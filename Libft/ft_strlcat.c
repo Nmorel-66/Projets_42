@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nimorel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 12:17:18 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/04 13:40:01 by nimorel          ###   ########.fr       */
+/*   Created: 2024/11/04 16:04:56 by nimorel           #+#    #+#             */
+/*   Updated: 2024/11/04 16:32:39 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isalpha(int c)
+size_t	strlcat( char *dst, const char *src, size_t size)
 {
-	if ((c >= 'A' && c <= 'Z') || (c <= 'a' && c <= 'z'))
-		return (1);
-	return (0);
+	size_t i;
+	size_t j;
+
+	i = 0;
+	while (dest[i] != '\0' && (i < size))
+		i++;
+	j = i;
+	i = 0;
+	while (src[i] != '\0' && i < size - 1)
+	{
+		dest[j] = src[i];
+		i++;
+		j++;
+	}
+	dest[j]= '\0';
+	return (j);
 }

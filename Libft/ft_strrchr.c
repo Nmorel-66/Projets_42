@@ -1,18 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nimorel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 12:17:18 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/04 13:40:01 by nimorel          ###   ########.fr       */
+/*   Created: 2024/11/04 14:46:33 by nimorel           #+#    #+#             */
+/*   Updated: 2024/11/04 15:42:56 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isalpha(int c)
+char	*ft_strrchr(const char *s, int c)
 {
-	if ((c >= 'A' && c <= 'Z') || (c <= 'a' && c <= 'z'))
-		return (1);
-	return (0);
+	int	i;
+	int	lastocc;
+
+	i = 0;
+	lastocc = -1;
+	while (s[i] != '\0')
+	{
+		if (s[i] == c)
+			lastocc = i;
+		i++;
+	}
+	if (lastocc != -1)
+		return ((char *)(s + lastocc));
+	return (NULL);
 }
+/*
+#include <stdio.h>
+int	main(void)
+{
+	char *str = "hello world";
+	char c = 'o';
+	printf("%s \n", ft_strrchr(str, c));
+	return (0);
+}*/
