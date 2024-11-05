@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:12:19 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/05 14:30:30 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/05 18:36:45 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int		ft_isdigit(int c);
 int		ft_isprint(int c);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
-int		ft_strlen(char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*strchr(const char *s, int c);
 char	*strchr(const char *s, int c);
+size_t	ft_strlen(const char *s);
 size_t	strlcat( char *dst, const char *src, size_t size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 

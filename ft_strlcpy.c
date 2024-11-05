@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:44:12 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/05 14:22:54 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/05 18:39:01 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,20 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 
 	i = 0;
 	if (size == 0)
-		return (i);
+		return (0);
 	while (src[i] != '\0' && i < (size - 1))
 	{
-		dest[i] = src[i];
+		dst[i] = src[i];
 		i++;
 	}
-	dest[i] = '\0';
-	return (i);
+	dst[i] = '\0';
+	return (ft_strlen(src));
 }
+/*int main(void)
+{
+	char *src = "Hello";
+	char dest[50];
+	
+	printf("%ld\n", ft_strlcpy(dest, src, 5));
+	return(0);
+}*/

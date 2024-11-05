@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:46:33 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/05 14:23:07 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/05 16:24:39 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,15 @@ char	*ft_strrchr(const char *s, int c)
 		return ((char *)(s + lastocc));
 	return (NULL);
 }
-/*
-#include <stdio.h>
-int	main(void)
+/*int main(void)
 {
-	char *str = "hello world";
-	char c = 'o';
-	printf("%s \n", ft_strrchr(str, c));
+	char *str = "Hello World";
+	int c = 'a';
+	char *ptr = ft_strrchr(str, c);
+	
+	if (ptr)
+		printf("%s\n", ptr);
+	else
+		printf("Caratere non touve\n")	;
 	return (0);
 }*/
