@@ -6,13 +6,13 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:04:56 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/06 14:14:25 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/06 14:16:54 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	strlcat( char *dst, const char *src, size_t size)
+size_t	ft_strlcat( char *dst, const char *src, size_t size)
 {
 	size_t i;
 	size_t j;
