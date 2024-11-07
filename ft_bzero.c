@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:43:17 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/07 14:31:43 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/07 15:54:33 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_bzero(void *s, size_t n)
 	i = 0;
 	while (i < n)
 	{
-		dest[i] = 0;
+		dest[i] = '0';
 		i++;
 	}
 }
@@ -32,6 +32,7 @@ int	main(void)
 {
 	char	str[10] = "Hello";
 	printf("avant bzero : %s\n", str);
-	printf("apres bzero : %s\n", bzero(str, 5));
+	ft_bzero(str, 5);
+	printf("apres bzero : %s\n", str);
 	return (0);	
 }*/

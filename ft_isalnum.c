@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:27:44 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/05 14:22:10 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/07 15:27:32 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@ int	ft_isalnum(int c)
 		return (1);
 	return (0);
 }
-/*#include <stdio.h>
-int main(void)
+/*int main(void)
 {	
-	int c = '9';
+	int c = 'B';
 	printf("%d\n",ft_isalnum(c));
 	return (0);
 }*/

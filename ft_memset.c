@@ -6,12 +6,14 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:19:21 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/07 14:41:18 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/07 16:29:40 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
+//#include "libft.h"
+# include <stdio.h>
+# include <stddef.h>
+# include <stdlib.h>
 void	*ft_memset(void *s, int c, size_t n)
 {
 	size_t			i;
@@ -31,9 +33,10 @@ void	*ft_memset(void *s, int c, size_t n)
 /*	   
 int main(void)
 {
-    char *str = "Hello";
-    
-    ft_memset(str, 'c', sizeof(str));
+    char str[10] = "Hello";
+	// int 97 = char 'a'
+	ft_memset(str, 97, 5);
     printf("%s\n", str);
+
     return (0);
 }*/

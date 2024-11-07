@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:32:56 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/07 14:41:45 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/07 15:48:50 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ char	*ft_strdup(const char *s)
 
 	i = 0;
 	len = 0;
-	while (s[len] != '\0')
-		len++;
+	len = ft_strlen(s);
 	dest = (char *)malloc(sizeof(char) * (len + 1));
 	if (dest == NULL)
 		return (NULL);

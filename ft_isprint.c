@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:48:12 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/05 14:22:38 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/07 15:28:29 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	ft_isprint(int c)
 		return (1);
 	return (0);
 }
-/*#include <stdio.h>
 int main(void)
 {
 	int c = 39;

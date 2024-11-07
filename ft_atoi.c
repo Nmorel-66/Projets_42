@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 14:44:42 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/07 14:44:43 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/07 15:24:17 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,5 @@ int	ft_atoi(const char *nptr)
 /*
 int	main(void)
 {
-	printf("%d\n",ft_atoi(" ---+--+1234ab567"));
+	printf("%d\n",ft_atoi(" -1234ab567"));
 }*/

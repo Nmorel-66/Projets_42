@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 12:17:18 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/05 14:22:22 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/07 15:25:52 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	ft_isalpha(int c)
 	return (0);
 }
 /*
-#include <stdio.h>
 int main(void)
 {
 	int c = 'B';

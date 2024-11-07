@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:38:28 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/05 14:22:33 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/07 15:26:36 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@ int	ft_isdigit(int c)
 	return (0);
 }
 /*
-#include <stdio.h>
 int main(void)
 {
-	int c = 'A';
+	int c = '4';
 	printf("%d\n",ft_isdigit(c));
 	return (0);
 }*/

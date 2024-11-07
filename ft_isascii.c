@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:43:22 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/05 14:22:28 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/07 15:28:19 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,9 @@ int	ft_isascii(int c)
 		return (1);
 	return (0);
 }
-/*#include <stdio.h>
-int main(void)
+/*int main(void)
 {	
-	int c = 2229;
+	int c = 29;
 	printf("%d\n",ft_isascii(c));
 	return (0);
 }*/
