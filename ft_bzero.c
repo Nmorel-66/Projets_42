@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:43:17 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/07 06:11:09 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/07 06:13:58 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_bzero(void *s, size_t n)
     unsigned char	*dest;
 	size_t			i;
 
-	dest = s;
+	dest = (unsigned char *)s;
 	i = 0;
 	while (i < n)
 	{

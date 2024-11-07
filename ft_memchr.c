@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 15:49:13 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/06 16:00:01 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/07 06:15:18 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	while (i < n)
     {
         if (str[i] == (unsigned char)c)
-            return (&str[i]);
+            return (str + i);
         i++;
     }
     return (NULL);

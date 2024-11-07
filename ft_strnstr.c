@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:59:36 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/06 17:19:08 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/07 06:16:35 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char *ft_strnstr(const char * s1, const char * s2, size_t len)
 				&& s1[i + j] == s2[j] && i + j < len)
 			j++;
 		if (j == s2_len)
-			return ((char *)&s1[i]);
+			return ((char *)s1 + i);
 		i++;
 	}
 	return (NULL);
