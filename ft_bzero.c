@@ -6,13 +6,13 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:43:17 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/06 14:56:15 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/07 06:11:09 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	fr_bzero(void *s, size_t n)
+void	ft_bzero(void *s, size_t n)
 {
     unsigned char	*dest;
 	size_t			i;
