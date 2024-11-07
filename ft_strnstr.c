@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:59:36 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/07 06:16:35 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/07 14:42:46 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strnstr(const char * s1, const char * s2, size_t len)
+char	*ft_strnstr(const char *s1, const char *s2, size_t len)
 {
-    size_t	i;
+	size_t	i;
 	size_t	j;
 	size_t	s2_len;
 
@@ -26,7 +26,7 @@ char *ft_strnstr(const char * s1, const char * s2, size_t len)
 	{
 		j = 0;
 		while (s1[i + j] != '\0' && s2[j] != '\0'
-				&& s1[i + j] == s2[j] && i + j < len)
+			&& s1[i + j] == s2[j] && i + j < len)
 			j++;
 		if (j == s2_len)
 			return ((char *)s1 + i);

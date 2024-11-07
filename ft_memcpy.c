@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:56:44 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/06 15:24:34 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/07 14:36:25 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 }
 /*La  fonction memcpy() copie n octets depuis la zone mémoire src vers la
        zone mémoire dest. Les deux zones ne  doivent  pas  se  chevaucher*/
+/*
 int	main(void)
 {
 	char	*str = "Hello";
@@ -38,4 +39,4 @@ int	main(void)
 	ft_memcpy(dest, str, 5);
 	printf("chaine copiée : %s\n", dest);
 	return(0);
-}
+}*/

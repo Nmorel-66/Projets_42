@@ -3,38 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 15:20:25 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/06 15:45:40 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/07 14:39:42 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void    *ft_memmove(void *dest, const void *src, size_t n)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-    unsigned char	*s;
-	unsigned char   *d;
-	size_t	        i;
+	unsigned char	*s;
+	unsigned char	*d;
+	size_t			i;
 
 	s = (unsigned char *)src;
 	d = (unsigned char *)dest;
 	i = 0;
-    if (dest == src || n == 0)
-        return (dest);
+	if (dest == src || n == 0)
+		return (dest);
 	if (d > s)
-        while (n > 0)
+	{
+		while (n > 0)
 		{
-            n--;
-            d[n] = s[n];
-        }    
+			n--;
+			d[n] = s[n];
+		}
+	}
 	else
+	{
 		while (i < n)
 		{
 			d[i] = s[i];
 			i++;
 		}
+	}
 	return (dest);
 }
 /* La fonction memmove() copie n octets depuis la zone mémoire src vers la

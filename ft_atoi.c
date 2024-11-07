@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/06 17:22:49 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/06 17:32:29 by nimorel          ###   ########.fr       */
+/*   Created: 2024/11/07 14:44:42 by nimorel           #+#    #+#             */
+/*   Updated: 2024/11/07 14:44:43 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "libft.h"
 
@@ -21,8 +22,8 @@ int	ft_atoi(const char *nptr)
 	i = 0;
 	sign = 1;
 	res = 0;
-	while (nptr[i] == ' ' || nptr[i] == '\n' || nptr[i] == '\t' || nptr[i] == '\v'
-			|| nptr[i] == '\f' || nptr[i] == '\r')
+	while (nptr[i] == ' ' || nptr[i] == '\n' || nptr[i] == '\t'
+		|| nptr[i] == '\v' || nptr[i] == '\f' || nptr[i] == '\r')
 		i++;
 	if (nptr[i] == '-' || nptr[i] == '+')
 	{

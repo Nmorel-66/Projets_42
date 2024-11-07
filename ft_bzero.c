@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:43:17 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/07 06:13:58 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/07 14:31:43 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-    unsigned char	*dest;
+	unsigned char	*dest;
 	size_t			i;
 
 	dest = (unsigned char *)s;
@@ -27,10 +27,11 @@ void	ft_bzero(void *s, size_t n)
 }
 /*La  fonction bzero() met à 0 les n premiers octets du bloc pointé par s
        (octets contenant « \0 »)*/
+/*
 int	main(void)
 {
 	char	str[10] = "Hello";
 	printf("avant bzero : %s\n", str);
 	printf("apres bzero : %s\n", bzero(str, 5));
 	return (0);	
-}
+}*/

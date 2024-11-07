@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:32:56 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/06 17:40:27 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/07 14:41:45 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strdup(const char *s)
+char	*ft_strdup(const char *s)
 {
 	int		i;
 	int		len;
@@ -33,7 +33,6 @@ char *ft_strdup(const char *s)
 	dest[i] = '\0';
 	return (dest);
 }
-
 /*int	main(void)
 {
 	char *src = "hello";
