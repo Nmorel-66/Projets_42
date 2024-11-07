@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:18:05 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/05 14:23:20 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/07 17:00:05 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_toupper(int c)
 		return (c - 32);
 	return (0);
 }
-/*#include <stdio.h>
+/*
 int main(void)
 {
 	int c = 'b';

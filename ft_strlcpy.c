@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:44:12 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/05 18:39:01 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/07 16:38:29 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	dst[i] = '\0';
 	return (ft_strlen(src));
 }
+/*La strlcpyfonction () copie jusqu'à size - 1 caractères de la chaîne src 
+terminée par NUL vers dst , terminant le résultat par NUL.
+strlcpy renvoie la longueur totale de la chaîne qu'elle a essaye de creer
+Pour strlcpy(), cela signifie la longueur de src*/
 /*int main(void)
 {
 	char *src = "Hello";

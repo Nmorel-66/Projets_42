@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:59:36 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/07 14:42:46 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/07 17:26:00 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,3 +34,20 @@ char	*ft_strnstr(const char *s1, const char *s2, size_t len)
 	}
 	return (NULL);
 }
+/*int main(void)
+{
+   char *string1 = "Hello World";
+   char *string2 = "World";
+   char *result;
+   int len;
+ 
+   len = 25;
+   result = ft_strnstr(string1,string2, len);
+   if (result != NULL) {
+        printf("La sous-chaîne a été trouvée : %s\n", result);
+    } else {
+        printf("La sous-chaîne n'a pas été trouvée dans les %d\n n premiers caractères.\n", len);
+    }
+
+    return (0);
+}*/

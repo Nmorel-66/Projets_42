@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:35:16 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/05 14:23:03 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/07 17:06:36 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,10 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		return (0);
 	return (s1[i] - s2[i]);
 }
-/*#include <stdio.h>
-#include <string.h>
-int	main(void)
+/*int	main(void)
 {
 	char str1[] = "bonjour";
 	char str2[] = "bonsoir";
 	
-	printf("%d", strncmp(str1, str2, 4));
 	printf("%d", ft_strncmp(str1, str2, 4));
 }*/
