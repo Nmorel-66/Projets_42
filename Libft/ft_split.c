@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 17:33:13 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/08 19:17:36 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/08 19:20:07 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	**ft_split(char const *s, char c)
 		if (len > 0)
 		{
 			dest[j++] = ft_addword(s, i, i + len);
-			i += len;
+			i = i + len;
 		}
 	}
 	dest[j] = NULL;
