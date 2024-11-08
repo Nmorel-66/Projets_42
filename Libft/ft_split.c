@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 17:33:13 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/08 18:47:47 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/08 19:17:36 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,30 @@
 
 int	ft_count_words(const char *str, char c)
 {
-	size_t	i;
-	size_t	cw;
+	int	i;
+	int	cw;
 
 	i = 0;
 	cw = 0;
-	while (str[i]!='\0')
+	while (str[i] != '\0')
 	{
-		if (str[i] == c)
+		while (str[i] == c && str[i] != '\0')
+			i++;
+		if (str[i] != c && str[i] != '\0')
 			cw++;
-		i++;	
+		while (str[i] != c && str[i] != '\0')
+			i++;
 	}
-	return (cw++);
+	return (cw);
 }
+
 char	*ft_addword(const char *str, int start, int end)
 {
-    int		i;
+	int		i;
 	char	*word;
 
 	i = 0;
-	word = (char *)malloc(sizeof(char) * (end - start + 2));
+	word = (char *)malloc(sizeof(char) * (end - start + 1));
 	if (word == NULL)
 		return (NULL);
 	while (start < end)
@@ -42,39 +46,43 @@ char	*ft_addword(const char *str, int start, int end)
 	return (word);
 }
 
-
 char	**ft_split(char const *s, char c)
 {
-	size_t	i;
-	size_t	len;
-	size_t	k;
+	int		i;
+	int		j;
+	int		len;
 	char	**dest;
 
+	i = 0;
+	j = 0;
 	dest = (char **)malloc(sizeof(char *) * (ft_count_words(s, c) + 1));
 	if (dest == NULL)
 		return (NULL);
-	i = 0;
-	k = 0; 
 	while (s[i] != '\0')
 	{
-		 while (s[i] == c)
-            i++;
-        len = 0;
-        while (s[i + len] != '\0' && s[i + len] != c)
-            len++;
-        dest[k++] = ft_addword(s, i, i + len);
-        i = i + len;
-    }
-    dest[k] = 0;
-    return (dest);
+		while (s[i] == c && s[i] != '\0')
+			i++;
+		len = 0;
+		while (s[i + len] != '\0' && s[i + len] != c)
+			len++;
+		if (len > 0)
+		{
+			dest[j++] = ft_addword(s, i, i + len);
+			i += len;
+		}
+	}
+	dest[j] = NULL;
+	return (dest);
 }
-int	main(void)
+/*int	main(void)
 {
-	char	str[] = "Bleu;blanc;rouge";
-	char	c = ';';
+	char str[] = "Bleu;blanc;rouge";
+	char c = ';';
 	int i = 0;
-	
+
 	char **res = ft_split(str, c);
+	if (res == NULL)
+		return (1);
 	while (res[i])
 	{
 		printf("%s\n", res[i]);
@@ -88,4 +96,4 @@ int	main(void)
 	}
 	free(res);
 	return (0);
-}
+}*/
