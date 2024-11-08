@@ -6,26 +6,63 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 17:39:57 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/07 17:47:49 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/08 14:14:47 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void *memmove(void *dest, const void *src, size_t n)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	size_t			i;
-	unsigned char	*d;
-	unsigned char	*s;
-	unsigned char	*tmp;
+	size_t	i;
 
-	d = (unsigned char *)dest;
-	s = (unsigned char *)src;
-	i = 0;
-	while (i < n)
+	if (dest == src || n == 0)
+		return (dest);
+	if (dest > src)
 	{
-		d[i] = s[i];
-		i++;
+		i = n;
+		while (i > 0)
+		{
+			i--;
+			((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
+		}
+	}
+	else
+	{
+		i = 0;
+		while (i < n)
+		{
+			((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
+			i++;
+		}
 	}
 	return (dest);
 }
+/*int main() {
+    // Différents tableaux pour les tests
+    char src1[] = "Hello, world!";
+    char src2[] = "Bonjour, monde!";
+    char dst[30];
+
+    // Test 1 : Copie simple sans overlap
+    printf("Test 1 : Copie simple\n");
+    ft_memmove(dst, src1, sizeof(src1));
+    printf("dst = %s\n", dst);
+
+    // Test 2 : Copie avec overlap (destination après source)
+    printf("\nTest 2 : Copie avec overlap (destination après source)\n");
+    ft_memmove(dst + 5, dst, 10);
+    printf("dst = %s\n", dst);
+
+    // Test 3 : Copie avec overlap (destination avant source)
+    printf("\nTest 3 : Copie avec overlap (destination avant source)\n");
+    ft_memmove(dst, dst + 5, 10);
+    printf("dst = %s\n", dst);
+
+    // Test 4 : Copie de tailles différentes
+    printf("\nTest 4 : Copie de tailles différentes\n");
+    ft_memmove(dst, src2, sizeof(src2));
+    printf("dst = %s\n", dst);
+
+    return 0;
+}*/

@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:56:44 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/07 16:32:56 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/08 14:11:20 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,11 @@
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	size_t			i;
-	unsigned char	*d;
-	unsigned char	*s;
 
-	d = (unsigned char *)dest;
-	s = (unsigned char *)src;
 	i = 0;
 	while (i < n)
 	{
-		d[i] = s[i];
+		((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
 		i++;
 	}
 	return (dest);
