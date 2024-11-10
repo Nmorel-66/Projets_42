@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:46:33 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/05 16:24:39 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/10 17:30:31 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ char	*ft_strrchr(const char *s, int c)
 		return ((char *)(s + lastocc));
 	return (NULL);
 }
+
 /*int main(void)
 {
 	char *str = "Hello World";
