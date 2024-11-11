@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:18:05 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/07 17:00:05 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/11 17:31:43 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	ft_toupper(int c)
 {
 	if (c >= 'a' && c <= 'z')
 		return (c - 32);
-	return (0);
+	else
+		return (c);
 }
 /*
 int main(void)
