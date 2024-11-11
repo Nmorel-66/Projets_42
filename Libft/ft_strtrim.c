@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 16:14:20 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/10 17:39:28 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/11 18:44:23 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (NULL);
 	while (s1[start] != '\0' && ft_strchr(set, s1[start]))
 		start++;
+	if (start > end)
+		return ((char *)s1);
 	while (end > start && ft_strchr(set, s1[end]))
 		end--;
 	trimmed_str = (char *)malloc(sizeof(char) * (end - start + 1));
