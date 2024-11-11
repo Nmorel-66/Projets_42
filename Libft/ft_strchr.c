@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:25:17 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/10 17:30:48 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/11 16:23:49 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_strchr(const char *s, int c)
 	char *str = "Hello World";
 	int c = 'o';
 	char *ptr = ft_strchr(str, c);
-	
+
 	if (ptr)
 		printf("%s\n", ptr);
 	else

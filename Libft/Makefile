@@ -59,7 +59,7 @@ $(NAME): $(OBJS)
 
 # Compilation des fichiers .c en .o
 %.o: %.c $(HEADERS)
-	rm
+	$(CC) $(CFLAGS) -c $< -o $@
 
 # Nettoyage des fichiers objets
 clean:
