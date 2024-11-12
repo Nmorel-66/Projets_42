@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ft_substr.c                                     :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 14:49:48 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/08 15:25:00 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/12 15:52:54 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	j;
 	char	*new_str;
 
-	new_str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!s)
+		return (NULL);
+	new_str = malloc(sizeof(char) * (len + 1));
 	if (new_str == NULL)
 		return (NULL);
 	i = start;
@@ -32,7 +34,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char *str = "Hello, world!";
     char *substr = ft_substr(str, 55, 3);
-	
+
 	printf("substr1: %s\n", substr);
 	free(substr);
 	return(0);

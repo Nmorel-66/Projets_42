@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:40:55 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/11 20:27:07 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/12 15:21:27 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*dest;
 
-	if (nmemb > SIZE_MAX / size)
-		return (NULL);
+	if (nmemb == 0 || size == 0 || nmemb > SIZE_MAX / size)
+		return (malloc(0));
 	dest = malloc(nmemb * size);
 	if (dest == NULL)
 		return (NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:32:56 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/07 15:48:50 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/12 14:03:31 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strdup(const char *s)
 	i = 0;
 	len = 0;
 	len = ft_strlen(s);
-	dest = (char *)malloc(sizeof(char) * (len + 1));
+	dest = malloc(sizeof(char) * (len + 1));
 	if (dest == NULL)
 		return (NULL);
 	while (s[i] != '\0')
@@ -42,5 +42,5 @@ char	*ft_strdup(const char *s)
 	printf(" chaine dest : %s\n",dest);
 	free(dest);
 	return (0);
-	
+
 }*/

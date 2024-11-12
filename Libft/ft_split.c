@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 17:33:13 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/08 19:20:07 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/12 14:03:13 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_addword(const char *str, int start, int end)
 	char	*word;
 
 	i = 0;
-	word = (char *)malloc(sizeof(char) * (end - start + 1));
+	word = malloc(sizeof(char) * (end - start + 1));
 	if (word == NULL)
 		return (NULL);
 	while (start < end)
@@ -55,7 +55,7 @@ char	**ft_split(char const *s, char c)
 
 	i = 0;
 	j = 0;
-	dest = (char **)malloc(sizeof(char *) * (ft_count_words(s, c) + 1));
+	dest = malloc(sizeof(char *) * (ft_count_words(s, c) + 1));
 	if (dest == NULL)
 		return (NULL);
 	while (s[i] != '\0')

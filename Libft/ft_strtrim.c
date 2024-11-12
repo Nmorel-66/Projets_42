@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 16:14:20 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/11 19:44:37 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/12 15:35:03 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,17 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	end;
 	char	*trimmed_str;
 
-	start = 0;
-	end = ft_strlen(s1) - 1;
 	if (!s1 || !set)
 		return (NULL);
+	if (*s1 == '\0')
+		return (ft_strdup(""));
+	start = 0;
+	end = ft_strlen(s1) - 1;
 	while (s1[start] != '\0' && ft_strchr(set, s1[start]))
 		start++;
 	while (end > start && ft_strchr(set, s1[end]))
 		end--;
-	trimmed_str = (char *)malloc(sizeof(char) * (end - start + 2));
+	trimmed_str = malloc(sizeof(char) * (end - start + 2));
 	if (!trimmed_str)
 		return (NULL);
 	i = 0;
@@ -38,8 +40,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 }
 /*int main()
 {
-    const char *str = "   Hello, World!   ";
-    const char *set = " ";
+    const char *str = "----hel-lo---";
+    const char *set = "-";
 	char *res = ft_strtrim(str, set);
     printf("Trimmed: '%s'\n", res);
     free(res);
