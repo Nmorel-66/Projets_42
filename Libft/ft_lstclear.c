@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:23:58 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/13 16:56:54 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/13 17:34:33 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 	t_list	*tmp;
 
 	if (!lst || !del)
-		return ;
+		return (0);
 	tmp = *lst;
 	while (*lst != NULL)
 	{

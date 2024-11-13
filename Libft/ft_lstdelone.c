@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:03:37 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/13 16:55:18 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/13 17:34:39 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
 	if (!lst || !del)
-		return ;
+		return (0);
 	del(lst->content);
 	free (lst);
 }
