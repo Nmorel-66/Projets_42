@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 14:49:48 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/12 15:52:54 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/13 15:54:32 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 /*int	main(void)
 {
 	char *str = "Hello, world!";
-    char *substr = ft_substr(str, 55, 3);
+    char *substr = ft_substr(str, 0, 3);
 
 	printf("substr1: %s\n", substr);
 	free(substr);
