@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:43:17 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/11 17:14:14 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/14 09:55:20 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	unsigned char	*dest;
-	size_t			i;
+	size_t	i;
 
-	dest = (unsigned char *)s;
 	i = 0;
 	while (i < n)
 	{
-		dest[i] = 0;
+		((unsigned char *)s)[i] = 0;
 		i++;
 	}
 }

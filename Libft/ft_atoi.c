@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 14:44:42 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/08 14:11:50 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/14 09:53:01 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_atoi(const char *nptr)
 			sign = -sign;
 		i++;
 	}
-	while (nptr[i] >= 48 && nptr[i] <= 57)
+	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
 		res = res * 10 + (nptr[i] - 48);
 		i++;
