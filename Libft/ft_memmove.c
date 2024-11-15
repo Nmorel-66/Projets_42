@@ -3,38 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 17:39:57 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/14 20:44:00 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/15 14:38:35 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+#include "libft.h"
+
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	unsigned char		*tmp;
-	size_t				i;
+	size_t	i;
 
-	if (!dest && !src)
-		return (NULL);
-	tmp = (unsigned char *)malloc(n * sizeof(unsigned char));
-	if (!tmp)
-		return (NULL);
-	i = 0;
-	while (i < n)
+	if (dest == src || n == 0)
+		return (dest);
+	if (dest > src)
 	{
-		tmp[i] = ((const unsigned char *)src)[i];
-		i++;
+		i = n;
+		while (i > 0)
+		{
+			i--;
+			((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
+		}
 	}
-	i = 0;
-	while (i < n)
+	else
 	{
-		((unsigned char *)dest)[i] = tmp[i];
-		i++;
+		i = 0;
+		while (i < n)
+		{
+			((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
+			i++;
+		}
 	}
-	free (tmp);
 	return (dest);
 }
 /*

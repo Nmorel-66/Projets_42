@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:40:55 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/14 21:07:49 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/15 14:34:53 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 
 	if (nmemb == 0 || size == 0)
 		return (malloc(0));
-	if (nmemb * size > SIZE_MAX)
+	if (nmemb > (nmemb * size / size))
 		return (NULL);
 	dest = malloc(nmemb * size);
 	if (dest == NULL)
