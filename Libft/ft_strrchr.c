@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:46:33 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/10 17:30:31 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/15 16:23:09 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,24 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int	i;
-	int	lastocc;
+	int				i;
 
-	i = 0;
-	lastocc = -1;
-	while (s[i] != '\0')
+	i = ft_strlen(s);
+	if ((unsigned char)c == '\0')
+		return ((char *)s + i);
+	while (i >= 0)
 	{
-		if (s[i] == c)
-			lastocc = i;
-		i++;
+		if (s[i] == (unsigned char)c)
+			return ((char *)s + i);
+		i--;
 	}
-	if (lastocc != -1)
-		return ((char *)(s + lastocc));
 	return (NULL);
 }
-
-/*int main(void)
+/*
+int main(void)
 {
 	char *str = "Hello World";
-	int c = 'a';
+	int c = 0;
 	char *ptr = ft_strrchr(str, c);
 	
 	if (ptr)
