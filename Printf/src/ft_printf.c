@@ -6,13 +6,12 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 09:47:54 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/16 15:12:20 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/16 15:28:11 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include <stdio.h>
-//#include <stdlib.h>
 #include <unistd.h>
 
 
@@ -85,15 +84,16 @@ int ft_printf(const char *format, ...)
 }
 int main(void)
 {
-    int	c = 67;
-	//int i = 42;
+    //int	c = 67; // 67 = C;
+	int i = 42;
+	//char *s = "Hello";
 	int	len;
 	
    	len = 0;
 	//printf("Printf affiche %d\n", i);
-	len = printf("Printf affiche %c\n", c);
+	len = printf("Printf affiche %d\n", i);
 	printf("len%d\n", len);
-    len = ft_printf("printf affiche %c\n", c);
+    len = ft_printf("printf affiche %d\n", i);
 	printf("len%d\n", len);
 	return (0);
 }
