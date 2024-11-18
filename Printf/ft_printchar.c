@@ -6,9 +6,11 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:02:34 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/18 10:02:50 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/18 12:20:57 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libftprintf.h"
 
 int	ft_printchar(int c)
 {

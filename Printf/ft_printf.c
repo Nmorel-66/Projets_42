@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 09:47:54 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/18 11:22:26 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/18 12:22:01 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static int	ft_printformat(char specifier, va_list args)
 		return (ft_printchar(va_arg(args, int)));
 	if (specifier == 's')
 		return (ft_printstr(va_arg(args, char *)));
-	//if (specifier == 'p')
-	//	return (ft_printptr(va_arg(args, void *)));
+	if (specifier == 'p')
+		return (ft_printptr(va_arg(args, void *)));
 	if (specifier == 'd' || specifier == 'i'|| specifier == 'u')
 		return (ft_printnbr(va_arg(args, int)));
 	if (specifier == 'x' || specifier == 'X')

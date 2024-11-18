@@ -6,22 +6,24 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 11:24:44 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/18 11:25:13 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/18 12:40:04 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_printunsigned(unsigned n)
-{
-	long nb = n;
-	int len = 0;
+#include "libftprintf.h"
 
-	if (nb < 0)
+int	ft_printunsigned(unsigned int n)
+{
+	int		len;
+
+	len = 0;
+	if (n < 0)
 	{
 		len = len + ft_printchar('-');
-		nb = -nb;
+		n = -n;
 	}
-	if (nb >= 10)
-		len = len + ft_printunsigned(nb / 10);
-	len = len + ft_printchar(nb % 10 + '0');
+	if (n >= 10)
+		len = len + ft_printunsigned(n / 10);
+	len = len + ft_printchar(n % 10 + '0');
 	return (len);
 }

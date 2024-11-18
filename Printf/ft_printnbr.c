@@ -6,15 +6,19 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:03:17 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/18 11:19:43 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/18 12:38:11 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libftprintf.h"
+
 int	ft_printnbr(int n)
 {
-	long nb = n;
-	int len = 0;
+	long	nb;
+	int		len;
 
+	nb = n;
+	len = 0;
 	if (nb < 0)
 	{
 		len = len + ft_printchar('-');
