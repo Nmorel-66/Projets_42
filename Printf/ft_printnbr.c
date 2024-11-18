@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:03:17 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/18 10:03:20 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/18 11:19:43 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_printnbr(int n)
 		len = len + ft_printchar('-');
 		nb = -nb;
 	}
-	if (nb > 9)
+	if (nb >= 10)
 		len = len + ft_printnbr(nb / 10);
 	len = len + ft_printchar(nb % 10 + '0');
 	return (len);

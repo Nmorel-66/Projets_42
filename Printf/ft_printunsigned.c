@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_printunsigned.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 10:04:06 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/18 11:36:05 by nimorel          ###   ########.fr       */
+/*   Created: 2024/11/18 11:24:44 by nimorel           #+#    #+#             */
+/*   Updated: 2024/11/18 11:25:13 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
+int	ft_printunsigned(unsigned n)
+{
+	long nb = n;
+	int len = 0;
 
-# include <stdarg.h>
-# include <unistd.h>
-# include <stdio.h>
-
-int	ft_printchar(int c);
-int	ft_printstr(char *str);
-int	ft_printnbr(int n);
-int	ft_printhex(unsigned int num, char specifier);
-int	ft_printunsigned(unsigned n);
-int	ft_printptr(void *ptr);
-
-#endif
+	if (nb < 0)
+	{
+		len = len + ft_printchar('-');
+		nb = -nb;
+	}
+	if (nb >= 10)
+		len = len + ft_printunsigned(nb / 10);
+	len = len + ft_printchar(nb % 10 + '0');
+	return (len);
+}

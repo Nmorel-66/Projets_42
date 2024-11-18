@@ -10,8 +10,9 @@ AR = ar rcs
 RM = rm -f
 
 # Fichiers sources
-SRCS = ft_printf.c \
-		ft_printnbr.c ft_printchar.c ft_printstr.c
+SRCS = \
+	ft_printf.c ft_printnbr.c ft_printchar.c ft_printstr.c ft_printhex.c \
+	ft_printprt.c ft_printunsigned.c
 
 # Fichiers objets
 OBJS = $(SRCS:.c=.o)

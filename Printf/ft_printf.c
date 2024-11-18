@@ -6,53 +6,12 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 09:47:54 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/18 10:56:44 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/18 11:22:26 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "libftprintf.h"
-
-int	ft_printchar(int c)
-{
-	write(1, &c, 1);
-	return (1);
-}
-
-int	ft_printstr(char *str)
-{
-	int	len = 0;
-
-	while (str[len])
-		len++;
-	write(1, str, len);
-	return (len);
-}
-
-int	ft_printnbr(int n)
-{
-	long nb = n;
-	int len = 0;
-
-	if (nb < 0)
-	{
-		len = len + ft_printchar('-');
-		nb = -nb;
-	}
-	if (nb > 9)
-		len = len + ft_printnbr(nb / 10);
-	len = len + ft_printchar(nb % 10 + '0');
-	return (len);
-}
-
-int ft_printptr(void *ptr)
-{
-	int	len = 0;
-
-    len = len + write(1, "0x", 2);
-    len += len + ft_printhexa((unsigned long)ptr);
-    return (len);
-}
 
 static int	ft_printformat(char specifier, va_list args)
 {
@@ -64,8 +23,8 @@ static int	ft_printformat(char specifier, va_list args)
 	//	return (ft_printptr(va_arg(args, void *)));
 	if (specifier == 'd' || specifier == 'i'|| specifier == 'u')
 		return (ft_printnbr(va_arg(args, int)));
-	//if (specifier == 'x' || specifier == 'X')
-	//	return (ft_printhex(va_arg(args, int), specifier));
+	if (specifier == 'x' || specifier == 'X')
+		return (ft_printhex(va_arg(args, unsigned int), specifier));
 	return (0);
 }
 

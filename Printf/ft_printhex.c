@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_printhex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 10:04:06 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/18 11:36:05 by nimorel          ###   ########.fr       */
+/*   Created: 2024/11/18 11:14:45 by nimorel           #+#    #+#             */
+/*   Updated: 2024/11/18 11:30:26 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
+int	ft_printhex(unsigned int n, char specifier)
+{
+	char	*base;
+	int	len;
 
-# include <stdarg.h>
-# include <unistd.h>
-# include <stdio.h>
-
-int	ft_printchar(int c);
-int	ft_printstr(char *str);
-int	ft_printnbr(int n);
-int	ft_printhex(unsigned int num, char specifier);
-int	ft_printunsigned(unsigned n);
-int	ft_printptr(void *ptr);
-
-#endif
+	len = 0;
+	if (specifier = 'X')
+		base = "0123456789ABCDEF";
+	else
+		base = "0123456789abcdef";
+	if (n >= 16)
+		len = len + ft_printhex(n / 16, specifier);
+	len =  len + ft_printchar(base[n % 16]);
+ return (len);
+}
