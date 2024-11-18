@@ -6,13 +6,13 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 11:14:45 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/18 12:37:14 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/18 15:49:48 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	ft_printhex(unsigned int n, char specifier)
+int	ft_printhex(unsigned long n, char specifier)
 {
 	char	*base;
 	int		len;
