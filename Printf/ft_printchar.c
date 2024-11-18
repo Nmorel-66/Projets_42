@@ -1,19 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_printchar.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 10:04:06 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/16 15:19:42 by nimorel          ###   ########.fr       */
+/*   Created: 2024/11/18 10:02:34 by nimorel           #+#    #+#             */
+/*   Updated: 2024/11/18 10:02:50 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
-
-# include <stdarg.h>
-
-
-#endif
+int	ft_printchar(int c)
+{
+	write(1, &c, 1);
+	return (1);
+}
