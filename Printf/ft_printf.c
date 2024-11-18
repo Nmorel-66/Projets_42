@@ -6,11 +6,16 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 09:47:54 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/18 15:55:45 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/18 16:03:59 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+
+/*static int	ft_printformat(char format, char specifier)
+{
+
+}*/
 
 int	ft_printf(const char *format, ...)
 {
