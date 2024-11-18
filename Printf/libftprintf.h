@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 10:04:06 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/18 15:51:15 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/18 15:53:57 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_printchar(int c);
 int	ft_printstr(char *str);
 int	ft_printnbr(int n);
 int	ft_printhex(unsigned long num, char specifier);
-int	ft_printunsigned(unsigned n);
+int	ft_printunsigned(unsigned int n);
 int	ft_printptr(void *ptr);
 
 #endif

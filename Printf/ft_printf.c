@@ -6,93 +6,20 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 09:47:54 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/18 15:49:33 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/18 15:55:45 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "libftprintf.h"
-
-int	ft_printchar(int c)
-{
-	write(1, &c, 1);
-	return (1);
-}
-int	ft_printunsigned(unsigned int n)
-{
-	int		len;
-
-	len = 0;
-	if (n < 0)
-	{
-		len = len + ft_printchar('-');
-		n = -n;
-	}
-	if (n >= 10)
-		len = len + ft_printunsigned(n / 10);
-	len = len + ft_printchar(n % 10 + '0');
-	return (len);
-}
-int	ft_printnbr(int n)
-{
-	long	nb;
-	int		len;
-
-	nb = n;
-	len = 0;
-	if (nb < 0)
-	{
-		len = len + ft_printchar('-');
-		nb = -nb;
-	}
-	if (nb >= 10)
-		len = len + ft_printnbr(nb / 10);
-	len = len + ft_printchar(nb % 10 + '0');
-	return (len);
-}
-
-int	ft_printhex(unsigned long n, char specifier)
-{
-	char	*base;
-	int		len;
-
-	len = 0;
-	if (specifier == 'X')
-		base = "0123456789ABCDEF";
-	else
-		base = "0123456789abcdef";
-	if (n >= 16)
-		len = len + ft_printhex(n / 16, specifier);
-	len = len + ft_printchar(base[n % 16]);
-	return (len);
-}
-int	ft_printptr(void *ptr)
-{
-	int	len = 0;
-
-	if (!ptr)
-		return (write(1, "0x0", 3));
-	len = len + write(1, "0x", 2);
-	len = len + ft_printhex((unsigned long)ptr, 'x');
-	return (len);
-}
-int	ft_printstr(char *str)
-{
-	int	len;
-
-	len = 0;
-	while (str[len])
-		len++;
-	write (1, str, len);
-	return (len);
-}
 
 int	ft_printf(const char *format, ...)
 {
-	va_list args;
-	int i = 0;
-	int len = 0;
+	va_list	args;
+	int		i;
+	int		len;
 
+	i = 0;
+	len = 0;
 	va_start(args, format);
 	while (format[i])
 	{
@@ -121,7 +48,7 @@ int	ft_printf(const char *format, ...)
 	va_end(args);
 	return (len);
 }
-
+/*
 int	main(void)
 {
 	int 	i = -452;
@@ -134,7 +61,8 @@ int	main(void)
 
 	len = printf("Printf affiche %s %i %c %u %x %X %p\n", s, i, c, u, h, h, p);
 	printf("len (Printf): %d\n", len);
-	len = ft_printf("printf affiche %s %i %c %u %x %X %p\n", s, i, c, u, h, h, p);
+	len = ft_printf("printf affiche %s %i %c
+		%u %x %X %p\n", s, i, c, u, h, h, p);
 	ft_printf("len (printf): %d\n", len);
 	return (0);
-}
+}*/
