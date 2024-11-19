@@ -1,5 +1,0 @@
----
-triple:          'arm64-apple-darwin'
-binary-path:     '/Users/nicolasmorel/Desktop/Projets_42/Printf/output/ft_printf'
-relocations:     []
-...
