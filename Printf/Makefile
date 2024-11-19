@@ -1,61 +1,57 @@
-# Nom de la bibliothèque
+# Name of the library
 NAME = libftprintf.a
 
-# Répertoires
+# Directories
 SRCDIR = Srcs
 INCDIR = Includes
 OBJDIR = Objs
 
-# Compilateur et options de compilation
+# Compiler and compilation options
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I$(INCDIR)
 
-# Commandes
+# Commands
 AR = ar rcs
 RM = rm -f
 
-# Fichiers sources et objets
-SRCS = $(SRCDIR)/ft_printf.c \
-       $(SRCDIR)/ft_printnbr.c \
-       $(SRCDIR)/ft_printchar.c \
-       $(SRCDIR)/ft_printstr.c \
-       $(SRCDIR)/ft_printhex.c \
-       $(SRCDIR)/ft_printptr.c \
-       $(SRCDIR)/ft_printunsigned.c
+# Source files
+SRCS = ft_printf.c \
+       ft_printnbr.c \
+       ft_printchar.c \
+       ft_printstr.c \
+       ft_printhex.c \
+       ft_printptr.c \
+       ft_printunsigned.c
 
-OBJS = $(OBJDIR)/ft_printf.o \
-       $(OBJDIR)/ft_printnbr.o \
-       $(OBJDIR)/ft_printchar.o \
-       $(OBJDIR)/ft_printstr.o \
-       $(OBJDIR)/ft_printhex.o \
-       $(OBJDIR)/ft_printptr.o \
-       $(OBJDIR)/ft_printunsigned.o
+# Add paths to the files
+SRC_FILES = $(addprefix $(SRCDIR)/, $(SRCS))
+OBJ_FILES = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 
-# Cible par défaut
+# Default target
 all: $(NAME)
 
-# Création de la bibliothèque
-$(NAME): $(OBJS)
-	$(AR) $(NAME) $(OBJS)
-	@echo "Création de $(NAME) terminée."
+# Create the library
+$(NAME): $(OBJ_FILES)
+	$(AR) $(NAME) $(OBJ_FILES)
+	@echo "Creation of $(NAME) completed."
 
-# Compilation des fichiers .c en .o
+# Compile .c files into .o files
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Nettoyage des fichiers objets
+# Clean up object files
 clean:
 	$(RM) -r $(OBJDIR)
-	@echo "Répertoire $(OBJDIR) supprimé."
+	@echo "Directory $(OBJDIR) removed."
 
-# Nettoyage complet
+# Complete cleanup
 fclean: clean
 	$(RM) $(NAME)
-	@echo "$(NAME) supprimée."
+	@echo "$(NAME) removed."
 
-# Recompilation complète
+# Complete recompilation
 re: fclean all
 
-# Commandes
+# Commands
 .PHONY: all clean fclean re
