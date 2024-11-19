@@ -3,7 +3,7 @@ NAME = libftprintf.a
 
 # Répertoires
 SRCDIR = Srcs
-INCDIR = Include
+INCDIR = Includes
 OBJDIR = Objs
 
 # Compilateur et options de compilation
@@ -15,8 +15,21 @@ AR = ar rcs
 RM = rm -f
 
 # Fichiers sources et objets
-SRCS = $(wildcard $(SRCDIR)/*.c)
-OBJS = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
+SRCS = $(SRCDIR)/ft_printf.c \
+       $(SRCDIR)/ft_printnbr.c \
+       $(SRCDIR)/ft_printchar.c \
+       $(SRCDIR)/ft_printstr.c \
+       $(SRCDIR)/ft_printhex.c \
+       $(SRCDIR)/ft_printptr.c \
+       $(SRCDIR)/ft_printunsigned.c
+
+OBJS = $(OBJDIR)/ft_printf.o \
+       $(OBJDIR)/ft_printnbr.o \
+       $(OBJDIR)/ft_printchar.o \
+       $(OBJDIR)/ft_printstr.o \
+       $(OBJDIR)/ft_printhex.o \
+       $(OBJDIR)/ft_printptr.o \
+       $(OBJDIR)/ft_printunsigned.o
 
 # Cible par défaut
 all: $(NAME)
