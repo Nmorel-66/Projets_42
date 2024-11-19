@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 10:04:06 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/19 13:22:42 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/19 16:01:16 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdarg.h>
 # include <unistd.h>
-# include <stdio.h>
 
 int	ft_printchar(int c);
 int	ft_printstr(char *str);
