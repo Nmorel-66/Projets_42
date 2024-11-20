@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 09:47:54 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/19 13:23:35 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/20 09:43:17 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static int	ft_printformat(char specifier, va_list *args)
 {
@@ -54,20 +54,3 @@ int	ft_printf(const char *format, ...)
 	va_end(args);
 	return (len);
 }
-/*
-int	main(void)
-{
-	int 	i = -452;
-	unsigned int u = 23;
-	char	*s = "Hello";
-	char	c = 'A';
-	unsigned int h = 100;
-	int 	len;
-	int *p = &i;
-
-	len = printf("   Printf %s %i %c %u %x %X %p\n", s, i, c, u, h, h, p);
-	printf("len (Printf): %d\n", len);
-	len = ft_printf("ft_printf  %s %i %c %u %x %X %p\n", s, i, c, u, h, h, p);
-	ft_printf("len (printf): %d\n", len);
-	return (0);
-}*/
