@@ -6,128 +6,126 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:07:57 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/24 19:14:22 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/25 19:23:17 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_char_pos(const char *str, char c)
-{
-	char	*pos;
-
-	pos = ft_strchr(str, c);
-	if (!pos)
-		return (-1);
-	return (pos - str);
-}
-
-static char	*ft_buffer_save(char *buffer_read)
-{
-	char	*new_buffer;
-	int		pos;
-
-	pos = ft_char_pos(buffer_read, '\n');
-	if (pos == -1)
-		return (NULL);
-	new_buffer = ft_strdup(buffer_read + pos + 1);
-	if (!new_buffer)
-	{
-		free (buffer_read);
-		return (NULL);
-	}
-	return (new_buffer);
-}
-
-static char	*ft_createline(char *buffer_read)
+static char	*ft_createline(char *readed_data)
 {
 	char	*line;
-	int		pos;
+	char	*pos;
+	int		len;
 	int		i;
 
-	pos = ft_char_pos(buffer_read, '\n');
-	if (pos == -1)
-		pos = ft_strlen(buffer_read);
-	i = 0;
-	line = malloc(sizeof(char) * pos + 2);
+	pos = ft_strchr(readed_data, '\n');
+	if (pos)
+		len = pos - readed_data;
+	else
+		len = ft_strlen(readed_data);
+	line = malloc(sizeof(char) * (len + 2));
 	if (!line)
-	{
-		free (buffer_read);
 		return (NULL);
-	}
-	while (i <= pos)
+	i = 0;
+	while (i < len)
 	{
-		line[i] = buffer_read[i];
+		line[i] = readed_data[i];
 		i++;
 	}
+	if (readed_data[i] == '\n')
+		line[i++] = '\n';
 	line[i] = '\0';
 	return (line);
 }
 
-static char	*ft_update_buffer(char *buffer_read, char *buffer)
+static char	*ft_buffer_save(char *readed_data)
 {
 	char	*temp;
+	char	*pos;
 
-	if (!buffer_read)
-		return (ft_strdup(buffer));
-	temp = ft_strjoin(buffer_read, buffer);
-	if (!temp)
+	pos = ft_strchr(readed_data, '\n');
+	if (!pos)
 	{
-		free(buffer_read);
+		free(readed_data);
 		return (NULL);
 	}
-	free(buffer_read);
+	temp = ft_strdup(pos + 1);
+	if (!temp)
+		return (NULL);
+	free(readed_data);
 	return (temp);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer_read = NULL;
+	static char	*readed_data = NULL;
 	char		buffer[BUFFER_SIZE + 1];
 	ssize_t		bytes_read;
 	char		*line;
+	char		*temp;
 
-
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	bytes_read = 1;
+	if (!readed_data)
+		readed_data = ft_strdup("");
+	if (!readed_data)
+		return (NULL);
 	while (bytes_read > 0)
 	{
 		bytes_read = read(fd, buffer, sizeof(buffer) - 1);
-		if (bytes_read < 0)
+		if (bytes_read == -1)
 		{
-			free(buffer_read);
+			free(readed_data);
+			readed_data = NULL;
 			return (NULL);
 		}
 		buffer[bytes_read] = '\0';
-		buffer_read = ft_update_buffer(buffer_read, buffer);
-		if (ft_strchr(buffer_read, '\n'))
+		temp = ft_strjoin(readed_data, buffer);
+		if (!temp)
 		{
-			line = ft_createline(buffer_read);
-			buffer_read = ft_buffer_save(buffer_read);
+			free(readed_data);
+			return (NULL);
+		}
+		free(readed_data);
+		readed_data = temp;
+		if (ft_strchr(readed_data, '\n'))
+		{
+			line = ft_createline(readed_data);
+			readed_data = ft_buffer_save(readed_data);
 			return (line);
 		}
 	}
-	free(buffer_read);
+	if (readed_data != NULL && readed_data[0] != '\0')
+	{
+		line = ft_createline(readed_data);
+		free(readed_data);
+		readed_data = NULL;
+		return (line);
+	}
+	free(readed_data);
+	readed_data = NULL;
 	return (NULL);
 }
+
 /*
-#include <stdio.h>
 int main(void)
 {
-	int fd;
-	char *line;
+    int fd;
+    char *line;
 
-	fd = open("test.txt", O_RDONLY);
-	if (fd == -1) {
-		printf("Erreur lors de l'ouverture du fichier");
-		return (EXIT_FAILURE);
-	}
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		printf("%s\n", line);
-		free(line);
-	}
-	close(fd);
-	return (EXIT_SUCCESS);
-}*/
+    fd = open("test.txt", O_RDONLY);
+    if (fd == -1) {
+        printf("Erreur lors de l'ouverture du fichier");
+        return (EXIT_FAILURE);
+    }
+    while ((line = get_next_line(fd)) != NULL)
+    {
+        printf("%s\n", line);
+        free(line);
+    }
+    close(fd);
+    return (EXIT_SUCCESS);
+}
+*/
