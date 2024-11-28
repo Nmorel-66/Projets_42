@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:07:57 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/27 18:30:54 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/27 18:52:04 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,53 @@ static char	*ft_buffer_save(char *readed_data)
 	return (temp);
 }
 
+static char	*ft_read_line(int fd, char *buf, char *readed_data)
+{
+	ssize_t	bytes_read;
+	char	*newline;
+	char 	*temp;
+
+	bytes_read = 1;
+	while (!ft_strchr(readed_data, '\n'))
+	{
+		bytes_read = read(fd, buf, BUFFER_SIZE);
+		if (bytes_read <= 0)
+			break ;
+		buf[bytes_read] = '\0';
+		temp = ft_strjoin(readed_data, buf);
+		if (!temp)
+		{
+			free(readed_data);
+			return (NULL);
+		}
+		free (readed_data);
+		readed_data = temp;
+	}
+	
+	newline = ft_createline(readed_data);
+	readed_data = ft_buffer_save(readed_data);
+	return (newline);
+}
+
+char	*get_next_line(int fd)
+{
+	static char	*readed_data = NULL;
+	char		*buf;
+	char		*line;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buf)
+		return (NULL);
+	if (!readed_data)
+		readed_data = ft_strdup("");
+	line = ft_read_line(fd, buf, readed_data);
+	free(buf);
+	return (line);
+}
+
+/*
 char	*get_next_line(int fd)
 {
 	static char	*readed_data = NULL;
@@ -108,6 +155,7 @@ char	*get_next_line(int fd)
 	readed_data = NULL;
 	return (NULL);
 }
+*/
 
 int main(void)
 {
@@ -127,4 +175,3 @@ int main(void)
     close(fd);
     return (EXIT_SUCCESS);
 }
-

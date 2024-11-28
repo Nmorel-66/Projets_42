@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:13:40 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/27 17:11:07 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/27 18:48:44 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	i;
 	size_t	j;
 
+	if (!s1)
+		s1 = ft_strdup("");
 	len = ft_strlen(s1) + ft_strlen(s2);
 	dest = malloc(sizeof(char) * (len + 1));
 	if (dest == NULL)
@@ -84,6 +86,5 @@ char	*ft_strjoin(char *s1, char *s2)
 		j++;
 	}
 	dest[i] = '\0';
-	//free(s1);
 	return (dest);
 }
