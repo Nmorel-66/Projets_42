@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:07:57 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/27 18:30:54 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/28 13:51:51 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ char	*get_next_line(int fd)
 	readed_data = NULL;
 	return (NULL);
 }
-
+/*
 int main(void)
 {
     int fd;
@@ -126,5 +126,5 @@ int main(void)
     }
     close(fd);
     return (EXIT_SUCCESS);
-}
+}*/
 

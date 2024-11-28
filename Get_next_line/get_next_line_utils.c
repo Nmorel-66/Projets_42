@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:13:40 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/27 17:11:07 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/28 13:52:38 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,5 @@ char	*ft_strjoin(char *s1, char *s2)
 		j++;
 	}
 	dest[i] = '\0';
-	//free(s1);
 	return (dest);
 }

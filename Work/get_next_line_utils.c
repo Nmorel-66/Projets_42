@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:13:40 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/27 18:48:44 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/28 16:58:01 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,13 @@ char	*ft_strchr(const char *s, int c)
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	size_t	len;
 	char	*dest;
 	size_t	i;
 	size_t	j;
 
 	if (!s1)
 		s1 = ft_strdup("");
-	len = ft_strlen(s1) + ft_strlen(s2);
-	dest = malloc(sizeof(char) * (len + 1));
+	dest = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (dest == NULL)
 		return (NULL);
 	i = 0;

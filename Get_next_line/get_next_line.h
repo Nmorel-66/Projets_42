@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:06:47 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/27 17:06:25 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/28 13:51:56 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 
-# define BUFFER_SIZE 10
+//# define BUFFER_SIZE 10
 
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);

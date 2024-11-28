@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:07:57 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/27 18:52:04 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/28 17:03:26 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,28 +61,27 @@ static char	*ft_read_line(int fd, char *buf, char *readed_data)
 {
 	ssize_t	bytes_read;
 	char	*newline;
-	char 	*temp;
+	char	*temp;
 
 	bytes_read = 1;
-	while (!ft_strchr(readed_data, '\n'))
+	while (bytes_read > 0)
 	{
-		bytes_read = read(fd, buf, BUFFER_SIZE);
-		if (bytes_read <= 0)
-			break ;
+		bytes_read = read(fd, buf, sizeof(buf) - 1);
+		if (bytes_read == -1)
+			return (free(readed_data), readed_data = NULL, NULL);
 		buf[bytes_read] = '\0';
 		temp = ft_strjoin(readed_data, buf);
-		if (!temp)
-		{
-			free(readed_data);
-			return (NULL);
-		}
-		free (readed_data);
+		//printf("join %s\n", temp);
+		free(readed_data);
 		readed_data = temp;
+		if (ft_strchr(readed_data, '\n'))
+		{
+			newline = ft_createline(readed_data);
+			readed_data = ft_buffer_save(readed_data);
+			return (newline);
+		}
 	}
-	
-	newline = ft_createline(readed_data);
-	readed_data = ft_buffer_save(readed_data);
-	return (newline);
+	return (NULL);
 }
 
 char	*get_next_line(int fd)
@@ -96,66 +95,11 @@ char	*get_next_line(int fd)
 	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buf)
 		return (NULL);
-	if (!readed_data)
-		readed_data = ft_strdup("");
 	line = ft_read_line(fd, buf, readed_data);
 	free(buf);
+	free(readed_data);
 	return (line);
 }
-
-/*
-char	*get_next_line(int fd)
-{
-	static char	*readed_data = NULL;
-	char		buffer[BUFFER_SIZE + 1];
-	ssize_t		bytes_read;
-	char		*line;
-	char		*temp;
-
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	bytes_read = 1;
-	if (!readed_data)
-		readed_data = ft_strdup("");
-	if (!readed_data)
-		return (NULL);
-	while (bytes_read > 0)
-	{
-		bytes_read = read(fd, buffer, sizeof(buffer) - 1);
-		if (bytes_read == -1)
-		{
-			free(readed_data);
-			readed_data = NULL;
-			return (NULL);
-		}
-		buffer[bytes_read] = '\0';
-		temp = ft_strjoin(readed_data, buffer);
-		if (!temp)
-		{
-			free(readed_data);
-			return (NULL);
-		}
-		free(readed_data);
-		readed_data = temp;
-		if (ft_strchr(readed_data, '\n'))
-		{
-			line = ft_createline(readed_data);
-			readed_data = ft_buffer_save(readed_data);
-			return (line);
-		}
-	}
-	if (readed_data != NULL && readed_data[0] != '\0')
-	{
-		line = ft_createline(readed_data);
-		free(readed_data);
-		readed_data = NULL;
-		return (line);
-	}
-	free(readed_data);
-	readed_data = NULL;
-	return (NULL);
-}
-*/
 
 int main(void)
 {
