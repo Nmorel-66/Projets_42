@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:07:57 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/28 13:51:51 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/30 10:58:10 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,56 +57,53 @@ static char	*ft_buffer_save(char *readed_data)
 	return (temp);
 }
 
+static int	ft_read(int fd, char **readed_data, char *buffer)
+{
+	ssize_t	bytes_read;
+	char	*temp;
+
+	bytes_read = 1;
+	while (bytes_read > 0)
+	{
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read <= 0)
+			break ;
+		buffer[bytes_read] = '\0';
+		temp = ft_strjoin(*readed_data, buffer);
+		if (!temp)
+		{
+			free(*readed_data);
+			return (-1);
+		}
+		free(*readed_data);
+		*readed_data = temp;
+		if (ft_strchr(*readed_data, '\n'))
+			break ;
+	}
+	return (bytes_read);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*readed_data = NULL;
 	char		buffer[BUFFER_SIZE + 1];
 	ssize_t		bytes_read;
 	char		*line;
-	char		*temp;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	bytes_read = 1;
 	if (!readed_data)
 		readed_data = ft_strdup("");
-	if (!readed_data)
-		return (NULL);
-	while (bytes_read > 0)
-	{
-		bytes_read = read(fd, buffer, sizeof(buffer) - 1);
-		if (bytes_read == -1)
-		{
-			free(readed_data);
-			readed_data = NULL;
-			return (NULL);
-		}
-		buffer[bytes_read] = '\0';
-		temp = ft_strjoin(readed_data, buffer);
-		if (!temp)
-		{
-			free(readed_data);
-			return (NULL);
-		}
-		free(readed_data);
-		readed_data = temp;
-		if (ft_strchr(readed_data, '\n'))
-		{
-			line = ft_createline(readed_data);
-			readed_data = ft_buffer_save(readed_data);
-			return (line);
-		}
-	}
-	if (readed_data != NULL && readed_data[0] != '\0')
+	bytes_read = ft_read(fd, &readed_data, buffer);
+	if (bytes_read == -1)
+		return (free(readed_data), readed_data = NULL, NULL);
+	if (ft_strchr(readed_data, '\n') || (bytes_read == 0 && *readed_data))
 	{
 		line = ft_createline(readed_data);
-		free(readed_data);
-		readed_data = NULL;
+		readed_data = ft_buffer_save(readed_data);
 		return (line);
 	}
-	free(readed_data);
-	readed_data = NULL;
-	return (NULL);
+	return (free(readed_data), readed_data = NULL, NULL);
 }
 /*
 int main(void)
@@ -121,10 +118,9 @@ int main(void)
     }
     while ((line = get_next_line(fd)) != NULL)
     {
-        printf("%s\n", line);
+        printf("%s", line);
         free(line);
     }
     close(fd);
     return (EXIT_SUCCESS);
 }*/
-
