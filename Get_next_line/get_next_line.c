@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:07:57 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/30 10:58:10 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/11/30 12:20:23 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,11 @@ static char	*ft_createline(char *readed_data)
 	if (!line)
 		return (NULL);
 	i = 0;
-	while (i < len)
+	while (i <= len)
 	{
 		line[i] = readed_data[i];
 		i++;
 	}
-	if (readed_data[i] == '\n')
-		line[i++] = '\n';
 	line[i] = '\0';
 	return (line);
 }
