@@ -6,135 +6,83 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:35:52 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/30 12:20:39 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/12/03 10:27:22 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-static char	*ft_createline(char *readed_data)
+size_t	ft_strlen(const char *s)
 {
-	char	*line;
-	char	*pos;
-	int		len;
-	int		i;
+	int	i;
 
-	pos = ft_strchr(readed_data, '\n');
-	if (pos)
-		len = pos - readed_data;
-	else
-		len = ft_strlen(readed_data);
-	line = malloc(sizeof(char) * (len + 2));
-	if (!line)
-		return (NULL);
 	i = 0;
-	while (i <= len)
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
+
+char	*ft_strdup(const char *s)
+{
+	int		i;
+	int		len;
+	char	*dest;
+
+	i = 0;
+	len = 0;
+	len = ft_strlen(s);
+	dest = malloc(sizeof(char) * (len + 1));
+	if (dest == NULL)
+		return (NULL);
+	while (s[i] != '\0')
 	{
-		line[i] = readed_data[i];
+		dest[i] = s[i];
 		i++;
 	}
-	line[i] = '\0';
-	return (line);
+	dest[i] = '\0';
+	return (dest);
 }
 
-static char	*ft_buffer_save(char *readed_data)
+char	*ft_strchr(const char *s, int c)
 {
-	char	*temp;
-	char	*pos;
+	int	i;
 
-	pos = ft_strchr(readed_data, '\n');
-	if (!pos)
+	i = 0;
+	if ((unsigned char)c == '\0')
+		return ((char *)s + ft_strlen(s));
+	while (s[i] != '\0')
 	{
-		free(readed_data);
+		if (s[i] == (unsigned char)c)
+			return ((char *)s + i);
+		i++;
+	}
+	return (NULL);
+}
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	size_t	len1;
+	size_t	len2;
+	char	*dest;
+	size_t	i;
+	size_t	j;
+
+	if (!s1)
+		s1 = ft_strdup("");
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	dest = malloc(sizeof(char) * (len1 + len2 + 1));
+	if (dest == NULL)
 		return (NULL);
+	i = 0;
+	while (i < len1)
+	{
+		dest[i] = s1[i];
+		i++;
 	}
-	temp = ft_strdup(pos + 1);
-	if (!temp)
-		return (NULL);
-	free(readed_data);
-	return (temp);
+	j = 0;
+	while (j < len2)
+		dest[i++] = s2[j++];
+	dest[i] = '\0';
+	return (dest);
 }
-
-static int	ft_read(int fd, char **readed_data, char *buffer)
-{
-	ssize_t	bytes_read;
-	char	*temp;
-
-	bytes_read = 1;
-	while (bytes_read > 0)
-	{
-		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		if (bytes_read <= 0)
-			break ;
-		buffer[bytes_read] = '\0';
-		temp = ft_strjoin(*readed_data, buffer);
-		if (!temp)
-		{
-			free(*readed_data);
-			return (-1);
-		}
-		free(*readed_data);
-		*readed_data = temp;
-		if (ft_strchr(*readed_data, '\n'))
-			break ;
-	}
-	return (bytes_read);
-}
-
-char	*get_next_line(int fd)
-{
-	static t_fd_data	fd_data[4096];
-	char				buffer[BUFFER_SIZE + 1];
-	ssize_t				bytes_read;
-	char				*line;
-
-	if (fd < 0 || fd >= 4096 || BUFFER_SIZE <= 0)
-		return (NULL);
-	if (!fd_data[fd].readed_data)
-		fd_data[fd].readed_data = ft_strdup("");
-	bytes_read = ft_read(fd, &fd_data[fd].readed_data, buffer);
-	if (bytes_read == -1)
-		return (free(fd_data[fd].readed_data),
-			fd_data[fd].readed_data = NULL, NULL);
-	if (ft_strchr(fd_data[fd].readed_data, '\n')
-		|| (bytes_read == 0 && *fd_data[fd].readed_data))
-	{
-		line = ft_createline(fd_data[fd].readed_data);
-		fd_data[fd].readed_data = ft_buffer_save(fd_data[fd].readed_data);
-		return (line);
-	}
-	return (free(fd_data[fd].readed_data), fd_data[fd].readed_data = NULL,
-		NULL);
-}
-/*
-int main(void)
-{
-	int fd1 = open("test1.txt", O_RDONLY);
-	int fd2 = open("test2.txt", O_RDONLY);
-	int fd3 = open("test3.txt", O_RDONLY);
-	char *line;
-
-	if (fd1 == -1 || fd2 == -1 || fd3 == -1)
-	{
-		printf("Erreur lors de l'ouverture des fichiers\n");
-		return (EXIT_FAILURE);
-	}
-	while ((line = get_next_line(fd1)) != NULL)
-	{
-		printf("FD1: %s", line);
-		free(line);
-	}
-	while ((line = get_next_line(fd2)) != NULL)
-    {
-		printf("FD2: %s", line);
-		free(line);
-	}
-	while ((line = get_next_line(fd3)) != NULL)
-	{
-		printf("FD3: %s", line);
-		free(line);
-	}
-	close(fd1);
-	close(fd2);
-	close(fd3);
-*/
