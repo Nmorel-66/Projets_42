@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:07:57 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/30 12:20:23 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/12/04 10:30:19 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ static int	ft_read(int fd, char **readed_data, char *buffer)
 char	*get_next_line(int fd)
 {
 	static char	*readed_data = NULL;
-	char		buffer[BUFFER_SIZE + 1];
 	ssize_t		bytes_read;
 	char		*line;
+	char		buffer[BUFFER_SIZE + 1];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);

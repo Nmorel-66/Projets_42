@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:06:47 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/30 09:45:09 by nimorel          ###   ########.fr       */
+/*   Updated: 2024/12/04 10:39:11 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 # include <fcntl.h>
 # include <stdio.h>
 
+# ifdef BUFFER_SIZE
+#  if BUFFER_SIZE < 1 || BUFFER_SIZE > 8192000
+#   undef BUFFER_SIZE
+#   define BUFFER_SIZE 10
+#  endif
+# endif
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
 # endif
