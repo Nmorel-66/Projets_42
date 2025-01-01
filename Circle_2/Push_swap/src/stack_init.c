@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:35:13 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/01 19:15:25 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/01 20:24:59 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_stack	*stack_init(void)
 {
 	t_stack	*stack;
 
-	stack = (t_stack *)malloc(sizeof(t_stack));
+	stack = malloc(sizeof(t_stack));
 	if (!stack)
 		return (NULL);
 	stack->top = NULL;
@@ -28,7 +28,7 @@ t_node	*create_node(int value)
 {
 	t_node	*new_node;
 
-	new_node = (t_node *)malloc(sizeof(t_node));
+	new_node = malloc(sizeof(t_node));
 	if (!new_node)
 		return (NULL);
 	new_node->value = value;
@@ -36,7 +36,7 @@ t_node	*create_node(int value)
 	return (new_node);
 }
 
-void	stack_add_front(t_stack *stack, int value)
+void	put_on_stack(t_stack *stack, int value)
 {
 	t_node	*new_node;
 
@@ -48,7 +48,7 @@ void	stack_add_front(t_stack *stack, int value)
 	stack->size++;
 }
 
-int	stack_del_front(t_stack *stack)
+int	remove_from_stack(t_stack *stack)
 {
 	t_node	*top_node;
 	int		value;

@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:02:49 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/01 18:30:29 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/01 20:31:43 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	pa(t_stack *a, t_stack *b)
 	t_node *tmp;
 
 	if (!b || !b->top)
-		return;
+		return ;
 	tmp = b->top;
 	b->top = tmp->next;
 	b->size--;
@@ -31,7 +31,7 @@ void	pb(t_stack *a, t_stack *b)
 	t_node *tmp;
 
 	if (!a || !a->top)
-		return;
+		return ;
 	tmp = a->top;
 	a->top = tmp->next;
 	a->size--;

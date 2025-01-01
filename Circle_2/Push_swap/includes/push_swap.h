@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 17:47:31 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/01 19:15:43 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/01 20:24:45 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	pa(t_stack *a, t_stack *b);
 void	pb(t_stack *a, t_stack *b);
 
 /* Stack */
-void		stack_add_front(t_stack *stack, int value);
-int			stack_del_front(t_stack *stack);
+void		put_on_stack(t_stack *stack, int value);
+int			remove_from_stack(t_stack *stack);
 t_stack		*stack_init(void);
 t_node		*create_node(int value);
 
