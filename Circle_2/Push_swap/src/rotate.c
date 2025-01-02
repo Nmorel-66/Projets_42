@@ -6,19 +6,17 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:13:34 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/01 20:32:00 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/02 10:22:41 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ra(t_stack *a)
+void	ft_ra(t_stack *a)
 {
 	t_node *tmp;
 	t_node *current;
 	
-	if (!a || !a->top || a->size < 2)
-		return ;
 	tmp = a->top; 
 	a->top = tmp->next;
 	current = a->top;
@@ -26,15 +24,14 @@ void	ra(t_stack *a)
 		current = current->next;
 	current->next = tmp;
 	tmp->next = NULL;
+	write(1, "ra\n", 3);
 }
 
-void	rb(t_stack *b)
+void	ft_rb(t_stack *b)
 {
 	t_node *tmp;
 	t_node *current;
 	
-	if (!b || !b->top || b->size < 2)
-		return ;
 	tmp = b->top;
 	b->top = tmp->next;
 	current = b->top;
@@ -42,10 +39,12 @@ void	rb(t_stack *b)
 		current = current->next;
 	current->next = tmp;
 	tmp->next = NULL;
+	write(1, "rb\n", 3);
 }
 
-void	rr(t_stack *a, t_stack *b)
+void	ft_rr(t_stack *a, t_stack *b)
 {
 	ra(a);
 	rb(b);
+	write(1, "rr\n", 3);
 }

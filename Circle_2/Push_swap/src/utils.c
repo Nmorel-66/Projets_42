@@ -6,17 +6,23 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:52:18 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/01 18:53:36 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/02 10:18:54 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_atoi(const char *nptr)
+int	ft_isdigit(int c)
 {
-	int	sign;
-	int	i;
-	int	res;
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
+static int	ft_atoi(const char *nptr)
+{
+	int			sign;
+	int			i;
+	long long	res;
 
 	i = 0;
 	sign = 1;
