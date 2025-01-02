@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:23:11 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/02 10:23:01 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/02 17:42:38 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,35 @@
 
 void	ft_rra(t_stack *a)
 {
-	t_node *tmp;
-	t_node *current;
+	t_node *last_node;
+	t_node *penultimate_node;
 
-	current = a->top;
-	while (current->next && current->next->next)
-		current = current->next;
-	tmp = current->next;
-	current->next = NULL;
-	tmp->next = a->top;
-	a->top = tmp;
+	if (!a || !a->top || !a->top->next)
+		return ;
+	penultimate_node = a->top;
+	while (penultimate_node->next && penultimate_node->next->next)
+		penultimate_node = penultimate_node->next;
+	last_node = penultimate_node->next;
+	penultimate_node->next = NULL;
+	last_node->next = a->top;
+	a->top = last_node;
 	write(1, "rra\n", 4);
 }
 
 void	ft_rrb(t_stack *b)
 {
-	t_node *tmp;
-	t_node *current;
+	t_node *last_node;
+	t_node *penultimate_node;
 
-	current = b->top;
-	while (current->next && current->next->next)
-		current = current->next;
-	tmp = current->next;
-	current->next = NULL;
-	tmp->next = b->top;
-	b->top = tmp;
+	if (!b || !b->top || !b->top->next)
+		return ;
+	penultimate_node = b->top;
+	while (penultimate_node->next && penultimate_node->next->next)
+		penultimate_node = penultimate_node->next;
+	last_node = penultimate_node->next;
+	penultimate_node->next = NULL;
+	last_node->next = b->top;
+	b->top = last_node;
 	write(1, "rrb\n", 4);
 }
 
@@ -48,3 +52,4 @@ void	ft_rrr(t_stack *a, t_stack *b)
 	rrb(b);
 	write(1, "rrr\n", 4);
 }
+// penultimate -> avant dernier

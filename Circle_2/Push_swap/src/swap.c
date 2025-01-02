@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 17:54:26 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/02 10:21:56 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/02 17:38:12 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_sa(t_stack *a)
 	t_node *first;
 	t_node *second;
 	
+	if (!a || !a->top || !a->top->next)
+		return ;
 	first = a->top;
 	second = first->next;
 	first->next = second->next;
@@ -30,6 +32,8 @@ void	ft_sb(t_stack *b)
 	t_node *first;
 	t_node *second;
 	
+	if (!b || !b->top || !b->top->next)
+		return ;
 	first = b->top;
 	second = first->next;
 	first->next = second->next;
@@ -44,13 +48,3 @@ void	ft_ss(t_stack *a, t_stack *b)
 	sb(b);
 	write(1, "ss\n", 3);
 }
-
-/* Swap functions
- +--+
- |	|<-- 
- +--+	|
- |	|<-- 
- +--+
- |	|
- +--+
-*/

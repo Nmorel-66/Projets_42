@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:02:49 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/02 10:22:12 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/02 17:39:46 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	ft_pa(t_stack *a, t_stack *b)
 {
 	t_node *tmp;
 
+	if (!b || !b->top)
+		return ;
 	tmp = b->top;
 	b->top = tmp->next;
 	b->size--;
@@ -29,6 +31,8 @@ void	ft_pb(t_stack *a, t_stack *b)
 {
 	t_node *tmp;
 
+	if (!a || !a->top)
+		return ;
 	tmp = a->top;
 	a->top = tmp->next;
 	a->size--;

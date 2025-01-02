@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:13:34 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/02 10:22:41 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/02 17:40:53 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,35 @@
 
 void	ft_ra(t_stack *a)
 {
-	t_node *tmp;
-	t_node *current;
+	t_node *old_top;
+	t_node *last_node;
 	
-	tmp = a->top; 
-	a->top = tmp->next;
-	current = a->top;
-	while (current->next)
-		current = current->next;
-	current->next = tmp;
-	tmp->next = NULL;
+	if (!a || !a->top || !a->top->next)
+		return ;
+	old_top = a->top; 
+	a->top = old_top->next;
+	last_node = a->top;
+	while (last_node->next)
+		last_node = last_node->next;
+	last_node->next = old_top;
+	old_top->next = NULL;
 	write(1, "ra\n", 3);
 }
 
 void	ft_rb(t_stack *b)
 {
-	t_node *tmp;
-	t_node *current;
+	t_node *old_top;
+	t_node *last_node;
 	
-	tmp = b->top;
-	b->top = tmp->next;
-	current = b->top;
-	while (current->next)
-		current = current->next;
-	current->next = tmp;
-	tmp->next = NULL;
+	if (!b || !b->top || !b->top->next)
+		return ;
+	old_top = b->top;
+	b->top = old_top->next;
+	last_node = b->top;
+	while (last_node->next)
+		last_node = last_node->next;
+	last_node->next = old_top;
+	old_top->next = NULL;
 	write(1, "rb\n", 3);
 }
 
