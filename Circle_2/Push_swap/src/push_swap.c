@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:50:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/01 19:08:25 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/02 08:12:00 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ int	main(int argc, char **argv)
 	if (!stack_a || !stack_b)
 		return (0);
 	while (--argc)
-		push(stack_a, ft_atoi(argv[argc]));
+		put_on_stack(stack_a, ft_atoi(argv[argc]));
 	return (0);
 }

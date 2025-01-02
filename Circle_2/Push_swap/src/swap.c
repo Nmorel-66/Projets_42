@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 17:54:26 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/01 20:30:46 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/02 08:18:20 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,29 @@
 void	sa(t_stack *a) 
 {
 	t_node *first;
-	t_node *tmp;
+	t_node *second;
 	
 	if (a->size < 2) 
 		return ;
 	first = a->top;
-	tmp = first->next;
-	first->next = tmp->next;
-	tmp->next = first;
-	a->top = tmp;
+	second = first->next;
+	first->next = second->next;
+	second->next = first;
+	a->top = second;
 }
 
 void	sb(t_stack *b) 
 {
 	t_node *first;
-	t_node *tmp;
+	t_node *second;
 	
 	if (b->size < 2)	
 		return ; 
 	first = b->top;
-	tmp = first->next;
-	first->next = tmp->next;
-	tmp->next = first;
-	b->top = tmp;
+	second = first->next;
+	first->next = second->next;
+	second->next = first;
+	b->top = second;
 }
 
 void	ss(t_stack *a, t_stack *b)
