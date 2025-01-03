@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 17:47:31 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/03 11:29:04 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/03 16:55:06 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,17 @@ void	ft_print_stack(t_stack *stack);
 void	ft_free_stack(t_stack *stack);
 
 /* Utils */
-int	ft_atoi(const char *nptr);
-int	ft_isdigit(int c);
+int		ft_atoi(const char *nptr);
+int		ft_isdigit(int c);
 void	ft_putnbr_fd(int n, int fd);
 
 /* Push Swap */
-int	is_sorted(t_stack *stack);
-int	main(int argc, char **argv);
+int		is_sorted(t_stack *stack);
+int		main(int argc, char **argv);
 
 /* Checker */
-int	ft_arg_checker(int argc, char **argv);
-int	is_duplicate(int argc, char **argv);
-int	is_valid_int(char *str);
+int		ft_arg_checker(int argc, char **argv);
+int		is_duplicate(int argc, char **argv);
+int		is_valid_int(char *str);
 
 #endif

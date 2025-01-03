@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:13:34 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/03 09:30:00 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/03 17:00:32 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	ft_ra(t_stack *a)
 {
-	t_node *top;
-	t_node *bottom;
-	
+	t_node	*top;
+	t_node	*bottom;
+
 	if (!a || !a->top || !a->top->next)
 		return ;
-	top = a->top; 
+	top = a->top;
 	a->top = top->next;
 	bottom = a->top;
 	while (bottom->next)
@@ -31,9 +31,9 @@ void	ft_ra(t_stack *a)
 
 void	ft_rb(t_stack *b)
 {
-	t_node *top;
-	t_node *bottom;
-	
+	t_node	*top;
+	t_node	*bottom;
+
 	if (!b || !b->top || !b->top->next)
 		return ;
 	top = b->top;

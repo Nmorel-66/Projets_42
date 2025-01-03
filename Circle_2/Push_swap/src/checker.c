@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:28:53 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/03 11:16:00 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/03 16:59:32 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	is_valid_int(char *str)
 {
 	int	i;
-	int value;
+	int	value;
 
 	i = 0;
 	if (str[i] == '-' || str[i] == '+')
@@ -38,6 +38,7 @@ int	is_duplicate(int argc, char **argv)
 {
 	int	i;
 	int	j ;
+
 	i = 1;
 	while (i < argc)
 	{
@@ -47,7 +48,7 @@ int	is_duplicate(int argc, char **argv)
 			if (ft_atoi(argv[i]) == ft_atoi(argv[j]))
 				return (1);
 			j++;
-	}
+		}
 		i++;
 	}
 	return (0);
@@ -55,17 +56,18 @@ int	is_duplicate(int argc, char **argv)
 
 int	ft_arg_checker(int argc, char **argv)
 {
-	int i = 1;
+	int	i;
 
+	i = 1;
 	if (argc < 2)
-        return (0);
+		return (0);
 	while (i < argc)
-    {
- 		if (!is_valid_int(argv[i]))
-    		return (0);
+	{
+		if (!is_valid_int(argv[i]))
+			return (0);
 		i++;
 	}
-    if (is_duplicate(argc, argv))
-        return (0);
-    return (1);
+	if (is_duplicate(argc, argv))
+		return (0);
+	return (1);
 }

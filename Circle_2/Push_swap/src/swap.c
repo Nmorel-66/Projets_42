@@ -6,17 +6,17 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 17:54:26 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/03 09:29:40 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/03 17:07:10 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_sa(t_stack *a) 
+void	ft_sa(t_stack *a)
 {
-	t_node *first;
-	t_node *second;
-	
+	t_node	*first;
+	t_node	*second;
+
 	if (!a || !a->top || !a->top->next)
 		return ;
 	first = a->top;
@@ -27,11 +27,11 @@ void	ft_sa(t_stack *a)
 	write(1, "sa\n", 3);
 }
 
-void	ft_sb(t_stack *b) 
+void	ft_sb(t_stack *b)
 {
-	t_node *first;
-	t_node *second;
-	
+	t_node	*first;
+	t_node	*second;
+
 	if (!b || !b->top || !b->top->next)
 		return ;
 	first = b->top;

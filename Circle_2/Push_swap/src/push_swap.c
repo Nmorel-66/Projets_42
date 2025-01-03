@@ -6,15 +6,15 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:50:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/03 11:04:42 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/03 17:05:42 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int is_sorted(t_stack *stack)
+int	is_sorted(t_stack *stack)
 {
-	t_node *current;
+	t_node	*current;
 
 	if (!stack || !stack->top)
 		return (0);
@@ -35,7 +35,7 @@ int	main(int argc, char **argv)
 
 	if (!ft_arg_checker(argc, argv))
 	{
-		write(2,"Error\n", 6);
+		write(2, "Error\n", 6);
 		return (1);
 	}
 	stack_a = ft_stack_init();
@@ -43,9 +43,11 @@ int	main(int argc, char **argv)
 	if (!stack_a || !stack_b)
 		return (0);
 	while (--argc)
+	{
 		ft_fill_stack(stack_a, ft_atoi(argv[argc]));
 		write(1, "Stack A before operations:\n", 26);
 		ft_print_stack(stack_a);
+	}
 	return (0);
 }
 /* programme de test-----------------------------------------

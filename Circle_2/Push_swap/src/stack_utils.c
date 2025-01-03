@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 10:56:44 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/03 11:28:34 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/03 17:03:31 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,16 @@ void	ft_fill_stack(t_stack *stack, int value)
 	stack->top = new_node;
 	stack->size++;
 }
+
 void	ft_print_stack(t_stack *stack)
 {
-	t_node *tmp = stack->top;
+	t_node	*tmp;
+
+	tmp = stack->top;
 	if (!tmp)
 	{
 		write(1, "Empty\n", 6);
-		return;
+		return ;
 	}
 	while (tmp)
 	{
@@ -63,10 +66,11 @@ void	ft_print_stack(t_stack *stack)
 	}
 	write(1, "\n", 1);
 }
+
 void	ft_free_stack(t_stack *stack)
 {
 	t_node	*temp;
-    
+
 	while (stack->top)
 	{
 		temp = stack->top;
