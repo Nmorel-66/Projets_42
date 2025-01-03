@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:52:18 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/03 10:44:06 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/03 11:43:20 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	ft_isdigit(int c)
 		return (1);
 	return (0);
 }
+
 int	ft_atoi(const char *nptr)
 {
 	int			sign;
@@ -32,34 +33,41 @@ int	ft_atoi(const char *nptr)
 		i++;
 	if (nptr[i] == '-' || nptr[i] == '+')
 	{
-		if (nptr[i] == '-')
+		if (nptr[i++] == '-')
 			sign = -sign;
-		i++;
 	}
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
-		res = res * 10 + (nptr[i] - 48);
-		i++;
+		res = res * 10 + (nptr[i++] - 48);
+		if (res > INT_MAX || res < INT_MIN)
+		{
+			write(2, "Error\n", 6);
+			exit(1);
+		}
 	}
-	return (res * sign);
+	return ((int)(res * sign));
 }
 
-void	ft_putnbr(int n)
+void	ft_putchar_fd(char c, int fd)
 {
-	char	c;
-	
-	if (n == -2147483648)
+	write(fd, &c, 1);
+}
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	long	nb;
+
+	nb = n;
+	if (nb < 0)
 	{
-		write(1, "-2147483648", 11);
-		return;
+		ft_putchar_fd('-', fd);
+		nb = nb * (-1);
 	}
-	if (n < 0)
+	if (nb > 9)
 	{
-		write(1, "-", 1);
-		n = -n;
+		ft_putnbr_fd(nb / 10, fd);
+		ft_putnbr_fd(nb % 10, fd);
 	}
-	if (n >= 10)
-		ft_putnbr(n / 10); 
-	c = (n % 10) + '0';
-	write(1, &c, 1);
+	else
+		ft_putchar_fd(nb + 48, fd);
 }

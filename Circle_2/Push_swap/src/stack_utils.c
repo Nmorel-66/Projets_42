@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 10:56:44 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/03 10:56:49 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/03 11:28:34 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_print_stack(t_stack *stack)
 	}
 	while (tmp)
 	{
-		ft_putnbr(tmp->value);
+		ft_putnbr_fd(tmp->value, 1);
 		write(1, " ", 1);
 		tmp = tmp->next;
 	}

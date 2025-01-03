@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:28:53 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/03 09:25:35 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/03 11:16:00 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	is_valid_int(char *str)
 {
-	int	i = 0;
-	long long value;
+	int	i;
+	int value;
 
 	i = 0;
 	if (str[i] == '-' || str[i] == '+')
@@ -31,7 +31,6 @@ int	is_valid_int(char *str)
 	value = ft_atoi(str);
 	if (value > INT_MAX || value < INT_MIN)
 		return (0);
-		i++;
 	return (1);
 }
 
