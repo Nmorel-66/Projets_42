@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:50:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/03 17:05:42 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/03 17:35:06 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int	main(int argc, char **argv)
 	}
 	return (0);
 }
+
+// faire 3 algo de tri size <= 3, taille <=5 et radix sort pour size > 5	
 /* programme de test-----------------------------------------
 int	main(int argc, char **argv)
 {
