@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:23:11 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/02 17:42:38 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/03 09:30:11 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,42 @@
 
 void	ft_rra(t_stack *a)
 {
-	t_node *last_node;
-	t_node *penultimate_node;
+	t_node *bottom;
+	t_node *penultimate;
 
 	if (!a || !a->top || !a->top->next)
 		return ;
-	penultimate_node = a->top;
-	while (penultimate_node->next && penultimate_node->next->next)
-		penultimate_node = penultimate_node->next;
-	last_node = penultimate_node->next;
-	penultimate_node->next = NULL;
-	last_node->next = a->top;
-	a->top = last_node;
+	penultimate = a->top;
+	while (penultimate->next && penultimate->next->next)
+		penultimate = penultimate->next;
+	bottom = penultimate->next;
+	penultimate->next = NULL;
+	bottom->next = a->top;
+	a->top = bottom;
 	write(1, "rra\n", 4);
 }
 
 void	ft_rrb(t_stack *b)
 {
-	t_node *last_node;
-	t_node *penultimate_node;
+	t_node *bottom;
+	t_node *penultimate;
 
 	if (!b || !b->top || !b->top->next)
 		return ;
-	penultimate_node = b->top;
-	while (penultimate_node->next && penultimate_node->next->next)
-		penultimate_node = penultimate_node->next;
-	last_node = penultimate_node->next;
-	penultimate_node->next = NULL;
-	last_node->next = b->top;
-	b->top = last_node;
+	penultimate = b->top;
+	while (penultimate->next && penultimate->next->next)
+		penultimate = penultimate->next;
+	bottom = penultimate->next;
+	penultimate->next = NULL;
+	bottom->next = b->top;
+	b->top = bottom;
 	write(1, "rrb\n", 4);
 }
 
 void	ft_rrr(t_stack *a, t_stack *b)
 {
-	rra(a);
-	rrb(b);
+	ft_rra(a);
+	ft_rrb(b);
 	write(1, "rrr\n", 4);
 }
 // penultimate -> avant dernier

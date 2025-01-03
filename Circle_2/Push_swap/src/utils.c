@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:52:18 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/02 10:18:54 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/03 10:44:06 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_isdigit(int c)
 		return (1);
 	return (0);
 }
-static int	ft_atoi(const char *nptr)
+int	ft_atoi(const char *nptr)
 {
 	int			sign;
 	int			i;
@@ -42,4 +42,24 @@ static int	ft_atoi(const char *nptr)
 		i++;
 	}
 	return (res * sign);
+}
+
+void	ft_putnbr(int n)
+{
+	char	c;
+	
+	if (n == -2147483648)
+	{
+		write(1, "-2147483648", 11);
+		return;
+	}
+	if (n < 0)
+	{
+		write(1, "-", 1);
+		n = -n;
+	}
+	if (n >= 10)
+		ft_putnbr(n / 10); 
+	c = (n % 10) + '0';
+	write(1, &c, 1);
 }

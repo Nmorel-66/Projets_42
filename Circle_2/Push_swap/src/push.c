@@ -6,13 +6,13 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:02:49 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/02 17:39:46 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/03 10:21:09 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_pa(t_stack *a, t_stack *b)
+void	ft_pb(t_stack *a, t_stack *b)
 {
 	t_node *tmp;
 
@@ -27,7 +27,7 @@ void	ft_pa(t_stack *a, t_stack *b)
 	write(1, "pa\n", 3);
 }
 
-void	ft_pb(t_stack *a, t_stack *b)
+void	ft_pa(t_stack *a, t_stack *b)
 {
 	t_node *tmp;
 

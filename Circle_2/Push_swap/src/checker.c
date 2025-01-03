@@ -6,13 +6,13 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:28:53 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/02 10:15:49 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/03 09:25:35 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_is_valid_int(char *str)
+int	is_valid_int(char *str)
 {
 	int	i = 0;
 	long long value;

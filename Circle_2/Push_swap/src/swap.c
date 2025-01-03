@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 17:54:26 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/02 17:38:12 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/03 09:29:40 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_sb(t_stack *b)
 
 void	ft_ss(t_stack *a, t_stack *b)
 {
-	sa(a);
-	sb(b);
+	ft_sa(a);
+	ft_sb(b);
 	write(1, "ss\n", 3);
 }
