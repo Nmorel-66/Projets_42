@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:50:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/03 17:35:06 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/12 17:45:33 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,41 +43,93 @@ int	main(int argc, char **argv)
 	if (!stack_a || !stack_b)
 		return (0);
 	while (--argc)
-	{
 		ft_fill_stack(stack_a, ft_atoi(argv[argc]));
-		write(1, "Stack A before operations:\n", 26);
-		ft_print_stack(stack_a);
-	}
+	if (is_sorted(stack_a))
+		return (0);
+	else if (stack_a->size <= 3)
+		ft_sort_3(stack_a);
+	else if (stack_a->size <= 5)
+		ft_sort_5(stack_a, stack_b);
+	else
+		ft_radix_sort(stack_a, stack_b);
+	write(1, "stack a after sort", 19);
+	write(1, "\n", 1);
+	ft_print_stack(stack_a);
+	ft_free_stack(stack_a);
+	ft_free_stack(stack_b);
 	return (0);
 }
 
-// faire 3 algo de tri size <= 3, taille <=5 et radix sort pour size > 5	
-/* programme de test-----------------------------------------
-int	main(int argc, char **argv)
+void	ft_sort_3(t_stack *stack_a)
 {
-	t_stack *a;
-	t_stack *b;
-
-	(void)argv;
-	(void)argc;
-	a = ft_stack_init();
-	b = ft_stack_init();
-	ft_fill_stack(a, 5);
-	ft_fill_stack(a, 10);
-	ft_fill_stack(a, 15);
-	ft_fill_stack(a, 20);
-	ft_fill_stack(b, 30);
-	ft_fill_stack(b, 35);
-	write(1, "Stack A before operations:\n", 26);
-	ft_print_stack(a);
-	write(1, "Stack B before operations:\n", 26);
-	ft_print_stack(b);
-	ft_ra(a);
-	write(1, "\nAfter ft_ra (rotate A):\n", 24);
-	write(1, "Stack A:\n", 9);
-	ft_print_stack(a);
-	write(1, "Stack B:\n", 9);
-	ft_print_stack(b);
-	return 0;
+	if (stack_a->size == 2)
+	{
+		if (stack_a->top->value > stack_a->top->next->value)
+			ft_sa(stack_a);
+	}
+	else if (stack_a->size == 3)
+	{
+		if (stack_a->top->value > stack_a->top->next->value)
+			ft_sa(stack_a);
+		ft_ra(stack_a);
+		if (stack_a->top->value > stack_a->top->next->value)
+			ft_sa(stack_a);
+		ft_rra(stack_a);
+	}
 }
-------------------------------------------------------------*/
+
+void	ft_sort_5(t_stack *stack_a, t_stack *stack_b)
+{
+	int	i;
+	int	min;
+	int	max;
+
+	i = 0;
+	while (i < 2)
+	{
+		min = ft_find_min(stack_a);
+		max = ft_find_max(stack_a);
+		while (stack_a->top->value != min && stack_a->top->value != max)
+			ft_ra(stack_a);
+		if (stack_a->top->value == min)
+			ft_pb(stack_a, stack_b);
+		else
+		{
+			ft_pb(stack_a, stack_b);
+			ft_ra(stack_a);
+		}
+		i++;
+	}
+	ft_sort_3(stack_a);
+	ft_pa(stack_a, stack_b);
+	ft_pa(stack_a, stack_b);
+}
+
+void	ft_radix_sort(t_stack *stack_a, t_stack *stack_b)
+{
+	int	max_bits;
+	int	i;
+	int	j;
+	int	size;
+	int	num;
+
+	size = stack_a->size;
+	max_bits = ft_get_max_bits(stack_a);
+	i = 0;
+	while (i < max_bits)
+	{
+		j = 0;
+		while (j < size)
+		{
+			num = stack_a->top->value;
+			if ((num >> i) & 1)
+				ft_ra(stack_a);
+			else
+				ft_pb(stack_a, stack_b);
+			j++;
+		}
+		while (stack_b->size)
+			ft_pa(stack_a, stack_b);
+		i++;
+	}
+}

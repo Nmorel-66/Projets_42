@@ -17,7 +17,8 @@ SRC_FILES = \
 	$(SRC_DIR)/swap.c \
 	$(SRC_DIR)/push.c \
 	$(SRC_DIR)/rotate.c \
-	$(SRC_DIR)/reverse_rotate.c
+	$(SRC_DIR)/reverse_rotate.c \
+	$(SRC_DIR)/sort_utils.c
 
 # Modification pour que les objets soient créés dans le répertoire obj
 OBJ_FILES = $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 17:47:31 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/03 16:55:06 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/12 17:32:57 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,17 @@ int		ft_atoi(const char *nptr);
 int		ft_isdigit(int c);
 void	ft_putnbr_fd(int n, int fd);
 
+/* Sort Utils */
+int		ft_find_min(t_stack *stack);
+int		ft_find_max(t_stack *stack);
+int		ft_get_max_bits(t_stack *stack);
+
 /* Push Swap */
 int		is_sorted(t_stack *stack);
 int		main(int argc, char **argv);
+void	ft_sort_3(t_stack *stack_a);
+void	ft_sort_5(t_stack *stack_a, t_stack *stack_b);
+void	ft_radix_sort(t_stack *stack_a, t_stack *stack_b);
 
 /* Checker */
 int		ft_arg_checker(int argc, char **argv);

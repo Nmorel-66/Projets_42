@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:23:11 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/03 17:06:10 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/12 16:57:02 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,43 @@
 
 void	ft_rra(t_stack *a)
 {
-	t_node	*bottom;
 	t_node	*penultimate;
+	t_node	*last;
 
 	if (!a || !a->top || !a->top->next)
 		return ;
-	penultimate = a->top;
-	while (penultimate->next && penultimate->next->next)
-		penultimate = penultimate->next;
-	bottom = penultimate->next;
-	penultimate->next = NULL;
-	bottom->next = a->top;
-	a->top = bottom;
+	penultimate = NULL;
+	last = a->top;
+	while (last->next)
+	{
+		penultimate = last;
+		last = last->next;
+	}
+	if (penultimate)
+		penultimate->next = NULL;
+	last->next = a->top;
+	a->top = last;
 	write(1, "rra\n", 4);
 }
 
 void	ft_rrb(t_stack *b)
 {
-	t_node	*bottom;
 	t_node	*penultimate;
+	t_node	*last;
 
 	if (!b || !b->top || !b->top->next)
 		return ;
-	penultimate = b->top;
-	while (penultimate->next && penultimate->next->next)
-		penultimate = penultimate->next;
-	bottom = penultimate->next;
-	penultimate->next = NULL;
-	bottom->next = b->top;
-	b->top = bottom;
+	penultimate = NULL;
+	last = b->top;
+	while (last->next)
+	{
+		penultimate = last;
+		last = last->next;
+	}
+	if (penultimate)
+		penultimate->next = NULL;
+	last->next = b->top;
+	b->top = last;
 	write(1, "rrb\n", 4);
 }
 
