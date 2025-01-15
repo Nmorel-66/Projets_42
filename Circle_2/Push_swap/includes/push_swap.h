@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 17:47:31 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/12 17:32:57 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/15 19:35:04 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	ft_putnbr_fd(int n, int fd);
 int		ft_find_min(t_stack *stack);
 int		ft_find_max(t_stack *stack);
 int		ft_get_max_bits(t_stack *stack);
+int		ft_is_min_neg(t_stack *stack);
+void	ft_restore_neg(t_stack *stack, int offset);
 
 /* Push Swap */
 int		is_sorted(t_stack *stack);

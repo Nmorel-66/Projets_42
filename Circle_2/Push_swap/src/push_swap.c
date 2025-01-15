@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:50:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/15 18:21:23 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/15 20:00:42 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,18 @@ void	ft_radix_sort(t_stack *stack_a, t_stack *stack_b)
 	int	max_bits;
 	int	i;
 	int	j;
-	int	size;
 	int	num;
-
-	size = stack_a->size;
+	int	offset;
+	
 	max_bits = ft_get_max_bits(stack_a);
 	i = 0;
+	offset = 0;
+	if (ft_find_min(stack_a) < 0)
+		offset = ft_is_min_neg(stack_a);
 	while (i < max_bits)
 	{
 		j = 0;
-		while (j < size)
+		while (j < stack_a->size)
 		{
 			num = stack_a->top->value;
 			if ((num >> i) & 1)
@@ -95,10 +97,13 @@ void	ft_radix_sort(t_stack *stack_a, t_stack *stack_b)
 				ft_pb(stack_a, stack_b);
 			j++;
 		}
+		
 		while (stack_b->size)
 			ft_pa(stack_a, stack_b);
 		i++;
 	}
+	if (offset != 0)
+		ft_restore_neg(stack_a, offset);
 }
 
 int	main(int argc, char **argv)
