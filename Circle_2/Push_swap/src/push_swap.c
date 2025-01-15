@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:50:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/15 20:00:42 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/15 21:48:58 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,16 @@ int	is_sorted(t_stack *stack)
 
 void	ft_sort_3(t_stack *stack_a)
 {
+	int top;
+	int middle;
+	int bottom;
+	
 	if (stack_a->size == 2)
 	{
 		if (stack_a->top->value > stack_a->top->next->value)
 			ft_sa(stack_a);
 	}
-	else if (stack_a->size == 3)
+	/*else if (stack_a->size == 3)
 	{
 		if (stack_a->top->value > stack_a->top->next->value)
 			ft_sa(stack_a);
@@ -45,10 +49,52 @@ void	ft_sort_3(t_stack *stack_a)
 		ft_rra(stack_a);
 		if (stack_a->top->value > stack_a->top->next->value)
 			ft_sa(stack_a);
+	}*/
+	top = stack_a->top->value;
+	middle = stack_a->top->next->value;
+	bottom = stack_a->top->next->next->value;
+	if (top > middle && middle > bottom)
+	{
+		ft_sa(stack_a);
+		ft_rra(stack_a);
 	}
-}
+	else if (top > middle && top > bottom && middle < bottom)
+		ft_ra(stack_a);
+	else if (top > middle && top > bottom && middle > bottom)
+		ft_sa(stack_a);
+	else if (top < middle && top < bottom && middle > bottom)
+	{
+		ft_sa(stack_a);
+		ft_ra(stack_a);
+	}
+	else if (top < middle && top > bottom)
+		ft_rra(stack_a);
 
+}
 void	ft_sort_5(t_stack *stack_a, t_stack *stack_b)
+{
+	int	min;
+	int i;
+
+	i = 0;
+	while (i < 2)
+	{
+		min = ft_find_min(stack_a);
+		while (stack_a->top->value != min)
+		{
+			if (ft_find_position(stack_a, min) <= stack_a->size / 2)
+				ft_ra(stack_a);
+			else
+				ft_rra(stack_a);
+		}
+		ft_pb(stack_a, stack_b);
+		i++;
+	}
+	ft_sort_3(stack_a);
+	ft_pa(stack_a, stack_b);
+	ft_pa(stack_a, stack_b);
+}
+/*void	ft_sort_5(t_stack *stack_a, t_stack *stack_b)
 {
 	int	i;
 	int	min;
@@ -70,7 +116,7 @@ void	ft_sort_5(t_stack *stack_a, t_stack *stack_b)
 	ft_pa(stack_a, stack_b);
 	ft_pa(stack_a, stack_b);
 	ft_ra(stack_a);
-}
+}*/
 
 void	ft_radix_sort(t_stack *stack_a, t_stack *stack_b)
 {
@@ -79,16 +125,18 @@ void	ft_radix_sort(t_stack *stack_a, t_stack *stack_b)
 	int	j;
 	int	num;
 	int	offset;
+	int size;
 	
-	max_bits = ft_get_max_bits(stack_a);
-	i = 0;
 	offset = 0;
 	if (ft_find_min(stack_a) < 0)
-		offset = ft_is_min_neg(stack_a);
+		offset = ft_get_offset(stack_a);
+	max_bits = ft_get_max_bits(stack_a);
+	i = 0;
 	while (i < max_bits)
 	{
 		j = 0;
-		while (j < stack_a->size)
+		size = stack_a->size;
+		while (j < size)
 		{
 			num = stack_a->top->value;
 			if ((num >> i) & 1)
@@ -97,13 +145,12 @@ void	ft_radix_sort(t_stack *stack_a, t_stack *stack_b)
 				ft_pb(stack_a, stack_b);
 			j++;
 		}
-		
 		while (stack_b->size)
 			ft_pa(stack_a, stack_b);
 		i++;
 	}
 	if (offset != 0)
-		ft_restore_neg(stack_a, offset);
+		ft_restore_offset(stack_a, offset);
 }
 
 int	main(int argc, char **argv)
