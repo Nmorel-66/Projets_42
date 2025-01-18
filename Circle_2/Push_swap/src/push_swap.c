@@ -6,50 +6,23 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:50:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/15 21:48:58 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/18 12:21:58 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	is_sorted(t_stack *stack)
-{
-	t_node	*current;
-
-	if (!stack || !stack->top)
-		return (0);
-	current = stack->top;
-	while (current->next)
-	{
-		if (current->value > current->next->value)
-			return (0);
-		current = current->next;
-	}
-	return (1);
-}
-
 void	ft_sort_3(t_stack *stack_a)
 {
-	int top;
-	int middle;
-	int bottom;
-	
+	int	top;
+	int	middle;
+	int	bottom;
+
 	if (stack_a->size == 2)
 	{
 		if (stack_a->top->value > stack_a->top->next->value)
 			ft_sa(stack_a);
 	}
-	/*else if (stack_a->size == 3)
-	{
-		if (stack_a->top->value > stack_a->top->next->value)
-			ft_sa(stack_a);
-		ft_ra(stack_a);
-		if (stack_a->top->value > stack_a->top->next->value)
-			ft_sa(stack_a);
-		ft_rra(stack_a);
-		if (stack_a->top->value > stack_a->top->next->value)
-			ft_sa(stack_a);
-	}*/
 	top = stack_a->top->value;
 	middle = stack_a->top->next->value;
 	bottom = stack_a->top->next->next->value;
@@ -69,12 +42,29 @@ void	ft_sort_3(t_stack *stack_a)
 	}
 	else if (top < middle && top > bottom)
 		ft_rra(stack_a);
-
 }
+
+void	ft_sort_4(t_stack *stack_a, t_stack *stack_b)
+{
+	int	min;
+
+	min = ft_find_min(stack_a);
+	while (stack_a->top->value != min)
+	{
+		if (ft_find_position(stack_a, min) <= stack_a->size / 2)
+			ft_ra(stack_a);
+		else
+			ft_rra(stack_a);
+	}
+	ft_pb(stack_a, stack_b);
+	ft_sort_3(stack_a);
+	ft_pa(stack_a, stack_b);
+}
+
 void	ft_sort_5(t_stack *stack_a, t_stack *stack_b)
 {
 	int	min;
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 2)
@@ -94,94 +84,36 @@ void	ft_sort_5(t_stack *stack_a, t_stack *stack_b)
 	ft_pa(stack_a, stack_b);
 	ft_pa(stack_a, stack_b);
 }
-/*void	ft_sort_5(t_stack *stack_a, t_stack *stack_b)
+
+void	ft_sort_beyond(t_stack *stack_a, t_stack *stack_b)
 {
-	int	i;
 	int	min;
 	int	max;
+	int	median;
+	int	i;
+	int	size;
 
 	i = 0;
-	while (i < 2)
+	size = stack_a->size;
+	median = size / 2;
+	while (i < median)
 	{
 		min = ft_find_min(stack_a);
 		max = ft_find_max(stack_a);
 		while (stack_a->top->value != min && stack_a->top->value != max)
-			ft_ra(stack_a);
-		if (stack_a->top->value == min || stack_a->top->value == max)
+		{
+			if (ft_find_position(stack_a, min) <= stack_a->size / 2)
+				ft_ra(stack_a);
+			else
+				ft_rra(stack_a);
+		}
+		if (stack_a->top->value == min)
 			ft_pb(stack_a, stack_b);
+		else
+			ft_ra(stack_a);
 		i++;
 	}
 	ft_sort_3(stack_a);
-	ft_sort_3(stack_b);
-	ft_pa(stack_a, stack_b);
-	ft_pa(stack_a, stack_b);
-	ft_ra(stack_a);
-}*/
-
-void	ft_radix_sort(t_stack *stack_a, t_stack *stack_b)
-{
-	int	max_bits;
-	int	i;
-	int	j;
-	int	num;
-	int	offset;
-	int size;
-	
-	offset = 0;
-	if (ft_find_min(stack_a) < 0)
-		offset = ft_get_offset(stack_a);
-	max_bits = ft_get_max_bits(stack_a);
-	i = 0;
-	while (i < max_bits)
-	{
-		j = 0;
-		size = stack_a->size;
-		while (j < size)
-		{
-			num = stack_a->top->value;
-			if ((num >> i) & 1)
-				ft_ra(stack_a);
-			else
-				ft_pb(stack_a, stack_b);
-			j++;
-		}
-		while (stack_b->size)
-			ft_pa(stack_a, stack_b);
-		i++;
-	}
-	if (offset != 0)
-		ft_restore_offset(stack_a, offset);
-}
-
-int	main(int argc, char **argv)
-{
-	t_stack	*stack_a;
-	t_stack	*stack_b;
-
-	if (!ft_arg_checker(argc, argv))
-	{
-		write(2, "Error\n", 6);
-		return (1);
-	}
-	stack_a = ft_stack_init();
-	stack_b = ft_stack_init();
-	if (!stack_a || !stack_b)
-		return (0);
-	while (--argc)
-		ft_fill_stack(stack_a, ft_atoi(argv[argc]));
-	if (is_sorted(stack_a))
-		return (0);
-	else if (stack_a->size <= 3)
-		ft_sort_3(stack_a);
-	else if (stack_a->size <= 5)
-		ft_sort_5(stack_a, stack_b);
-	else
-		ft_radix_sort(stack_a, stack_b);
-	write(1, "stack a after sort", 19);
-	write(1, "\n", 1);
-	ft_print_stack(stack_a);
-	ft_print_stack(stack_b);
-	ft_free_stack(stack_a);
-	ft_free_stack(stack_b);
-	return (0);
+	while (stack_b->size)
+		ft_pa(stack_a, stack_b);
 }

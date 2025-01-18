@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 17:06:54 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/15 21:45:59 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/18 12:18:11 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,6 @@ int	ft_find_max(t_stack *stack)
 	return (max);
 }
 
-int	ft_get_max_bits(t_stack *stack)
-{
-	int		max;
-	int		bits;
-
-	max = ft_find_max(stack);
-	bits = 0;
-	while (max >> bits != 0)
-		bits++;
-	return (bits);
-}
-
 int	ft_find_position(t_stack *stack, int value)
 {
 	t_node	*current;
@@ -81,21 +69,21 @@ int	ft_get_offset(t_stack *stack)
 {
 	int		offset;
 	t_node	*current;
-	
+
 	offset = -ft_find_min(stack);
 	current = stack->top;
-		while (current)
-		{
-			current->value = current->value + offset;
-			current = current->next;
-		}
+	while (current)
+	{
+		current->value = current->value + offset;
+		current = current->next;
+	}
 	return (offset);
 }
 
 void	ft_restore_offset(t_stack *stack, int offset)
 {
 	t_node	*current;
-	
+
 	current = stack->top;
 	while (current)
 	{

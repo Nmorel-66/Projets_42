@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:28:53 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/03 16:59:32 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/18 11:49:53 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	ft_arg_checker(int argc, char **argv)
 
 	i = 1;
 	if (argc < 2)
-		return (0);
+		exit (0);
 	while (i < argc)
 	{
 		if (!is_valid_int(argv[i]))
