@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 17:47:31 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/18 12:18:03 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/18 14:36:21 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,16 @@ int		ft_find_position(t_stack *stack, int value);
 int		ft_get_offset(t_stack *stack);
 void	ft_restore_offset(t_stack *stack, int offset);
 
-/* Push Swap */
+/* Main */
 int		is_sorted(t_stack *stack);
 int		main(int argc, char **argv);
+
+/* Sort */
 void	ft_sort_3(t_stack *stack_a);
 void	ft_sort_4(t_stack *stack_a, t_stack *stack_b);
 void	ft_sort_5(t_stack *stack_a, t_stack *stack_b);
-void	ft_sort_beyond(t_stack *stack_a, t_stack *stack_b);
+void	ft_sort_to_infinity_and_beyond(t_stack *stack_a, t_stack *stack_b);
+void	ft_sort(t_stack *stack_a, t_stack *stack_b);
 
 /* Checker */
 int		ft_arg_checker(int argc, char **argv);
