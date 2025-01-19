@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 11:45:23 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/18 14:37:25 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/19 11:00:06 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,11 @@ int	main(int argc, char **argv)
 	while (--argc)
 		ft_fill_stack(stack_a, ft_atoi(argv[argc]));
 	if (is_sorted(stack_a))
+	{
+		ft_free_stack(stack_a);
+		ft_free_stack(stack_b);
 		return (0);
+    }
 	ft_sort(stack_a, stack_b);
 	write(1, "stack a after sort", 19);
 	write(1, "\n", 1);

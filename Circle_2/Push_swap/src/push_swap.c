@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:50:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/18 14:58:24 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/19 11:53:28 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,13 @@ void	ft_sort_5(t_stack *stack_a, t_stack *stack_b)
 
 void	ft_sort_to_infinity_and_beyond(t_stack *stack_a, t_stack *stack_b)
 {
-	//a implementer
+	
 }
 
 void	ft_sort(t_stack *stack_a, t_stack *stack_b)
 {
+	if (!stack_a || stack_a->size <= 1 || is_sorted(stack_a))
+		return ;
 	if (stack_a->size == 2)
 	{
 		if (stack_a->top->value > stack_a->top->next->value)
