@@ -6,13 +6,13 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:28:53 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/20 09:54:53 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/20 15:09:05 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	is_valid_int(char *str)
+/*int	is_valid_int(char *str)
 {
 	int	i;
 	int	value;
@@ -53,7 +53,6 @@ int	is_duplicate(int argc, char **argv)
 	}
 	return (0);
 }
-
 int	ft_arg_checker(int argc, char **argv)
 {
 	int	i;
@@ -70,46 +69,76 @@ int	ft_arg_checker(int argc, char **argv)
 	if (is_duplicate(argc, argv))
 		return (0);
 	return (1);
+}*/
+
+int	is_valid_int(char *str)
+{
+    int		i;
+
+    i = 0;
+    if (str[i] == '-' || str[i] == '+')
+        i++;
+    if (str[i] == '\0')
+        return (0);
+    while (str[i])
+    {
+        if (!ft_isdigit(str[i]))
+            return (0);
+        i++;
+    }
+    return (1);
 }
 
-char	**ft_split_args(int argc, char **argv, int *new_argc)
+int	is_duplicate(int count, char **args)
 {
-	char	**split_args;
-	char	**new_argv;
-	int		i;
-	int		j;
+    int	i;
+    int	j;
 
-	if (argc == 2 && ft_strchr(argv[1], ' '))
-	{
-		split_args = ft_split(argv[1], ' ');
-		*new_argc = 0;
-		while (split_args[*new_argc])
-			(*new_argc)++;
-		new_argv = (char **)malloc(sizeof(char *) * (*new_argc + 1));
-		if (!new_argv)
-			return (NULL);
-		i = 0;
-		j = 0;
-		while (i < *new_argc)
-		{
-			new_argv[i] = ft_strdup(split_args[i]);
-			i++;
-		}
-		new_argv[i] = NULL;
-		ft_free_split(split_args);
-		return (new_argv);
-	}
+    for (i = 0; i < count; i++)
+    {
+        for (j = i + 1; j < count; j++)
+        {
+            if (ft_atoi(args[i]) == ft_atoi(args[j]))
+                return (1);
+        }
+    }
+    return (0);
 }
 
-void ft_free_split(char **split)
+int	ft_arg_checker(int argc, char **argv)
 {
-	int	i;
+    int		i;
+    char	**splitted_args;
 
-	i = 0;
-	while (split[i])
-	{
-		free(split[i]);
-		i++;
-	}
-	free(split);
+    if (argc < 2)
+        exit(0);
+
+    if (argc == 2)
+        splitted_args = ft_split(argv[1], ' ');
+    else
+        splitted_args = argv + 1;
+
+    i = 0;
+    while (splitted_args[i])
+    {
+        if (!is_valid_int(splitted_args[i]))
+        {
+            if (argc == 2)
+                ft_free(splitted_args);
+            return (0);
+        }
+        i++;
+    }
+
+    if (is_duplicate(i, splitted_args))
+    {
+        if (argc == 2)
+            ft_free(splitted_args);
+        return (0);
+    }
+
+    if (argc == 2)
+        ft_free(splitted_args);
+
+    return (1);
 }

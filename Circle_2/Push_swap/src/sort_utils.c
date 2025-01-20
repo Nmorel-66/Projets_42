@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 17:06:54 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/20 09:11:28 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/20 15:54:29 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_find_position(t_stack *stack, int value)
 	return (-1);
 }
 
-int	ft_get_max_bits(t_stack *stack)
+/*int	ft_get_max_bits(t_stack *stack)
 {
 	int		max_bits;
 	int		max;
@@ -78,9 +78,15 @@ int	ft_get_max_bits(t_stack *stack)
 		max >>= 1;
 	}
 	return (max_bits);
+}*/
+int ft_get_max_bits(t_stack *stack) {
+    int max = ft_find_max(stack);
+    int bits = 0;
+    while (max >> bits)
+        bits++;
+    return bits;
 }
-
-void	ft_shift_stack(t_stack *stack, int shift)
+void	ft_offset(t_stack *stack, int offset)
 {
 	t_node	*current;
 
@@ -89,7 +95,7 @@ void	ft_shift_stack(t_stack *stack, int shift)
     current = stack->top;
     while (current)
     {
-        current->value += shift;
+        current->value = current->value + offset;
         current = current->next;
     }
 }

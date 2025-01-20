@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:52:18 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/03 17:01:12 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/20 14:54:24 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,80 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 	else
 		ft_putchar_fd(nb + 48, fd);
+}
+
+int	ft_count_words(const char *str, char c)
+{
+	int	i;
+	int	cw;
+
+	i = 0;
+	cw = 0;
+	while (str[i] != '\0')
+	{
+		while (str[i] == c && str[i] != '\0')
+			i++;
+		if (str[i] != c && str[i] != '\0')
+			cw++;
+		while (str[i] != c && str[i] != '\0')
+			i++;
+	}
+	return (cw);
+}
+
+char	*ft_addword(const char *str, int start, int end)
+{
+	int		i;
+	char	*word;
+
+	i = 0;
+	word = malloc(sizeof(char) * (end - start + 1));
+	if (word == NULL)
+		return (NULL);
+	while (start < end)
+		word[i++] = str[start++];
+	word[i] = '\0';
+	return (word);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	int		i;
+	int		j;
+	int		len;
+	char	**dest;
+
+	i = 0;
+	j = 0;
+	dest = malloc(sizeof(char *) * (ft_count_words(s, c) + 1));
+	if (dest == NULL)
+		return (NULL);
+	while (s[i] != '\0')
+	{
+		while (s[i] == c && s[i] != '\0')
+			i++;
+		len = 0;
+		while (s[i + len] != '\0' && s[i + len] != c)
+			len++;
+		if (len > 0)
+		{
+			dest[j++] = ft_addword(s, i, i + len);
+			i = i + len;
+		}
+	}
+	dest[j] = NULL;
+	return (dest);
+}
+
+void	ft_free(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 }
