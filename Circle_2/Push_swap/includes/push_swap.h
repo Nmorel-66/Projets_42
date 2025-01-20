@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 17:47:31 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/20 15:39:38 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/20 17:49:19 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int		main(int argc, char **argv);
 void	ft_sort_3(t_stack *stack_a);
 void	ft_sort_4(t_stack *stack_a, t_stack *stack_b);
 void	ft_sort_5(t_stack *stack_a, t_stack *stack_b);
-void	ft_sort_to_infinity_and_beyond(t_stack *stack_a, t_stack *stack_b);
+void	ft_radix_sort(t_stack *stack_a, t_stack *stack_b);
 void	ft_sort(t_stack *stack_a, t_stack *stack_b);
 
 /* Checker */

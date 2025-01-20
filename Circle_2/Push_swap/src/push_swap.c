@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:50:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/20 17:11:54 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/20 18:23:52 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	ft_sort_5(t_stack *stack_a, t_stack *stack_b)
 	ft_pa(stack_a, stack_b);
 }
 
-void ft_sort_to_infinity_and_beyond(t_stack *stack_a, t_stack *stack_b)
+void ft_radix_sort(t_stack *stack_a, t_stack *stack_b)
 {
 	int max_bits;
     int i;
@@ -86,7 +86,6 @@ void ft_sort_to_infinity_and_beyond(t_stack *stack_a, t_stack *stack_b)
 
     if (!stack_a || !stack_b || stack_a->size == 0)
         return;
-
     size = stack_a->size;
     min = ft_find_min(stack_a);
     ft_offset(stack_a, -min);
@@ -96,7 +95,7 @@ void ft_sort_to_infinity_and_beyond(t_stack *stack_a, t_stack *stack_b)
     while (i < max_bits)
     {
         j = 0;
-        while (j < size && !is_sorted(stack_a))
+        while (j < size )
         {
             num = stack_a->top->value;
             if ((num >> i) & 1)
@@ -106,8 +105,8 @@ void ft_sort_to_infinity_and_beyond(t_stack *stack_a, t_stack *stack_b)
             j++;
         }
         while (stack_b->size)
-            ft_pa(stack_a, stack_b);
-        i++;
+           ft_pa(stack_a, stack_b);
+		i++;
     }
     ft_offset(stack_a, min);
 }
@@ -131,5 +130,5 @@ void	ft_sort(t_stack *stack_a, t_stack *stack_b)
 	else if (stack_a->size == 5)
 		ft_sort_5(stack_a, stack_b);
 	else
-		ft_sort_to_infinity_and_beyond(stack_a, stack_b);
+		ft_radix_sort(stack_a, stack_b);
 }
