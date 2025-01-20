@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:50:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/20 16:10:45 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/20 17:11:54 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void ft_sort_to_infinity_and_beyond(t_stack *stack_a, t_stack *stack_b)
     while (i < max_bits)
     {
         j = 0;
-        while (j < size)
+        while (j < size && !is_sorted(stack_a))
         {
             num = stack_a->top->value;
             if ((num >> i) & 1)
