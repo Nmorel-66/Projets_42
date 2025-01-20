@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:50:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/19 12:18:46 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/20 09:10:22 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,39 @@ void	ft_sort_5(t_stack *stack_a, t_stack *stack_b)
 
 void ft_sort_to_infinity_and_beyond(t_stack *stack_a, t_stack *stack_b)
 {
-	// code here
+	int max_bits;
+    int i;
+    int j;
+    int size;
+    int num;
+    int min;
+
+    if (!stack_a || !stack_b || stack_a->size == 0)
+        return;
+
+    size = stack_a->size;
+    min = ft_find_min(stack_a);
+    ft_shift_stack(stack_a, -min); // Décale tous les nombres pour qu'ils soient positifs
+    max_bits = ft_get_max_bits(stack_a);
+
+    i = 0;
+    while (i < max_bits)
+    {
+        j = 0;
+        while (j < size)
+        {
+            num = stack_a->top->value;
+            if ((num >> i) & 1)
+                ft_ra(stack_a);
+            else
+                ft_pb(stack_a, stack_b);
+            j++;
+        }
+        while (stack_b->size)
+            ft_pa(stack_a, stack_b);
+        i++;
+    }
+    ft_shift_stack(stack_a, min);
 }
 
 void	ft_sort(t_stack *stack_a, t_stack *stack_b)

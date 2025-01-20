@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 17:47:31 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/19 11:53:20 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/20 09:11:13 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	ft_putnbr_fd(int n, int fd);
 int		ft_find_min(t_stack *stack);
 int		ft_find_max(t_stack *stack);
 int		ft_find_position(t_stack *stack, int value);
-int		ft_get_offset(t_stack *stack);
-void	ft_restore_offset(t_stack *stack, int offset);
+int		ft_get_max_bits(t_stack *stack);
+void	ft_shift_stack(t_stack *stack, int shift);
 
 /* Main */
 int		is_sorted(t_stack *stack);
