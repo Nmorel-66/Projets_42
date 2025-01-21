@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 17:47:31 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/20 22:06:06 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/21 20:46:05 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,13 @@ int		ft_atoi(const char *nptr);
 int		ft_isdigit(int c);
 void	ft_putnbr_fd(int n, int fd);
 char	*ft_addword(const char *str, int start, int end);
-char 	**ft_split(char const *s, char c);
+char	**ft_split(char const *s, char c);
 void	ft_free(char **str);
 
 /* Sort Utils */
 int		ft_find_min(t_stack *stack);
-int		ft_find_max(t_stack *stack);
 int		ft_find_position(t_stack *stack, int value);
-int		ft_get_max_bits(t_stack *stack);
-void	ft_offset(t_stack *stack, int shift);
+int		ft_find_min_position(t_stack *stack);
 
 /* Main */
 int		is_sorted(t_stack *stack);
@@ -75,7 +73,7 @@ int		main(int argc, char **argv);
 void	ft_sort_3(t_stack *stack_a);
 void	ft_sort_4(t_stack *stack_a, t_stack *stack_b);
 void	ft_sort_5(t_stack *stack_a, t_stack *stack_b);
-void	ft_radix_sort(t_stack *stack_a, t_stack *stack_b);
+void	ft_big_sort(t_stack *stack_a, t_stack *stack_b);
 void	ft_sort(t_stack *stack_a, t_stack *stack_b);
 
 /* Checker */

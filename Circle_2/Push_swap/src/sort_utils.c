@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 17:06:54 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/20 16:16:20 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/21 20:56:44 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,6 @@ int	ft_find_min(t_stack *stack)
 	return (min);
 }
 
-int	ft_find_max(t_stack *stack)
-{
-	t_node	*current;
-	int		max;
-
-	if (!stack || !stack->top)
-		return (0);
-	current = stack->top;
-	max = current->value;
-	while (current)
-	{
-		if (current->value > max)
-			max = current->value;
-		current = current->next;
-	}
-	return (max);
-}
-
 int	ft_find_position(t_stack *stack, int value)
 {
 	t_node	*current;
@@ -65,32 +47,26 @@ int	ft_find_position(t_stack *stack, int value)
 	return (-1);
 }
 
-int	ft_get_max_bits(t_stack *stack)
+int	ft_find_min_position(t_stack *stack)
 {
-	int		max_bits;
-	int		max;
-
-	max = ft_find_max(stack);
-	max_bits = 0;
-	while (max)
-	{
-		max_bits++;
-		//max >>= 1;
-		max = max >> 1;
-	}
-	return (max_bits);
-}
-
-void	ft_offset(t_stack *stack, int offset)
-{
+	int		min;
+	int		min_pos;
+	int		current_pos;
 	t_node	*current;
 
-    if (!stack || !stack->top)
-        return;
-    current = stack->top;
-    while (current)
-    {
-        current->value = current->value + offset;
-        current = current->next;
-    }
+	min = stack->top->value;
+	min_pos = 0;
+	current_pos = 0;
+	current = stack->top;
+	while (current)
+	{
+		if (current->value < min)
+		{
+			min = current->value;
+			min_pos = current_pos;
+		}
+		current = current->next;
+		current_pos++;
+	}
+	return (min_pos);
 }
