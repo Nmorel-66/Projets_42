@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 17:06:54 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/22 10:17:46 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/22 16:52:31 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,13 @@ int	ft_find_max_position(t_stack *stack)
 	return (max_pos);
 }
 
-int ft_find_best_move(t_stack *stack)
+int	ft_find_best_move(t_stack *stack)
 {
-	int min_pos;
-	int max_pos;
-	int size;
-	int min_operations;
-	int max_operations;
+	int	min_pos;
+	int	max_pos;
+	int	size;
+	int	min_operations;
+	int	max_operations;
 
 	min_pos = ft_find_min_position(stack);
 	max_pos = ft_find_max_position(stack);
@@ -119,19 +119,4 @@ int ft_find_best_move(t_stack *stack)
 		return (min_pos);
 	else
 		return (max_pos);
-}
-
-void 	ft_move_to_top(t_stack *stack, int pos)
-{
-	if (pos <= stack->size / 2)
-	{
-		while (pos--)
-			ft_ra(stack);
-	}
-	else
-	{
-		pos = stack->size - pos;
-		while (pos--)
-			ft_rra(stack);
-	}
 }

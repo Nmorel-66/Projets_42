@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arg_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:18:15 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/22 12:05:27 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/22 17:14:32 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	ft_arg_checker(int argc, char **argv)
 	char	**splitted_args;
 
 	if (argc < 2)
-		exit(0);
+		exit (0);
 	if (argc == 2)
 		splitted_args = ft_split(argv[1], ' ');
 	else

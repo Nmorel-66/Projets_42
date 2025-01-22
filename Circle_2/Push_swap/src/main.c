@@ -6,10 +6,9 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:16:05 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/22 16:38:12 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/22 17:05:28 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "push_swap.h"
 
@@ -75,7 +74,6 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	ft_sort(stack_a, stack_b);
-	
 	ft_free_stack(stack_a);
 	ft_free_stack(stack_b);
 	return (0);

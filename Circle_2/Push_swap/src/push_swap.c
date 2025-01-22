@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:50:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/22 11:04:47 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/22 16:51:29 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,10 @@ void	ft_big_sort(t_stack *stack_a, t_stack *stack_b)
 		min_pos = ft_find_min_position(stack_a);
 		max_pos = ft_find_max_position(stack_a);
 		best_element = ft_find_best_move(stack_a);
-
 		if (best_element == min_pos)
 		{
 			ft_move_to_top(stack_a, min_pos);
-			ft_pb(stack_a, stack_b);	
+			ft_pb(stack_a, stack_b);
 		}
 		else if (best_element == max_pos)
 		{
