@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 17:47:31 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/21 20:46:05 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/22 11:55:15 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <limits.h>
 # include <stdlib.h>
+# include "../Libft/libft.h"
 
 /* Structures */
 typedef struct s_node
@@ -52,17 +53,15 @@ void	ft_print_stack(t_stack *stack);
 void	ft_free_stack(t_stack *stack);
 
 /* Utils */
-int		ft_atoi(const char *nptr);
-int		ft_isdigit(int c);
-void	ft_putnbr_fd(int n, int fd);
-char	*ft_addword(const char *str, int start, int end);
-char	**ft_split(char const *s, char c);
 void	ft_free(char **str);
 
 /* Sort Utils */
 int		ft_find_min(t_stack *stack);
-int		ft_find_position(t_stack *stack, int value);
 int		ft_find_min_position(t_stack *stack);
+int		ft_find_max(t_stack *stack);
+int		ft_find_max_position(t_stack *stack);
+int		ft_find_best_move(t_stack *stack);
+void	ft_move_to_top(t_stack *stack, int pos);
 
 /* Main */
 int		is_sorted(t_stack *stack);

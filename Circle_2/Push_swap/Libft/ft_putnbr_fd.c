@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/01 18:52:18 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/22 11:54:25 by nimorel          ###   ########.fr       */
+/*   Created: 2024/11/11 14:07:48 by nimorel           #+#    #+#             */
+/*   Updated: 2024/11/12 14:00:23 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ft_free(char **str)
+void	ft_putnbr_fd(int n, int fd)
 {
-	int	i;
+	long	nb;
 
-	i = 0;
-	while (str[i])
+	nb = n;
+	if (nb < 0)
 	{
-		free(str[i]);
-		i++;
+		ft_putchar_fd('-', fd);
+		nb = nb * (-1);
 	}
-	free(str);
+	if (nb > 9)
+	{
+		ft_putnbr_fd(nb / 10, fd);
+		ft_putnbr_fd(nb % 10, fd);
+	}
+	else
+		ft_putchar_fd(nb + 48, fd);
 }
+/*int	main(void)
+{
+	ft_putnbr_fd(INT_MIN, 1);
+	return(0);
+}*/

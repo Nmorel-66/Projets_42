@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/01 18:52:18 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/22 11:54:25 by nimorel          ###   ########.fr       */
+/*   Created: 2024/11/13 14:59:59 by nimorel           #+#    #+#             */
+/*   Updated: 2024/11/14 09:13:21 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ft_free(char **str)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
+	if (!lst || !f)
+		return ;
+	while (lst != NULL)
 	{
-		free(str[i]);
-		i++;
+		f(lst->content);
+		lst = lst->next;
 	}
-	free(str);
 }

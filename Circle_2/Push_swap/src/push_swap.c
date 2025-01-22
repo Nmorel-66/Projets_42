@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:50:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/21 21:00:20 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/22 11:04:47 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_sort_5(t_stack *stack_a, t_stack *stack_b)
 		min = ft_find_min(stack_a);
 		while (stack_a->top->value != min)
 		{
-			if (ft_find_position(stack_a, min) <= stack_a->size / 2)
+			if (ft_find_min_position(stack_a) <= stack_a->size / 2)
 				ft_ra(stack_a);
 			else
 				ft_rra(stack_a);
@@ -78,23 +78,29 @@ void	ft_sort_5(t_stack *stack_a, t_stack *stack_b)
 void	ft_big_sort(t_stack *stack_a, t_stack *stack_b)
 {
 	int	min_pos;
+	int	max_pos;
+	int	best_element;
 
 	while (stack_a->size > 0)
 	{
 		min_pos = ft_find_min_position(stack_a);
-		if (min_pos <= stack_a->size / 2)
+		max_pos = ft_find_max_position(stack_a);
+		best_element = ft_find_best_move(stack_a);
+
+		if (best_element == min_pos)
 		{
-			while (min_pos--)
-				ft_ra(stack_a);
+			ft_move_to_top(stack_a, min_pos);
+			ft_pb(stack_a, stack_b);	
 		}
-		else
+		else if (best_element == max_pos)
 		{
-			min_pos = stack_a->size - min_pos;
-			while (min_pos--)
-				ft_rra(stack_a);
+			ft_move_to_top(stack_a, max_pos);
+			ft_pb(stack_a, stack_b);
+			ft_rb(stack_b);
 		}
-		ft_pb(stack_a, stack_b);
 	}
+	max_pos = ft_find_max_position(stack_b);
+	ft_move_to_top(stack_b, max_pos);
 	while (stack_b->size > 0)
 		ft_pa(stack_a, stack_b);
 }

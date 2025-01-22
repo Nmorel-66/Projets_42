@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/18 11:45:23 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/21 21:03:21 by nimorel          ###   ########.fr       */
+/*   Created: 2025/01/22 11:16:05 by nimorel           #+#    #+#             */
+/*   Updated: 2025/01/22 12:14:54 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "push_swap.h"
 
@@ -39,10 +40,13 @@ void	ft_args(t_stack *stack_a, int argc, char **argv)
 		if (!splitted_args)
 			return ;
 		i = 0;
+		i = ft_strlen(splitted_args);
+		//while (splitted_args[i])
 		while (splitted_args[i])
 		{
 			ft_fill_stack(stack_a, ft_atoi(splitted_args[i]));
-			i++;
+			//i++;
+			i--;
 		}
 		ft_free(splitted_args);
 	}
@@ -51,6 +55,8 @@ void	ft_args(t_stack *stack_a, int argc, char **argv)
 		while (--argc)
 			ft_fill_stack(stack_a, ft_atoi(argv[argc]));
 	}
+	write(1, "stack a after fill ", 20);
+		ft_print_stack(stack_a);
 }
 
 int	main(int argc, char **argv)
