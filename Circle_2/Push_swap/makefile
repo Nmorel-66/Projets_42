@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror -Iincludes  # Assurez-vous que -Iincludes est ici
 SRC_DIR = src
 OBJ_DIR = obj
 INC_DIR = includes
-LIBFT_DIR = libft
+LIBFT_DIR = Libft
 LIBFT_OBJ_DIR = $(LIBFT_DIR)/obj
 
 # Files

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:16:05 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/22 12:14:54 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/22 16:38:12 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,10 @@ void	ft_args(t_stack *stack_a, int argc, char **argv)
 		if (!splitted_args)
 			return ;
 		i = 0;
-		i = ft_strlen(splitted_args);
-		//while (splitted_args[i])
-		while (splitted_args[i])
-		{
+		while (splitted_args[i] != NULL)
+			i++;
+		while (--i >= 0)
 			ft_fill_stack(stack_a, ft_atoi(splitted_args[i]));
-			//i++;
-			i--;
-		}
 		ft_free(splitted_args);
 	}
 	else
@@ -55,8 +51,6 @@ void	ft_args(t_stack *stack_a, int argc, char **argv)
 		while (--argc)
 			ft_fill_stack(stack_a, ft_atoi(argv[argc]));
 	}
-	write(1, "stack a after fill ", 20);
-		ft_print_stack(stack_a);
 }
 
 int	main(int argc, char **argv)
@@ -81,15 +75,16 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	ft_sort(stack_a, stack_b);
-	if (is_sorted(stack_a))
-		write(1, "OK\n", 3);
-	else
-		write(1, "KO\n", 3);
+	
 	ft_free_stack(stack_a);
 	ft_free_stack(stack_b);
 	return (0);
 }
 /* impression des stack
+if (is_sorted(stack_a))
+		write(1, "OK\n", 3);
+	else
+		write(2, "KO\n", 3);
 write(1, "stack a after sort", 19);
 	write(1, "\n", 1);
 	ft_print_stack(stack_a);
