@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:18:15 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/23 20:58:31 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/23 21:02:16 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,37 +92,3 @@ int	ft_arg_checker(int argc, char **argv)
 		ft_free(splitted_args);
 	return (1);
 }
-/*
-int	ft_arg_checker(int argc, char **argv)
-{
-	int		i;
-	char	**splitted_args;
-
-	if (argc < 2)
-		exit (0);
-	if (argc == 2)
-		splitted_args = ft_split(argv[1], ' ');
-	else
-		splitted_args = argv + 1;
-	i = 0;
-	while (splitted_args[i])
-	{
-		if (!is_valid_int(splitted_args[i]))
-		{
-			if (argc == 2)
-				ft_free(splitted_args);
-			return (0);
-		}
-		i++;
-	}
-	if (is_duplicate(i, splitted_args))
-	{
-		if (argc == 2)
-			ft_free(splitted_args);
-		return (0);
-	}
-	if (argc == 2)
-		ft_free(splitted_args);
-	return (1);
-}
-*/
