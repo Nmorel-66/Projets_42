@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:50:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/23 21:07:39 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/23 21:21:29 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,17 @@ void	ft_sort_3(t_stack *stack_a)
 void	ft_sort_4(t_stack *stack_a, t_stack *stack_b)
 {
 	int	min;
+	int	min_pos;
 
 	min = ft_find_min(stack_a);
-	while (stack_a->top->value != min)
-		ft_ra(stack_a, 1);
+	min_pos = ft_find_min_position(stack_a);
+	if (min_pos <= stack_a->size - 1)
+		ft_rra(stack_a, 1);
+	else
+	{
+		while (stack_a->top->value != min)
+			ft_ra(stack_a, 1);
+	}
 	ft_pb(stack_a, stack_b);
 	ft_sort_3(stack_a);
 	ft_pa(stack_a, stack_b);
