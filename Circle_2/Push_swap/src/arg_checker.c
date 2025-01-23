@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arg_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:18:15 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/22 17:14:32 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/23 20:58:31 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,47 @@ int	is_duplicate(int count, char **args)
 	return (0);
 }
 
+int	ft_validate_args(char **args, int argc)
+{
+	int	i;
+
+	i = 0;
+	while (args[i])
+	{
+		if (!is_valid_int(args[i]))
+		{
+			if (argc == 2)
+				ft_free(args);
+			return (0);
+		}
+		i++;
+	}
+	if (is_duplicate(i, args))
+	{
+		if (argc == 2)
+			ft_free(args);
+		return (0);
+	}
+	return (1);
+}
+
+int	ft_arg_checker(int argc, char **argv)
+{
+	char	**splitted_args;
+
+	if (argc < 2)
+		exit(0);
+	if (argc == 2)
+		splitted_args = ft_split(argv[1], ' ');
+	else
+		splitted_args = argv + 1;
+	if (!ft_validate_args(splitted_args, argc))
+		return (0);
+	if (argc == 2)
+		ft_free(splitted_args);
+	return (1);
+}
+/*
 int	ft_arg_checker(int argc, char **argv)
 {
 	int		i;
@@ -84,3 +125,4 @@ int	ft_arg_checker(int argc, char **argv)
 		ft_free(splitted_args);
 	return (1);
 }
+*/

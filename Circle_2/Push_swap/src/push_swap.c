@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:50:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/23 20:51:40 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/23 20:57:35 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_sort_3(t_stack *stack_a)
 		ft_ra(stack_a, 1);
 	}
 	else if (top < middle && middle > bottom && top > bottom)
-		ft_rra(stack_a,	1);
+		ft_rra(stack_a, 1);
 }
 
 void	ft_sort_4(t_stack *stack_a, t_stack *stack_b)
@@ -75,41 +75,6 @@ void	ft_sort_5(t_stack *stack_a, t_stack *stack_b)
 	ft_pa(stack_a, stack_b);
 	ft_pa(stack_a, stack_b);
 }
-
-/*void	ft_big_sort(t_stack *stack_a, t_stack *stack_b)
-{
-	int	chunk_size;
-	int	chunk_max;
-	int	pushed;
-	int	current;
-
-	if (stack_a->size <= 100)
-		chunk_size = stack_a->size / 4;
-	else
-		chunk_size = stack_a->size / 8;
-	chunk_max = chunk_size;
-	pushed = 0;
-	while (stack_a->size > 0)
-	{
-		current = stack_a->top->value;
-		if (current <= chunk_max)
-		{
-			ft_pb(stack_a, stack_b);
-			pushed++;
-			if (current > chunk_max - (chunk_size / 2))
-				ft_rb(stack_b, 1);
-		}
-		else
-			ft_ra(stack_a, 1);
-		if (pushed == chunk_size)
-		{
-			chunk_max = chunk_max + chunk_size;
-			pushed = 0;
-		}
-	}
-	while (stack_b->size > 0)
-		ft_pa(stack_a, stack_b);
-}*/
 
 void	ft_big_sort(t_stack *stack_a, t_stack *stack_b)
 {
