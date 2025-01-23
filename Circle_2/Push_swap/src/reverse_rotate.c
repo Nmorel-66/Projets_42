@@ -6,13 +6,13 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:23:11 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/12 16:57:02 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/23 09:09:00 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_rra(t_stack *a)
+void	ft_rra(t_stack *a, int w)
 {
 	t_node	*penultimate;
 	t_node	*last;
@@ -30,10 +30,11 @@ void	ft_rra(t_stack *a)
 		penultimate->next = NULL;
 	last->next = a->top;
 	a->top = last;
-	write(1, "rra\n", 4);
+	if (w)
+		write(1, "rra\n", 4);
 }
 
-void	ft_rrb(t_stack *b)
+void	ft_rrb(t_stack *b, int w)
 {
 	t_node	*penultimate;
 	t_node	*last;
@@ -51,13 +52,14 @@ void	ft_rrb(t_stack *b)
 		penultimate->next = NULL;
 	last->next = b->top;
 	b->top = last;
-	write(1, "rrb\n", 4);
+	if (w)
+		write(1, "rrb\n", 4);
 }
 
 void	ft_rrr(t_stack *a, t_stack *b)
 {
-	ft_rra(a);
-	ft_rrb(b);
+	ft_rra(a, 0);
+	ft_rrb(b, 0);
 	write(1, "rrr\n", 4);
 }
 // penultimate -> avant dernier

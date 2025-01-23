@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:52:18 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/22 16:52:18 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/23 10:01:58 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ void	ft_move_to_top(t_stack *stack, int pos)
 	if (pos <= stack->size / 2)
 	{
 		while (pos--)
-			ft_ra(stack);
+			ft_ra(stack, 1);
+	
 	}
 	else
 	{
 		pos = stack->size - pos;
 		while (pos--)
-			ft_rra(stack);
+			ft_rra(stack, 1);
 	}
 }

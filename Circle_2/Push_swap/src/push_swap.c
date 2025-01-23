@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:50:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/22 16:51:29 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/23 10:01:49 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,21 @@ void	ft_sort_3(t_stack *stack_a)
 	middle = stack_a->top->next->value;
 	bottom = stack_a->top->next->next->value;
 	if (top > middle && middle < bottom && top < bottom)
-		ft_sa(stack_a);
+		ft_sa(stack_a, 1);
 	else if (top > middle && middle > bottom && top > bottom)
 	{
-		ft_sa(stack_a);
-		ft_rra(stack_a);
+		ft_sa(stack_a, 1);
+		ft_rra(stack_a, 1);
 	}
 	else if (top > middle && middle < bottom && top > bottom)
-		ft_ra(stack_a);
+		ft_ra(stack_a, 1);
 	else if (top < middle && middle > bottom && top < bottom)
 	{
-		ft_sa(stack_a);
-		ft_ra(stack_a);
+		ft_sa(stack_a, 1);
+		ft_ra(stack_a, 1);
 	}
 	else if (top < middle && middle > bottom && top > bottom)
-		ft_rra(stack_a);
+		ft_rra(stack_a,	1);
 }
 
 void	ft_sort_4(t_stack *stack_a, t_stack *stack_b)
@@ -45,7 +45,7 @@ void	ft_sort_4(t_stack *stack_a, t_stack *stack_b)
 
 	min = ft_find_min(stack_a);
 	while (stack_a->top->value != min)
-		ft_ra(stack_a);
+		ft_ra(stack_a, 1);
 	ft_pb(stack_a, stack_b);
 	ft_sort_3(stack_a);
 	ft_pa(stack_a, stack_b);
@@ -63,9 +63,9 @@ void	ft_sort_5(t_stack *stack_a, t_stack *stack_b)
 		while (stack_a->top->value != min)
 		{
 			if (ft_find_min_position(stack_a) <= stack_a->size / 2)
-				ft_ra(stack_a);
+				ft_ra(stack_a, 1);
 			else
-				ft_rra(stack_a);
+				ft_rra(stack_a, 1);
 		}
 		ft_pb(stack_a, stack_b);
 		i++;
@@ -75,7 +75,7 @@ void	ft_sort_5(t_stack *stack_a, t_stack *stack_b)
 	ft_pa(stack_a, stack_b);
 }
 
-void	ft_big_sort(t_stack *stack_a, t_stack *stack_b)
+/*void	ft_big_sort(t_stack *stack_a, t_stack *stack_b)
 {
 	int	min_pos;
 	int	max_pos;
@@ -95,14 +95,14 @@ void	ft_big_sort(t_stack *stack_a, t_stack *stack_b)
 		{
 			ft_move_to_top(stack_a, max_pos);
 			ft_pb(stack_a, stack_b);
-			ft_rb(stack_b);
+			ft_rb(stack_b, 1);
 		}
 	}
 	max_pos = ft_find_max_position(stack_b);
 	ft_move_to_top(stack_b, max_pos);
 	while (stack_b->size > 0)
 		ft_pa(stack_a, stack_b);
-}
+}*/
 
 void	ft_sort(t_stack *stack_a, t_stack *stack_b)
 {
@@ -112,7 +112,7 @@ void	ft_sort(t_stack *stack_a, t_stack *stack_b)
 	{
 		if (stack_a->top->value > stack_a->top->next->value)
 		{
-			ft_sa(stack_a);
+			ft_sa(stack_a, 1);
 			return ;
 		}
 	}

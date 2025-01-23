@@ -6,13 +6,13 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:13:34 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/12 16:49:53 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/23 09:08:18 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_ra(t_stack *a)
+void	ft_ra(t_stack *a, int w)
 {
 	t_node	*tmp;
 	t_node	*bottom;
@@ -26,10 +26,11 @@ void	ft_ra(t_stack *a)
 		bottom = bottom->next;
 	bottom->next = tmp;
 	tmp->next = NULL;
-	write(1, "ra\n", 3);
+	if (w)
+		write(1, "ra\n", 3);
 }
 
-void	ft_rb(t_stack *b)
+void	ft_rb(t_stack *b, int w)
 {
 	t_node	*tmp;
 	t_node	*bottom;
@@ -43,12 +44,13 @@ void	ft_rb(t_stack *b)
 		bottom = bottom->next;
 	bottom->next = tmp;
 	tmp->next = NULL;
-	write(1, "rb\n", 3);
+	if (w)
+		write(1, "rb\n", 3);
 }
 
 void	ft_rr(t_stack *a, t_stack *b)
 {
-	ft_ra(a);
-	ft_rb(b);
+	ft_ra(a, 0);
+	ft_rb(b, 0);
 	write(1, "rr\n", 3);
 }
