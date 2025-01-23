@@ -15,7 +15,6 @@ SRC_FILES = \
 	$(SRC_DIR)/push_swap.c \
 	$(SRC_DIR)/arg_checker.c \
 	$(SRC_DIR)/stack_utils.c \
-	$(SRC_DIR)/utils.c \
 	$(SRC_DIR)/swap.c \
 	$(SRC_DIR)/push.c \
 	$(SRC_DIR)/rotate.c \

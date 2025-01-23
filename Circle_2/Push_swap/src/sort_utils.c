@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   sort_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 17:06:54 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/22 16:52:31 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/23 20:52:55 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	ft_free(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+}
 
 int	ft_find_min(t_stack *stack)
 {
@@ -54,69 +67,30 @@ int	ft_find_min_position(t_stack *stack)
 	return (min_pos);
 }
 
-int	ft_find_max(t_stack *stack)
+void	ft_push_chunks_to_b(t_stack *stack_a, t_stack *stack_b, int chunk_size)
 {
-	t_node	*current;
-	int		max;
+	int	chunk_max;
+	int	pushed;
+	int	current;
 
-	if (!stack || !stack->top)
-		return (0);
-	current = stack->top;
-	max = current->value;
-	while (current)
+	chunk_max = chunk_size;
+	pushed = 0;
+	while (stack_a->size > 0)
 	{
-		if (current->value > max)
-			max = current->value;
-		current = current->next;
-	}
-	return (max);
-}
-
-int	ft_find_max_position(t_stack *stack)
-{
-	int		max;
-	int		max_pos;
-	int		current_pos;
-	t_node	*current;
-
-	max = stack->top->value;
-	max_pos = 0;
-	current_pos = 0;
-	current = stack->top;
-	while (current)
-	{
-		if (current->value > max)
+		current = stack_a->top->value;
+		if (current <= chunk_max)
 		{
-			max = current->value;
-			max_pos = current_pos;
+			ft_pb(stack_a, stack_b);
+			pushed++;
+			if (current > chunk_max - (chunk_size / 2))
+				ft_rb(stack_b, 1);
 		}
-		current = current->next;
-		current_pos++;
+		else
+			ft_ra(stack_a, 1);
+		if (pushed == chunk_size)
+		{
+			chunk_max += chunk_size;
+			pushed = 0;
+		}
 	}
-	return (max_pos);
-}
-
-int	ft_find_best_move(t_stack *stack)
-{
-	int	min_pos;
-	int	max_pos;
-	int	size;
-	int	min_operations;
-	int	max_operations;
-
-	min_pos = ft_find_min_position(stack);
-	max_pos = ft_find_max_position(stack);
-	size = stack->size;
-	if (min_pos <= size / 2)
-		min_operations = min_pos;
-	else
-		min_operations = size - min_pos;
-	if (max_pos <= size / 2)
-		max_operations = max_pos;
-	else
-		max_operations = size - max_pos;
-	if (min_operations <= max_operations)
-		return (min_pos);
-	else
-		return (max_pos);
 }

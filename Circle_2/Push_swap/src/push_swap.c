@@ -6,11 +6,12 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:50:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/23 10:01:49 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/23 20:51:40 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdlib.h>
 
 void	ft_sort_3(t_stack *stack_a)
 {
@@ -77,32 +78,51 @@ void	ft_sort_5(t_stack *stack_a, t_stack *stack_b)
 
 /*void	ft_big_sort(t_stack *stack_a, t_stack *stack_b)
 {
-	int	min_pos;
-	int	max_pos;
-	int	best_element;
+	int	chunk_size;
+	int	chunk_max;
+	int	pushed;
+	int	current;
 
+	if (stack_a->size <= 100)
+		chunk_size = stack_a->size / 4;
+	else
+		chunk_size = stack_a->size / 8;
+	chunk_max = chunk_size;
+	pushed = 0;
 	while (stack_a->size > 0)
 	{
-		min_pos = ft_find_min_position(stack_a);
-		max_pos = ft_find_max_position(stack_a);
-		best_element = ft_find_best_move(stack_a);
-		if (best_element == min_pos)
+		current = stack_a->top->value;
+		if (current <= chunk_max)
 		{
-			ft_move_to_top(stack_a, min_pos);
 			ft_pb(stack_a, stack_b);
+			pushed++;
+			if (current > chunk_max - (chunk_size / 2))
+				ft_rb(stack_b, 1);
 		}
-		else if (best_element == max_pos)
+		else
+			ft_ra(stack_a, 1);
+		if (pushed == chunk_size)
 		{
-			ft_move_to_top(stack_a, max_pos);
-			ft_pb(stack_a, stack_b);
-			ft_rb(stack_b, 1);
+			chunk_max = chunk_max + chunk_size;
+			pushed = 0;
 		}
 	}
-	max_pos = ft_find_max_position(stack_b);
-	ft_move_to_top(stack_b, max_pos);
 	while (stack_b->size > 0)
 		ft_pa(stack_a, stack_b);
 }*/
+
+void	ft_big_sort(t_stack *stack_a, t_stack *stack_b)
+{
+	int	chunk_size;
+
+	if (stack_a->size <= 100)
+		chunk_size = stack_a->size / 4;
+	else
+		chunk_size = stack_a->size / 8;
+	ft_push_chunks_to_b(stack_a, stack_b, chunk_size);
+	while (stack_b->size > 0)
+		ft_pa(stack_a, stack_b);
+}
 
 void	ft_sort(t_stack *stack_a, t_stack *stack_b)
 {

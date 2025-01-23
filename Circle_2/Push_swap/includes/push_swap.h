@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 17:47:31 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/23 10:01:40 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/23 20:53:31 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,11 @@ t_node	*ft_create_node(int value);
 void	ft_print_stack(t_stack *stack);
 void	ft_free_stack(t_stack *stack);
 
-/* Utils */
-void	ft_free(char **str);
-
 /* Sort Utils */
 int		ft_find_min(t_stack *stack);
 int		ft_find_min_position(t_stack *stack);
-int		ft_find_max(t_stack *stack);
-int		ft_find_max_position(t_stack *stack);
-int		ft_find_best_move(t_stack *stack);
-void	ft_move_to_top(t_stack *stack, int pos);
+void	ft_push_chunks_to_b(t_stack *stack_a, t_stack *stack_b, int chunk_size);
+void	ft_free(char **str);
 
 /* Main */
 int		is_sorted(t_stack *stack);
