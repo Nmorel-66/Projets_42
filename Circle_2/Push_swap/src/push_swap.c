@@ -6,12 +6,11 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:50:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/23 20:57:35 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/23 21:07:39 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdlib.h>
 
 void	ft_sort_3(t_stack *stack_a)
 {

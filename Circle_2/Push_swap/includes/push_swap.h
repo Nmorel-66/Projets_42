@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 17:47:31 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/23 20:53:31 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/23 21:07:13 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef struct s_stack
 }			t_stack;
 
 /* Operations */
-
 void	ft_ra(t_stack *a, int w);
 void	ft_rb(t_stack *b, int w);
 void	ft_rr(t_stack *a, t_stack *b);
