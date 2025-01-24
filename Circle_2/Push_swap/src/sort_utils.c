@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 17:06:54 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/23 20:52:55 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/24 10:44:00 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,30 +67,66 @@ int	ft_find_min_position(t_stack *stack)
 	return (min_pos);
 }
 
-void	ft_push_chunks_to_b(t_stack *stack_a, t_stack *stack_b, int chunk_size)
+int	ft_find_max(t_stack *stack)
 {
-	int	chunk_max;
-	int	pushed;
-	int	current;
+	t_node	*current;
+	int		max;
 
-	chunk_max = chunk_size;
-	pushed = 0;
-	while (stack_a->size > 0)
+	if (!stack || !stack->top)
+		return (0);
+	current = stack->top;
+	max = current->value;
+	while (current)
 	{
-		current = stack_a->top->value;
-		if (current <= chunk_max)
+		if (current->value > max)
+			max = current->value;
+		current = current->next;
+	}
+	return (max);
+}
+
+int	ft_find_max_position(t_stack *stack)
+{
+	int		max;
+	int		max_pos;
+	int		current_pos;
+	t_node	*current;
+
+	max = stack->top->value;
+	max_pos = 0;
+	current_pos = 0;
+	current = stack->top;
+	while (current)
+	{
+		if (current->value > max)
 		{
-			ft_pb(stack_a, stack_b);
-			pushed++;
-			if (current > chunk_max - (chunk_size / 2))
-				ft_rb(stack_b, 1);
+			max = current->value;
+			max_pos = current_pos;
 		}
-		else
-			ft_ra(stack_a, 1);
-		if (pushed == chunk_size)
+		current = current->next;
+		current_pos++;
+	}
+	return (max_pos);
+}
+
+void	ft_move_to_top(t_stack *stack, int pos)
+{
+	if (pos == 0)
+		return ;
+	if (pos <= stack->size / 2)
+	{
+		while (pos > 0)
 		{
-			chunk_max += chunk_size;
-			pushed = 0;
+			ft_ra(stack, 1);
+			pos--;
+		}
+	}
+	else
+	{
+		while (pos < stack->size)
+		{
+			ft_rra(stack, 1);
+			pos++;
 		}
 	}
 }

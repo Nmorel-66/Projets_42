@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:50:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/23 21:21:29 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/24 11:15:53 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,19 +82,20 @@ void	ft_sort_5(t_stack *stack_a, t_stack *stack_b)
 	ft_pa(stack_a, stack_b);
 }
 
-void	ft_big_sort(t_stack *stack_a, t_stack *stack_b)
+void 	ft_big_sort(t_stack *stack_a, t_stack *stack_b)
 {
-	int	chunk_size;
-
-	if (stack_a->size <= 100)
-		chunk_size = stack_a->size / 4;
-	else
-		chunk_size = stack_a->size / 8;
-	ft_push_chunks_to_b(stack_a, stack_b, chunk_size);
+	int	min_pos;
+	
+	while (stack_a->size > 0)
+	{
+		min_pos = ft_find_min_position(stack_a);
+		ft_move_to_top(stack_a, min_pos);
+		ft_pb(stack_a, stack_b);
+	}
+	
 	while (stack_b->size > 0)
 		ft_pa(stack_a, stack_b);
 }
-
 void	ft_sort(t_stack *stack_a, t_stack *stack_b)
 {
 	if (!stack_a || stack_a->size <= 1 || is_sorted(stack_a))
