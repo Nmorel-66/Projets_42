@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:13:34 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/23 09:08:18 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/25 17:09:21 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_ra(t_stack *a, int w)
 		bottom = bottom->next;
 	bottom->next = tmp;
 	tmp->next = NULL;
-	if (w)
+	if (w == 1)
 		write(1, "ra\n", 3);
 }
 
@@ -44,7 +44,7 @@ void	ft_rb(t_stack *b, int w)
 		bottom = bottom->next;
 	bottom->next = tmp;
 	tmp->next = NULL;
-	if (w)
+	if (w == 1)
 		write(1, "rb\n", 3);
 }
 

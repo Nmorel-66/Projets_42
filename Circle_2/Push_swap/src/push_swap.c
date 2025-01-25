@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:50:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/25 13:10:45 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/25 18:08:52 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,20 @@ void	ft_sort_3(t_stack *stack_a)
 
 void	ft_sort_4(t_stack *stack_a, t_stack *stack_b)
 {
-	int	min;
 	int	min_pos;
 
-	min = ft_find_min(stack_a);
 	min_pos = ft_find_min_position(stack_a);
-	if (min_pos <= stack_a->size - 1)
-		ft_rra(stack_a, 1);
-	else
+	if (min_pos == 1)
+		ft_ra(stack_a, 1);
+	else if (min_pos == 2)
 	{
-		while (stack_a->top->value != min)
-			ft_ra(stack_a, 1);
+		ft_ra(stack_a, 1);
+		ft_ra(stack_a, 1);
 	}
+	else if (min_pos == 3)
+		ft_rra(stack_a, 1);
+	if (is_sorted(stack_a))
+		return ;
 	ft_pb(stack_a, stack_b);
 	ft_sort_3(stack_a);
 	ft_pa(stack_a, stack_b);
@@ -60,29 +62,31 @@ void	ft_sort_4(t_stack *stack_a, t_stack *stack_b)
 
 void	ft_sort_5(t_stack *stack_a, t_stack *stack_b)
 {
-	int	min;
-	int	i;
+	int	min_pos;
 
-	i = 0;
-	while (i < 2)
+	min_pos = ft_find_min_position(stack_a);
+	if (min_pos == 1)
+		ft_ra(stack_a, 1);
+	else if (min_pos == 2)
 	{
-		min = ft_find_min(stack_a);
-		while (stack_a->top->value != min)
-		{
-			if (ft_find_min_position(stack_a) <= stack_a->size / 2)
-				ft_ra(stack_a, 1);
-			else
-				ft_rra(stack_a, 1);
-		}
-		ft_pb(stack_a, stack_b);
-		i++;
+		ft_ra(stack_a, 1);
+		ft_ra(stack_a, 1);
 	}
-	ft_sort_3(stack_a);
-	ft_pa(stack_a, stack_b);
+	else if (min_pos == 3)
+	{
+		ft_rra(stack_a, 1);
+		ft_rra(stack_a, 1);
+	}
+	else if (min_pos == 4)
+		ft_rra(stack_a, 1);
+	if (is_sorted(stack_a))
+		return ;
+	ft_pb(stack_a, stack_b);
+	ft_sort_4(stack_a, stack_b);
 	ft_pa(stack_a, stack_b);
 }
 
-void	ft_big_sort(t_stack *stack_a, t_stack *stack_b)
+/*void	ft_big_sort(t_stack *stack_a, t_stack *stack_b)
 {
 	while (stack_a->size > 0)
 		ft_push_best_to_b(stack_a, stack_b);
@@ -91,7 +95,7 @@ void	ft_big_sort(t_stack *stack_a, t_stack *stack_b)
 		ft_move_to_top(stack_b, ft_find_max_position(stack_b));
 		ft_pa(stack_a, stack_b);
 	}
-}
+}*/
 
 void	ft_sort(t_stack *stack_a, t_stack *stack_b)
 {
@@ -113,25 +117,22 @@ void	ft_sort(t_stack *stack_a, t_stack *stack_b)
 		ft_sort_5(stack_a, stack_b);
 	else
 		ft_big_sort(stack_a, stack_b);
-		
 }
 
-/*void 	ft_big_sort(t_stack *stack_a, t_stack *stack_b)
+void 	ft_big_sort(t_stack *stack_a, t_stack *stack_b)
 {
 	int	min_pos;
-	//int	max_pos;
 	
 	while (stack_a->size > 0 && is_sorted(stack_a) == 0)
 	{
 		min_pos = ft_find_min_position(stack_a);
-		//max_pos = ft_find_max_position(stack_a);
 		ft_move_to_top(stack_a, min_pos);
 		ft_pb(stack_a, stack_b);
 	}
 	
 	while (stack_b->size > 0)
 		ft_pa(stack_a, stack_b);
-}*/
+}
 
 /*void	ft_radix_sort(t_stack *stack_a, t_stack *stack_b)
 {

@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 17:06:54 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/25 13:11:05 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/25 18:08:34 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ void	ft_move_to_top(t_stack *stack, int pos)
 void	ft_push_best_to_b(t_stack *stack_a, t_stack *stack_b)
 {
 	char	best;
+	char	next_best;
 
 	best = ft_best_move(stack_a);
 	if (best == 'm')
@@ -145,7 +146,12 @@ void	ft_push_best_to_b(t_stack *stack_a, t_stack *stack_b)
 	{
 		ft_move_to_top(stack_a, ft_find_max_position(stack_a));
 		ft_pb(stack_a, stack_b);
-		ft_rb(stack_b, 1);
+		//ft_rb(stack_b, 1);
+		next_best = ft_best_move(stack_a);
+		if (next_best == 'm' && stack_a->top->value != ft_find_min(stack_a))
+			ft_rr(stack_a, stack_b);
+		else
+			ft_rb(stack_b, 1);
 	}
 }
 
@@ -173,3 +179,4 @@ char	ft_best_move(t_stack *stack_a)
 		return ('m');
 	return ('M');
 }
+
