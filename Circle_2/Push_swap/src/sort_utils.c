@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 17:06:54 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/24 10:44:00 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/25 13:11:05 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,4 +129,47 @@ void	ft_move_to_top(t_stack *stack, int pos)
 			pos++;
 		}
 	}
+}
+
+void	ft_push_best_to_b(t_stack *stack_a, t_stack *stack_b)
+{
+	char	best;
+
+	best = ft_best_move(stack_a);
+	if (best == 'm')
+	{
+		ft_move_to_top(stack_a, ft_find_min_position(stack_a));
+		ft_pb(stack_a, stack_b);
+	}
+	else
+	{
+		ft_move_to_top(stack_a, ft_find_max_position(stack_a));
+		ft_pb(stack_a, stack_b);
+		ft_rb(stack_b, 1);
+	}
+}
+
+char	ft_best_move(t_stack *stack_a)
+{
+	int	min_pos;
+	int	max_pos;
+	int	cost_min;
+	int	cost_max;
+
+	min_pos = ft_find_min_position(stack_a);
+	max_pos = ft_find_max_position(stack_a);
+
+	if (min_pos <= stack_a->size / 2)
+		cost_min = min_pos;
+	else
+		cost_min = stack_a->size - min_pos;
+
+	if (max_pos <= stack_a->size / 2)
+		cost_max = max_pos;
+	else
+		cost_max = stack_a->size - max_pos;
+
+	if (cost_min <= cost_max)
+		return ('m');
+	return ('M');
 }

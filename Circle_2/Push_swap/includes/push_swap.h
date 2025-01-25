@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 17:47:31 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/24 10:46:59 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/25 12:24:04 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,11 @@ int		ft_find_min_position(t_stack *stack);
 int		ft_find_max(t_stack *stack);
 int		ft_find_max_position(t_stack *stack);
 void	ft_move_to_top(t_stack *stack, int pos);
-void	ft_chunk_sort(t_stack *stack_a, t_stack *stack_b, int chunk);
 void	ft_free(char **str);
+char	ft_best_move(t_stack *stack_a);
+void	ft_push_best_to_b(t_stack *stack_a, t_stack *stack_b);
+void	ft_min_max_sort(t_stack *stack_a, t_stack *stack_b);
+
 
 /* Main */
 int		is_sorted(t_stack *stack);
@@ -69,7 +72,7 @@ int		main(int argc, char **argv);
 void	ft_sort_3(t_stack *stack_a);
 void	ft_sort_4(t_stack *stack_a, t_stack *stack_b);
 void	ft_sort_5(t_stack *stack_a, t_stack *stack_b);
-void	ft_big_sort(t_stack *stack_a, t_stack *stack_b);
+//void	ft_big_sort(t_stack *stack_a, t_stack *stack_b);
 void	ft_sort(t_stack *stack_a, t_stack *stack_b);
 
 /* Checker */

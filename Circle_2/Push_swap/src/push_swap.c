@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:50:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/24 11:15:53 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/25 13:10:45 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,20 +82,17 @@ void	ft_sort_5(t_stack *stack_a, t_stack *stack_b)
 	ft_pa(stack_a, stack_b);
 }
 
-void 	ft_big_sort(t_stack *stack_a, t_stack *stack_b)
+void	ft_big_sort(t_stack *stack_a, t_stack *stack_b)
 {
-	int	min_pos;
-	
 	while (stack_a->size > 0)
-	{
-		min_pos = ft_find_min_position(stack_a);
-		ft_move_to_top(stack_a, min_pos);
-		ft_pb(stack_a, stack_b);
-	}
-	
+		ft_push_best_to_b(stack_a, stack_b);
 	while (stack_b->size > 0)
+	{
+		ft_move_to_top(stack_b, ft_find_max_position(stack_b));
 		ft_pa(stack_a, stack_b);
+	}
 }
+
 void	ft_sort(t_stack *stack_a, t_stack *stack_b)
 {
 	if (!stack_a || stack_a->size <= 1 || is_sorted(stack_a))
@@ -116,4 +113,46 @@ void	ft_sort(t_stack *stack_a, t_stack *stack_b)
 		ft_sort_5(stack_a, stack_b);
 	else
 		ft_big_sort(stack_a, stack_b);
+		
 }
+
+/*void 	ft_big_sort(t_stack *stack_a, t_stack *stack_b)
+{
+	int	min_pos;
+	//int	max_pos;
+	
+	while (stack_a->size > 0 && is_sorted(stack_a) == 0)
+	{
+		min_pos = ft_find_min_position(stack_a);
+		//max_pos = ft_find_max_position(stack_a);
+		ft_move_to_top(stack_a, min_pos);
+		ft_pb(stack_a, stack_b);
+	}
+	
+	while (stack_b->size > 0)
+		ft_pa(stack_a, stack_b);
+}*/
+
+/*void	ft_radix_sort(t_stack *stack_a, t_stack *stack_b)
+{
+	int	bit_pos;
+	int	count;
+	int	size;
+	
+	size = stack_a->size;
+	bit_pos = 1;
+	while(is_sorted(stack_a) == 0)
+	{
+		count = 0;
+		while (stack_a != NULL && count++ < size)
+		{
+			if ((stack_a->top->value & bit_pos) == 0)
+				ft_pb(stack_a, stack_b);
+			else
+				ft_ra(stack_a, 1);
+		}
+		while (stack_b->size > 0)
+			ft_pa(stack_a, stack_b);
+		bit_pos = bit_pos << 1;
+	}
+}*/
