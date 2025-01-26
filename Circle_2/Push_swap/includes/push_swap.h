@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 17:47:31 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/25 18:09:21 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/26 19:37:10 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 /* Structures */
 typedef struct s_node
 {
-	int				value;
+	long long		value;
 	struct s_node	*next;
 }					t_node;
 
@@ -72,6 +72,8 @@ void	ft_sort_4(t_stack *stack_a, t_stack *stack_b);
 void	ft_sort_5(t_stack *stack_a, t_stack *stack_b);
 void	ft_big_sort(t_stack *stack_a, t_stack *stack_b);
 void	ft_sort(t_stack *stack_a, t_stack *stack_b);
+void	ft_radix_sort(t_stack *stack_a, t_stack *stack_b);
+void	ft_offset(t_stack *stack, int offset, int mode);
 
 /* Checker */
 int		ft_arg_checker(int argc, char **argv);
