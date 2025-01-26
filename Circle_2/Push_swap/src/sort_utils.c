@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 17:06:54 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/26 19:50:08 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/26 20:45:26 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,20 @@ void	ft_offset(t_stack *stack, int offset, int add)
 			current->value = current->value - offset;
 		current = current->next;
 	}
+}
+
+void	ft_sort_process(t_stack *a, t_stack *b, int bit_pos, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i++ < size)
+	{
+		if ((a->top->value & bit_pos) == 0)
+			ft_pb(a, b);
+		else
+			ft_ra(a, 1);
+	}
+	while (b->size > 0)
+		ft_pa(a, b);
 }

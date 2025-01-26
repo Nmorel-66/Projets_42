@@ -6,13 +6,13 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:50:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/26 19:54:18 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/26 20:58:45 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_sort_3(t_stack *stack_a)
+static void	ft_sort_3(t_stack *stack_a)
 {
 	int	top;
 	int	middle;
@@ -39,7 +39,7 @@ void	ft_sort_3(t_stack *stack_a)
 		ft_rra(stack_a, 1);
 }
 
-void	ft_sort_4(t_stack *stack_a, t_stack *stack_b)
+static void	ft_sort_4(t_stack *stack_a, t_stack *stack_b)
 {
 	int	min_pos;
 
@@ -60,7 +60,7 @@ void	ft_sort_4(t_stack *stack_a, t_stack *stack_b)
 	ft_pa(stack_a, stack_b);
 }
 
-void	ft_sort_5(t_stack *stack_a, t_stack *stack_b)
+static void	ft_sort_5(t_stack *stack_a, t_stack *stack_b)
 {
 	int	min_pos;
 
@@ -86,6 +86,28 @@ void	ft_sort_5(t_stack *stack_a, t_stack *stack_b)
 	ft_pa(stack_a, stack_b);
 }
 
+static void	ft_radix_sort(t_stack *stack_a, t_stack *stack_b)
+{
+	int	bit_pos;
+	int	size;
+	int	offset;
+
+	offset = ft_find_min(stack_a);
+	if (offset < 0)
+		offset = -offset;
+	else
+		offset = 0;
+	ft_offset(stack_a, offset, 1);
+	size = stack_a->size;
+	bit_pos = 1;
+	while (!is_sorted(stack_a))
+	{
+		ft_sort_process(stack_a, stack_b, bit_pos, size);
+		bit_pos <<= 1;
+	}
+	ft_offset(stack_a, offset, 0);
+}
+
 void	ft_sort(t_stack *stack_a, t_stack *stack_b)
 {
 	if (!stack_a || stack_a->size <= 1 || is_sorted(stack_a))
@@ -106,36 +128,4 @@ void	ft_sort(t_stack *stack_a, t_stack *stack_b)
 		ft_sort_5(stack_a, stack_b);
 	else
 		ft_radix_sort(stack_a, stack_b);
-}
-
-void	ft_radix_sort(t_stack *stack_a, t_stack *stack_b)
-{
-	int	bit_pos;
-	int	count;
-	int	size;
-	int	offset;
-
-	offset = ft_find_min(stack_a);
-	if (offset < 0)
-		offset = -offset;
-	else
-		offset = 0;
-	ft_offset(stack_a, offset, 1);
-	size = stack_a->size;
-	bit_pos = 1;
-	while (is_sorted(stack_a) == 0)
-	{
-		count = 0;
-		while (stack_a != NULL && count++ < size)
-		{
-			if ((stack_a->top->value & bit_pos) == 0)
-				ft_pb(stack_a, stack_b);
-			else
-				ft_ra(stack_a, 1);
-		}
-		while (stack_b->size > 0)
-			ft_pa(stack_a, stack_b);
-		bit_pos = bit_pos << 1;
-	}
-	ft_offset(stack_a, offset, 0);
 }

@@ -6,13 +6,13 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:18:15 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/23 21:02:16 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/26 20:47:28 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	is_valid_int(char *str)
+static int	is_valid_int(char *str)
 {
 	int	i;
 
@@ -32,7 +32,7 @@ int	is_valid_int(char *str)
 	return (1);
 }
 
-int	is_duplicate(int count, char **args)
+static int	is_duplicate(int count, char **args)
 {
 	int	i;
 	int	j;
@@ -52,7 +52,7 @@ int	is_duplicate(int count, char **args)
 	return (0);
 }
 
-int	ft_validate_args(char **args, int argc)
+static int	ft_validate_args(char **args, int argc)
 {
 	int	i;
 
