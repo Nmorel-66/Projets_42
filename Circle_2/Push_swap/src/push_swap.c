@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:50:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/26 19:37:57 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/26 19:54:18 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,17 +86,6 @@ void	ft_sort_5(t_stack *stack_a, t_stack *stack_b)
 	ft_pa(stack_a, stack_b);
 }
 
-/*void	ft_big_sort(t_stack *stack_a, t_stack *stack_b)
-{
-	while (stack_a->size > 0)
-		ft_push_best_to_b(stack_a, stack_b);
-	while (stack_b->size > 0)
-	{
-		ft_move_to_top(stack_b, ft_find_max_position(stack_b));
-		ft_pa(stack_a, stack_b);
-	}
-}*/
-
 void	ft_sort(t_stack *stack_a, t_stack *stack_b)
 {
 	if (!stack_a || stack_a->size <= 1 || is_sorted(stack_a))
@@ -116,23 +105,7 @@ void	ft_sort(t_stack *stack_a, t_stack *stack_b)
 	else if (stack_a->size == 5)
 		ft_sort_5(stack_a, stack_b);
 	else
-
 		ft_radix_sort(stack_a, stack_b);
-}
-
-void 	ft_big_sort(t_stack *stack_a, t_stack *stack_b)
-{
-	int	min_pos;
-	
-	while (stack_a->size > 0 && is_sorted(stack_a) == 0)
-	{
-		min_pos = ft_find_min_position(stack_a);
-		ft_move_to_top(stack_a, min_pos);
-		ft_pb(stack_a, stack_b);
-	}
-	
-	while (stack_b->size > 0)
-		ft_pa(stack_a, stack_b);
 }
 
 void	ft_radix_sort(t_stack *stack_a, t_stack *stack_b)
@@ -147,7 +120,7 @@ void	ft_radix_sort(t_stack *stack_a, t_stack *stack_b)
 		offset = -offset;
 	else
 		offset = 0;
-	ft_offset(stack_a, offset, 1); 
+	ft_offset(stack_a, offset, 1);
 	size = stack_a->size;
 	bit_pos = 1;
 	while (is_sorted(stack_a) == 0)
@@ -165,19 +138,4 @@ void	ft_radix_sort(t_stack *stack_a, t_stack *stack_b)
 		bit_pos = bit_pos << 1;
 	}
 	ft_offset(stack_a, offset, 0);
-}
-
-void	ft_offset(t_stack *stack, int offset, int add)
-{
-	t_node	*current;
-
-	current = stack->top;
-	while (current != NULL)
-	{
-		if (add)
-			current->value = current->value + offset;
-		else
-			current->value = current->value - offset;
-		current = current->next;
-	}
 }
