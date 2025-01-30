@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:16:05 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/30 15:25:04 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/30 16:04:10 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	main(int argc, char **argv)
 		ft_free_stack(stack_b);
 		return (0);
 	}
+	//ft_give_index(stack_a);
 	ft_sort(stack_a, stack_b);
 	ft_free_stack(stack_a);
 	ft_free_stack(stack_b);
