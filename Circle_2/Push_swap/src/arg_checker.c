@@ -3,40 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   arg_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:18:15 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/30 15:30:31 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/30 18:35:45 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-long long	ft_atol(const char *nptr)
-{
-	int			sign;
-	int			i;
-	long long	res;
-
-	i = 0;
-	sign = 1;
-	res = 0;
-	while (nptr[i] == ' ' || nptr[i] == '\n' || nptr[i] == '\t'
-		|| nptr[i] == '\v' || nptr[i] == '\f' || nptr[i] == '\r')
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
-	{
-		if (nptr[i] == '-')
-			sign = -sign;
-		i++;
-	}
-	while (nptr[i] >= '0' && nptr[i] <= '9')
-	{
-		res = res * 10 + (nptr[i] - 48);
-		i++;
-	}
-	return (res * sign);
-}
 
 static int	is_valid_int(char *str)
 {
@@ -53,7 +27,7 @@ static int	is_valid_int(char *str)
 			return (0);
 		i++;
 	}
-	if (ft_atol(str) > INT_MAX || ft_atol(str) < INT_MIN)
+	if (ft_atoi(str) > INT_MAX || ft_atoi(str) < INT_MIN)
 		return (0);
 	return (1);
 }

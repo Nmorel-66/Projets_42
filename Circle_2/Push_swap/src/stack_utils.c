@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 10:56:44 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/30 15:59:07 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/30 18:13:27 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_node	*ft_create_node(int value)
 	if (!new_node)
 		return (NULL);
 	new_node->value = value;
-	new_node->index == 0; ///************* */
+	new_node->index = 0;
 	new_node->next = NULL;
 	return (new_node);
 }

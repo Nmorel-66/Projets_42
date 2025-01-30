@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 17:06:54 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/30 16:05:08 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/30 18:36:10 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,6 @@ void	ft_free(char **str)
 		i++;
 	}
 	free(str);
-}
-
-int	ft_find_min(t_stack *stack)
-{
-	t_node	*current;
-	int		min;
-
-	if (!stack || !stack->top)
-		return (0);
-	current = stack->top;
-	min = current->value;
-	while (current)
-	{
-		if (current->value < min)
-			min = current->value;
-		current = current->next;
-	}
-	return (min);
 }
 
 int	ft_find_min_position(t_stack *stack)
@@ -67,21 +49,6 @@ int	ft_find_min_position(t_stack *stack)
 	return (min_pos);
 }
 
-void	ft_offset(t_stack *stack, int offset, int add)
-{
-	t_node	*current;
-
-	current = stack->top;
-	while (current != NULL)
-	{
-		if (add)
-			current->value = current->value + offset;
-		else
-			current->value = current->value - offset;
-		current = current->next;
-	}
-}
-
 void	ft_sort_process(t_stack *a, t_stack *b, int bit_pos, int size)
 {
 	int	i;
@@ -89,15 +56,11 @@ void	ft_sort_process(t_stack *a, t_stack *b, int bit_pos, int size)
 	i = 0;
 	while (i++ < size)
 	{
-		if ((a->top->value & bit_pos) == 0)
+		if ((a->top->index & bit_pos) == 0)
 			ft_pb(a, b);
 		else
 			ft_ra(a, 1);
 	}
 	while (b->size > 0)
 		ft_pa(a, b);
-}
-void	ft_give_index(t_stack *stack)
-{
-	
 }

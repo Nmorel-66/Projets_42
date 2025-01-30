@@ -20,6 +20,7 @@ SRC_FILES = \
 	$(SRC_DIR)/rotate.c \
 	$(SRC_DIR)/reverse_rotate.c \
 	$(SRC_DIR)/sort_utils.c \
+	$(SRC_DIR)/index_utils.c \
 	$(SRC_DIR)/main.c
 
 # Libft files
