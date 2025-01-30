@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:16:05 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/26 21:08:34 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/30 15:25:04 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,11 @@ int	main(int argc, char **argv)
 		return (0);
 	ft_args(stack_a, argc, argv);
 	if (stack_a->size < 2 || is_sorted(stack_a))
+	{
+		ft_free_stack(stack_a);
+		ft_free_stack(stack_b);
 		return (0);
+	}
 	ft_sort(stack_a, stack_b);
 	ft_free_stack(stack_a);
 	ft_free_stack(stack_b);

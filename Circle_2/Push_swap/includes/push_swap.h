@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 17:47:31 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/26 20:58:00 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/01/30 15:32:10 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,16 @@ void	ft_free_stack(t_stack *stack);
 int		ft_find_min(t_stack *stack);
 int		ft_find_min_position(t_stack *stack);
 void	ft_free(char **str);
-void	ft_offset(t_stack *stack, int offset, int mode);
-void	ft_sort_process(t_stack *a, t_stack *b, int bit_pos, int size);
+void		ft_offset(t_stack *stack, int offset, int mode);
+void		ft_sort_process(t_stack *a, t_stack *b, int bit_pos, int size);
 
 /* Main */
-int		is_sorted(t_stack *stack);
-void	ft_sort(t_stack *stack_a, t_stack *stack_b);
+int			is_sorted(t_stack *stack);
+void		ft_sort(t_stack *stack_a, t_stack *stack_b);
 
 /* Arg Checker */
-int		ft_arg_checker(int argc, char **argv);
-void	ft_args(t_stack *stack_a, int argc, char **argv);
+int			ft_arg_checker(int argc, char **argv);
+void		ft_args(t_stack *stack_a, int argc, char **argv);
+long long	ft_atol(const char *nptr);
 
 #endif
