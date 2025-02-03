@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 17:47:31 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/30 18:35:53 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/03 16:28:32 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 typedef struct s_node
 {
 	int				value;
-	unsigned int 	index;
+	unsigned int	index;
 	struct s_node	*next;
 }					t_node;
 
@@ -57,6 +57,7 @@ int			ft_find_min_position(t_stack *stack);
 void		ft_free(char **str);
 void		ft_sort_process(t_stack *a, t_stack *b, int bit_pos, int size);
 void		ft_give_index(t_stack *stack);
+long long	ft_atol(const char *nptr);
 
 /* Main */
 int			is_sorted(t_stack *stack);

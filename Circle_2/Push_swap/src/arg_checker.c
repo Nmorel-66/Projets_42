@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arg_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:18:15 by nimorel           #+#    #+#             */
-/*   Updated: 2025/01/30 18:35:45 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/03 16:25:43 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	is_valid_int(char *str)
 			return (0);
 		i++;
 	}
-	if (ft_atoi(str) > INT_MAX || ft_atoi(str) < INT_MIN)
+	if (ft_atol(str) > INT_MAX || ft_atol(str) < INT_MIN)
 		return (0);
 	return (1);
 }
