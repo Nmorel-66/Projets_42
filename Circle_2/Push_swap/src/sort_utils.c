@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 17:06:54 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/03 16:40:49 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/03 18:55:36 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,11 @@ void	ft_sort_process(t_stack *a, t_stack *b, int bit_pos, int size)
 	while (b->size > 0)
 		ft_pa(a, b);
 }
+
 long long	ft_atol(const char *nptr)
 {
 	int			sign;
-	long long	i;
+	int			i;
 	long long	res;
 
 	i = 0;
