@@ -6,15 +6,17 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:13:45 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/06 21:23:52 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/07 18:03:48 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char *ft_get_path_env(char **env)
+char	*ft_get_path_env(char **env)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (env[i])
 	{
 		if (ft_strncmp(env[i], "PATH=", 5) == 0)
@@ -24,55 +26,65 @@ char *ft_get_path_env(char **env)
 	return (NULL);
 }
 
-char *ft_get_full_path(char *path, char *cmd)
+char	*ft_get_full_path(char *path, char *cmd)
 {
-	char *full_path = ft_strjoin(path, "/");
-	if (!full_path)
+	char	*full_path;
+	char	*tmp;
+
+	tmp = ft_strjoin(path, "/");
+	if (!tmp)
 		return (NULL);
-	char *tmp = ft_strjoin(full_path, cmd);
-	free(full_path);
-	return (tmp);
+	full_path = ft_strjoin(tmp, cmd);
+	free(tmp);
+	return (full_path);
 }
 
-char *ft_get_path(char *cmd, char **env)
+char	*ft_free_and_return(char **to_free, char *ret_value)
 {
-	char *path_env = ft_get_path_env(env);
-	if (!path_env)
-		return (NULL);
+	if (to_free && *to_free)
+	{
+		free(*to_free);
+		*to_free = NULL;	
+	}
+	return (ret_value);
+}
 
-	char **paths = ft_split(path_env, ':');
-	int i = 0;
+char	*ft_get_path(char *cmd, char **env)
+{
+	char	**paths;
+	char	*full_path;
+	int		i;
+
+	paths = ft_split(ft_get_path_env(env), ':');
+	if (!paths)
+		return (NULL);
+	i = 0;
 	while (paths[i])
 	{
-		char *full_path = ft_get_full_path(paths[i], cmd);
+		full_path = ft_get_full_path(paths[i], cmd);
 		if (!full_path)
-		{
-			free(paths);
-			return (NULL);
-		}
+			return (ft_free_and_return(paths, NULL));
 		if (access(full_path, X_OK) == 0)
-		{
-			free(paths);
-			return (full_path);
-		}
+			return (ft_free_and_return(paths, full_path));
 		free(full_path);
 		i++;
 	}
-	free(paths);
-	return (NULL);
+	return (ft_free_and_return(paths, NULL));
 }
 
-void	ft_exec(char *cmd, char **env)
+void	ft_exec_cmd(char *cmd, char **env)
 {
-	char	**cmd_args = ft_split(cmd, ' ');
-	char	*cmd_path = ft_get_path(cmd_args[0], env);
+	char	**cmd_args;
+	char	*cmd_path;
 
+	cmd_args = ft_split(cmd, ' ');
+	cmd_path = ft_get_path(cmd_args[0], env);
 	if (!cmd_path)
 	{
-		ft_putstr_fd("Command not found\n", 2);
+		ft_error_handler("Command not found\n", 2);
 		exit(127);
 	}
 	execve(cmd_path, cmd_args, env);
-	ft_putstr_fd("Execute command failed\n", 2);
+	ft_error_handler("Execute command failed\n", 2);
 	exit(1);
 }
