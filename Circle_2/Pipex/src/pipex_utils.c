@@ -6,70 +6,48 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:13:45 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/07 18:03:48 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/07 18:54:54 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	*ft_get_path_env(char **env)
+static char	*ft_get_path_from_env(char **env)
 {
 	int	i;
 
 	i = 0;
 	while (env[i])
 	{
-		if (ft_strncmp(env[i], "PATH=", 5) == 0)
+		if (strncmp(env[i], "PATH=", 5) == 0)
 			return (env[i] + 5);
 		i++;
 	}
 	return (NULL);
 }
 
-char	*ft_get_full_path(char *path, char *cmd)
+static char	*ft_get_path(char *cmd, char **env)
 {
-	char	*full_path;
-	char	*tmp;
-
-	tmp = ft_strjoin(path, "/");
-	if (!tmp)
-		return (NULL);
-	full_path = ft_strjoin(tmp, cmd);
-	free(tmp);
-	return (full_path);
-}
-
-char	*ft_free_and_return(char **to_free, char *ret_value)
-{
-	if (to_free && *to_free)
-	{
-		free(*to_free);
-		*to_free = NULL;	
-	}
-	return (ret_value);
-}
-
-char	*ft_get_path(char *cmd, char **env)
-{
-	char	**paths;
-	char	*full_path;
+	char	*path;
+	char	**dirs;
+	char	*cmd_path;
 	int		i;
 
-	paths = ft_split(ft_get_path_env(env), ':');
-	if (!paths)
+	path = ft_get_path_from_env(env);
+	if (!path)
 		return (NULL);
+	dirs = ft_split(path, ':');
+	cmd_path = NULL;
 	i = 0;
-	while (paths[i])
+	while (dirs[i])
 	{
-		full_path = ft_get_full_path(paths[i], cmd);
-		if (!full_path)
-			return (ft_free_and_return(paths, NULL));
-		if (access(full_path, X_OK) == 0)
-			return (ft_free_and_return(paths, full_path));
-		free(full_path);
+		cmd_path = ft_strjoin(dirs[i], "/");
+		cmd_path = ft_strjoin(cmd_path, cmd);
+		if (access(cmd_path, F_OK) == 0)
+			return (cmd_path);
 		i++;
 	}
-	return (ft_free_and_return(paths, NULL));
+	return (NULL);
 }
 
 void	ft_exec_cmd(char *cmd, char **env)

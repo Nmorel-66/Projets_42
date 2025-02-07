@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 19:12:27 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/07 17:38:31 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/07 18:54:08 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_parent_process(int pipefd[2], char **av, pid_t cpid, char **env)
 
 int	main(int ac, char **av, char **env)
 {
-	int	pipefd[2];
+	int		pipefd[2];
 	pid_t	cpid;
 
 	if (ac != 5)

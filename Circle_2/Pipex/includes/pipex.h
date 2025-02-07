@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 19:12:40 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/07 17:40:00 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/07 18:55:52 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@
 # include <errno.h>
 
 void	ft_child_process(int pipefd[2], char **av, char **env);
-void	ft_parent_process(int pipefd[2], char **av, int pid, char **env);
+void	ft_parent_process(int pipefd[2], char **av, pid_t cpid, char **env);
 void	ft_error_handler(char *message, int exit_code);
 void	ft_exec_cmd(char *cmd, char **env);
-char	*ft_get_path(char *cmd, char **env);
 
 #endif
