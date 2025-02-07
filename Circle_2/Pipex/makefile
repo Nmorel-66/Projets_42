@@ -1,6 +1,6 @@
 # Compiler and flags
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -Iincludes  # Assurez-vous que -Iincludes est ici
+CFLAGS = -Wall -Wextra -Werror -Iincludes
 
 # Directories
 SRC_DIR = src
@@ -25,7 +25,7 @@ LIBFT_SRC = \
 
 LIBFT_OBJ = $(LIBFT_SRC:$(LIBFT_DIR)/%.c=$(LIBFT_OBJ_DIR)/%.o)
 
-# Modification pour que les objets soient créés dans le répertoire obj
+# Object files
 OBJ_FILES = $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 # Colors for echo
