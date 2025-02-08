@@ -1,6 +1,9 @@
+# OS detection
+OS = $(shell uname)
+
 # Compiler and flags
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -Iincludes  # Assurez-vous que -Iincludes est ici
+CFLAGS = -Wall -Wextra -Werror -Iincludes
 
 # Directories
 SRC_DIR = src
@@ -8,25 +11,36 @@ OBJ_DIR = obj
 INC_DIR = includes
 LIBFT_DIR = Libft
 LIBFT_OBJ_DIR = $(LIBFT_DIR)/obj
+MLX_DIR_MACOS = minilibx_macos
+MLX_DIR_LINUX = minilibx-linux
+
+# MiniLibX
+ifeq ($(OS), Darwin)  # macOS
+    MLX_FLAGS = -L$(MLX_DIR_MACOS) -lmlx -framework OpenGL -framework AppKit
+else  # Linux
+    MLX_FLAGS = -L$(MLX_DIR_LINUX) -lmlx -lX11 -lXext -lm
+endif
 
 # Files
 NAME = fdf
 SRC_FILES = \
 	$(SRC_DIR)/fdf.c \
-
+	$(SRC_DIR)/draw.c \
+	$(SRC_DIR)/events.c \
+	$(SRC_DIR)/parse.c \
+	$(SRC_DIR)/projection.c
+	
 # Libft files
 LIBFT_SRC = \
-	$(LIBFT_DIR)/ft_atoi.c \
-	$(LIBFT_DIR)/ft_putchar_fd.c \
-	$(LIBFT_DIR)/ft_putnbr_fd.c \
-	$(LIBFT_DIR)/ft_putstr_fd.c  \
+	$(LIBFT_DIR)/ft_putstr_fd.c \
 	$(LIBFT_DIR)/ft_split.c \
-	$(LIBFT_DIR)/ft_isdigit.c \
-	$(LIBFT_DIR)/ft_strlen.c
+	$(LIBFT_DIR)/ft_strlen.c \
+	$(LIBFT_DIR)/ft_strncmp.c \
+	$(LIBFT_DIR)/ft_strjoin.c
 
 LIBFT_OBJ = $(LIBFT_SRC:$(LIBFT_DIR)/%.c=$(LIBFT_OBJ_DIR)/%.o)
 
-# Modification pour que les objets soient créés dans le répertoire obj
+# Object files
 OBJ_FILES = $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 # Colors for echo
@@ -43,7 +57,7 @@ all: $(NAME)
 # Create the executable
 $(NAME): $(OBJ_FILES) $(LIBFT_OBJ)
 	@echo "$(COLOR_BLUE)Linking object files to create the executable $(NAME)...$(COLOR_RESET)"
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_FILES) $(LIBFT_OBJ)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_FILES) $(LIBFT_OBJ) $(MLX_FLAGS)
 	@echo "$(COLOR_GREEN)Executable $(NAME) created successfully! Congratulations!$(COLOR_RESET)"
 
 # Compile source files to object files

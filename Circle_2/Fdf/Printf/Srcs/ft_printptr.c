@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   ft_printptr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/03 15:30:38 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/08 16:32:04 by nimorel          ###   ########.fr       */
+/*   Created: 2024/11/18 11:32:41 by nimorel           #+#    #+#             */
+/*   Updated: 2024/11/20 09:42:48 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 
-#include "../includes/fdf.h"
-
-int	main(int argc, char **argv)
+int	ft_printptr(void *ptr)
 {
-	void	*mlx;
-	void	*mlx_win;
-	(void)argc;
-	(void)argv;
+	int	len;
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1000, 800, "FDF Project");
-	mlx_loop(mlx);
+	len = 0;
+	if (ptr == 0)
+		return (write(1, "(nil)", 5));
+	len = len + write(1, "0x", 2);
+	len = len + ft_printhex((unsigned long)ptr, 'x');
+	return (len);
 }
