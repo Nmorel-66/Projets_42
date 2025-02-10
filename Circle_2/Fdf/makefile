@@ -25,18 +25,22 @@ endif
 NAME = fdf
 SRC_FILES = \
 	$(SRC_DIR)/fdf.c \
+	$(SRC_DIR)/hook.c \
+	$(SRC_DIR)/read.c \
 	$(SRC_DIR)/draw.c \
-	$(SRC_DIR)/events.c \
-	$(SRC_DIR)/parse.c \
-	$(SRC_DIR)/projection.c
-	
+	$(SRC_DIR)/init.c
+
 # Libft files
 LIBFT_SRC = \
 	$(LIBFT_DIR)/ft_putstr_fd.c \
 	$(LIBFT_DIR)/ft_split.c \
 	$(LIBFT_DIR)/ft_strlen.c \
 	$(LIBFT_DIR)/ft_strncmp.c \
-	$(LIBFT_DIR)/ft_strjoin.c
+	$(LIBFT_DIR)/ft_strjoin.c \
+	$(LIBFT_DIR)/ft_atoi.c \
+	$(LIBFT_DIR)/ft_strchr.c \
+	$(LIBFT_DIR)/ft_strdup.c \
+	$(LIBFT_DIR)/get_next_line.c
 
 LIBFT_OBJ = $(LIBFT_SRC:$(LIBFT_DIR)/%.c=$(LIBFT_OBJ_DIR)/%.o)
 

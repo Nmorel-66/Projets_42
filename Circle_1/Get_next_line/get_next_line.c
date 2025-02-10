@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:07:57 by nimorel           #+#    #+#             */
-/*   Updated: 2024/12/04 10:30:19 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/08 19:11:34 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int main(void)
     int fd;
     char *line;
 
-    fd = open("test.txt", O_RDONLY);
+    fd = open("42.fdf", O_RDONLY);
     if (fd == -1) {
         printf("Erreur lors de l'ouverture du fichier");
         return (EXIT_FAILURE);
@@ -121,4 +121,5 @@ int main(void)
     }
     close(fd);
     return (EXIT_SUCCESS);
-}*/
+}
+*/

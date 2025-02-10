@@ -6,21 +6,35 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:30:38 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/08 16:32:04 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/10 11:16:38 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../includes/fdf.h"
 
-int	main(int argc, char **argv)
+void	ft_error_handler(char *message, int exit_code)
 {
-	void	*mlx;
-	void	*mlx_win;
-	(void)argc;
-	(void)argv;
+	ft_putstr_fd("\033[1;31m", 2);
+	ft_putstr_fd(message, 2);
+	if (errno)
+		ft_putstr_fd(strerror(errno), 2);
+	ft_putstr_fd("\033[0m", 2);
+	exit(exit_code);
+}
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1000, 800, "FDF Project");
-	mlx_loop(mlx);
+int		main(int argc, char **argv)
+{
+	t_map	map;
+	
+
+	if (argc != 2)
+		ft_error_handler("Usage: ./fdf <filename>\n", 1);
+	ft_map_init(&map);
+	ft_read_map(argv[1], &map);
+	ft_draw(&map);
+	mlx_key_hook(map.win_ptr, ft_key_hook, &map);
+	mlx_hook(map.win_ptr, 17, 0, ft_close_window, &map);
+	mlx_loop(map.mlx_ptr);
+	return (0);
 }

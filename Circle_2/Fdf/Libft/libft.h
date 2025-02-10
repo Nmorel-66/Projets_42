@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:12:19 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/15 16:44:55 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/10 09:43:01 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+# include <fcntl.h>
 
 typedef struct s_list
 {
@@ -68,5 +69,19 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+// get_next_line
+# ifdef BUFFER_SIZE
+#  if BUFFER_SIZE < 1 || BUFFER_SIZE > 8192000
+#   undef BUFFER_SIZE
+#   define BUFFER_SIZE 10
+#  endif
+# endif
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
+char	*get_next_line(int fd);
+
+
 
 #endif
