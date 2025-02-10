@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:26:40 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/10 11:02:57 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/10 11:28:52 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_map
 void	ft_error_handler(char *message, int exit_code);
 
  /* hook.c */
-int		ft_key_hook(int keycode, t_map *map);
+int		ft_hook_events(int keycode, t_map *map);
 int		ft_close_window(t_map *map);
 
 /* read.c */

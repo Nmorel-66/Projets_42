@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:30:38 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/10 11:16:38 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/10 11:26:42 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		main(int argc, char **argv)
 	ft_map_init(&map);
 	ft_read_map(argv[1], &map);
 	ft_draw(&map);
-	mlx_key_hook(map.win_ptr, ft_key_hook, &map);
+	mlx_key_hook(map.win_ptr, ft_hook_events, &map);
 	mlx_hook(map.win_ptr, 17, 0, ft_close_window, &map);
 	mlx_loop(map.mlx_ptr);
 	return (0);
