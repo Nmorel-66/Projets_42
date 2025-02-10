@@ -6,13 +6,13 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 10:25:02 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/10 11:29:31 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/10 11:31:27 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-int		ft_hook_events(int keycode, t_map *map)
+int	ft_hook_events(int keycode, t_map *map)
 {
 	if (keycode == 53)
 	{
