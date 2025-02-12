@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 10:13:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/10 10:53:48 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/12 11:39:05 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,21 @@ void	ft_draw_line(t_point p1, t_point p2, t_map *map)
 
 void	ft_draw(t_map *map)
 {
-	int x;
-	int y;
+	int col;
+	int row;
 	
-	y = 0;
-	while (y < map->map_height)
+	row = 0;
+	while (row < map->map_height)
 	{
-		x = 0;
-		while (x < map->map_width)
+		col = 0;
+		while (col < map->map_width)
 		{
-			if (x < map->map_width - 1)
-				ft_draw_line(map->coordinates[y][x], map->coordinates[y][x + 1], map);
-			if (y < map->map_height - 1)
-				ft_draw_line(map->coordinates[y][x], map->coordinates[y + 1][x], map);
-			x++;
+			if (col < map->map_width - 1)
+				ft_draw_line(map->coordinates[row][col], map->coordinates[row][col + 1], map);
+			if (row < map->map_height - 1)
+				ft_draw_line(map->coordinates[row][col], map->coordinates[row + 1][col], map);
+			col++;
 		}
-		y++;
+		row++;
 	}
 }

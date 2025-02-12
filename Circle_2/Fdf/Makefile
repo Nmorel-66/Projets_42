@@ -18,7 +18,8 @@ MLX_DIR_LINUX = minilibx-linux
 ifeq ($(OS), Darwin)  # macOS
     MLX_FLAGS = -L$(MLX_DIR_MACOS) -lmlx -framework OpenGL -framework AppKit
 else  # Linux
-    MLX_FLAGS = -L$(MLX_DIR_LINUX) -lmlx -lX11 -lXext -lm
+    #MLX_FLAGS = -L$(MLX_DIR_LINUX) -lmlx_linux -lX11 -lXext -lm -lz
+	#MLX_FLAGS = -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 endif
 
 # Files
