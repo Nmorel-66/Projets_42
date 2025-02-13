@@ -1,3 +1,5 @@
+NAME = fdf
+
 # OS detection
 OS = $(shell uname)
 
@@ -23,7 +25,6 @@ else  # Linux
 endif
 
 # Files
-NAME = fdf
 SRC_FILES = \
 	$(SRC_DIR)/fdf.c \
 	$(SRC_DIR)/hook.c \
