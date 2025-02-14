@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:00:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/10 11:16:58 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/14 11:31:08 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 void	ft_map_init(t_map *new_map)
 {
 	new_map->mlx_ptr = mlx_init();
-	new_map->win_ptr = mlx_new_window(new_map->mlx_ptr, 800, 600,
-		"Project_FDF");
+	new_map->win_ptr = mlx_new_window(new_map->mlx_ptr, SCREEN_WIDTH,
+		SCREEN_HEIGHT, "Project_FDF");
 	new_map->map_width = 0;
 	new_map->map_height = 0;
 	new_map->coordinates = NULL;
 	new_map->scale = 20;
+	new_map->z_scale = 1;
 }
 
 int	ft_init_coordinates(t_map *map)

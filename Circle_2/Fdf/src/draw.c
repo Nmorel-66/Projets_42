@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 10:13:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/12 11:39:05 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/14 11:40:43 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,25 @@
 
 void	ft_draw_line(t_point p1, t_point p2, t_map *map)
 {
+	t_point proj_p1;
+	t_point proj_p2;
 	double x;
 	double y;
 	double dx;
 	double dy;
 	double step;
 	int i;
-
-	dx = (p2.x - p1.x) * map->scale;
-	dy = (p2.y - p1.y) * map->scale;
-	if (fabs(dx) > fabs(dy))
-		step = fabs(dx);
-	else
-		step = fabs(dy);
+	
+	proj_p1 = ft_project_iso(p1, map);;
+	proj_p2 = ft_project_iso(p2, map);
+	x = proj_p1.x;
+	y = proj_p1.y;
+	dx = proj_p2.x - proj_p1.x;
+	dy = proj_p2.y - proj_p1.y;
+	step = fmax(fabs(dx), fabs(dy));
+	i = 0;
 	dx = dx / step;
 	dy = dy / step;
-	x = p1.x * map->scale;
-	y = p1.y * map->scale;
-	i = 0;
 	while (i <= step)
 	{
 		mlx_pixel_put(map->mlx_ptr, map->win_ptr, (int)x, (int)y, 0x00FF00);
@@ -43,9 +44,12 @@ void	ft_draw_line(t_point p1, t_point p2, t_map *map)
 
 void	ft_draw(t_map *map)
 {
-	int col;
 	int row;
-	
+	int col;
+
+	map->x_offset = (SCREEN_WIDTH - (map->map_width * map->scale)) / 2;
+	map->y_offset = (SCREEN_HEIGHT - (map->map_height * map->scale)) / 2;
+
 	row = 0;
 	while (row < map->map_height)
 	{
@@ -53,11 +57,25 @@ void	ft_draw(t_map *map)
 		while (col < map->map_width)
 		{
 			if (col < map->map_width - 1)
-				ft_draw_line(map->coordinates[row][col], map->coordinates[row][col + 1], map);
+				ft_draw_line(map->coordinates[row][col],
+					map->coordinates[row][col + 1], map);
 			if (row < map->map_height - 1)
-				ft_draw_line(map->coordinates[row][col], map->coordinates[row + 1][col], map);
+				ft_draw_line(map->coordinates[row][col],
+					map->coordinates[row + 1][col], map);
 			col++;
 		}
 		row++;
 	}
+}
+
+t_point	ft_project_iso(t_point p, t_map *map)
+{
+	t_point	proj;
+	double	angle = 0.523599;
+
+	p.z = p.z * map->z_scale;
+	proj.x = (p.x - p.y) * cos(angle) * map->scale + map->x_offset;
+	proj.y = (p.x + p.y) * sin(angle) * map->scale - (p.z * map->scale / 2)
+		+ map->y_offset;
+	return (proj);
 }

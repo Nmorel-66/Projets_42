@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 10:25:02 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/10 11:31:27 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/14 11:23:46 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,18 @@
 int	ft_hook_events(int keycode, t_map *map)
 {
 	if (keycode == 53)
-	{
-		mlx_destroy_window(map->mlx_ptr, map->win_ptr);
-		exit(0);
-	}
+		ft_exit(map);
 	if (keycode == 124)
-	{	
-		map->scale = map->scale + 2;
-		mlx_clear_window(map->mlx_ptr, map->win_ptr);
-		ft_draw(map);
-	}
+		ft_scale_up(map);
 	if (keycode == 123)
-	{	
-		mlx_clear_window(map->mlx_ptr, map->win_ptr);
-		map->scale = map->scale - 2;
-		ft_draw(map);
-	}
+		ft_scale_down(map);
+	if (keycode == 126)
+		ft_height_up(map);
+	if (keycode == 125)
+		ft_height_down(map);
 	return (0);
 }
+
 
 int	ft_close_window(t_map *map)
 {

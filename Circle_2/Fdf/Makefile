@@ -30,7 +30,8 @@ SRC_FILES = \
 	$(SRC_DIR)/hook.c \
 	$(SRC_DIR)/read.c \
 	$(SRC_DIR)/draw.c \
-	$(SRC_DIR)/init.c
+	$(SRC_DIR)/init.c \
+	$(SRC_DIR)/events.c
 
 # Libft files
 LIBFT_SRC = \

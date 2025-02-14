@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 10:26:58 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/10 11:18:26 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/14 10:04:38 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int	ft_map_dimensions(char *file, t_map *map)
 int	ft_read_map(char *file, t_map *map)
 {
 	int		fd;
-	int		y;
-	int		x;
+	int		row;
+	int		col;
 	char	*line;
 	char	**split;
 
@@ -60,22 +60,22 @@ int	ft_read_map(char *file, t_map *map)
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		ft_error_handler("Error opening file\n", -1);
-	y = 0;
+	row = 0;
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		split = ft_split(line, ' ');
-		x = 0;
-		while (split[x])
+		col = 0;
+		while (split[col])
 		{
-			map->coordinates[y][x].x = x;
-			map->coordinates[y][x].y = y;
-			map->coordinates[y][x].z = ft_atoi(split[x]);
-			free(split[x]);
-			x++;
+			map->coordinates[row][col].x = col;
+			map->coordinates[row][col].y = row;
+			map->coordinates[row][col].z = ft_atoi(split[col]);
+			free(split[col]);
+			col++;
 		}
 		free(split);
 		free(line);
-		y++;
+		row++;
 	}
 	close(fd);
 	return (0);
