@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:26:40 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/14 11:42:38 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/15 16:15:43 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "../minilibx_macos/mlx.h"
 # include "../Libft/libft.h"
-# include "../Printf/Includes/ft_printf.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
@@ -39,27 +38,20 @@ typedef struct s_map
 	t_point	**coordinates;
 	void	*mlx_ptr;
 	void	*win_ptr;
-	void	*img_ptr;
-	char	*data_addr;
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
 	int		map_width;
 	int		map_height;
 	int		scale;
 	int		z_scale;
 	int		x_offset;
 	int		y_offset;
-	int		mouse_x;
-	int		mouse_y;
-	int		mouse_pressed;
 }			t_map;
 
 /* fdf.c */
 void	ft_error_handler(char *message, int exit_code);
 
  /* hook.c */
-int		ft_hook_events(int keycode, t_map *map);
+int		ft_key_events(int keycode, t_map *map);
+int		ft_mouse_events(int button, int x, int y, t_map *map);
 int		ft_close_window(t_map *map);
 
 /* read.c */
@@ -82,6 +74,9 @@ void	ft_scale_up(t_map *map);
 void	ft_scale_down(t_map *map);
 void	ft_height_up(t_map *map);
 void	ft_height_down(t_map *map);
-
+void	ft_move_right(t_map *map);
+void	ft_move_left(t_map *map);
+void	ft_move_up(t_map *map);
+void	ft_move_down(t_map *map);
 
 #endif

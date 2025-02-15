@@ -1,49 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events.c                                           :+:      :+:    :+:   */
+/*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/14 10:32:56 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/15 14:33:57 by nimorel          ###   ########.fr       */
+/*   Created: 2025/02/15 14:15:30 by nimorel           #+#    #+#             */
+/*   Updated: 2025/02/15 15:59:11 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+# include "../includes/fdf.h"
 
-void	ft_exit(t_map *map)
-{
-	mlx_destroy_window(map->mlx_ptr, map->win_ptr);
-	exit(0);
-}
 
-void	ft_scale_up(t_map *map)
+void	ft_move_right(t_map *map)
 {
-	map->scale = map->scale + 2;
+	map->x_offset = map->x_offset + 10;
 	mlx_clear_window(map->mlx_ptr, map->win_ptr);
 	ft_draw(map);
 }
 
-void	ft_scale_down(t_map *map)
+void	ft_move_left(t_map *map)
 {
-	map->scale = map->scale - 2;
+	map->x_offset = map->x_offset - 10;
 	mlx_clear_window(map->mlx_ptr, map->win_ptr);
 	ft_draw(map);
 }
 
-void	ft_height_up(t_map *map)
+void	ft_move_up(t_map *map)
 {
-	map->z_scale = map->z_scale * 2;
+	map->y_offset = map->y_offset + 10;
 	mlx_clear_window(map->mlx_ptr, map->win_ptr);
 	ft_draw(map);
 }
 
-void	ft_height_down(t_map *map)
+void	ft_move_down(t_map *map)
 {
-	map->z_scale = map->z_scale / 2;
-	if (map->z_scale <= 1)
-		map->z_scale = 1;
+	map->y_offset = map->y_offset - 10;
 	mlx_clear_window(map->mlx_ptr, map->win_ptr);
 	ft_draw(map);
 }

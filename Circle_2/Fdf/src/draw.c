@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 10:13:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/14 11:40:43 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/15 16:16:59 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,8 @@ void	ft_draw(t_map *map)
 {
 	int row;
 	int col;
-
-	map->x_offset = (SCREEN_WIDTH - (map->map_width * map->scale)) / 2;
-	map->y_offset = (SCREEN_HEIGHT - (map->map_height * map->scale)) / 2;
-
+	
+	
 	row = 0;
 	while (row < map->map_height)
 	{
@@ -71,11 +69,14 @@ void	ft_draw(t_map *map)
 t_point	ft_project_iso(t_point p, t_map *map)
 {
 	t_point	proj;
-	double	angle = 0.523599;
-
+	double radian;
+	
+	radian = 0.523599;
 	p.z = p.z * map->z_scale;
-	proj.x = (p.x - p.y) * cos(angle) * map->scale + map->x_offset;
-	proj.y = (p.x + p.y) * sin(angle) * map->scale - (p.z * map->scale / 2)
+	proj.x = (p.x - p.y) * cos(radian) * map->scale + map->x_offset;
+	proj.y = (p.x + p.y) * sin(radian) * map->scale - (p.z * map->scale / 2)
 		+ map->y_offset;
 	return (proj);
 }
+
+//angle = 0.523599 radians = 30°

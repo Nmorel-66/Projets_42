@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:00:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/14 11:31:08 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/15 16:17:31 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	ft_map_init(t_map *new_map)
 	new_map->coordinates = NULL;
 	new_map->scale = 20;
 	new_map->z_scale = 1;
+	new_map->x_offset = 0;
+	new_map->y_offset = 0;
 }
 
 int	ft_init_coordinates(t_map *map)
