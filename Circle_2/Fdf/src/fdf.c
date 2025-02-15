@@ -6,10 +6,9 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:30:38 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/15 14:43:41 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/15 16:40:09 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../includes/fdf.h"
 
@@ -23,10 +22,9 @@ void	ft_error_handler(char *message, int exit_code)
 	exit(exit_code);
 }
 
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_map	map;
-	
 
 	if (argc != 2)
 		ft_error_handler("Usage: ./fdf <filename>\n", 1);

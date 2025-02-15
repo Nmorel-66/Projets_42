@@ -6,12 +6,11 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 14:15:30 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/15 15:59:11 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/15 16:39:09 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/fdf.h"
-
+#include "../includes/fdf.h"
 
 void	ft_move_right(t_map *map)
 {

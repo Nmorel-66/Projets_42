@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 10:32:56 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/15 14:33:57 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/15 16:34:59 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	ft_scale_up(t_map *map)
 void	ft_scale_down(t_map *map)
 {
 	map->scale = map->scale - 2;
+	if (map->scale <= 1)
+		map->scale = 1;
 	mlx_clear_window(map->mlx_ptr, map->win_ptr);
 	ft_draw(map);
 }

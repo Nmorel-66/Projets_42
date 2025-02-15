@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:26:40 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/15 16:15:43 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/15 16:24:18 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct s_point
 	double	x;
 	double	y;
 	double	z;
-	int		color;
 }			t_point;
 
 typedef struct s_map

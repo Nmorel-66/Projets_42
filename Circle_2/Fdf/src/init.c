@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:00:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/15 16:17:31 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/15 16:38:43 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_map_init(t_map *new_map)
 {
 	new_map->mlx_ptr = mlx_init();
 	new_map->win_ptr = mlx_new_window(new_map->mlx_ptr, SCREEN_WIDTH,
-		SCREEN_HEIGHT, "Project_FDF");
+			SCREEN_HEIGHT, "Project_FDF");
 	new_map->map_width = 0;
 	new_map->map_height = 0;
 	new_map->coordinates = NULL;
@@ -28,7 +28,7 @@ void	ft_map_init(t_map *new_map)
 
 int	ft_init_coordinates(t_map *map)
 {
-	int y;
+	int	y;
 
 	map->coordinates = (t_point **)malloc(sizeof(t_point *) * map->map_height);
 	if (map->coordinates == NULL)
@@ -36,7 +36,8 @@ int	ft_init_coordinates(t_map *map)
 	y = 0;
 	while (y < map->map_height)
 	{
-		map->coordinates[y] = (t_point *)malloc(sizeof(t_point) * map->map_width);
+		map->coordinates[y] = (t_point *)malloc(sizeof(t_point)
+				* map->map_width);
 		if (map->coordinates[y] == NULL)
 			return (-1);
 		y++;
