@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 10:13:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/15 21:32:15 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/16 12:24:43 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,16 @@ void	ft_draw_line(t_point p1, t_point p2, t_map *map)
 	double	dy;
 	double	step;
 	int		i;
+	t_color	color1;
+	t_color	color2;
+	t_color interpolated_color;
 
+	color1 = ft_get_color_by_height(p1.z);
+    color2 = ft_get_color_by_height(p2.z);
 	proj_p1 = ft_project_iso(p1, map);
 	proj_p2 = ft_project_iso(p2, map);
+	p1.color = (t_color){0, 255, 0};
+	p2.color = (t_color){0, 255, 0};
 	x = proj_p1.x;
 	y = proj_p1.y;
 	dx = proj_p2.x - proj_p1.x;
@@ -35,7 +42,13 @@ void	ft_draw_line(t_point p1, t_point p2, t_map *map)
 	dy = dy / step;
 	while (i <= step)
 	{
-		mlx_pixel_put(map->mlx_ptr, map->win_ptr, (int)x, (int)y, 0x00FF00);
+        interpolated_color.r = (int)((1 - (i / step)) * color1.r + (i / step) * color2.r);
+        interpolated_color.g = (int)((1 - (i / step)) * color1.g + (i / step) * color2.g);
+        interpolated_color.b = (int)((1 - (i / step)) * color1.b + (i / step) * color2.b);
+        interpolated_color.r = fmin(fmax(interpolated_color.r, 0), 255);
+        interpolated_color.g = fmin(fmax(interpolated_color.g, 0), 255);
+        interpolated_color.b = fmin(fmax(interpolated_color.b, 0), 255);
+        mlx_pixel_put(map->mlx_ptr, map->win_ptr, (int)x, (int)y, ft_get_color(interpolated_color));
 		x = x + dx;
 		y = y + dy;
 		i++;

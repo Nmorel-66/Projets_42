@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 10:26:58 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/15 17:08:58 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/16 11:16:26 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,41 +108,3 @@ int	ft_read_map(char *file, t_map *map)
 	return (0);
 }
 
-/*int	ft_read_map(char *file, t_map *map)
-{
-	int		fd;
-	int		row;
-	int		col;
-	char	*line;
-	char	**split;
-
-	if (ft_map_dimensions(file, map) == -1)
-		return (-1);
-	if (ft_init_coordinates(map) == -1)
-		ft_error_handler("Error allocating memory\n", -1);
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-		ft_error_handler("Error opening file\n", -1);
-	row = 0;
-	while(1)
-	{
-		line = get_next_line(fd);
-		if (line == NULL)
-			break ;
-		split = ft_split(line, ' ');
-		col = 0;
-		while (split[col])
-		{
-			map->coordinates[row][col].x = col;
-			map->coordinates[row][col].y = row;
-			map->coordinates[row][col].z = ft_atoi(split[col]);
-			free(split[col]);
-			col++;
-		}
-		free(split);
-		free(line);
-		row++;
-	}
-	close(fd);
-	return (0);
-}*/

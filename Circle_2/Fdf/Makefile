@@ -33,7 +33,8 @@ SRC_FILES = \
 	$(SRC_DIR)/draw.c \
 	$(SRC_DIR)/init.c \
 	$(SRC_DIR)/move.c \
-	$(SRC_DIR)/events.c
+	$(SRC_DIR)/events.c \
+	$(SRC_DIR)/color.c
 
 # Libft files
 LIBFT_SRC = \

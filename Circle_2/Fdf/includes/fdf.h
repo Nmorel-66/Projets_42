@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:26:40 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/15 21:31:56 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/16 12:05:29 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,22 @@
 # include <errno.h>
 # include <string.h>
 
-# define SCREEN_WIDTH 800
-# define SCREEN_HEIGHT 600
+# define SCREEN_WIDTH 1280
+# define SCREEN_HEIGHT 720
+
+typedef struct s_color
+{
+	int	r;
+	int	g;
+	int	b;
+}		t_color;
 
 typedef struct s_point
 {
 	double	x;
 	double	y;
 	double	z;
+	t_color	color;
 }			t_point;
 
 typedef struct s_map
@@ -77,5 +85,9 @@ void	ft_move_right(t_map *map);
 void	ft_move_left(t_map *map);
 void	ft_move_up(t_map *map);
 void	ft_move_down(t_map *map);
+
+/* color.c */
+t_color	ft_get_color_by_height(double z);
+int		ft_get_color(t_color color);
 
 #endif
