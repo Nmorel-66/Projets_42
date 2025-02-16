@@ -13,15 +13,16 @@ OBJ_DIR = obj
 INC_DIR = includes
 LIBFT_DIR = Libft
 LIBFT_OBJ_DIR = $(LIBFT_DIR)/obj
-MLX_DIR_MACOS = minilibx_macos
-MLX_DIR_LINUX = minilibx-linux
 
 # MiniLibX
 ifeq ($(OS), Darwin)  # macOS
-    MLX_FLAGS = -L$(MLX_DIR_MACOS) -lmlx -framework OpenGL -framework AppKit
+    MLX_DIR = minilibx_macos
+    MLX_LIB = $(MLX_DIR)/libmlx.a
+    MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 else  # Linux
-    #MLX_FLAGS = -L$(MLX_DIR_LINUX) -lmlx_linux -lX11 -lXext -lm -lz
-	#MLX_FLAGS = -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+    MLX_DIR = minilibx-linux
+    MLX_LIB = $(MLX_DIR)/libmlx.a
+    MLX_FLAGS = -L$(MLX_DIR) -lmlx -lX11 -lXext -lm -lz
 endif
 
 # Files
@@ -60,13 +61,18 @@ COLOR_BLUE = \033[34m
 COLOR_CYAN = \033[36m
 
 # Targets
-all: $(NAME)
+all: $(MLX_LIB) $(NAME)
+
+# Compile MiniLibX if not built
+$(MLX_LIB):
+	@echo "$(COLOR_CYAN)Compiling MiniLibX...$(COLOR_RESET)"
+	@make -C $(MLX_DIR)
 
 # Create the executable
-$(NAME): $(OBJ_FILES) $(LIBFT_OBJ)
+$(NAME): $(OBJ_FILES) $(LIBFT_OBJ) $(MLX_LIB)
 	@echo "$(COLOR_BLUE)Linking object files to create the executable $(NAME)...$(COLOR_RESET)"
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_FILES) $(LIBFT_OBJ) $(MLX_FLAGS)
-	@echo "$(COLOR_GREEN)Executable $(NAME) created successfully! Congratulations!$(COLOR_RESET)"
+	@echo "$(COLOR_GREEN)Executable $(NAME) created successfully!$(COLOR_RESET)"
 
 # Compile source files to object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
