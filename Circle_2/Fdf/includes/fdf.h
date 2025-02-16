@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:26:40 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/16 12:05:29 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/16 15:14:33 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ typedef struct s_map
 	int		z_scale;
 	int		x_offset;
 	int		y_offset;
+	double	z_min;
+	double	z_max;
 }			t_map;
 
 /* fdf.c */
@@ -87,7 +89,7 @@ void	ft_move_up(t_map *map);
 void	ft_move_down(t_map *map);
 
 /* color.c */
-t_color	ft_get_color_by_height(double z);
+t_color	ft_get_color_by_height(double z, t_map *map);
 int		ft_get_color(t_color color);
 
 #endif
