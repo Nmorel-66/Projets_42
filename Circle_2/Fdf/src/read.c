@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 10:26:58 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/16 15:12:26 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/16 15:55:39 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,10 @@ int	ft_map_dimensions(char *file, t_map *map)
 		ft_map_dimensions_process(line, map);
 		free(line);
 	}
-	map->x_offset = (SCREEN_WIDTH - (map->map_width * map->scale)) / 2;
-	map->y_offset = (SCREEN_HEIGHT - (map->map_height * map->scale)) / 2;
+	map->x_offset = (SCREEN_WIDTH - ((map->map_width - map->map_height)
+				* map->scale)) / 2;
+	map->y_offset = (SCREEN_HEIGHT - ((map->map_width + map->map_height)
+				* map->scale) / 2) / 2;
 	close(fd);
 	return (0);
 }
@@ -111,4 +113,3 @@ int	ft_read_map(char *file, t_map *map)
 	close(fd);
 	return (0);
 }
-

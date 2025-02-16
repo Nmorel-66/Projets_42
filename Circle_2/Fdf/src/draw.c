@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 10:13:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/16 15:46:36 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/16 16:28:41 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@ void	ft_draw_line(t_point p1, t_point p2, t_map *map)
 	double	dy;
 	double	step;
 	int		i;
-	t_color point_color;
+	t_color	point_color;
 
 	proj_p1 = ft_project_iso(p1, map);
 	proj_p2 = ft_project_iso(p2, map);
-	p1.color = (t_color){0, 255, 0};
-	p2.color = (t_color){0, 255, 0};
 	x = proj_p1.x;
 	y = proj_p1.y;
 	dx = proj_p2.x - proj_p1.x;
@@ -38,8 +36,8 @@ void	ft_draw_line(t_point p1, t_point p2, t_map *map)
 	dy = dy / step;
 	while (i <= step)
 	{
-		point_color = ft_get_color_by_height(((1 - (i / step)) * p1.z +
-			(i / step) * p2.z), map);
+		point_color = ft_get_color_by_height(((1 - (i / step)) * p1.z
+			+ (i / step) * p2.z), map);
 		mlx_pixel_put(map->mlx_ptr, map->win_ptr, (int)x, (int)y,
 			ft_get_color(point_color));
 		x = x + dx;
