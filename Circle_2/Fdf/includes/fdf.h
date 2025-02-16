@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:26:40 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/16 15:14:33 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/16 18:53:17 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,21 @@ typedef struct s_point
 	t_color	color;
 }			t_point;
 
+typedef struct s_img
+{
+	void	*img_ptr;
+	int		*data;
+	int		bpp;
+	int		size_line;
+	int		endian;
+}			t_img;
+
 typedef struct s_map
 {
 	t_point	**coordinates;
 	void	*mlx_ptr;
 	void	*win_ptr;
+	t_img	img;
 	int		map_width;
 	int		map_height;
 	int		scale;
@@ -54,6 +64,14 @@ typedef struct s_map
 	double	z_min;
 	double	z_max;
 }			t_map;
+
+typedef struct s_line_data{
+	t_point proj_p1;
+	t_point proj_p2;
+	t_point p1;
+	t_point p2;
+	double step;
+} 	t_line_data;
 
 /* fdf.c */
 void	ft_error_handler(char *message, int exit_code);
@@ -72,6 +90,7 @@ int		ft_map_dimensions(char *file, t_map *map);
 void	ft_draw(t_map *map);
 void	ft_draw_line(t_point p1, t_point p2, t_map *map);
 t_point	ft_project_iso(t_point p, t_map *map);
+void	ft_draw_point(t_line_data *line_data, t_map *map, int i);
 
 /* init.c */
 int		ft_init_coordinates(t_map *map);
@@ -91,5 +110,8 @@ void	ft_move_down(t_map *map);
 /* color.c */
 t_color	ft_get_color_by_height(double z, t_map *map);
 int		ft_get_color(t_color color);
+
+/* menu.c */
+void	ft_menu(t_map *map);
 
 #endif

@@ -34,7 +34,9 @@ SRC_FILES = \
 	$(SRC_DIR)/init.c \
 	$(SRC_DIR)/move.c \
 	$(SRC_DIR)/events.c \
-	$(SRC_DIR)/color.c
+	$(SRC_DIR)/color.c \
+	$(SRC_DIR)/menu.c
+
 
 # Libft files
 LIBFT_SRC = \

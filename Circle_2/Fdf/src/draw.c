@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 10:13:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/16 16:28:41 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/16 18:59:44 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,38 @@
 
 void	ft_draw_line(t_point p1, t_point p2, t_map *map)
 {
-	t_point	proj_p1;
-	t_point	proj_p2;
-	double	x;
-	double	y;
-	double	dx;
-	double	dy;
-	double	step;
-	int		i;
-	t_color	point_color;
+	t_line_data	line_data;
+	int			i;
 
-	proj_p1 = ft_project_iso(p1, map);
-	proj_p2 = ft_project_iso(p2, map);
-	x = proj_p1.x;
-	y = proj_p1.y;
-	dx = proj_p2.x - proj_p1.x;
-	dy = proj_p2.y - proj_p1.y;
-	step = fmax(fabs(dx), fabs(dy));
+	line_data.proj_p1 = ft_project_iso(p1, map);
+	line_data.proj_p2 = ft_project_iso(p2, map);
+	line_data.p1 = p1;
+	line_data.p2 = p2;
+	line_data.step = fmax(fabs(line_data.proj_p2.x - line_data.proj_p1.x),
+			fabs(line_data.proj_p2.y - line_data.proj_p1.y));
 	i = 0;
-	dx = dx / step;
-	dy = dy / step;
-	while (i <= step)
+	while (i <= line_data.step)
 	{
-		point_color = ft_get_color_by_height(((1 - (i / step)) * p1.z
-			+ (i / step) * p2.z), map);
-		mlx_pixel_put(map->mlx_ptr, map->win_ptr, (int)x, (int)y,
-			ft_get_color(point_color));
-		x = x + dx;
-		y = y + dy;
+		ft_draw_point(&line_data, map, i);
 		i++;
 	}
+}
+
+void	ft_draw_point(t_line_data *line_data, t_map *map, int i)
+{
+	double	x;
+	double	y;
+	t_color	point_color;
+
+	x = line_data->proj_p1.x + (line_data->proj_p2.x - line_data->proj_p1.x)
+		* (i / line_data->step);
+	y = line_data->proj_p1.y + (line_data->proj_p2.y - line_data->proj_p1.y)
+		* (i / line_data->step);
+	point_color = ft_get_color_by_height(((1 - (i / line_data->step))
+				* line_data->p1.z + (i / line_data->step) * line_data->p2.z),
+			map);
+	mlx_pixel_put(map->mlx_ptr, map->win_ptr, (int)x, (int)y,
+		ft_get_color(point_color));
 }
 
 void	ft_draw(t_map *map)
