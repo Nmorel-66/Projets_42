@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:26:40 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/16 18:53:17 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/16 19:01:20 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ void	ft_scale_up(t_map *map);
 void	ft_scale_down(t_map *map);
 void	ft_height_up(t_map *map);
 void	ft_height_down(t_map *map);
+
+/* move.c */
 void	ft_move_right(t_map *map);
 void	ft_move_left(t_map *map);
 void	ft_move_up(t_map *map);

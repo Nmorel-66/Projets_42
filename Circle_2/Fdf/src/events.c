@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 10:32:56 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/16 18:26:31 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/16 20:30:38 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	ft_scale_up(t_map *map)
 {
 	map->scale = map->scale + 2;
 	mlx_clear_window(map->mlx_ptr, map->win_ptr);
-	ft_menu(map);
 	ft_draw(map);
+	ft_menu(map);
 }
 
 void	ft_scale_down(t_map *map)
@@ -33,16 +33,16 @@ void	ft_scale_down(t_map *map)
 	if (map->scale <= 1)
 		map->scale = 1;
 	mlx_clear_window(map->mlx_ptr, map->win_ptr);
-	ft_menu(map);
 	ft_draw(map);
+	ft_menu(map);
 }
 
 void	ft_height_up(t_map *map)
 {
 	map->z_scale = map->z_scale * 2;
 	mlx_clear_window(map->mlx_ptr, map->win_ptr);
-	ft_menu(map);
 	ft_draw(map);
+	ft_menu(map);
 }
 
 void	ft_height_down(t_map *map)
@@ -51,6 +51,6 @@ void	ft_height_down(t_map *map)
 	if (map->z_scale <= 1)
 		map->z_scale = 1;
 	mlx_clear_window(map->mlx_ptr, map->win_ptr);
-	ft_menu(map);
 	ft_draw(map);
+	ft_menu(map);
 }
