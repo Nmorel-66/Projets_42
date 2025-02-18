@@ -3,39 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 10:32:56 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/18 17:34:01 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/16 20:30:38 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void ft_free_coordinates(t_map *map)
-{
-	int y;
-
-	if (map->coordinates != NULL)
-	{
-		y = 0;
-		while (y < map->map_height)
-		{
-			if (map->coordinates[y] != NULL)
-				free(map->coordinates[y]);
-			y++;
-		}
-		free(map->coordinates);
-		map->coordinates = NULL;
-	}
-}
-
 void	ft_exit(t_map *map)
 {
-	//ft_free_coordinates(map);
 	mlx_destroy_image(map->mlx_ptr, map->img.img_ptr);
 	mlx_destroy_window(map->mlx_ptr, map->win_ptr);
-	
 	exit(0);
 }
 
