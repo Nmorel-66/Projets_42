@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:00:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/16 18:24:45 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/18 16:54:48 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ft_map_init(t_map *new_map)
 	new_map->y_offset = 0;
 	new_map->z_min = -10;
 	new_map->z_max = 10;
+	new_map->radian = 0.523599;
 }
 
 int	ft_init_coordinates(t_map *map)
@@ -34,15 +35,16 @@ int	ft_init_coordinates(t_map *map)
 
 	map->coordinates = (t_point **)malloc(sizeof(t_point *) * map->map_height);
 	if (map->coordinates == NULL)
-		return (-1);
+		ft_error_handler("coordinates allocation error line", -1);
 	y = 0;
 	while (y < map->map_height)
 	{
 		map->coordinates[y] = (t_point *)malloc(sizeof(t_point)
 				* map->map_width);
 		if (map->coordinates[y] == NULL)
-			return (-1);
+			ft_error_handler("line allocation error", -1);
 		y++;
 	}
 	return (0);
 }
+//angle = 0.523599 radians = 30°

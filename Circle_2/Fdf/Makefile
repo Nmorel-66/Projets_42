@@ -35,7 +35,8 @@ SRC_FILES = \
 	$(SRC_DIR)/move.c \
 	$(SRC_DIR)/events.c \
 	$(SRC_DIR)/color.c \
-	$(SRC_DIR)/menu.c
+	$(SRC_DIR)/menu.c \
+	$(SRC_DIR)/angle.c
 
 
 # Libft files
