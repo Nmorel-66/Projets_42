@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 10:26:58 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/20 15:35:34 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/20 18:47:13 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ static void	ft_read_map_process(char *line, t_map *map, int row)
 	split = ft_split(line, ' ');
 	while (split[col])
 	{
+		assert(row < map->map_height);
+        assert(col < map->map_width);
 		map->coordinates[row][col].x = col;
 		map->coordinates[row][col].y = row;
 		map->coordinates[row][col].z = ft_atoi(split[col]);
