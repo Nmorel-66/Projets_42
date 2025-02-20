@@ -3,20 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 10:32:56 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/16 20:30:38 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/20 15:06:40 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	ft_exit(t_map *map)
+int	ft_exit(t_map *map)
 {
+	ft_free_coordinates(map);
 	mlx_destroy_image(map->mlx_ptr, map->img.img_ptr);
 	mlx_destroy_window(map->mlx_ptr, map->win_ptr);
+	mlx_destroy_display(map->mlx_ptr);
 	exit(0);
+	return (0);
 }
 
 void	ft_scale_up(t_map *map)

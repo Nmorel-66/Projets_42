@@ -67,9 +67,9 @@ COLOR_CYAN = \033[36m
 all: $(MLX_LIB) $(NAME)
 
 # Compile MiniLibX if not built
-$(MLX_LIB):
-	@echo "$(COLOR_CYAN)Compiling MiniLibX...$(COLOR_RESET)"
-	@make -C $(MLX_DIR)
+#(MLX_LIB):
+#	@echo "$(COLOR_CYAN)Compiling MiniLibX...$(COLOR_RESET)"
+#	@make -C $(MLX_DIR)
 
 # Create the executable
 $(NAME): $(OBJ_FILES) $(LIBFT_OBJ) $(MLX_LIB)

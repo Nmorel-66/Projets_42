@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:00:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/16 18:24:45 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/20 15:09:55 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ft_map_init(t_map *new_map)
 	new_map->y_offset = 0;
 	new_map->z_min = -10;
 	new_map->z_max = 10;
+	new_map->radian = 0.523599;
 }
 
 int	ft_init_coordinates(t_map *map)
@@ -45,4 +46,19 @@ int	ft_init_coordinates(t_map *map)
 		y++;
 	}
 	return (0);
+}
+
+void	ft_free_coordinates(t_map *map)
+{
+	int	y;
+
+	if (map->coordinates == NULL)
+		return ;
+	y = 0;
+	while (y < map->map_height)
+	{
+		free(map->coordinates[y]);
+		y++;
+	}
+	free (map->coordinates);
 }

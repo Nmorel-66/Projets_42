@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:26:40 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/16 19:01:20 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/20 15:14:47 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "../minilibx_macos/mlx.h"
+//# include "../minilibx_macos/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include "../Libft/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
@@ -21,6 +22,7 @@
 # include <math.h>
 # include <errno.h>
 # include <string.h>
+# include <stdio.h>
 
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
@@ -63,6 +65,7 @@ typedef struct s_map
 	int		y_offset;
 	double	z_min;
 	double	z_max;
+	double radian;
 }			t_map;
 
 typedef struct s_line_data{
@@ -79,7 +82,8 @@ void	ft_error_handler(char *message, int exit_code);
  /* hook.c */
 int		ft_key_events(int keycode, t_map *map);
 int		ft_mouse_events(int button, int x, int y, t_map *map);
-int		ft_close_window(t_map *map);
+void	ft_increase_radian(t_map *map);
+void	ft_decrease_radian(t_map *map);
 
 /* read.c */
 void	free_split(char **split);
@@ -95,9 +99,10 @@ void	ft_draw_point(t_line_data *line_data, t_map *map, int i);
 /* init.c */
 int		ft_init_coordinates(t_map *map);
 void	ft_map_init(t_map *param);
+void	ft_free_coordinates(t_map *map);
 
 /* events.c */
-void	ft_exit(t_map *map);
+int		ft_exit(t_map *map);
 void	ft_scale_up(t_map *map);
 void	ft_scale_down(t_map *map);
 void	ft_height_up(t_map *map);

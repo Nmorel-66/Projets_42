@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:30:38 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/16 20:28:38 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/20 14:33:07 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int argc, char **argv)
 	ft_menu(&map);
 	mlx_key_hook(map.win_ptr, ft_key_events, &map);
 	mlx_mouse_hook(map.win_ptr, ft_mouse_events, &map);
-	mlx_hook(map.win_ptr, 17, 0, ft_close_window, &map);
+	mlx_hook(map.win_ptr, 17, 0, ft_exit, &map);
 	mlx_loop(map.mlx_ptr);
 	return (0);
 }
