@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:00:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/20 15:09:55 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/20 15:40:34 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,12 @@ int	ft_init_coordinates(t_map *map)
 		map->coordinates[y] = (t_point *)malloc(sizeof(t_point)
 				* map->map_width);
 		if (map->coordinates[y] == NULL)
+		{
+			while (y > 0)
+				free(map->coordinates[--y]);
+			free(map->coordinates);
 			return (-1);
+		}
 		y++;
 	}
 	return (0);

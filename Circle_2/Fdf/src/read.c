@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 10:26:58 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/16 15:55:39 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/20 15:35:34 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	free_split(char **split)
 {
 	int	i;
 
+	if (split == NULL)
+		return ;
 	i = 0;
 	while (split[i])
 		free(split[i++]);
