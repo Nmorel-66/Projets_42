@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 10:13:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/20 15:10:50 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/21 16:48:46 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,7 @@ void	ft_draw(t_map *map)
 t_point	ft_project_iso(t_point p, t_map *map)
 {
 	t_point	proj;
-	//double	radian;
 
-	//radian = 0.523599;
 	p.z = p.z * map->z_scale;
 	proj.x = (p.x - p.y) * cos(map->radian) * map->scale + map->x_offset;
 	proj.y = (p.x + p.y) * sin(map->radian) * map->scale - (p.z * map->scale / 2)

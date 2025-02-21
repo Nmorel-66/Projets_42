@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 10:26:58 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/20 18:47:13 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/21 16:47:37 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,15 @@ void	ft_map_dimensions_process(char *line, t_map *map)
 	if (map->map_width == 0)
 	{
 		while (split[width])
-		{
 			width++;
-		}
 		map->map_width = width;
+	}
+	else if ( map->map_width != 0)
+	{
+		while (split[width])
+			width++;
+		if (width <= map->map_width)
+			map->map_width = width;
 	}
 	map->map_height++;
 	free_split(split);
@@ -76,17 +81,18 @@ static void	ft_read_map_process(char *line, t_map *map, int row)
 	split = ft_split(line, ' ');
 	while (split[col])
 	{
-		assert(row < map->map_height);
-        assert(col < map->map_width);
-		map->coordinates[row][col].x = col;
-		map->coordinates[row][col].y = row;
-		map->coordinates[row][col].z = ft_atoi(split[col]);
-		if (map->coordinates[row][col].z < map->z_min)
-			map->z_min = map->coordinates[row][col].z;
-		if (map->coordinates[row][col].z > map->z_max)
-			map->z_max = map->coordinates[row][col].z;
-		free(split[col]);
-		col++;
+		if (col <= map->map_width) //
+		{
+			map->coordinates[row][col].x = col;
+			map->coordinates[row][col].y = row;
+			map->coordinates[row][col].z = ft_atoi(split[col]);
+			if (map->coordinates[row][col].z < map->z_min)
+				map->z_min = map->coordinates[row][col].z;
+			if (map->coordinates[row][col].z > map->z_max)
+				map->z_max = map->coordinates[row][col].z;
+			free(split[col]);
+			col++;
+		}
 	}
 	free(split);
 }
