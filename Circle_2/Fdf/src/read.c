@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 10:26:58 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/21 16:47:37 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/26 16:45:46 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,6 @@ void	ft_map_dimensions_process(char *line, t_map *map)
 		while (split[width])
 			width++;
 		map->map_width = width;
-	}
-	else if ( map->map_width != 0)
-	{
-		while (split[width])
-			width++;
-		if (width <= map->map_width)
-			map->map_width = width;
 	}
 	map->map_height++;
 	free_split(split);
@@ -81,8 +74,11 @@ static void	ft_read_map_process(char *line, t_map *map, int row)
 	split = ft_split(line, ' ');
 	while (split[col])
 	{
-		if (col <= map->map_width) //
-		{
+			if (col > map->map_width - 1)
+			{
+				free(split[col]);
+				break ;
+			}
 			map->coordinates[row][col].x = col;
 			map->coordinates[row][col].y = row;
 			map->coordinates[row][col].z = ft_atoi(split[col]);
@@ -91,8 +87,7 @@ static void	ft_read_map_process(char *line, t_map *map, int row)
 			if (map->coordinates[row][col].z > map->z_max)
 				map->z_max = map->coordinates[row][col].z;
 			free(split[col]);
-			col++;
-		}
+			col++;		
 	}
 	free(split);
 }

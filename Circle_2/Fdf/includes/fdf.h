@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:26:40 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/21 16:21:32 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/02/26 15:07:38 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "../minilibx_macos/mlx.h"
-//# include "../minilibx-linux/mlx.h"
+//# include "../minilibx_macos/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include "../Libft/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
@@ -24,8 +24,8 @@
 # include <string.h>
 # include <stdio.h>
 
-# define SCREEN_WIDTH 1280
-# define SCREEN_HEIGHT 720
+# define SCREEN_WIDTH 1920
+# define SCREEN_HEIGHT 1080
 
 typedef struct s_color
 {
