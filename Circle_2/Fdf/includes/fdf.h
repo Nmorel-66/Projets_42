@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:26:40 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/26 15:07:38 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/02 12:05:10 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	ft_increase_radian(t_map *map);
 void	ft_decrease_radian(t_map *map);
 
 /* read.c */
-void	free_split(char **split);
+void	ft_free_split(char **split);
 int		ft_read_map(char *file, t_map *map);
 int		ft_map_dimensions(char *file, t_map *map);
 

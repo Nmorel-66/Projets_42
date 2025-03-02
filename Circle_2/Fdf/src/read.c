@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   read.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 10:26:58 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/26 17:58:59 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/02 11:44:24 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	free_split(char **split)
+void	ft_free_split(char **split)
 {
 	int	i;
 
@@ -38,7 +38,7 @@ void	ft_map_dimensions_process(char *line, t_map *map)
 		map->map_width = width;
 	}
 	map->map_height++;
-	free_split(split);
+	ft_free_split(split);
 }
 
 int	ft_map_dimensions(char *file, t_map *map)
@@ -74,7 +74,7 @@ static void	ft_read_map_process(char *line, t_map *map, int row)
 	split = ft_split(line, ' ');
 	while (split[col])
 	{
-			if (col > map->map_width - 1)
+		if (col > map->map_width - 1)
 			{
 				free(split[col]);
 				break ;
