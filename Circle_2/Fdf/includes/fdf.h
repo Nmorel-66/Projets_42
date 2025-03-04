@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:26:40 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/04 13:49:42 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/04 16:22:37 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,22 @@ typedef struct s_map
 	int		y_offset;
 	double	z_min;
 	double	z_max;
-	double radian;
+	double	radian;
 }			t_map;
 
-typedef struct s_line_data{
-	t_point proj_p1;
-	t_point proj_p2;
-	t_point p1;
-	t_point p2;
-	double step;
-} 	t_line_data;
+typedef struct s_line_data
+{
+	t_point	proj_p1;
+	t_point	proj_p2;
+	t_point	p1;
+	t_point	p2;
+	double	step;
+}			t_line_data;
 
 /* fdf.c */
 void	ft_error_handler(char *message, int exit_code);
 
- /* hook.c */
+/* hook.c */
 int		ft_key_events(int keycode, t_map *map);
 int		ft_mouse_events(int button, int x, int y, t_map *map);
 void	ft_increase_radian(t_map *map);
@@ -117,6 +118,7 @@ void	ft_move_down(t_map *map);
 /* color.c */
 t_color	ft_get_color_by_height(double z, t_map *map);
 int		ft_get_color(t_color color);
+void	ft_get_z(char *z_split, int row, int col, t_map *map);
 
 /* menu.c */
 void	ft_menu(t_map *map);

@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 10:26:58 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/04 14:12:09 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/04 16:21:38 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,11 @@ int	ft_map_dimensions(char *file, t_map *map)
 	return (0);
 }
 
+
 static void	ft_read_map_process(char *line, t_map *map, int row)
 {
 	char	**split;
 	int		col;
-	char	*iscolor;
-	int		l;
 
 	col = 0;
 	split = ft_split(line, ' ');
@@ -83,14 +82,7 @@ static void	ft_read_map_process(char *line, t_map *map, int row)
 		}
 		map->coordinates[row][col].x = col;
 		map->coordinates[row][col].y = row;
-		iscolor = ft_strchr(split[col], ',');
-		if (iscolor == NULL)
-			map->coordinates[row][col].z = ft_atoi(split[col]);
-		else
-		{
-			l = iscolor - split[col];
-			map->coordinates[row][col].z = ft_atoi(ft_substr(split[col], 0, l));
-		}
+		ft_get_z(split[col], row, col, map);
 		if (map->coordinates[row][col].z < map->z_min)
 			map->z_min = map->coordinates[row][col].z;
 		if (map->coordinates[row][col].z > map->z_max)

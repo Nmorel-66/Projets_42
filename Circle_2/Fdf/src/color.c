@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 11:07:34 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/16 15:55:02 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/04 17:23:30 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,27 @@ t_color	ft_get_color_by_height(double z, t_map *map)
 int	ft_get_color(t_color color)
 {
 	return ((color.r << 16) | (color.g << 8) | color.b);
+}
+void	ft_get_z(char *z_split, int row, int col, t_map *map)
+{
+	char	*iscolor;
+	int		len;
+	char	*z_value;
+	char	*z_color;
+	int		len2;
+	
+	iscolor = ft_strchr(z_split, ',');
+	if (iscolor == NULL)
+		map->coordinates[row][col].z = ft_atoi(z_split);
+	else
+	{
+		len = iscolor - z_split;
+		z_value = ft_substr(z_split, 0, len);
+		map->coordinates[row][col].z = ft_atoi(z_value);
+		free(z_value);
+		len2 = ft_strlen(z_split) - len - 1;
+		len = len + 3;
+		z_color = ft_substr(z_split, len ,len2);
+		free(z_color);
+	}
 }
