@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 10:26:58 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/02 11:44:24 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/04 14:12:09 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,25 +69,34 @@ static void	ft_read_map_process(char *line, t_map *map, int row)
 {
 	char	**split;
 	int		col;
+	char	*iscolor;
+	int		l;
 
 	col = 0;
 	split = ft_split(line, ' ');
 	while (split[col])
 	{
 		if (col > map->map_width - 1)
-			{
-				free(split[col]);
-				break ;
-			}
-			map->coordinates[row][col].x = col;
-			map->coordinates[row][col].y = row;
-			map->coordinates[row][col].z = ft_atoi(split[col]);
-			if (map->coordinates[row][col].z < map->z_min)
-				map->z_min = map->coordinates[row][col].z;
-			if (map->coordinates[row][col].z > map->z_max)
-				map->z_max = map->coordinates[row][col].z;
+		{
 			free(split[col]);
-			col++;		
+			break ;
+		}
+		map->coordinates[row][col].x = col;
+		map->coordinates[row][col].y = row;
+		iscolor = ft_strchr(split[col], ',');
+		if (iscolor == NULL)
+			map->coordinates[row][col].z = ft_atoi(split[col]);
+		else
+		{
+			l = iscolor - split[col];
+			map->coordinates[row][col].z = ft_atoi(ft_substr(split[col], 0, l));
+		}
+		if (map->coordinates[row][col].z < map->z_min)
+			map->z_min = map->coordinates[row][col].z;
+		if (map->coordinates[row][col].z > map->z_max)
+			map->z_max = map->coordinates[row][col].z;
+		free(split[col]);
+		col++;
 	}
 	free(split);
 }

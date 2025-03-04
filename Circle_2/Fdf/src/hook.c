@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 10:25:02 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/20 15:14:08 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/04 14:09:15 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	ft_key_events(int keycode, t_map *map)
 		ft_decrease_radian(map);
 	return (0);
 }
+
 void	ft_increase_radian(t_map *map)
 {
 	map->radian = map->radian + 0.1;
@@ -52,6 +53,7 @@ void	ft_increase_radian(t_map *map)
 	ft_draw(map);
 	ft_menu(map);
 }
+
 void	ft_decrease_radian(t_map *map)
 {
 	map->radian = map->radian - 0.1;
@@ -59,6 +61,7 @@ void	ft_decrease_radian(t_map *map)
 	ft_draw(map);
 	ft_menu(map);
 }
+
 /*int	ft_key_events(int keycode, t_map *map)
 {
 	#ifdef __APPLE__
