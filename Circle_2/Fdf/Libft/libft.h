@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:12:19 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/15 15:55:40 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/06 15:06:29 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+int		ft_atoi_base(const char *str, char *base);
 
 // get_next_line
 # ifdef BUFFER_SIZE
@@ -80,6 +81,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
 # endif
+
 char	*get_next_line(int fd);
 
 #endif

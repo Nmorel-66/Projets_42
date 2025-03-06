@@ -49,6 +49,7 @@ LIBFT_SRC = \
 	$(LIBFT_DIR)/ft_strchr.c \
 	$(LIBFT_DIR)/ft_strdup.c \
 	$(LIBFT_DIR)/ft_substr.c \
+	$(LIBFT_DIR)/ft_atoi_base.c \
 	$(LIBFT_DIR)/get_next_line.c
 
 LIBFT_OBJ = $(LIBFT_SRC:$(LIBFT_DIR)/%.c=$(LIBFT_OBJ_DIR)/%.o)
