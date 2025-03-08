@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:00:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/06 16:04:57 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/08 13:11:08 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+
+void	ft_error_handler(char *message, int exit_code)
+{
+	ft_putstr_fd("\033[1;31m", 2);
+	ft_putstr_fd(message, 2);
+	if (errno)
+		ft_putstr_fd(strerror(errno), 2);
+	ft_putstr_fd("\033[0m", 2);
+	exit(exit_code);
+}
 
 void	ft_map_init(t_map *new_map)
 {
@@ -20,7 +30,7 @@ void	ft_map_init(t_map *new_map)
 	new_map->map_width = 0;
 	new_map->map_height = 0;
 	new_map->coordinates = NULL;
-	new_map->scale = 20;
+	new_map->scale = 10;
 	new_map->z_scale = 1;
 	new_map->x_offset = 0;
 	new_map->y_offset = 0;

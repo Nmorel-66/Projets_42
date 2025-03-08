@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:26:40 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/08 10:08:23 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/08 14:54:54 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,6 @@ typedef struct s_line_data
 	double	step;
 }			t_line_data;
 
-/* fdf.c */
-void	ft_error_handler(char *message, int exit_code);
-
 /* hook.c */
 int		ft_key_events(int keycode, t_map *map);
 int		ft_mouse_events(int button, int x, int y, t_map *map);
@@ -98,6 +95,7 @@ t_point	ft_project_iso(t_point p, t_map *map);
 void	ft_draw_point(t_line_data *line_data, t_map *map, int i);
 
 /* init.c */
+void	ft_error_handler(char *message, int exit_code);
 int		ft_init_coordinates(t_map *map);
 void	ft_map_init(t_map *param);
 void	ft_free_coordinates(t_map *map);
