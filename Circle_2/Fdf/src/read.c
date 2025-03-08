@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 10:26:58 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/08 14:19:28 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/08 19:14:53 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,3 +118,22 @@ int	ft_read_map(char *file, t_map *map)
 	close(fd);
 	return (0);
 }
+
+/*void	ft_map_dimensions_process(char *line, t_map *map)
+{
+	int		width;
+	char	*ptr;
+
+	width = 0;
+	ptr = line;
+	while (*ptr)
+	{
+		if (*ptr == ' ')
+			width++;
+		ptr++;
+	}
+	if (map->map_width == 0)
+		map->map_width = width + 1;
+	map->map_height++;
+}
+*/

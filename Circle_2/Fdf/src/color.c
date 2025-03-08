@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 11:07:34 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/08 10:11:57 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/08 18:12:33 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,14 @@
 
 t_color	ft_get_color_by_height(double z, t_map *map)
 {
-	double	z_min;
-	double	z_max;
-	double	pas;
+	t_color	color;
+	double	ratio;
 
-	z_min = map->z_min;
-	z_max = map->z_max;
-	pas = (z_max - z_min) / 4.0;
-	if (z >= z_min && z <= z_min + pas)
-		return ((t_color){0, 0, 255});
-	else if (z > z_min + pas && z <= z_min + (2 * pas))
-		return ((t_color){0, 255, 0});
-	else if (z > z_min + (2 * pas) && z <= z_min + (3 * pas))
-		return ((t_color){139, 69, 19});
-	else if (z > z_min + (3 * pas) && z <= z_max)
-		return ((t_color){255, 255, 255});
-	return ((t_color){0, 0, 0});
+	ratio = (z - map->z_min) / (map->z_max - map->z_min);
+	color.r = (int)(128 * ratio);
+	color.g = (int)(255 * (1 - ratio));
+	color.b = (int)(128 * ratio);
+	return (color);
 }
 
 int	ft_get_color(t_color color)

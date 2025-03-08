@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:26:40 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/08 14:54:54 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/08 19:02:40 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-//# include "../minilibx_macos/mlx.h"
-# include "../minilibx-linux/mlx.h"
+# include "../minilibx_macos/mlx.h"
+//# include "../minilibx-linux/mlx.h"
 # include "../Libft/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
@@ -72,9 +72,14 @@ typedef struct s_line_data
 {
 	t_point	proj_p1;
 	t_point	proj_p2;
-	t_point	p1;
-	t_point	p2;
 	double	step;
+	double	dx;
+	double	dy;
+	double	dz;
+	double	inv_step;
+	double	current_x;
+	double	current_y;
+	double	current_z;
 }			t_line_data;
 
 /* hook.c */
@@ -93,6 +98,7 @@ void	ft_draw(t_map *map);
 void	ft_draw_line(t_point p1, t_point p2, t_map *map);
 t_point	ft_project_iso(t_point p, t_map *map);
 void	ft_draw_point(t_line_data *line_data, t_map *map, int i);
+//void	ft_draw_point(t_line_data *line_data, t_map *map, int i, double inv_step);
 
 /* init.c */
 void	ft_error_handler(char *message, int exit_code);
