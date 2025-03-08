@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 10:26:58 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/08 19:14:53 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/08 21:17:46 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,29 @@ void	ft_free_split(char **split)
 	free(split);
 }
 
-void	ft_map_dimensions_process(char *line, t_map *map)
+void ft_map_dimensions_process(char *line, t_map *map)
 {
-	char	**split;
-	int		width;
+	int width;
+	int is_counting;
 
 	width = 0;
-	split = ft_split(line, ' ');
+	is_counting = 0;
 	if (map->map_width == 0)
 	{
-		while (split[width])
-			width++;
+		while (*line)
+		{
+			if (*line == ' ')
+				is_counting = 0;
+			else if (!is_counting)
+			{
+				is_counting = 1;
+				width++;
+			}
+			line++;
+		}
 		map->map_width = width;
 	}
 	map->map_height++;
-	ft_free_split(split);
 }
 
 int	ft_map_dimensions(char *file, t_map *map)
@@ -57,10 +65,6 @@ int	ft_map_dimensions(char *file, t_map *map)
 		ft_map_dimensions_process(line, map);
 		free(line);
 	}
-	map->x_offset = (SCREEN_WIDTH - ((map->map_width - map->map_height)
-				* map->scale)) / 2;
-	map->y_offset = (SCREEN_HEIGHT - ((map->map_width + map->map_height)
-				* map->scale) / 2) / 2;
 	close(fd);
 	return (0);
 }
@@ -118,22 +122,3 @@ int	ft_read_map(char *file, t_map *map)
 	close(fd);
 	return (0);
 }
-
-/*void	ft_map_dimensions_process(char *line, t_map *map)
-{
-	int		width;
-	char	*ptr;
-
-	width = 0;
-	ptr = line;
-	while (*ptr)
-	{
-		if (*ptr == ' ')
-			width++;
-		ptr++;
-	}
-	if (map->map_width == 0)
-		map->map_width = width + 1;
-	map->map_height++;
-}
-*/

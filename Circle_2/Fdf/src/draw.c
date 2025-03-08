@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 10:13:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/08 19:03:50 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/08 21:55:22 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,29 @@ void	ft_draw_line(t_point p1, t_point p2, t_map *map)
 	}
 }
 
+static void	ft_adjust_offset(t_map *map)
+{
+	map->x_offset = (SCREEN_WIDTH - (map->map_width * map->scale)) / 2;
+	map->y_offset = (SCREEN_HEIGHT - (map->map_height * map->scale)) / 2;
+}
+
+static void	ft_adjust_scale(t_map *map)
+{
+	int	max;
+
+	max = fmax(map->map_width, map->map_height);
+	while (max * map->scale > 1000)
+		map->scale--;
+	ft_adjust_offset(map);
+}
+
 void	ft_draw(t_map *map)
 {
 	int	row;
 	int	col;
 
 	row = 0;
+	ft_adjust_scale(map);
 	while (row < map->map_height)
 	{
 		col = 0;

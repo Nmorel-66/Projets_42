@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:26:40 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/08 19:02:40 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/08 21:14:26 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include <string.h>
 # include <stdio.h>
 
-# define SCREEN_WIDTH 1920
-# define SCREEN_HEIGHT 1080
+# define SCREEN_WIDTH 1200
+# define SCREEN_HEIGHT 800
 
 typedef struct s_color
 {
@@ -36,9 +36,9 @@ typedef struct s_color
 
 typedef struct s_point
 {
-	double	x;
-	double	y;
-	double	z;
+	float	x;
+	float	y;
+	float	z;
 	t_color	color;
 }			t_point;
 
@@ -63,23 +63,23 @@ typedef struct s_map
 	int		z_scale;
 	int		x_offset;
 	int		y_offset;
-	double	z_min;
-	double	z_max;
-	double	radian;
+	float	z_min;
+	float	z_max;
+	float	radian;
 }			t_map;
 
 typedef struct s_line_data
 {
 	t_point	proj_p1;
 	t_point	proj_p2;
-	double	step;
-	double	dx;
-	double	dy;
-	double	dz;
-	double	inv_step;
-	double	current_x;
-	double	current_y;
-	double	current_z;
+	float	step;
+	float	dx;
+	float	dy;
+	float	dz;
+	float	inv_step;
+	float	current_x;
+	float	current_y;
+	float	current_z;
 }			t_line_data;
 
 /* hook.c */
@@ -98,7 +98,7 @@ void	ft_draw(t_map *map);
 void	ft_draw_line(t_point p1, t_point p2, t_map *map);
 t_point	ft_project_iso(t_point p, t_map *map);
 void	ft_draw_point(t_line_data *line_data, t_map *map, int i);
-//void	ft_draw_point(t_line_data *line_data, t_map *map, int i, double inv_step);
+//void	ft_draw_point(t_line_data *line_data, t_map *map, int i, float inv_step);
 
 /* init.c */
 void	ft_error_handler(char *message, int exit_code);
@@ -120,7 +120,7 @@ void	ft_move_up(t_map *map);
 void	ft_move_down(t_map *map);
 
 /* color.c */
-t_color	ft_get_color_by_height(double z, t_map *map);
+t_color	ft_get_color_by_height(float z, t_map *map);
 int		ft_get_color(t_color color);
 void	ft_get_z(char *z_split, int row, int col, t_map *map);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:00:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/08 13:11:08 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/08 20:42:11 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_map_init(t_map *new_map)
 int	ft_init_coordinates(t_map *map)
 {
 	int	y;
-
+	
 	map->coordinates = (t_point **)malloc(sizeof(t_point *) * map->map_height);
 	if (map->coordinates == NULL)
 		return (-1);

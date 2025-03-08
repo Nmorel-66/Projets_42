@@ -6,17 +6,19 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 11:07:34 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/08 18:12:33 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/08 21:44:12 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-t_color	ft_get_color_by_height(double z, t_map *map)
+t_color	ft_get_color_by_height(float z, t_map *map)
 {
 	t_color	color;
-	double	ratio;
+	float	ratio;
 
+	if (z < 0)
+		return ((t_color){.r = 0, .g = 0, .b = 255});
 	ratio = (z - map->z_min) / (map->z_max - map->z_min);
 	color.r = (int)(128 * ratio);
 	color.g = (int)(255 * (1 - ratio));
