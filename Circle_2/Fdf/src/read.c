@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 10:26:58 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/09 17:05:13 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/09 17:18:48 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static void	ft_read_map_process(char *line, t_map *map, int row)
 		index = row * map->map_width + col;
 		map->coordinates[index].x = col;
 		map->coordinates[index].y = row;
-		ft_get_z(split[col], row, col, map);
+		ft_get_z(split[col], index, map);
 		if (map->coordinates[index].z < map->z_min)
 			map->z_min = map->coordinates[index].z;
 		if (map->coordinates[index].z > map->z_max)
