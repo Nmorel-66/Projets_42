@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:00:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/09 16:37:19 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/09 17:03:06 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,58 +40,20 @@ void	ft_map_init(t_map *new_map)
 	new_map->default_color = (t_color){.r = 255, .g = 255, .b = 255};
 }
 
-int ft_init_coordinates(t_map *map)
+int	ft_init_coordinates(t_map *map)
 {
-    map->coordinates = (t_point *)malloc(sizeof(t_point) * map->map_width * map->map_height);
-    if (map->coordinates == NULL)
-        return (-1);
-	return (0);
-}
-
-void ft_free_coordinates(t_map *map)
-{
-    if (map->coordinates != NULL)
-    {
-        free(map->coordinates);
-        map->coordinates = NULL;
-    }
-}
-/*int	ft_init_coordinates(t_map *map)
-{
-	int	y;
-	
-	map->coordinates = (t_point **)malloc(sizeof(t_point *) * map->map_height);
+	map->coordinates = (t_point *)malloc(sizeof(t_point) * map->map_width
+			* map->map_height);
 	if (map->coordinates == NULL)
 		return (-1);
-	y = 0;
-	while (y < map->map_height)
-	{
-		map->coordinates[y] = (t_point *)malloc(sizeof(t_point)
-				* map->map_width);
-		if (map->coordinates[y] == NULL)
-		{
-			while (y > 0)
-				free(map->coordinates[--y]);
-			free(map->coordinates);
-			return (-1);
-		}
-		y++;
-	}
 	return (0);
 }
 
 void	ft_free_coordinates(t_map *map)
 {
-	int	y;
-
-	if (map->coordinates == NULL)
-		return ;
-	y = 0;
-	while (y < map->map_height)
+	if (map->coordinates != NULL)
 	{
-		free(map->coordinates[y]);
-		y++;
+		free(map->coordinates);
+		map->coordinates = NULL;
 	}
-	free (map->coordinates);
 }
-*/

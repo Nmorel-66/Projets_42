@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:26:40 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/09 16:29:57 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/09 17:10:10 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ typedef struct s_color
 
 typedef struct s_point
 {
-	int	x;
-	int	y;
-	int	z;
+	int		x;
+	int		y;
+	int		z;
 	t_color	color;
-}		t_point;
+}			t_point;
 
 typedef struct s_img
 {
@@ -66,7 +66,7 @@ typedef struct s_map
 	float	z_min;
 	float	z_max;
 	float	radian;
-	t_color default_color;
+	t_color	default_color;
 }			t_map;
 
 typedef struct s_line_data
@@ -99,7 +99,6 @@ void	ft_draw(t_map *map);
 void	ft_draw_line(t_point p1, t_point p2, t_map *map);
 t_point	ft_project_iso(t_point p, t_map *map);
 void	ft_draw_point(t_line_data *line_data, t_map *map, int i);
-//void	ft_draw_point(t_line_data *line_data, t_map *map, int i, float inv_step);
 
 /* init.c */
 void	ft_error_handler(char *message, int exit_code);

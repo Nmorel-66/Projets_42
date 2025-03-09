@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 10:13:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/09 16:44:08 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/09 17:04:30 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ static void	ft_adjust_offset(t_map *map)
 
 static void	ft_adjust_scale(t_map *map)
 {
-	int	maxi;
+	int	max;
 
-	maxi = fmax(map->map_width, map->map_height);
-	while (maxi * map->scale > 1000)
+	max = fmax(map->map_width, map->map_height);
+	while (max * map->scale > 1000)
 		map->scale--;
 	ft_adjust_offset(map);
 }
@@ -84,51 +84,12 @@ void	ft_draw(t_map *map)
 			index = row * map->map_width + col;
 			if (col < map->map_width - 1)
 				ft_draw_line(map->coordinates[index],
-							map->coordinates[index + 1], map);
+					map->coordinates[index + 1], map);
 			if (row < map->map_height - 1)
 				ft_draw_line(map->coordinates[index],
-							map->coordinates[index + map->map_width], map);
+					map->coordinates[index + map->map_width], map);
 			col++;
 		}
 		row++;
 	}
 }
-
-/*void	ft_draw_point(t_line_data *line_data, t_map *map, int i)
-{
-	double	x;
-	double	y;
-	t_color	point_color;
-
-	x = line_data->proj_p1.x + (line_data->proj_p2.x - line_data->proj_p1.x)
-		* (i / line_data->step);
-	y = line_data->proj_p1.y + (line_data->proj_p2.y - line_data->proj_p1.y)
-		* (i / line_data->step);
-	point_color = ft_get_color_by_height(((1 - (i / line_data->step))
-				* line_data->p1.z + (i / line_data->step) * line_data->p2.z),
-			map);
-	mlx_pixel_put(map->mlx_ptr, map->win_ptr, (int)x, (int)y,
-		ft_get_color(point_color));
-}*/
-
-/*void	ft_draw_line(t_point p1, t_point p2, t_map *map)
-{
-	t_line_data	line_data;
-	int			i;
-
-	line_data.proj_p1 = ft_project_iso(p1, map);
-	line_data.proj_p2 = ft_project_iso(p2, map);
-	line_data.p1 = p1;
-	line_data.p2 = p2;
-	line_data.dx = line_data.proj_p2.x - line_data.proj_p1.x;
-	line_data.dy = line_data.proj_p2.y - line_data.proj_p1.y;
-	line_data.dz = p2.z - p1.z;
-	line_data.z1 = p1.z;
-	line_data.step = fmax(fabs(line_data.dx), fabs(line_data.dy));
-	i = 0;
-	while (i <= line_data.step)
-	{
-		ft_draw_point(&line_data, map, i);
-		i++;
-	}
-}*/

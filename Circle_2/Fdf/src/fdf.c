@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:30:38 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/09 16:40:45 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/09 17:04:13 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 static void	ft_map_checker(char *file)
 {
 	int		fd;
-	char *ext;
-	int	start;
+	char	*ext;
+	int		start;
 
 	start = ft_strlen(file) - 3;
 	ext = ft_substr(file, start, 4);
-	if (ft_strncmp(ext,"fdf", 3) != 0)
+	if (ft_strncmp(ext, "fdf", 3) != 0)
 	{
 		free(ext);
-		ft_error_handler("extension file error\n", 1);	
+		ft_error_handler("extension file error\n", 1);
 	}
 	free(ext);
 	fd = open(file, O_RDONLY);
@@ -31,7 +31,6 @@ static void	ft_map_checker(char *file)
 		ft_error_handler("Open file error.\n", 1);
 	close(fd);
 }
-
 
 int	main(int argc, char **argv)
 {

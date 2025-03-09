@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 11:07:34 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/09 16:44:36 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/09 17:09:07 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ int	ft_get_color(t_color color)
 	return ((color.r << 16) | (color.g << 8) | color.b);
 }
 
-/*void	ft_get_z(char *z_split, int row, int col, t_map *map)
+void	ft_get_z(char *z_split, int row, int col, t_map *map)
 {
+	int		indx;
 	char	*iscolor;
 	int		len;
 	char	*z_value;
@@ -41,50 +42,23 @@ int	ft_get_color(t_color color)
 
 	iscolor = ft_strchr(z_split, ',');
 	base = "0123456789ABCDEF";
+	indx = row * map->map_width + col;
 	if (iscolor == NULL)
-		map->coordinates[row][col].z = ft_atoi(z_split);
+	{
+		map->coordinates[indx].z = ft_atoi(z_split);
+		map->coordinates[indx].color = map->default_color;
+	}
 	else
 	{
 		len = iscolor - z_split;
 		z_value = ft_substr(z_split, 0, len);
-		map->coordinates[row][col].z = ft_atoi(z_value);
+		map->coordinates[indx].z = ft_atoi(z_value);
 		free(z_value);
 		len = len + 3;
 		z_color = ft_substr(z_split, len, 6);
-		map->coordinates[row][col].color.r = ft_atoi_base(z_color, base) & 0xFF;
-		map->coordinates[row][col].color.g = ft_atoi_base(z_color + 2, base)
-			& 0xFF;
-		map->coordinates[row][col].color.b = ft_atoi_base(z_color + 4, base);
+		map->coordinates[indx].color.r = ft_atoi_base(z_color, base) & 0xFF;
+		map->coordinates[indx].color.g = ft_atoi_base(z_color + 2, base) & 0xFF;
+		map->coordinates[indx].color.b = ft_atoi_base(z_color + 4, base);
 		free(z_color);
 	}
-}*/
-void ft_get_z(char *z_split, int row, int col, t_map *map)
-{
-    int index = row * map->map_width + col;
-    char *iscolor;
-    int len;
-    char *z_value;
-    char *z_color;
-    char *base;
-
-    iscolor = ft_strchr(z_split, ',');
-    base = "0123456789ABCDEF";
-    if (iscolor == NULL)
-	{
-        map->coordinates[index].z = ft_atoi(z_split);
-        map->coordinates[index].color = map->default_color;
-    } 
-	else
-	{
-		len = iscolor - z_split;
-        z_value = ft_substr(z_split, 0, len);
-        map->coordinates[index].z = ft_atoi(z_value);
-        free(z_value);
-        len = len + 3;
-        z_color = ft_substr(z_split, len, 6);
-        map->coordinates[index].color.r = ft_atoi_base(z_color, base) & 0xFF;
-        map->coordinates[index].color.g = ft_atoi_base(z_color + 2, base) & 0xFF;
-        map->coordinates[index].color.b = ft_atoi_base(z_color + 4, base);
-        free(z_color);
-    }
 }
