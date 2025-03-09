@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 10:13:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/08 21:55:22 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/09 16:44:08 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	ft_draw_line(t_point p1, t_point p2, t_map *map)
 	line_data.dx = line_data.proj_p2.x - line_data.proj_p1.x;
 	line_data.dy = line_data.proj_p2.y - line_data.proj_p1.y;
 	line_data.dz = p2.z - p1.z;
-	line_data.step = fmax(fabs(line_data.proj_p2.x - line_data.proj_p1.x),
-			fabs(line_data.proj_p2.y - line_data.proj_p1.y));
+	line_data.step = fmax(abs(line_data.proj_p2.x - line_data.proj_p1.x),
+			abs(line_data.proj_p2.y - line_data.proj_p1.y));
 	line_data.inv_step = 1.0 / line_data.step;
 	i = 0;
 	while (i <= line_data.step)
@@ -60,10 +60,10 @@ static void	ft_adjust_offset(t_map *map)
 
 static void	ft_adjust_scale(t_map *map)
 {
-	int	max;
+	int	maxi;
 
-	max = fmax(map->map_width, map->map_height);
-	while (max * map->scale > 1000)
+	maxi = fmax(map->map_width, map->map_height);
+	while (maxi * map->scale > 1000)
 		map->scale--;
 	ft_adjust_offset(map);
 }
@@ -72,6 +72,7 @@ void	ft_draw(t_map *map)
 {
 	int	row;
 	int	col;
+	int	index;
 
 	row = 0;
 	ft_adjust_scale(map);
@@ -80,12 +81,13 @@ void	ft_draw(t_map *map)
 		col = 0;
 		while (col < map->map_width)
 		{
+			index = row * map->map_width + col;
 			if (col < map->map_width - 1)
-				ft_draw_line(map->coordinates[row][col],
-					map->coordinates[row][col + 1], map);
+				ft_draw_line(map->coordinates[index],
+							map->coordinates[index + 1], map);
 			if (row < map->map_height - 1)
-				ft_draw_line(map->coordinates[row][col],
-					map->coordinates[row + 1][col], map);
+				ft_draw_line(map->coordinates[index],
+							map->coordinates[index + map->map_width], map);
 			col++;
 		}
 		row++;

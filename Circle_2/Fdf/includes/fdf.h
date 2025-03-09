@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:26:40 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/08 21:14:26 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/09 16:29:57 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ typedef struct s_color
 
 typedef struct s_point
 {
-	float	x;
-	float	y;
-	float	z;
+	int	x;
+	int	y;
+	int	z;
 	t_color	color;
-}			t_point;
+}		t_point;
 
 typedef struct s_img
 {
@@ -53,7 +53,7 @@ typedef struct s_img
 
 typedef struct s_map
 {
-	t_point	**coordinates;
+	t_point	*coordinates;
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_img	img;
@@ -66,6 +66,7 @@ typedef struct s_map
 	float	z_min;
 	float	z_max;
 	float	radian;
+	t_color default_color;
 }			t_map;
 
 typedef struct s_line_data
@@ -77,9 +78,9 @@ typedef struct s_line_data
 	float	dy;
 	float	dz;
 	float	inv_step;
-	float	current_x;
-	float	current_y;
-	float	current_z;
+	int		current_x;
+	int		current_y;
+	int		current_z;
 }			t_line_data;
 
 /* hook.c */

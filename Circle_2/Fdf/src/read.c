@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 10:26:58 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/08 21:17:46 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/09 16:39:22 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	ft_map_dimensions(char *file, t_map *map)
 	return (0);
 }
 
-static void	ft_read_map_process(char *line, t_map *map, int row)
+/*static void	ft_read_map_process(char *line, t_map *map, int row)
 {
 	char	**split;
 	int		col;
@@ -94,6 +94,35 @@ static void	ft_read_map_process(char *line, t_map *map, int row)
 		col++;
 	}
 	free(split);
+}*/
+static void ft_read_map_process(char *line, t_map *map, int row)
+{
+    char **split;
+    int col;
+	int	index;
+
+    col = 0;
+    split = ft_split(line, ' ');
+    while (split[col])
+    {
+        if (col >= map->map_width)
+        {
+            free(split[col]);
+            break;
+        }
+		
+        index = row * map->map_width + col;
+        map->coordinates[index].x = col;
+        map->coordinates[index].y = row;
+        ft_get_z(split[col], row, col, map);
+        if (map->coordinates[index].z < map->z_min)
+            map->z_min = map->coordinates[index].z;
+        if (map->coordinates[index].z > map->z_max)
+            map->z_max = map->coordinates[index].z;
+        free(split[col]);
+        col++;
+    }
+    free(split);
 }
 
 int	ft_read_map(char *file, t_map *map)
