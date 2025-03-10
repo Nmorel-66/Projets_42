@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:12:19 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/06 15:06:29 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/10 19:48:18 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ int		ft_atoi_base(const char *str, char *base);
 # ifdef BUFFER_SIZE
 #  if BUFFER_SIZE < 1 || BUFFER_SIZE > 8192000
 #   undef BUFFER_SIZE
-#   define BUFFER_SIZE 10
+#   define BUFFER_SIZE 4096
 #  endif
 # endif
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 4096
 # endif
 
 char	*get_next_line(int fd);
