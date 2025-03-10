@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 10:13:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/09 17:04:30 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/09 18:00:20 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_draw_line(t_point p1, t_point p2, t_map *map)
 		line_data.current_z = p1.z + line_data.dz * i * line_data.inv_step;
 		point_color = ft_get_color_by_height(line_data.current_z, map);
 		mlx_pixel_put(map->mlx_ptr, map->win_ptr, (int)line_data.current_x,
-			(int)line_data.current_y, ft_get_color(point_color));
+			(int)line_data.current_y, point_color);
 		i++;
 	}
 }

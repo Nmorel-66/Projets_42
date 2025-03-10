@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:00:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/09 17:03:06 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/09 18:00:29 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_map_init(t_map *new_map)
 	new_map->z_min = -10;
 	new_map->z_max = 10;
 	new_map->radian = 0.523599;
-	new_map->default_color = (t_color){.r = 255, .g = 255, .b = 255};
+	new_map->default_color = 0xFFFFFF;
 }
 
 int	ft_init_coordinates(t_map *map)

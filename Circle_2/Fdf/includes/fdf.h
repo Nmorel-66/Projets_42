@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:26:40 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/09 17:18:59 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/09 18:31:37 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,15 @@
 # include <stdio.h>
 
 # define SCREEN_WIDTH 1200
-# define SCREEN_HEIGHT 800
+# define SCREEN_HEIGHT 900
 
-typedef struct s_color
-{
-	int	r;
-	int	g;
-	int	b;
-}		t_color;
+typedef int	t_color;
 
 typedef struct s_point
 {
-	int		x;
-	int		y;
-	int		z;
+	short	x;
+	short	y;
+	short	z;
 	t_color	color;
 }			t_point;
 
@@ -57,14 +52,14 @@ typedef struct s_map
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_img	img;
-	int		map_width;
-	int		map_height;
-	int		scale;
-	int		z_scale;
-	int		x_offset;
-	int		y_offset;
-	float	z_min;
-	float	z_max;
+	short	map_width;
+	short	map_height;
+	short	scale;
+	short	z_scale;
+	short	x_offset;
+	short	y_offset;
+	short	z_min;
+	short	z_max;
 	float	radian;
 	t_color	default_color;
 }			t_map;
@@ -78,9 +73,9 @@ typedef struct s_line_data
 	float	dy;
 	float	dz;
 	float	inv_step;
-	int		current_x;
-	int		current_y;
-	int		current_z;
+	short	current_x;
+	short	current_y;
+	short	current_z;
 }			t_line_data;
 
 /* hook.c */
