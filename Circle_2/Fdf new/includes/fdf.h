@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:26:40 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/12 18:47:44 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/12 21:34:36 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	ft_error_handler(char *message, int exit_code);
 int		ft_init_coordinates(t_map *map);
 void	ft_map_init(t_map *param);
 void	ft_free_coordinates(t_map *map);
+void	ft_refresh_window(t_map *map);
 
 /* events.c */
 int		ft_exit(t_map *map);
