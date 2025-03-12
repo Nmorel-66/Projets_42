@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:26:40 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/12 10:38:39 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/12 12:12:11 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_map
 	short	z_min;
 	short	z_max;
 	float	radian;
-	t_color	default_color;
+	int		is_def_col;
 }			t_map;
 
 typedef struct s_line_data
@@ -93,7 +93,6 @@ int		ft_map_dimensions(char *file, t_map *map);
 void	ft_draw(t_map *map);
 void	ft_draw_line(t_point p1, t_point p2, t_map *map);
 t_point	ft_project_iso(t_point p, t_map *map);
-void	ft_adjust_offset(t_map *map);
 void	ft_adjust_scale(t_map *map);
 
 /* init.c */
@@ -118,6 +117,7 @@ void	ft_move_down(t_map *map);
 /* color.c */
 t_color	ft_get_color_by_height(float z, t_map *map);
 void	ft_get_z(char *z_split, int index, t_map *map);
+t_color	ft_get_point_color(int z, t_map *map, t_point p1);
 
 /* menu.c */
 void	ft_menu(t_map *map);

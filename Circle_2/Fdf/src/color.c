@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 11:07:34 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/09 18:01:15 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/12 12:11:56 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_color	ft_get_color_by_height(float z, t_map *map)
 		return (0x0000FF);
 	ratio = (z - map->z_min) / (map->z_max - map->z_min);
 	r = (int)(128 * ratio);
-	g = (int)(255 * (1 - ratio));
+		g = (int)(255 * (1 - ratio));
 	b = (int)(128 * ratio);
 	return ((r << 16) | (g << 8) | b);
 }
@@ -40,7 +40,7 @@ void	ft_get_z(char *z_split, int i, t_map *map)
 	if (iscolor == NULL)
 	{
 		map->coordinates[i].z = ft_atoi(z_split);
-		map->coordinates[i].color = map->default_color;
+		map->coordinates[i].color = 0xFFFFFF;
 	}
 	else
 	{
@@ -52,5 +52,15 @@ void	ft_get_z(char *z_split, int i, t_map *map)
 		z_value = ft_substr(z_split, len, 6);
 		map->coordinates[i].color = ft_atoi_base(z_value, base);
 		free(z_value);
+		map->is_def_col = 1;
 	}
+}
+
+t_color	ft_get_point_color(int z, t_map *map, t_point p1)
+{
+
+	if (map->is_def_col == 0)
+		return (ft_get_color_by_height(z, map));
+	else
+		return (p1.color);
 }

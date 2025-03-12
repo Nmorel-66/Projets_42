@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 10:13:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/12 10:37:56 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/12 12:11:41 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,11 @@ void	ft_draw_line(t_point p1, t_point p2, t_map *map)
 		line_data.current_y = line_data.proj_p1.y + line_data.dy * i
 			* line_data.inv_step;
 		line_data.current_z = p1.z + line_data.dz * i * line_data.inv_step;
-		point_color = ft_get_color_by_height(line_data.current_z, map);
+		point_color =  ft_get_point_color(line_data.current_z, map, p1);
 		mlx_pixel_put(map->mlx_ptr, map->win_ptr, (int)line_data.current_x,
-			(int)line_data.current_y, point_color);
+				(int)line_data.current_y, point_color);	
 		i++;
 	}
-}
-
-void	ft_adjust_offset(t_map *map)
-{
-	map->x_offset = (SCREEN_WIDTH - (map->map_width * map->scale)) / 2;
-	map->y_offset = (SCREEN_HEIGHT - (map->map_height * map->scale)) / 2;
 }
 
 void	ft_adjust_scale(t_map *map)
@@ -64,7 +58,8 @@ void	ft_adjust_scale(t_map *map)
 
 	max = fmax(map->map_width, map->map_height);
 	map->scale = fmin((SCREEN_WIDTH / (max + 2)), (SCREEN_HEIGHT / (max + 2)));
-	ft_adjust_offset(map);
+	map->x_offset = (SCREEN_WIDTH - (map->map_width * map->scale));
+	map->y_offset = (SCREEN_HEIGHT - (map->map_height * map->scale)) / 2;
 }
 
 void	ft_draw(t_map *map)
