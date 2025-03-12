@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:26:40 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/09 18:31:37 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/12 10:38:39 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "../minilibx_macos/mlx.h"
-//# include "../minilibx-linux/mlx.h"
+//# include "../minilibx_macos/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include "../Libft/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
@@ -93,6 +93,8 @@ int		ft_map_dimensions(char *file, t_map *map);
 void	ft_draw(t_map *map);
 void	ft_draw_line(t_point p1, t_point p2, t_map *map);
 t_point	ft_project_iso(t_point p, t_map *map);
+void	ft_adjust_offset(t_map *map);
+void	ft_adjust_scale(t_map *map);
 
 /* init.c */
 void	ft_error_handler(char *message, int exit_code);
@@ -115,7 +117,6 @@ void	ft_move_down(t_map *map);
 
 /* color.c */
 t_color	ft_get_color_by_height(float z, t_map *map);
-int		ft_get_color(t_color color);
 void	ft_get_z(char *z_split, int index, t_map *map);
 
 /* menu.c */

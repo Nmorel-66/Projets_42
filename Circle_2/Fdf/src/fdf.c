@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:30:38 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/09 18:12:13 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/12 10:14:13 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	main(int argc, char **argv)
 	ft_map_checker(argv[1]);
 	ft_map_init(&map);
 	ft_read_map(argv[1], &map);
+	ft_adjust_scale(&map);
 	ft_draw(&map);
 	map.img.img_ptr = mlx_new_image(map.mlx_ptr, 260, 130);
 	map.img.data = (int *)mlx_get_data_addr(map.img.img_ptr, &map.img.bpp,

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 10:26:58 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/09 18:12:27 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/12 09:45:06 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	ft_read_map(char *file, t_map *map)
 		return (-1);
 	if (ft_init_coordinates(map) == -1)
 		ft_error_handler("Error allocating memory\n", -1);
-		fd = open(file, O_RDONLY);
+	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		ft_error_handler("Error opening file\n", -1);
 	row = 0;
