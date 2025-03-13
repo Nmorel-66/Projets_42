@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 10:13:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/12 21:26:56 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/13 10:13:25 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_point	ft_project_iso(t_point p, t_map *map)
 void	ft_draw_line(t_point p1, t_point p2, t_map *map)
 {
 	t_line_data	line_data;
-	int			i;
+	int	i;
 
 	line_data.proj_p1 = ft_project_iso(p1, map);
 	line_data.proj_p2 = ft_project_iso(p2, map);
@@ -34,28 +34,29 @@ void	ft_draw_line(t_point p1, t_point p2, t_map *map)
 	line_data.dy = line_data.proj_p2.y - line_data.proj_p1.y;
 	line_data.dz = p2.z - p1.z;
 	line_data.step = fmax(abs(line_data.proj_p2.x - line_data.proj_p1.x),
-			abs(line_data.proj_p2.y - line_data.proj_p1.y));
+							abs(line_data.proj_p2.y - line_data.proj_p1.y));
 	line_data.inv_step = 1.0 / line_data.step;
 	i = 0;
 	while (i <= line_data.step)
 	{
-		line_data.current_x = line_data.proj_p1.x + line_data.dx * i
-			* line_data.inv_step;
-		line_data.current_y = line_data.proj_p1.y + line_data.dy * i
-			* line_data.inv_step;
+		line_data.current_x = line_data.proj_p1.x + line_data.dx * i * line_data.inv_step;
+		line_data.current_y = line_data.proj_p1.y + line_data.dy * i * line_data.inv_step;
 		line_data.current_z = p1.z + line_data.dz * i * line_data.inv_step;
-		map->img.data[(int)line_data.current_x + (int)line_data.current_y
-			* SCREEN_WIDTH] = ft_get_point_color(line_data.current_z, map, p1);
+		if (line_data.current_x >= 0 && line_data.current_x < SCREEN_WIDTH &&
+			line_data.current_y >= 0 && line_data.current_y < SCREEN_HEIGHT) {
+			map->img.data[(int)line_data.current_x + (int)line_data.current_y * SCREEN_WIDTH] =
+				ft_get_point_color(line_data.current_z, map, p1);
+		}
 		i++;
 	}
 }
 
-void	ft_adjust_scale(t_map *map)
+void ft_adjust_scale(t_map *map)
 {
 	int	max;
 
 	max = fmax(map->map_width, map->map_height);
-	map->scale = fmin((SCREEN_WIDTH / (max + 2)), (SCREEN_HEIGHT / (max + 2)));
+	map->scale = fmin((SCREEN_WIDTH - 2) / max, (SCREEN_HEIGHT - 2) / max);
 	map->x_offset = (SCREEN_WIDTH - (map->map_width * map->scale));
 	map->y_offset = (SCREEN_HEIGHT - (map->map_height * map->scale)) / 2;
 }
@@ -67,6 +68,7 @@ void	ft_draw(t_map *map)
 	int	index;
 
 	row = 0;
+	ft_memset(map->img.data, 0, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(int));
 	while (row < map->map_height)
 	{
 		col = 0;

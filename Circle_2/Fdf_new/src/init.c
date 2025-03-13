@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:00:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/12 21:34:28 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/13 09:26:57 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,6 @@ void	ft_error_handler(char *message, int exit_code)
 	ft_putstr_fd("\033[0m", 2);
 	exit(exit_code);
 }
-/*void ft_init_img_ptr(t_map *map)
-{
-	map->img.img_ptr = mlx_new_image(map->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
-	map->img.data = (int *)mlx_get_data_addr(map->img.img_ptr,
-			&map->img.bpp, &map->img.size_line, &map->img.endian);
-}*/
-
-void	ft_refresh_window(t_map *map)
-{
-	mlx_clear_window(map->mlx_ptr, map->win_ptr);
-	memset(map->img.data, 0, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(int));
-}
 
 void	ft_map_init(t_map *new_map)
 {
@@ -46,7 +34,7 @@ void	ft_map_init(t_map *new_map)
 	new_map->map_width = 0;
 	new_map->map_height = 0;
 	new_map->coordinates = NULL;
-	new_map->scale = 10;
+	new_map->scale = 5;
 	new_map->z_scale = 1;
 	new_map->x_offset = 0;
 	new_map->y_offset = 0;

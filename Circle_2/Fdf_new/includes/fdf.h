@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:26:40 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/12 21:34:36 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/13 09:27:06 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "../minilibx_macos/mlx.h"
-//# include "../minilibx-linux/mlx.h"
+//# include "../minilibx_macos/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include "../Libft/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
@@ -100,7 +100,6 @@ void	ft_error_handler(char *message, int exit_code);
 int		ft_init_coordinates(t_map *map);
 void	ft_map_init(t_map *param);
 void	ft_free_coordinates(t_map *map);
-void	ft_refresh_window(t_map *map);
 
 /* events.c */
 int		ft_exit(t_map *map);
