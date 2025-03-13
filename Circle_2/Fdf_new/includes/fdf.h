@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:26:40 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/13 09:27:06 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/13 11:23:38 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,10 @@ typedef struct s_map
 	short	y_offset;
 	short	z_min;
 	short	z_max;
+	short	left;
+	short	right;
+	short	top;
+	short	bottom;
 	float	radian;
 	int		is_def_col;
 }			t_map;

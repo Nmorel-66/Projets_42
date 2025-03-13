@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:00:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/13 09:26:57 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/13 11:23:53 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ void	ft_map_init(t_map *new_map)
 	new_map->z_max = 10;
 	new_map->radian = 0.523599;
 	new_map->is_def_col = 0;
+	new_map->left = 0;
+	new_map->right = 0;
+	new_map->top = 0;
+	new_map->bottom = 0;
 }
 
 int	ft_init_coordinates(t_map *map)

@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 10:13:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/13 10:13:25 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/13 11:38:53 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_point	ft_project_iso(t_point p, t_map *map)
 	proj.x = (p.x - p.y) * cos(map->radian) * map->scale + map->x_offset;
 	proj.y = (p.x + p.y) * sin(map->radian) * map->scale
 		- (p.z * map->scale / 2) + map->y_offset;
+		
 	return (proj);
 }
 
@@ -56,9 +57,19 @@ void ft_adjust_scale(t_map *map)
 	int	max;
 
 	max = fmax(map->map_width, map->map_height);
-	map->scale = fmin((SCREEN_WIDTH - 2) / max, (SCREEN_HEIGHT - 2) / max);
-	map->x_offset = (SCREEN_WIDTH - (map->map_width * map->scale));
-	map->y_offset = (SCREEN_HEIGHT - (map->map_height * map->scale)) / 2;
+	if (map->z_max < max)
+	{
+		map->scale = fmin((SCREEN_WIDTH - 2) / max, (SCREEN_HEIGHT - 2) / max);
+		map->x_offset = (SCREEN_WIDTH - (map->map_width * map->scale));
+		map->y_offset = (SCREEN_HEIGHT - (map->map_height * map->scale)) / 2;
+	}
+	else
+		{
+		map->scale = fmin((SCREEN_WIDTH - 2) / max, (SCREEN_HEIGHT - 2)
+			/ map->z_max);
+		map->x_offset = (SCREEN_WIDTH - (map->map_width * map->scale));
+		map->y_offset = (SCREEN_HEIGHT - (map->map_height * map->scale)) / 2;
+	}
 }
 
 void	ft_draw(t_map *map)
