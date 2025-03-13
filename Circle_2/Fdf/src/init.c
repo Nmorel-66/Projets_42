@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:00:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/12 14:49:43 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/13 16:33:54 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,14 @@ void	ft_map_init(t_map *new_map)
 	new_map->mlx_ptr = mlx_init();
 	new_map->win_ptr = mlx_new_window(new_map->mlx_ptr, SCREEN_WIDTH,
 			SCREEN_HEIGHT, "Project_FDF");
+	new_map->img.img_ptr = mlx_new_image(new_map->mlx_ptr, SCREEN_WIDTH,
+			SCREEN_HEIGHT);
+	new_map->img.data = (int *)mlx_get_data_addr(new_map->img.img_ptr,
+			&new_map->img.bpp, &new_map->img.size_line, &new_map->img.endian);
 	new_map->map_width = 0;
 	new_map->map_height = 0;
 	new_map->coordinates = NULL;
-	new_map->scale = 10;
+	new_map->scale = 5;
 	new_map->z_scale = 1;
 	new_map->x_offset = 0;
 	new_map->y_offset = 0;

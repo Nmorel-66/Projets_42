@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:30:38 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/12 10:14:13 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/13 09:17:41 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,6 @@ int	main(int argc, char **argv)
 	ft_read_map(argv[1], &map);
 	ft_adjust_scale(&map);
 	ft_draw(&map);
-	map.img.img_ptr = mlx_new_image(map.mlx_ptr, 260, 130);
-	map.img.data = (int *)mlx_get_data_addr(map.img.img_ptr, &map.img.bpp,
-			&map.img.size_line, &map.img.endian);
 	ft_menu(&map);
 	mlx_key_hook(map.win_ptr, ft_key_events, &map);
 	mlx_mouse_hook(map.win_ptr, ft_mouse_events, &map);

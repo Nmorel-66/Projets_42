@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 10:13:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/12 15:30:57 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/13 16:41:16 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,20 @@ t_point	ft_project_iso(t_point p, t_map *map)
 	return (proj);
 }
 
+void	ft_draw_pixel(t_line_data *line_data, t_map *map, t_point p1)
+{
+	if (line_data->current_x >= 0 && line_data->current_x < SCREEN_WIDTH
+		&& line_data->current_y >= 0 && line_data->current_y < SCREEN_HEIGHT)
+	{
+		map->img.data[(int)line_data->current_x + (int)line_data->current_y
+			* SCREEN_WIDTH] = ft_get_point_color(line_data->current_z, map, p1);
+	}
+}
+
 void	ft_draw_line(t_point p1, t_point p2, t_map *map)
 {
 	t_line_data	line_data;
 	int			i;
-	t_color		point_color;
 
 	line_data.proj_p1 = ft_project_iso(p1, map);
 	line_data.proj_p2 = ft_project_iso(p2, map);
@@ -45,9 +54,7 @@ void	ft_draw_line(t_point p1, t_point p2, t_map *map)
 		line_data.current_y = line_data.proj_p1.y + line_data.dy * i
 			* line_data.inv_step;
 		line_data.current_z = p1.z + line_data.dz * i * line_data.inv_step;
-		point_color = ft_get_point_color(line_data.current_z, map, p1);
-		mlx_pixel_put(map->mlx_ptr, map->win_ptr, (int)line_data.current_x,
-			(int)line_data.current_y, point_color);
+		ft_draw_pixel(&line_data, map, p1);
 		i++;
 	}
 }
@@ -57,9 +64,19 @@ void	ft_adjust_scale(t_map *map)
 	int	max;
 
 	max = fmax(map->map_width, map->map_height);
-	map->scale = fmin((SCREEN_WIDTH / (max + 2)), (SCREEN_HEIGHT / (max + 2)));
-	map->x_offset = (SCREEN_WIDTH - (map->map_width * map->scale));
-	map->y_offset = (SCREEN_HEIGHT - (map->map_height * map->scale)) / 2;
+	if (map->z_max < max)
+	{
+		map->scale = fmin((SCREEN_WIDTH - 2) / max, (SCREEN_HEIGHT - 2) / max);
+		map->x_offset = (SCREEN_WIDTH - (map->map_width * map->scale));
+		map->y_offset = (SCREEN_HEIGHT - (map->map_height * map->scale)) / 2;
+	}
+	else
+	{
+		map->scale = fmin((SCREEN_WIDTH - 2) / max, (SCREEN_HEIGHT - 2)
+				/ map->z_max);
+		map->x_offset = (SCREEN_WIDTH - (map->map_width * map->scale));
+		map->y_offset = (SCREEN_HEIGHT - (map->map_height * map->scale)) / 2;
+	}
 }
 
 void	ft_draw(t_map *map)
@@ -69,6 +86,7 @@ void	ft_draw(t_map *map)
 	int	index;
 
 	row = 0;
+	ft_memset(map->img.data, 0, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(int));
 	while (row < map->map_height)
 	{
 		col = 0;
@@ -85,4 +103,5 @@ void	ft_draw(t_map *map)
 		}
 		row++;
 	}
+	mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->img.img_ptr, 0, 0);
 }

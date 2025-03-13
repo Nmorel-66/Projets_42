@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 10:32:56 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/12 18:48:00 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/13 16:34:18 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,36 +25,36 @@ int	ft_exit(t_map *map)
 
 void	ft_scale_up(t_map *map)
 {
-	map->scale = map->scale + 2;
 	mlx_clear_window(map->mlx_ptr, map->win_ptr);
+	map->scale = map->scale + 2;
 	ft_draw(map);
 	ft_menu(map);
 }
 
 void	ft_scale_down(t_map *map)
 {
+	mlx_clear_window(map->mlx_ptr, map->win_ptr);
 	map->scale = map->scale - 2;
 	if (map->scale <= 1)
 		map->scale = 1;
-	mlx_clear_window(map->mlx_ptr, map->win_ptr);
 	ft_draw(map);
 	ft_menu(map);
 }
 
 void	ft_height_up(t_map *map)
 {
-	map->z_scale = map->z_scale * 2;
 	mlx_clear_window(map->mlx_ptr, map->win_ptr);
+	map->z_scale = map->z_scale * 2;
 	ft_draw(map);
 	ft_menu(map);
 }
 
 void	ft_height_down(t_map *map)
 {
+	mlx_clear_window(map->mlx_ptr, map->win_ptr);
 	map->z_scale = map->z_scale / 2;
 	if (map->z_scale <= 1)
 		map->z_scale = 1;
-	mlx_clear_window(map->mlx_ptr, map->win_ptr);
 	ft_draw(map);
 	ft_menu(map);
 }
