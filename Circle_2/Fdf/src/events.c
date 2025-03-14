@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 10:32:56 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/13 16:34:18 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/14 08:21:42 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_exit(t_map *map)
 	ft_free_coordinates(map);
 	mlx_destroy_image(map->mlx_ptr, map->img.img_ptr);
 	mlx_destroy_window(map->mlx_ptr, map->win_ptr);
-	//mlx_destroy_display(map->mlx_ptr);
+	mlx_destroy_display(map->mlx_ptr);
 	free(map->mlx_ptr);
 	exit(0);
 	return (0);

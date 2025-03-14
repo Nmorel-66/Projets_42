@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:26:40 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/13 16:35:25 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/14 08:21:31 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "../minilibx_macos/mlx.h"
-//# include "../minilibx-linux/mlx.h"
+//# include "../minilibx_macos/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include "../Libft/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
