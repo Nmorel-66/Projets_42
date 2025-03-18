@@ -13,13 +13,15 @@ LIBFT_OBJ_DIR = $(LIBFT_DIR)/obj
 # Files
 NAME = minishell
 SRC_FILES = \
-	$(SRC_DIR)/minishell.c
+	$(SRC_DIR)/minishell.c \
+	$(SRC_DIR)/parse.c
 	
 # Libft files
 LIBFT_SRC = \
-	$(LIBFT_DIR)/
+	$(LIBFT_DIR)/ ft_split.c \
+	$(LIBFT_DIR)/ ft_strncmp.c
 
-LIBFT_OBJ = $(LIBFT_SRC:$(LIBFT_DIR)/%.c=$(LIBFT_OBJ_DIR)/%.o)
+#LIBFT_OBJ = $(LIBFT_SRC:$(LIBFT_DIR)/%.c=$(LIBFT_OBJ_DIR)/%.o)
 
 # Object files
 OBJ_FILES = $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
