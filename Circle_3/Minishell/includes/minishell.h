@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:39:53 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/19 15:56:29 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/19 18:34:12 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ typedef enum	e_token_type
 	REDIRECT_OUT,
 	HEREDOC,
 	APPEND,
-	SPACE,
 	ENV_VAR
 }	t_token_type;
 
@@ -61,17 +60,18 @@ typedef struct s_env
 
 /******************************************************************************
  *  
- *  				add this line otherwise error occured  on MACOS ???
+ *  				add this line otherwise error occured  on MACOS
  *  
  *****************************************************************************/
-
+#if __APPLE__
 extern int rl_replace_line(const char *text, int i); 
-
+#endif
 /******************************************************************************
  *  
  *  					MINISHELL global variables for signal handling
  *  
  *****************************************************************************/
+
 extern volatile sig_atomic_t g_signal;
 
 /*****************************************************************************
