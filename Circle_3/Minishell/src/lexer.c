@@ -6,128 +6,113 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 08:47:36 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/19 09:11:52 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/19 15:10:37 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-void	free_tokens(t_token *tokens)
+static void	ft_handle_operator(const char *input, size_t *i, t_token **tokens)
 {
-	while (tokens)
+	char	op[3];
+
+	op[0] = input[*i];
+	op[1] = '\0';
+	op[2] = '\0';
+	if ((input[*i] == '<' || input[*i] == '>') && input[*i + 1] == input[*i])
 	{
-		t_token	*tmp;
-
-		tmp = tokens;
-		tokens = tokens->next;
-		free(tmp->value);
-		free(tmp);
+		op[1] = input[*i];
+		(*i)++;
 	}
+	ft_add_token(tokens, ft_create_token(op, ft_get_operator_type(op[0],
+				op[1])));
+	(*i)++;
 }
 
-t_token	*ft_create_token(char *value, t_token_type type)
+static void	ft_handle_quote(const char *input, size_t *i, t_token **tokens)
 {
-	t_token	*token;
+	char	quote;
+	int		start;
+	int		len;
+	char	*quoted_word;
 
-	token = malloc(sizeof(t_token));
-	if (!token)
-		return NULL;
-	token->value = ft_strdup(value);
-	token->type = type;
-	token->next = NULL;
-	return token;
-}
-
-void	ft_add_token(t_token **tokens, t_token *new_token)
-{
-	t_token	*current;
-	
-	if (!*tokens)
+	quote = input[(*i)++];
+	start = *i;
+	while (input[*i] && input[*i] != quote)
+		(*i)++;
+	if (input[*i] == quote)
 	{
-		*tokens = new_token;
-		return;
+		len = *i - start;
+		quoted_word = malloc(len + 1);
+		if (!quoted_word)
+			return ;
+		ft_memcpy(quoted_word, &input[start], len);
+		quoted_word[len] = '\0';
+		ft_add_token(tokens, ft_create_token(quoted_word, WORD));
+		free(quoted_word);
+		(*i)++;
 	}
-	current = *tokens;
-	while (current->next)
-		current = current->next;
-	current->next = new_token;
+	else
+		perror("Error : quote not closed.\n");
 }
 
-t_token_type	ft_get_operator_type(char c, char next_c)
+static void	ft_handle_env_var(const char *input, size_t *i, t_token **tokens)
 {
-	if (c == '|')
-		return (PIPE);
-	if (c == '<' && next_c == '<')
-		return (HEREDOC);
-	if (c == '>' && next_c == '>')
-		return (APPEND);
-	if (c == '<')
-		return (REDIRECT_IN);
-	if (c == '>')
-		return (REDIRECT_OUT);
-	return (WORD);
+	int		start;
+	int		len;
+	char	*word;
+
+	start = (*i)++;
+	while (input[*i] && !ft_isspace(input[*i]) && !ft_strchr("|<>", input[*i]))
+		(*i)++;
+	len = *i - start;
+	word = malloc(len + 1);
+	if (!word)
+		return ;
+	ft_memcpy(word, &input[start], len);
+	word[len] = '\0';
+	ft_add_token(tokens, ft_create_token(word, ENV_VAR));
+	free(word);
+}
+
+static void	ft_handle_word(const char *input, size_t *i, t_token **tokens)
+{
+	int		start;
+	int		len;
+	char	*word;
+
+	start = *i;
+	while (input[*i] && !ft_isspace(input[*i]) && !ft_strchr("|<>", input[*i]))
+		(*i)++;
+	len = *i - start;
+	word = malloc(len + 1);
+	if (!word)
+		return ;
+	ft_memcpy(word, &input[start], len);
+	word[len] = '\0';
+	ft_add_token(tokens, ft_create_token(word, WORD));
+	free(word);
 }
 
 t_token	*ft_lexer(const char *input)
 {
 	t_token	*tokens;
 	size_t	i;
-	char	op[3];
-	char	quote;
-	char	*quoted_word;
-	char	*word;
-	int		start;
 
 	tokens = NULL;
 	i = 0;
 	while (input[i])
 	{
 		if (ft_isspace(input[i]))
-		{
 			i++;
-			continue ;
-		}
-		if (ft_strchr("|<>", input[i]))
-		{
-			op[0] = input[i];
-			op[1] = '\0';
-			op[2] = '\0';
-			if ((input[i] == '<' || input[i] == '>') && input[i + 1] == input[i])
-			{
-				op[1] = input[i];
-				i++;
-			}
-			ft_add_token(&tokens, ft_create_token(op, ft_get_operator_type(op[0], op[1])));
-			i++;
-			continue ;
-		}
-		if (input[i] == '\'' || input[i] == '"')
-		{
-			quote = input[i++];
-			start = i;
-			while (input[i] && input[i] != quote)
-				i++;
-			if (input[i] == quote)
-			{
-				quoted_word = ft_strndup(&input[start], i - start);
-				ft_add_token(&tokens, ft_create_token(quoted_word, WORD));
-				free(quoted_word);
-				i++;
-			}
-			else
-			{
-				perror("Error : quote not closed.\n");
-				break ;
-			}
-			continue ;
-		}
-		start = i;
-		while (input[i] && !ft_isspace(input[i]) && !ft_strchr("|<>", input[i]))
-			i++;
-		word = ft_strndup(&input[start], i - start);
-		ft_add_token(&tokens, ft_create_token(word, WORD));
-		free(word);
+		else if (ft_strchr("|<>", input[i]))
+			ft_handle_operator(input, &i, &tokens);
+		else if (input[i] == '\'' || input[i] == '"')
+			ft_handle_quote(input, &i, &tokens);
+		else if (input[i] == '$')
+			ft_handle_env_var(input, &i, &tokens);
+		else
+			ft_handle_word(input, &i, &tokens);
 	}
 	return (tokens);
 }

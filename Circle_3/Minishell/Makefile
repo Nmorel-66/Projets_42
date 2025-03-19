@@ -24,12 +24,16 @@ NAME = minishell
 SRC_FILES = \
 	$(SRC_DIR)/minishell.c \
 	$(SRC_DIR)/lexer.c \
-	$(SRC_DIR)/lexer_utils.c
+	$(SRC_DIR)/lexer_utils.c \
+	$(SRC_DIR)/utils.c \
+	$(SRC_DIR)/environment.c \
+	$(SRC_DIR)/environment_utils.c
 	
 # Libft files
 LIBFT_SRC = \
 	$(LIBFT_DIR)/ft_split.c \
 	$(LIBFT_DIR)/ft_strncmp.c \
+	$(LIBFT_DIR)/ft_memcpy.c \
 	$(LIBFT_DIR)/ft_strlen.c \
 	$(LIBFT_DIR)/ft_strdup.c \
 	$(LIBFT_DIR)/ft_strchr.c

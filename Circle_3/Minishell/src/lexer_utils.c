@@ -5,37 +5,67 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/19 09:05:01 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/19 09:08:23 by nimorel          ###   ########.fr       */
+/*   Created: 2025/03/19 11:02:33 by nimorel           #+#    #+#             */
+/*   Updated: 2025/03/19 12:33:10 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_isspace(int c)
+void	ft_free_tokens(t_token *tokens)
 {
-	return (c == ' ' || c == '\t' || c == '\n'
-		|| c == '\v' || c == '\f' || c == '\r');
+	t_token	*tmp;
+
+	while (tokens)
+	{
+		tmp = tokens;
+		tokens = tokens->next;
+		free(tmp->value);
+		free(tmp);
+	}
 }
 
-char	*ft_strndup(const char *s, size_t n)
+t_token	*ft_create_token(char *value, t_token_type type)
 {
-	size_t	i;
-	size_t	len;
-	char	*dest;
+	t_token	*token;
 
-	len = 0;
-	while (s[len] && len < n)
-		len++;
-	dest = malloc(sizeof(char) * (len + 1));
-	if (!dest)
+	token = malloc(sizeof(t_token));
+	if (!token)
 		return (NULL);
-	i = 0;
-	while (i < len)
+	token->value = ft_strdup(value);
+	token->type = type;
+	token->next = NULL;
+	return (token);
+}
+
+void	ft_add_token(t_token **tokens, t_token *new_token)
+{
+	t_token	*current;
+
+	if (!*tokens)
 	{
-		dest[i] = s[i];
-		i++;
+		*tokens = new_token;
+		return ;
 	}
-	dest[i] = '\0';
-	return (dest);
+	current = *tokens;
+	while (current->next)
+		current = current->next;
+	current->next = new_token;
+}
+
+t_token_type	ft_get_operator_type(char c, char next_c)
+{
+	if (c == '|')
+		return (PIPE);
+	if (c == '<' && next_c == '<')
+		return (HEREDOC);
+	if (c == '>' && next_c == '>')
+		return (APPEND);
+	if (c == '<')
+		return (REDIRECT_IN);
+	if (c == '>')
+		return (REDIRECT_OUT);
+	if (c == '$')
+		return (ENV_VAR);
+	return (WORD);
 }
