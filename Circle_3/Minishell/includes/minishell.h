@@ -11,21 +11,39 @@
 # include <string.h>
 # include "../Libft/libft.h"
 
-
-typedef struct s_cmd 
+/* lexer */
+typedef enum	e_token_type
 {
-	char			*cmd; //command ex : ls
-	char			*option; //optio ex -l
-	char			*input_file; // <
-	char			*output_file; // >
-	int				append; // >>
-	struct	t_cmd	*next;
-}				t_cmd;
+	WORD,
+	PIPE,
+	REDIRECT_IN,
+	REDIRECT_OUT,
+	HEREDOC,
+	APPEND,
+	SPACE
+}	t_token_type;
+
+typedef struct	s_token
+{
+	char			*value;
+	t_token_type	type;
+	struct s_token	*next;
+}					t_token;
+
+extern int rl_replace_line(const char *text, int i);
 
 /* minishell.c */
 void	ft_handle_sigint(int sig);
 
-/* parse.c */
-t_cmd	*ft_parse(const char *input);
+/* lexer.c */
+t_token	*ft_lexer(const char *input);
+void	free_tokens(t_token *tokens);
+t_token	*ft_create_token(char *value, t_token_type type);
+void	ft_add_token(t_token **tokens, t_token *new_token);
+t_token_type	ft_get_operator_type(char c, char next_c);
+
+/* lexer_utils.c */
+int		ft_isspace(int c);
+char	*ft_strndup(const char *s, size_t n);
 
 #endif

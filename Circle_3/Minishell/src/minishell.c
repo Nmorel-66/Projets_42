@@ -12,7 +12,8 @@ void	ft_handle_sigint(int sig)
 int	main(int argc, char	**argv, char	**envp)
 {
 	char	*input;
-	t_cmd	*cmd;
+	//t_cmd	*cmd;
+	t_token	*lexer;
 
 
 	(void)argc;
@@ -29,12 +30,12 @@ int	main(int argc, char	**argv, char	**envp)
 		if (*input)
 		{
 			add_history(input);
-			cmd = ft_parse_input(input);
-            if (cmd) {
-                printf("cmd = %s\n", cmd->cmd);
-                free(cmd->cmd);
-                free(cmd);
-            }
+			lexer = ft_lexer(input);
+			while (lexer) // test of lexer
+			{
+				printf("Token: %-10s Type: %d\n", lexer->value, lexer->type);
+				lexer = lexer->next;
+			}
         }
         free(input);
     }

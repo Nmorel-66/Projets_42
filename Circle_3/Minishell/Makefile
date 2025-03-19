@@ -1,7 +1,16 @@
 # Compiler and flags
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -Iincludes
-LDFLAGS = -lreadline
+
+# OS detection
+UNAME := $(shell uname)
+
+# Flags for MacOS otherwise Linux
+ifeq ($(UNAME), Darwin)
+    LDFLAGS = -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include -lreadline
+else
+    LDFLAGS = -lreadline
+endif
 
 # Directories
 SRC_DIR = src
@@ -14,63 +23,42 @@ LIBFT_OBJ_DIR = $(LIBFT_DIR)/obj
 NAME = minishell
 SRC_FILES = \
 	$(SRC_DIR)/minishell.c \
-	$(SRC_DIR)/parse.c
+	$(SRC_DIR)/lexer.c \
+	$(SRC_DIR)/lexer_utils.c
 	
 # Libft files
 LIBFT_SRC = \
-	$(LIBFT_DIR)/ ft_split.c \
-	$(LIBFT_DIR)/ ft_strncmp.c
+	$(LIBFT_DIR)/ft_split.c \
+	$(LIBFT_DIR)/ft_strncmp.c \
+	$(LIBFT_DIR)/ft_strlen.c \
+	$(LIBFT_DIR)/ft_strdup.c \
+	$(LIBFT_DIR)/ft_strchr.c
 
-#LIBFT_OBJ = $(LIBFT_SRC:$(LIBFT_DIR)/%.c=$(LIBFT_OBJ_DIR)/%.o)
-
-# Object files
+LIBFT_OBJ = $(LIBFT_SRC:$(LIBFT_DIR)/%.c=$(LIBFT_OBJ_DIR)/%.o)
 OBJ_FILES = $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-
-# Colors for echo
-COLOR_RESET = \033[0m
-COLOR_GREEN = \033[32m
-COLOR_RED = \033[31m
-COLOR_YELLOW = \033[33m
-COLOR_BLUE = \033[34m
-COLOR_CYAN = \033[36m
 
 # Targets
 all: $(NAME)
 
-# Create the executable
 $(NAME): $(OBJ_FILES) $(LIBFT_OBJ)
-	@echo "$(COLOR_BLUE)Linking object files to create the executable $(NAME)...$(COLOR_RESET)"
+	@echo "Linking object files to create the executable $(NAME)..."
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_FILES) $(LIBFT_OBJ) $(LDFLAGS)
-	@echo "$(COLOR_GREEN)Executable $(NAME) created successfully! Congratulations!$(COLOR_RESET)"
+	@echo "Executable $(NAME) created successfully!"
 
-# Compile source files to object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@echo "$(COLOR_YELLOW)Compiling $< to $@...$(COLOR_RESET)"
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
-	@echo "$(COLOR_GREEN)$< compiled successfully.$(COLOR_RESET)"
 
-# Compile libft source files to object files
 $(LIBFT_OBJ_DIR)/%.o: $(LIBFT_DIR)/%.c
-	@echo "$(COLOR_YELLOW)Compiling libft $< to $@...$(COLOR_RESET)"
 	@mkdir -p $(LIBFT_OBJ_DIR)
 	$(CC) $(CFLAGS) -I$(INC_DIR) -I$(LIBFT_DIR) -c $< -o $@
-	@echo "$(COLOR_GREEN)$< compiled successfully.$(COLOR_RESET)"
 
-# Clean object files
 clean:
-	@echo "$(COLOR_RED)Cleaning object files...$(COLOR_RESET)"
 	rm -rf $(OBJ_DIR) $(LIBFT_OBJ_DIR)
-	@echo "$(COLOR_GREEN)Object files cleaned successfully!$(COLOR_RESET)"
 
-# Remove executable
 fclean: clean
-	@echo "$(COLOR_RED)Removing executable $(NAME)...$(COLOR_RESET)"
 	rm -f $(NAME)
-	@echo "$(COLOR_GREEN)Executable $(NAME) removed successfully!$(COLOR_RESET)"
 
-# Rebuild the project
 re: fclean all
 
-# Phony targets to avoid name conflicts
 .PHONY: all clean fclean re
