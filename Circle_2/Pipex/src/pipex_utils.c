@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:13:45 by nimorel           #+#    #+#             */
-/*   Updated: 2025/02/07 18:54:54 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/20 15:39:12 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char	*ft_get_path_from_env(char **env)
 	i = 0;
 	while (env[i])
 	{
-		if (strncmp(env[i], "PATH=", 5) == 0)
+		if (ft_strncmp(env[i], "PATH=", 5) == 0)
 			return (env[i] + 5);
 		i++;
 	}
