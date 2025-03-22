@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:16:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/20 17:09:15 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/22 11:56:46 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,40 +108,43 @@ int	ft_execute_cmd(t_token *tokens, t_env *env)
 	i = 0;
 	current = tokens;
 	envp = ft_env_to_array(env);
-	path = ft_get_path(tokens->value, env);
-	if (!path)
+	if (!ft_isbuilt_in(tokens->value, tokens, env))
 	{
-		perror("Command not found");
-		return (127);
+		path = ft_get_path(tokens->value, env);
+		if (!path)
+		{
+			perror("Command not found");
+			return (127);
+		}
+		while (current && current->type == WORD)
+		{
+			i++;
+			current = current->next;
+		}
+		cmd = malloc(sizeof(char *) * (i + 1));
+		if (!cmd)
+			return (1);
+		i = 0;
+		while (tokens && tokens->type == WORD)
+		{
+			cmd[i++] = strdup(tokens->value);
+			tokens = tokens->next;
+		}
+		cmd[i] = NULL;
+		pid = fork();
+		if (pid == 0)
+		{
+			execve(path, cmd, envp);
+			perror("execve");
+			exit(1);
+		}
+		else if (pid < 0)
+			perror("fork");
+		wait(NULL);
+		free(path);
+		ft_free_array(envp);
+		ft_free_array(cmd);
 	}
-	while (current && current->type == WORD)
-	{
-		i++;
-		current = current->next;
-	}
-	cmd = malloc(sizeof(char *) * (i + 1));
-	if (!cmd)
-		return (1);
-	i = 0;
-	while (tokens && tokens->type == WORD)
-	{
-		cmd[i++] = strdup(tokens->value);
-		tokens = tokens->next;
-	}
-	cmd[i] = NULL;
-	pid = fork();
-	if (pid == 0)
-	{
-		execve(path, cmd, envp);
-		perror("execve");
-		exit(1);
-	}
-	else if (pid < 0)
-		perror("fork");
-	wait(NULL);
-	free(path);
-	ft_free_array(envp);
-	ft_free_array(cmd);
 	return (0);
 }
 

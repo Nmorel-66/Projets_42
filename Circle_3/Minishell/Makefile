@@ -29,7 +29,7 @@ SRC_FILES = \
 	$(SRC_DIR)/environment.c \
 	$(SRC_DIR)/environment_utils.c \
 	$(SRC_DIR)/execute.c \
-	#$(SRC_DIR)/built_in.c
+	$(SRC_DIR)/built_in.c
 	
 # Libft files
 LIBFT_SRC = \
