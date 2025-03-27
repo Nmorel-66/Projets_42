@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 12:31:23 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/26 16:56:13 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/27 11:20:54 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_get_env(t_env *env)
+int	ft_env(t_env *env)
 {
 	t_env	*current;
 
+	if (!env)
+		return (FAILURE);
 	current = env;
 	while (current)
 	{
@@ -33,6 +35,11 @@ int	ft_unset(t_token *tokens, t_env *env)
 	t_env	*current;
 	t_env	*prev;
 
+	if (!tokens->next)
+	{
+		perror("unset: not enough arguments");
+		return (SUCCESS);
+	}
 	current = env;
 	prev = NULL;
 	while (current)
@@ -53,6 +60,7 @@ int	ft_unset(t_token *tokens, t_env *env)
 	}
 	return (FAILURE);
 }
+
 char *ft_extract_name(char *str)
 {
 	char	*name;
@@ -77,29 +85,35 @@ int	ft_export(t_token *tokens, t_env **env)
 	
 	if (!tokens->next)
 	{
-		ft_get_env(*env);
+		ft_env(*env);
 		return (SUCCESS);
 	}
 	tokens = tokens->next;
 	name = ft_extract_name(tokens->value);
+	if (!name)
+		return (FAILURE);
 	value = ft_strchr(tokens->value, '=');
 	if (value)
-		value++;
+		value = ft_strdup(value + 1);
 	else
-		value = "";
+		value = NULL;
 	current = *env;
 	while (current)
 	{
-		
 		if (ft_strcmp(current->name, name) == 0)
 		{
-			free(current->value);
-			current->value = ft_strdup(value);
+			if (value)
+			{
+				free(current->value);
+				current->value = value;
+			}
 			free(name);
 			return (SUCCESS);
 		}
 		current = current->next;
 	}
+	if (value == NULL)
+		value = ft_strdup("");
 	new_node = ft_create_env_node(name, value);
 	free(name);
 	if (!new_node)
@@ -107,9 +121,14 @@ int	ft_export(t_token *tokens, t_env **env)
 		perror("Failed to create new env node");
 		return (FAILURE);
 	}
-	new_node->next = *env;
-	*env = new_node;
-	printf("ptr env %p\n", env);
-	printf("fisrt env %s\n", env[1]->name);
+	if (*env)
+	{
+		current = *env;
+		while (current->next)
+			current = current->next;
+		current->next = new_node;
+	}
+	else
+		*env = new_node;
 	return (SUCCESS);
 }

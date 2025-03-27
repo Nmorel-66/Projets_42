@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:39:53 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/26 16:47:39 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/27 11:50:14 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@
 # include <termios.h>
 # include <string.h>
 # include "../Libft/libft.h"
-# include <wait.h>
+# include <limits.h>
+//# include <wait.h>
 
 /*****************************************************************************
  *  
@@ -123,7 +124,7 @@ int		ft_pwd(void);
 
 /* built_in_utils.c */
 
-int		ft_get_env(t_env *env);
+int		ft_env(t_env *env);
 int		ft_unset(t_token *tokens, t_env *env);
 int		ft_export(t_token *tokens, t_env **env);
 
