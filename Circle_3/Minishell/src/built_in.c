@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 09:30:21 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/27 11:52:43 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/27 17:18:18 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,40 +65,45 @@ int	ft_echo(t_token *tokens)
 	return (SUCCESS);
 }
 
-int	ft_cd(t_token *tokens)
+int	ft_cd(t_token *tokens, t_env *env)
 {
+	char	cwd[PATH_MAX];
 	char	*path;
+	char	*oldpwd;
+	int		ret1;
+	int		ret2;
 
-	if (tokens->next == NULL)
+	if (getcwd(cwd, sizeof(cwd)) == NULL)
 	{
-		path = getenv("HOME");
-		if (path)
-			chdir(path);
-		else
-		{
-			perror("cd: HOME not set");
-			return (FAILURE);
-		}
-	}
-	if (strcmp(tokens->next->value, "~") == 0)
-	{
-		path = getenv("OLDPWD");
-		if (path)
-			chdir(path);
-		else
-		{
-			perror("cd: OLDPWD not set");
-			return (FAILURE);
-		}
-	}
-	path = tokens->next->value;
-	if (chdir(path) != 0)
-	{
-		perror("cd");
+		perror("cd: getcwd failed");
 		return (FAILURE);
 	}
-	// mettre a jour OLDPWD et PWD
-	
+	oldpwd = ft_strdup(cwd);
+	if (!oldpwd)
+		return (FAILURE);
+
+	if (!tokens->next)
+		path = getenv("HOME");
+	else if (strcmp(tokens->next->value, "~") == 0)
+		path = getenv("OLDPWD");
+	else
+		path = tokens->next->value;
+
+	if (!path || chdir(path) != 0)
+	{
+		perror("cd");
+		free(oldpwd);
+		return (FAILURE);
+	}
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
+	{
+		ret1 = ft_update_var(env, ft_strdup("OLDPWD"), oldpwd);
+		ret2 = ft_update_var(env, ft_strdup("PWD"), ft_strdup(cwd));
+		if (ret1 == FAILURE || ret2 == FAILURE)
+			return (FAILURE);
+	}
+	else
+		free(oldpwd);
 	return (SUCCESS);
 }
 
@@ -109,7 +114,7 @@ int	ft_isbuilt_in(char *cmd, t_token *tokens, t_env *env)
 	else if (ft_strncmp(cmd, "pwd", 3) == 0)
 		return (ft_pwd());
 	else if (ft_strncmp(cmd, "cd", 2) == 0)
-		return (ft_cd(tokens));
+		return (ft_cd(tokens, env));
 	else if (ft_strncmp(cmd, "export", 6) == 0)
 		return (ft_export(tokens, &env));
 	else if (ft_strncmp(cmd, "unset", 5) == 0)

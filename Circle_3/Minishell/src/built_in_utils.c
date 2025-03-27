@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 12:31:23 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/27 11:20:54 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/27 17:19:58 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,28 +76,10 @@ char *ft_extract_name(char *str)
 	return (name);
 }
 
-int	ft_export(t_token *tokens, t_env **env)
+int	ft_update_var(t_env *env, char *name, char *value)
 {
-	t_env	*current;
-	t_env	*new_node;
-	char	*name;
-	char	*value;
-	
-	if (!tokens->next)
-	{
-		ft_env(*env);
-		return (SUCCESS);
-	}
-	tokens = tokens->next;
-	name = ft_extract_name(tokens->value);
-	if (!name)
-		return (FAILURE);
-	value = ft_strchr(tokens->value, '=');
-	if (value)
-		value = ft_strdup(value + 1);
-	else
-		value = NULL;
-	current = *env;
+	t_env *current = env;
+
 	while (current)
 	{
 		if (ft_strcmp(current->name, name) == 0)
@@ -112,13 +94,21 @@ int	ft_export(t_token *tokens, t_env **env)
 		}
 		current = current->next;
 	}
-	if (value == NULL)
+	return (FAILURE);
+}
+
+int	ft_add_var(t_env **env, char *name, char *value)
+{
+	t_env	*new_node;
+	t_env	*current;
+
+	if (!value)
 		value = ft_strdup("");
 	new_node = ft_create_env_node(name, value);
-	free(name);
 	if (!new_node)
 	{
 		perror("Failed to create new env node");
+		free(name);
 		return (FAILURE);
 	}
 	if (*env)
@@ -131,4 +121,26 @@ int	ft_export(t_token *tokens, t_env **env)
 	else
 		*env = new_node;
 	return (SUCCESS);
+}
+
+int	ft_export(t_token *tokens, t_env **env)
+{
+	char	*name;
+	char	*value;
+
+	if (!tokens->next)
+	{
+		ft_env(*env);
+		return (SUCCESS);
+	}
+	tokens = tokens->next;
+	name = ft_extract_name(tokens->value);
+	if (!name)
+		return (FAILURE);
+	value = ft_strchr(tokens->value, '=');
+	if (value)
+		value = ft_strdup(value + 1);
+	if (ft_update_var(*env, name, value) == SUCCESS)
+		return (SUCCESS);
+	return (ft_add_var(env, name, value));
 }

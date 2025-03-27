@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:39:53 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/27 11:50:14 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/27 17:09:12 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ char	*ft_get_path(char *cmd, t_env *env);
 /* built_in*/
 int		ft_isbuilt_in(char *cmd, t_token *tokens, t_env *env);
 int		ft_echo(t_token *tokens);
-int		ft_cd(t_token *tokens);
+int		ft_cd(t_token *tokens, t_env *env);
 int		ft_pwd(void);
 
 /* built_in_utils.c */
@@ -127,5 +127,7 @@ int		ft_pwd(void);
 int		ft_env(t_env *env);
 int		ft_unset(t_token *tokens, t_env *env);
 int		ft_export(t_token *tokens, t_env **env);
+int		ft_update_var(t_env *env, char *name, char *value);
+int		ft_add_var(t_env **env, char *name, char *value);
 
 #endif
