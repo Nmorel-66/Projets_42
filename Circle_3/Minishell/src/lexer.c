@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 08:47:36 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/24 10:19:36 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/28 11:43:44 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,15 @@ static void	ft_handle_quote(const char *input, size_t *i, t_token **tokens)
 		(*i)++;
 	}
 	else
-		perror("Error : quote not closed.\n");
+	{
+		if (quote == == '\'')
+		{
+		}
+		else if (quote == == '\'')
+		
+		//perror("Error : quote not closed.\n");
+		
+	}
 }
 
 static void	ft_handle_env_var(const char *input, size_t *i, t_token **tokens)

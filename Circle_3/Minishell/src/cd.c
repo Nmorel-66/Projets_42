@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:30:08 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/28 09:24:39 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/28 10:21:53 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	ft_pwd(void)
 
 static char	*ft_cd_path(t_token *tokens)
 {
-	if (!tokens->next)
+	if (!tokens->next || strcmp(tokens->next->value, "~") == 0)
 		return (getenv("HOME"));
-	if (strcmp(tokens->next->value, "~") == 0)
+	if (strcmp(tokens->next->value, "-") == 0)
 		return (getenv("OLDPWD"));
 	return (tokens->next->value);
 }

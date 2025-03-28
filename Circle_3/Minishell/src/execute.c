@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:16:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/28 09:32:10 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/28 11:15:36 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int	ft_execute_cmd(t_token *tokens, t_env *env, int *status)
 			perror("fork");
 		waitpid(pid, status, 0);
 		*status = (*status >> 8) & 0xFF;
-		printf("status: %d\n", *status);
 		free(path);
 		ft_free_array(env_array);
 		ft_free_array(cmd);
