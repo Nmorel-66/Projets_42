@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:33:18 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/30 09:22:32 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/30 09:54:21 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static int	ft_n_flag(t_token **tokens)
 	int	i;
 
 	newline = 1;
-	while (*tokens && (*tokens)->type == WORD && ft_strncmp((*tokens)->value, "-n", 2) == 0)
+	while (*tokens && (*tokens)->type == WORD
+		&& ft_strncmp((*tokens)->value, "-n", 2) == 0)
 	{
 		i = 1;
 		while ((*tokens)->value[i] == 'n')
@@ -51,7 +52,8 @@ static void	ft_echo_process(t_token *tokens, t_env *env)
 					write(1, env_value, ft_strlen(env_value));
 			}
 		}
-		if (tokens->next && (tokens->next->type == WORD || tokens->next->type == ENV_VAR))
+		if (tokens->next && (tokens->next->type == WORD
+			|| tokens->next->type == ENV_VAR))
 			write(1, " ", 1);
 		tokens = tokens->next;
 	}
