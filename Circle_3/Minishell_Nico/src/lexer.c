@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 08:47:36 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/29 18:18:46 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/30 09:20:47 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,59 +29,8 @@ static void	ft_handle_operator(const char *input, size_t *i, t_token **tokens)
 				op[1])));
 	(*i)++;
 }
-static void	ft_handle_quote(const char *input, size_t *i, t_token **tokens)
-{
-	char	quote;
-	int		start;
-	int		len;
-	char	*quoted_word;
-	int		token_type;
 
-	if (input[*i]== '\'')
-	{	
-		quoted_word = malloc(2);
-		if (!quoted_word)
-        	return;
-		ft_memcpy(quoted_word, &input[*i], 1);
-		quoted_word[1] = '\0';
-		token_type = QUOTE; 
-		ft_add_token(tokens, ft_create_token(quoted_word, token_type));
-		free(quoted_word);;
-	}
-	
-	if (input[*i]== '"')
-	{	
-		quoted_word = malloc(2);
-		if (!quoted_word)
-        	return;
-		ft_memcpy(quoted_word, &input[*i], 1);
-		quoted_word[1] = '\0';
-		token_type = D_QUOTE; 
-		ft_add_token(tokens, ft_create_token(quoted_word, token_type));
-		free(quoted_word);;
-	}
-	
-	quote = input[(*i)++];
-	start = *i;
-	while (input[*i] && input[*i] != quote)
-		(*i)++;
-	if (input[*i] == quote)
-	{
-		len = *i - start;
-		quoted_word = malloc(len + 1);
-		if (!quoted_word)
-        	return;
-		ft_memcpy(quoted_word, &input[start], len);
-		quoted_word[len] = '\0';
-		token_type = WORD; 
-		ft_add_token(tokens, ft_create_token(quoted_word, token_type));
-		free(quoted_word);
-		(*i)++;
-	}
-	else
-		perror("Error : quote not closed.\n");
-}
-/*static void	ft_handle_quote(const char *input, size_t *i, t_token **tokens)
+static void	ft_handle_quote(const char *input, size_t *i, t_token **tokens)
 {
 	char	quote;
 	int		start;
@@ -106,7 +55,7 @@ static void	ft_handle_quote(const char *input, size_t *i, t_token **tokens)
 	}
 	else
 		perror("Error : quote not closed.\n");
-}*/
+}
 
 static void	ft_handle_env_var(const char *input, size_t *i, t_token **tokens)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:44:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/29 18:03:59 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/30 09:23:18 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,6 @@ int	main(int argc, char	**argv, char **envp)
 		{
 			add_history(input);
 			ft_lexer(input, &mini);
-			
-			while (mini.lexer)
-			{
-				printf("lexer->type = %d\n", mini.lexer->type);
-				printf("lexer->value = %s\n", mini.lexer->value);
-				mini.lexer = mini.lexer->next;
-			}
 			if (mini.lexer && mini.env)
 				if(ft_execute(&mini) == EXIT_CMD)
 				{

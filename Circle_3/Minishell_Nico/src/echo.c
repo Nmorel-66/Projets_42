@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:33:18 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/29 18:00:23 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/30 09:22:32 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,50 +30,12 @@ static int	ft_n_flag(t_token **tokens)
 	}
 	return (newline);
 }
+
 static void	ft_echo_process(t_token *tokens, t_env *env)
 {
 	char	*env_value;
-	int		in_single_quote;
-	int		in_double_quote;
 
-	in_single_quote = 0;
-	in_double_quote = 0;
-while (tokens && (tokens->type == WORD || tokens->type == ENV_VAR
-	|| tokens->type == QUOTE || tokens->type == D_QUOTE))
-	{
-		if (tokens->type == QUOTE)
-			in_single_quote = !in_single_quote;
-		else if (tokens->type == D_QUOTE)
-			in_double_quote = !in_double_quote;
-		else if (tokens->type == WORD)
-			write(1, tokens->value, ft_strlen(tokens->value));
-		else if (tokens->type == ENV_VAR)
-		{
-			if (!in_single_quote)
-			{
-				if (ft_strncmp(tokens->value + 1, "?", 2) == 0)
-					ft_putnbr_fd(status, 1);
-				else
-				{
-					env_value = ft_getenv(env, tokens->value + 1);
-					if (env_value)
-						write(1, env_value, ft_strlen(env_value));
-				}
-			}
-			else
-				write(1, tokens->value, ft_strlen(tokens->value));
-		}
-		if (tokens->next && (tokens->next->type == WORD || tokens->next->type == ENV_VAR))
-			write(1, " ", 1);
-		tokens = tokens->next;
-	}
-}
-
-/*static void	ft_echo_process(t_token *tokens, t_env *env)
-{
-	char	*env_value;
-
-	while (tokens && (tokens->type == WORD || tokens->type == ENV_VAR || ))
+	while (tokens && (tokens->type == WORD || tokens->type == ENV_VAR))
 	{
 		//printf("token passed: %s\n", tokens->value);
 		if (tokens->type == WORD)
@@ -93,7 +55,7 @@ while (tokens && (tokens->type == WORD || tokens->type == ENV_VAR
 			write(1, " ", 1);
 		tokens = tokens->next;
 	}
-}*/
+}
 
 int	ft_echo(t_token *tokens, t_env *env)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:39:53 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/29 17:38:30 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/30 09:21:07 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ b: modified params in ft_execute_cmd as t_mini *mini
 # include <string.h>
 # include "../Libft/libft.h"
 # include <limits.h>
-# include <wait.h>
+//# include <wait.h>
 
 /*****************************************************************************
  *  
@@ -130,9 +130,7 @@ typedef enum	e_token_type
 	ENV_VAR,
 	AND,
 	OR,
-	WILDCARDS,
-	QUOTE,
-	D_QUOTE
+	WILDCARDS
 }	t_token_type;																														
 
 typedef struct	s_token
