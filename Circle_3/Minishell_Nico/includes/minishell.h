@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:39:53 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/30 09:55:07 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/30 09:56:58 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,12 @@ b: modified params in ft_execute_cmd as t_mini *mini
 # include <string.h>
 # include "../Libft/libft.h"
 # include <limits.h>
+#if __linux__
 # include <wait.h>
-
+#endif
+#if __APPLE__
+extern int rl_replace_line(const char *text, int i);
+#endif
 /*****************************************************************************
  *  
  *  					MINISHELL define
@@ -155,15 +159,6 @@ typedef struct s_mini
 }			t_mini;
 
 extern int status;
-
-/******************************************************************************
- *  
- *  				add this line otherwise error occured  on MACOS
- *  
- *****************************************************************************/
-#if __APPLE__
-extern int rl_replace_line(const char *text, int i);
-#endif
 
 /*****************************************************************************
  *  
