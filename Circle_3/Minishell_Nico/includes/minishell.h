@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:39:53 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/30 09:56:58 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/04/01 15:39:08 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,19 @@ b: modified params in ft_execute_cmd as t_mini *mini
    
 11:
   add command "echo $?" in ft_echo_process
+*/
+
+/*
+Nico modify on 3003:
+1 : create ft_getenv in environment.c for ;odify our env
+2 ; call ft_getenv in pace getenc in echo.c and cd.case
+3 : modif lexer.c with ft_handle_quote for simple quote and 
+		ft_handle_dquote for double quote
+4 : modif echo.c now work with env var
+5 : modif minishell.h for codindboth linux and macos
+6 : remove last free(oldpwd) witch crash sometime
+Nico modif on 0401
+1 :launch executable using a relative or an absolute path
 */
 
 /******************************************************************************

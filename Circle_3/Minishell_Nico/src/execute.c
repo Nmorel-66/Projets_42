@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: layang <layang@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:16:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/29 06:38:40 by layang           ###   ########.fr       */
+/*   Updated: 2025/04/01 15:16:45 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,11 @@ int	ft_execute_cmd(t_token *tokens, t_mini *mini)
 	int		i;
 	char	**cmd;
 	int		isbuilt;
+	int 	end;
+	int 	start;
 
+	start = 0;
+	end = 0;
 	i = 0;
 	current = tokens;
 	if (mini->array_env)
@@ -50,7 +54,13 @@ int	ft_execute_cmd(t_token *tokens, t_mini *mini)
 		return (ft_free_mini(mini), EXIT_CMD);
 	else if (isbuilt == NOT_BUILT_IN_CMD)
 	{
-		path = ft_get_path(tokens->value, mini->env);
+		//***
+		if (tokens->value[0] == '/' || (tokens->value[0] == '.'
+			&& tokens->value[1] == '/'))
+			path =ft_strdup(tokens->value);
+		else
+		//***
+			path = ft_get_path(tokens->value, mini->env);
 		if (!path)
 		{
 			perror("Command not found");
