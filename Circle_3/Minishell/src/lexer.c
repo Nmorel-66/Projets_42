@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 08:47:36 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/29 17:03:04 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/30 09:40:24 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,35 +29,6 @@ static void	ft_handle_operator(const char *input, size_t *i, t_token **tokens)
 				op[1])));
 	(*i)++;
 }
-
-static void	ft_handle_quote(const char *input, size_t *i, t_token **tokens)
-{
-	char	quote;
-	int		start;
-	int		len;
-	char	*quoted_word;
-
-	quote = input[(*i)++];
-	start = *i;
-	while (input[*i] && input[*i] != quote)
-		(*i)++;
-	if (input[*i] == quote)
-	{
-		len = *i - start;
-		quoted_word = malloc(len + 1);
-		if (!quoted_word)
-			return ;
-		ft_memcpy(quoted_word, &input[start], len);
-		quoted_word[len] = '\0';
-		ft_add_token(tokens, ft_create_token(quoted_word, WORD));
-		free(quoted_word);
-		(*i)++;
-	}
-	else
-		perror("Error : quote not closed.\n");
-		
-}
-
 static void	ft_handle_env_var(const char *input, size_t *i, t_token **tokens)
 {
 	int		start;
@@ -96,25 +67,76 @@ static void	ft_handle_word(const char *input, size_t *i, t_token **tokens)
 	free(word);
 }
 
-t_token	*ft_lexer(const char *input)
+static void	ft_handle_quote(const char *input, size_t *i, t_token **tokens)
 {
-	t_token	*tokens;
+	int		start;
+	int		len;
+	char	*quoted_word;
+
+	start = ++(*i);
+	while (input[*i] && input[*i] != '\'')
+		(*i)++;
+	if (input[*i] == '\'')
+	{
+		len = *i - start;
+		quoted_word = malloc(len + 1);
+		if (!quoted_word)
+			return ;
+		ft_memcpy(quoted_word, &input[start], len);
+		quoted_word[len] = '\0';
+		ft_add_token(tokens, ft_create_token(quoted_word, WORD));
+		free(quoted_word);
+		(*i)++;
+	}
+	else
+		perror("Error : quote not closed.\n");
+}
+
+static void	ft_handle_double_quote(const char *input, size_t *i, t_token **tokens)
+{
+	int		start;
+	int		len;
+	char	*quoted_word;
+
+	start = ++(*i);
+	while (input[*i] && input[*i] != '"')
+		(*i)++;
+	if (input[*i] == '"')
+	{
+		len = *i - start;
+		quoted_word = malloc(len + 1);
+		if (!quoted_word)
+			return ;
+		ft_memcpy(quoted_word, &input[start], len);
+		quoted_word[len] = '\0';
+		if ((ft_strchr(quoted_word, '$') && !ft_strchr(quoted_word, '\'')))
+			ft_add_token(tokens, ft_create_token(quoted_word, ENV_VAR));
+		else
+			ft_add_token(tokens, ft_create_token(quoted_word, WORD));
+		free(quoted_word);
+		(*i)++;
+	}
+	else
+		perror("Error : double quote not closed.\n");
+}
+void ft_lexer(const char *input, t_mini	*mini)
+{
 	size_t	i;
 
-	tokens = NULL;
 	i = 0;
 	while (input[i])
 	{
 		if (ft_isspace(input[i]))
 			i++;
 		else if (ft_strchr("|<>&", input[i]))
-			ft_handle_operator(input, &i, &tokens);
-		else if (input[i] == '\'' || input[i] == '"')
-			ft_handle_quote(input, &i, &tokens);
+			ft_handle_operator(input, &i, &mini->lexer);
+		else if (input[i] == '\'')
+			ft_handle_quote(input, &i, &mini->lexer);
+		else if (input[i] == '"')
+			ft_handle_double_quote(input, &i, &mini->lexer);
 		else if (input[i] == '$')
-			ft_handle_env_var(input, &i, &tokens);
+			ft_handle_env_var(input, &i, &mini->lexer);
 		else
-			ft_handle_word(input, &i, &tokens);
+			ft_handle_word(input, &i, &mini->lexer);
 	}
-	return (tokens);
 }

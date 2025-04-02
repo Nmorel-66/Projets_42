@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: layang <layang@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:26:37 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/27 17:55:41 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/29 08:08:29 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_update_var(t_env *env, char *name, char *value)
 		}
 		current = current->next;
 	}
-	return (FAILURE);
+	return (printf("update env: update %s failed\n", name), FAILURE);
 }
 
 static int	ft_add_var(t_env **env, char *name, char *value)

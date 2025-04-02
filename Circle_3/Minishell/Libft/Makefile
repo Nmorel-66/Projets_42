@@ -3,7 +3,7 @@ NAME = libft.a
 
 # Compilateur et options de compilation
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g -O0
 
 # Commandes
 AR = ar rcs
@@ -49,7 +49,7 @@ bonus: $(OBJS) $(BONUS_OBJS)
 
 # Compilation des fichiers .c en .o
 %.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -g -o $@
 
 # Nettoyage des fichiers objets
 clean:

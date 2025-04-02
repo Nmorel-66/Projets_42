@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 10:36:34 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/27 18:09:00 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/29 14:54:16 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*ft_getenv(t_env *env, const char *name)
+{
+	t_env	*current;
+
+	current = env;
+	while (current != NULL)
+	{
+		if (ft_strcmp(current->name, name) == 0)
+			return (current->value);
+		current = current->next;
+	}
+	return (NULL);
+}
 
 void	ft_free_env(t_env *env)
 {
@@ -65,7 +79,10 @@ t_env	*ft_init_env(char **envp)
 			new_node = ft_create_env_node(envp[i], equal_sign + 1);
 			*equal_sign = '=';
 			if (!new_node)
+			{
+				ft_free_env(head);
 				return (NULL);
+			}
 			if (!head)
 				head = new_node;
 			else

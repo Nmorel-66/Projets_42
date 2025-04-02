@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:44:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/28 09:57:40 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/30 09:23:18 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_start_animation(void)
 		i++;
 	}
 	write(1, "\n", 1);
-	write(1, "                                    by Layang and Nimorel\n", 62);
+	write(1, "                                    by Layang and Nimorel\n", 59);
 	write(1, "\033[0m", 4);
 	write(1, "\n", 1);
 }
@@ -48,12 +48,22 @@ void	ft_handle_sigint(int sig)
 	rl_redisplay();
 }
 
+/* static void test_print_env(t_env *env)
+{
+	t_env	*tmp;
+
+	tmp = env;
+	while (tmp)
+	{
+		printf("%s ====== ", tmp->name);
+		printf("%s\n", tmp->value);
+		tmp = tmp->next;
+	}
+} */
+
 int	main(int argc, char	**argv, char **envp)
 {
 	char	*input;
-	//t_token	*lexer;
-	//t_env	*new_env;
-	int		status;
 	t_mini	mini;
 	
 	(void)argc;
@@ -62,28 +72,35 @@ int	main(int argc, char	**argv, char **envp)
 	ft_start_animation();
 	signal(SIGINT, ft_handle_sigint);
 	signal(SIGQUIT, SIG_IGN);
-	mini.env = malloc(sizeof(t_env));
-	ft_memset(mini.env, 0, sizeof(t_env));
 	mini.env = ft_init_env(envp);
-	mini.lexer = malloc(sizeof(t_token));
-	ft_memset(mini.lexer, 0, sizeof(t_token));
+	mini.lexer = NULL;
 	mini.array_env = NULL;
 	while (1)
 	{
-		input = readline("minishell$ ");
+		input = readline(PURPLEB "minishell" X YELLOW "$ " X);
 		if (!input)
 			break ;
 		if (*input)
 		{
 			add_history(input);
-			mini.lexer = ft_lexer(input);
+			ft_lexer(input, &mini);
 			if (mini.lexer && mini.env)
-				ft_execute(mini.lexer, mini.env, &status);
+				if(ft_execute(&mini) == EXIT_CMD)
+				{
+					free(input);
+					input = NULL;
+					clear_history();
+					printf("status in exit: %d\n", status);
+					exit(status);
+				}
 			ft_free_tokens(mini.lexer);
+			mini.lexer = NULL;
 			free(input);
 			input = NULL;
 		}
 	}
+	ft_free_mini(&mini);
+	clear_history();
 	return (0);
 }
 
@@ -93,4 +110,5 @@ while (lexer)
 				printf("lexer->type = %d\n", lexer->type);
 				printf("lexer->value = %s\n", lexer->value);
 				lexer = lexer->next;
+
 			}*/

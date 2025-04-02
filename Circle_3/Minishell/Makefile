@@ -1,6 +1,6 @@
 # Compiler and flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Iincludes
+CFLAGS = -Wall -Wextra -Werror -Iincludes -g -O0
 
 # OS detection
 UNAME := $(shell uname)
@@ -47,7 +47,9 @@ LIBFT_SRC = \
 	$(LIBFT_DIR)/ft_toupper.c \
 	$(LIBFT_DIR)/ft_memset.c \
 	$(LIBFT_DIR)/ft_bzero.c \
-	$(LIBFT_DIR)/ft_strjoin.c
+	$(LIBFT_DIR)/ft_strjoin.c \
+	$(LIBFT_DIR)/ft_putchar_fd.c \
+	$(LIBFT_DIR)/ft_putnbr_fd.c
 
 
 LIBFT_OBJ = $(LIBFT_SRC:$(LIBFT_DIR)/%.c=$(LIBFT_OBJ_DIR)/%.o)
@@ -78,3 +80,5 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+
+#valgrind --trace-children=yes --leak-check=full --show-leak-kinds=all --suppressions=valgrind.supp ./minishell

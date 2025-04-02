@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:30:08 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/28 10:21:53 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/04/01 17:16:49 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ int	ft_pwd(void)
 	return (FAILURE);
 }
 
-static char	*ft_cd_path(t_token *tokens)
+static char	*ft_cd_path(t_token *tokens, t_env *env)
 {
-	if (!tokens->next || strcmp(tokens->next->value, "~") == 0)
-		return (getenv("HOME"));
-	if (strcmp(tokens->next->value, "-") == 0)
-		return (getenv("OLDPWD"));
+	if (!tokens->next || ft_strcmp(tokens->next->value, "~") == 0)
+		return (ft_getenv(env, "HOME"));
+	if (ft_strcmp(tokens->next->value, "-") == 0)
+		return (ft_getenv(env, "OLDPWD"));
 	return (tokens->next->value);
 }
 
@@ -45,17 +45,18 @@ int	ft_cd(t_token *tokens, t_env *env)
 		return (perror("cd: getcwd failed"), FAILURE);
 	oldpwd = ft_strdup(cwd);
 	if (!oldpwd)
-		return (FAILURE);
-	path = ft_cd_path(tokens);
+		return (perror("cd: copy cwd failed"), FAILURE);
+	path = ft_cd_path(tokens, env);
 	if (!path || chdir(path) != 0)
 		return (perror("cd"), free(oldpwd), FAILURE);
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
 		if (ft_update_var(env, ft_strdup("OLDPWD"), oldpwd) == FAILURE
 			|| ft_update_var(env, ft_strdup("PWD"), ft_strdup(cwd)) == FAILURE)
-			return (FAILURE);
+			return (perror("cd: update OLDPWD and PWD failed"), FAILURE);
 	}
 	else
 		free(oldpwd);
-	return (SUCCESS);
+	//free(oldpwd);
+	return (printf("cd success.\n"), SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 09:30:21 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/28 09:36:40 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/03/29 14:58:19 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,24 @@ int	ft_env(t_env *env)
 	return (SUCCESS);
 }
 
-int	ft_isbuilt_in(char *cmd, t_token *tokens, t_env *env)
+int	ft_isbuilt_in(char *cmd, t_token *tokens, t_mini *mini)
 {
 	if (ft_strncmp(cmd, "echo", 4) == 0)
-		return (ft_echo(tokens));
+		return (ft_echo(tokens, mini->env));
 	else if (ft_strncmp(cmd, "pwd", 3) == 0)
 		return (ft_pwd());
 	else if (ft_strncmp(cmd, "cd", 2) == 0)
-		return (ft_cd(tokens, env));
+		return (ft_cd(tokens, mini->env));
 	else if (ft_strncmp(cmd, "export", 6) == 0)
-		return (ft_export(tokens, &env));
+		return (ft_export(tokens, &mini->env));
 	else if (ft_strncmp(cmd, "unset", 5) == 0)
-		return (ft_unset(tokens, &env));
+		return (ft_unset(tokens, &mini->env));
 	else if (ft_strncmp(cmd, "env", 3) == 0)
-		return (ft_env(env));
+		return (ft_env(mini->env));
 	else if (ft_strncmp(cmd, "exit", 4) == 0)
-		exit(0);
-	return (FAILURE);
+	{
+		status = 0;
+		return (EXIT_CMD);
+	}
+	return (NOT_BUILT_IN_CMD);
 }
