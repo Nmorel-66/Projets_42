@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:33:18 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/30 09:54:21 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/04/02 15:08:05 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static void	ft_echo_process(t_token *tokens, t_env *env)
 
 	while (tokens && (tokens->type == WORD || tokens->type == ENV_VAR))
 	{
-		//printf("token passed: %s\n", tokens->value);
 		if (tokens->type == WORD)
 			write(1, tokens->value, ft_strlen(tokens->value));
 		else if (tokens->type == ENV_VAR)
@@ -53,7 +52,7 @@ static void	ft_echo_process(t_token *tokens, t_env *env)
 			}
 		}
 		if (tokens->next && (tokens->next->type == WORD
-			|| tokens->next->type == ENV_VAR))
+				|| tokens->next->type == ENV_VAR))
 			write(1, " ", 1);
 		tokens = tokens->next;
 	}
