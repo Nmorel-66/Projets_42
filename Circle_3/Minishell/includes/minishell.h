@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:39:53 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/05 11:02:00 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/04/05 13:27:56 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,14 @@ Nico modif on 0401
 # include <termios.h>
 # include <string.h>
 # include "../Libft/libft.h"
-# include <limits.h>
-#if __linux__
+# include <linux/limits.h>
 # include <wait.h>
-#endif
-#if __APPLE__
-extern int rl_replace_line(const char *text, int i);
-#endif
+//#if __linux__
+//	
+//#endif
+//#if __APPLE__
+//	extern int rl_replace_line(const char *text, int i);
+//#endif
 /*****************************************************************************
  *  
  *  					MINISHELL define
@@ -136,7 +137,7 @@ extern int rl_replace_line(const char *text, int i);
  *  					MINISHELL structures and enums
  *  
  *****************************************************************************/
-typedef enum	e_token_type
+typedef enum e_token_type
 {
 	WORD,
 	PIPE,
@@ -148,9 +149,9 @@ typedef enum	e_token_type
 	AND,
 	OR,
 	WILDCARDS
-}	t_token_type;																														
+}	t_token_type;
 
-typedef struct	s_token
+typedef struct s_token
 {
 	char			*value;
 	t_token_type	type;
@@ -162,16 +163,16 @@ typedef struct s_env
 	char			*name;
 	char			*value;
 	struct s_env	*next;
-} 					t_env;
+}					t_env;
 
 typedef struct s_mini
 {
-	t_token *lexer;
+	t_token	*lexer;
 	t_env	*env;
-	char 	**array_env;
+	char	**array_env;
 }			t_mini;
 
-extern int g_status;
+extern int	g_status;
 
 /*****************************************************************************
  *  
@@ -179,10 +180,10 @@ extern int g_status;
  *  
  *****************************************************************************/
 /* minishell.c */
-void	ft_handle_sigint(int sig);
+void			ft_handle_sigint(int sig);
 
 /* lexer.c */
-void ft_lexer(const char *input, t_mini	*mini);
+void			ft_lexer(const char *input, t_mini	*mini);
 
 /* lexer_utils.c */
 void			ft_free_tokens(t_token *tokens);
@@ -191,45 +192,45 @@ void			ft_add_token(t_token **tokens, t_token *new_token);
 t_token_type	ft_get_operator_type(char c, char next_c);
 
 /* utils.c */
-int		ft_isspace(int c);
-int		ft_strcmp(const char *s1, const char *s2);
-void	ft_free_mini(t_mini *all);
+int				ft_isspace(int c);
+int				ft_strcmp(const char *s1, const char *s2);
+void			ft_free_mini(t_mini *all);
 
 /* environment.c */
-t_env	*ft_create_env_node(const char *name, const char *value);
-t_env	*ft_init_env(char **envp);
-void	ft_free_env(t_env *env);
-char	*ft_getenv(t_env *env, const char *name);
+t_env			*ft_create_env_node(const char *name, const char *value);
+t_env			*ft_init_env(char **envp);
+void			ft_free_env(t_env *env);
+char			*ft_getenv(t_env *env, const char *name);
 
 /* execute.c */
-int	ft_execute(t_mini *mini);
-int	ft_execute_cmd(t_token *tokens, t_mini *mini);
-int	ft_count_operators(t_token *tokens, int *pipe, int *redirect);
+int				ft_execute(t_mini *mini);
+int				ft_execute_cmd(t_token *tokens, t_mini *mini);
+int				ft_count_operators(t_token *tokens, int *pipe, int *redirect);
 
 /* execute_utils.c */
-char	**ft_env_to_array(t_env *env);
-void	ft_free_array(char **paths);
-char	*ft_get_path_from_env(t_env *env);
-char	*ft_get_path(char *cmd, t_env *env);
+char			**ft_env_to_array(t_env *env);
+void			ft_free_array(char **paths);
+char			*ft_get_path_from_env(t_env *env);
+char			*ft_get_path(char *cmd, t_env *env);
 
 /* built_in*/
-int		ft_isbuilt_in(char *cmd, t_token *tokens, t_mini *mini);
-int		ft_env(t_env *env);
+int				ft_isbuilt_in(char *cmd, t_token *tokens, t_mini *mini);
+int				ft_env(t_env *env);
 
 /* export.c */
-int		ft_export(t_token *tokens, t_env **env);
-int		ft_update_var(t_env *env, char *name, char *value);
+int				ft_export(t_token *tokens, t_env **env);
+int				ft_update_var(t_env *env, char *name, char *value);
 
 /* cd.c */
-int		ft_cd(t_token *tokens, t_env *env);
-int		ft_pwd(void);
+int				ft_cd(t_token *tokens, t_env *env);
+int				ft_pwd(void);
 
 /* echo.c */
-int		ft_echo(t_token *tokens, t_env *env);
+int				ft_echo(t_token *tokens, t_env *env);
 
 /* unset */
-int		ft_unset(t_token *tokens, t_env **env);
+int				ft_unset(t_token *tokens, t_env **env);
 
 /* error print */
-void	*error_print(int err_type, char *param, int err);
+//void			*error_print(int err_type, char *param, int err);
 #endif

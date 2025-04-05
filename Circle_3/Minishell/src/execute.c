@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:16:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/05 11:06:14 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/04/05 13:30:00 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	ft_count_operators(t_token *tokens, int *pipe, int *redirect)
 {
 	*pipe = 0;
 	*redirect = 0;
-
 	while (tokens)
 	{
 		if (tokens->type == PIPE)

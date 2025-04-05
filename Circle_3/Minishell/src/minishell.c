@@ -6,13 +6,13 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:44:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/05 10:59:21 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/04/05 13:30:59 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int g_status;
+int	g_status;
 
 void	ft_start_animation(void)
 {
@@ -48,24 +48,11 @@ void	ft_handle_sigint(int sig)
 	rl_redisplay();
 }
 
-/* static void test_print_env(t_env *env)
-{
-	t_env	*tmp;
-
-	tmp = env;
-	while (tmp)
-	{
-		printf("%s ====== ", tmp->name);
-		printf("%s\n", tmp->value);
-		tmp = tmp->next;
-	}
-} */
-
 int	main(int argc, char	**argv, char **envp)
 {
 	char	*input;
 	t_mini	mini;
-	
+
 	(void)argc;
 	(void)argv;
 	g_status = 0;
@@ -85,7 +72,7 @@ int	main(int argc, char	**argv, char **envp)
 			add_history(input);
 			ft_lexer(input, &mini);
 			if (mini.lexer && mini.env)
-				if(ft_execute(&mini) == EXIT_CMD)
+				if (ft_execute(&mini) == EXIT_CMD)
 				{
 					free(input);
 					input = NULL;
@@ -104,6 +91,18 @@ int	main(int argc, char	**argv, char **envp)
 	return (0);
 }
 
+/* static void test_print_env(t_env *env)
+{
+	t_env	*tmp;
+
+	tmp = env;
+	while (tmp)
+	{
+		printf("%s ====== ", tmp->name);
+		printf("%s\n", tmp->value);
+		tmp = tmp->next;
+	}
+} */
 /*
 while (lexer)
 			{
