@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 08:47:36 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/30 09:40:24 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/04/05 11:09:33 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	ft_handle_operator(const char *input, size_t *i, t_token **tokens)
 	op[1] = '\0';
 	op[2] = '\0';
 	if ((input[*i] == '<' || input[*i] == '>' || input[*i] == '&'
-		|| input[*i] == '|') && input[*i + 1] == input[*i])
+			|| input[*i] == '|') && input[*i + 1] == input[*i])
 	{
 		op[1] = input[*i];
 		(*i)++;
@@ -29,6 +29,7 @@ static void	ft_handle_operator(const char *input, size_t *i, t_token **tokens)
 				op[1])));
 	(*i)++;
 }
+
 static void	ft_handle_env_var(const char *input, size_t *i, t_token **tokens)
 {
 	int		start;
@@ -92,7 +93,7 @@ static void	ft_handle_quote(const char *input, size_t *i, t_token **tokens)
 		perror("Error : quote not closed.\n");
 }
 
-static void	ft_handle_double_quote(const char *input, size_t *i, t_token **tokens)
+static void	ft_handle_dquote(const char *input, size_t *i, t_token **tokens)
 {
 	int		start;
 	int		len;
@@ -119,6 +120,7 @@ static void	ft_handle_double_quote(const char *input, size_t *i, t_token **token
 	else
 		perror("Error : double quote not closed.\n");
 }
+
 void ft_lexer(const char *input, t_mini	*mini)
 {
 	size_t	i;
@@ -133,7 +135,7 @@ void ft_lexer(const char *input, t_mini	*mini)
 		else if (input[i] == '\'')
 			ft_handle_quote(input, &i, &mini->lexer);
 		else if (input[i] == '"')
-			ft_handle_double_quote(input, &i, &mini->lexer);
+			ft_handle_dquote(input, &i, &mini->lexer);
 		else if (input[i] == '$')
 			ft_handle_env_var(input, &i, &mini->lexer);
 		else

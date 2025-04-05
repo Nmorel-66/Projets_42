@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 10:36:34 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/02 15:19:47 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/04/05 11:31:44 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ t_env	*ft_create_env_node(const char *name, const char *value)
 	node->next = NULL;
 	return (node);
 }
-
 t_env	*ft_init_env(char **envp)
 {
 	t_env	*head;

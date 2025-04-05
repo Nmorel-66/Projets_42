@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:16:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/02 15:10:43 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/04/05 11:06:14 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_count_operators(t_token *tokens, int *pipe, int *redirect)
 {
 	*pipe = 0;
 	*redirect = 0;
-	
+
 	while (tokens)
 	{
 		if (tokens->type == PIPE)
@@ -51,15 +51,15 @@ int	ft_execute_cmd(t_token *tokens, t_mini *mini)
 	else if (isbuilt == NOT_BUILT_IN_CMD)
 	{
 		if (tokens->value[0] == '/' || (tokens->value[0] == '.'
-			&& tokens->value[1] == '/'))
-			path =ft_strdup(tokens->value);
+				&& tokens->value[1] == '/'))
+			path = ft_strdup(tokens->value);
 		else
 			path = ft_get_path(tokens->value, mini->env);
 		if (!path)
 		{
 			perror("Command not found");
-			status = 127;
-			return (status);
+			g_status = 127;
+			return (g_status);
 		}
 		while (current && current->type == WORD)
 		{
@@ -81,20 +81,20 @@ int	ft_execute_cmd(t_token *tokens, t_mini *mini)
 		{
 			execve(path, cmd, mini->array_env);
 			perror("execve");
-			status  = 1;
+			g_status = 1;
 			ft_free_mini(mini);
-			exit(status);
+			exit(g_status);
 		}
 		else if (pid < 0)
 		{
 			perror("fork");
-			status  = 1;
+			g_status = 1;
 			ft_free_mini(mini);
-			exit(status);
+			exit(g_status);
 		}
-		waitpid(pid, &status, 0);
-		status = (status >> 8) & 0xFF;
-		printf("status: %d\n", status);
+		waitpid(pid, &g_status, 0);
+		g_status = (g_status >> 8) & 0xFF;
+		printf("status: %d\n", g_status);
 		free(path);
 		ft_free_array(cmd);
 	}
@@ -104,16 +104,16 @@ int	ft_execute_cmd(t_token *tokens, t_mini *mini)
 int	ft_execute(t_mini *mini)
 {
 	t_token	*current;
-	int	nb_pipe;
-	int	nb_redirect;
+	int		nb_pipe;
+	int		nb_redirect;
 
 	current = mini->lexer;
 	if (!current)
 		return (1);
 	while (current)
 	{
-		if (current->type == WORD &&
-			!ft_count_operators(mini->lexer, &nb_pipe, &nb_redirect))
+		if (current->type == WORD
+			&& !ft_count_operators(mini->lexer, &nb_pipe, &nb_redirect))
 			return (ft_execute_cmd(current, mini));
 		current = current->next;
 	}

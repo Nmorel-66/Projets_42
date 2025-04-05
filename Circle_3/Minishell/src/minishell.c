@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:44:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/30 09:23:18 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/04/05 10:59:21 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int status;
+int g_status;
 
 void	ft_start_animation(void)
 {
@@ -68,7 +68,7 @@ int	main(int argc, char	**argv, char **envp)
 	
 	(void)argc;
 	(void)argv;
-	status = 0;
+	g_status = 0;
 	ft_start_animation();
 	signal(SIGINT, ft_handle_sigint);
 	signal(SIGQUIT, SIG_IGN);
@@ -90,8 +90,8 @@ int	main(int argc, char	**argv, char **envp)
 					free(input);
 					input = NULL;
 					clear_history();
-					printf("status in exit: %d\n", status);
-					exit(status);
+					printf("status in exit: %d\n", g_status);
+					exit(g_status);
 				}
 			ft_free_tokens(mini.lexer);
 			mini.lexer = NULL;
