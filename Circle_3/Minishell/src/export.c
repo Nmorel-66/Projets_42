@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:26:37 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/05 10:52:37 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/04/05 14:26:02 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	ft_add_var(t_env **env, char *name, char *value)
 	t_env	*current;
 
 	if (!value)
-		value = ft_strdup("");
+		return (SUCCESS);
 	new_node = ft_create_env_node(name, value);
 	if (!new_node)
 	{

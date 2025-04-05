@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:44:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/05 13:30:59 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/04/05 15:07:38 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,31 @@ void	ft_handle_sigint(int sig)
 	rl_replace_line("", 0);
 	rl_redisplay();
 }
-
+/*void	ft_readline(t_mini mini)
+{
+	char	*input;
+	
+	input = readline(PURPLEB "minishell" X YELLOW "$ " X);
+		if (!input)
+			return ;
+		if (*input)
+		{
+			add_history(input);
+			ft_lexer(input, &mini);
+			if (mini.lexer && mini.env)
+				if (ft_execute(&mini) == EXIT_CMD)
+				{
+					free(input);
+					input = NULL;
+					clear_history();
+					exit(g_status);
+				}
+			ft_free_tokens(mini.lexer);
+			mini.lexer = NULL;
+			free(input);
+			input = NULL;
+		}
+}*/
 int	main(int argc, char	**argv, char **envp)
 {
 	char	*input;
@@ -64,6 +88,7 @@ int	main(int argc, char	**argv, char **envp)
 	mini.array_env = NULL;
 	while (1)
 	{
+		//ft_readline(mini);
 		input = readline(PURPLEB "minishell" X YELLOW "$ " X);
 		if (!input)
 			break ;
@@ -77,7 +102,7 @@ int	main(int argc, char	**argv, char **envp)
 					free(input);
 					input = NULL;
 					clear_history();
-					printf("status in exit: %d\n", g_status);
+					//printf("status in exit: %d\n", g_status);
 					exit(g_status);
 				}
 			ft_free_tokens(mini.lexer);
@@ -85,6 +110,7 @@ int	main(int argc, char	**argv, char **envp)
 			free(input);
 			input = NULL;
 		}
+		//
 	}
 	ft_free_mini(&mini);
 	clear_history();

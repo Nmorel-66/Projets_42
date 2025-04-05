@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 08:47:36 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/05 13:58:34 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/04/05 15:15:12 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ static void	ft_handle_quote(const char *input, size_t *i, t_token **tokens)
 	}
 	else
 		perror("Error : quote not closed.\n");
+
 }
 
 static void	ft_handle_dquote(const char *input, size_t *i, t_token **tokens)
