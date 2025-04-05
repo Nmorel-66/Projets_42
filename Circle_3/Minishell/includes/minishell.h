@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:39:53 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/05 13:27:56 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/04/05 13:38:02 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,17 @@ Nico modif on 0401
 # include <string.h>
 # include "../Libft/libft.h"
 # include <linux/limits.h>
-# include <wait.h>
-//#if __linux__
-//	
-//#endif
-//#if __APPLE__
-//	extern int rl_replace_line(const char *text, int i);
-//#endif
+//# include <wait.h>
+
+// remove before push
+#if __linux__
+	# include <wait.h>
+#endif
+#if __APPLE__
+	extern int rl_replace_line(const char *text, int i);
+#endif
+//********************/
+
 /*****************************************************************************
  *  
  *  					MINISHELL define
