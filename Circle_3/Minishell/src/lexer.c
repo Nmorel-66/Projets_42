@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 08:47:36 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/05 11:09:33 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/04/05 13:58:34 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ static void	ft_handle_dquote(const char *input, size_t *i, t_token **tokens)
 		perror("Error : double quote not closed.\n");
 }
 
-void ft_lexer(const char *input, t_mini	*mini)
+void	ft_lexer(const char *input, t_mini	*mini)
 {
 	size_t	i;
 

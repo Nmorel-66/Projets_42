@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:39:53 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/05 13:38:02 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/04/05 14:02:45 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,17 @@ Nico modif on 0401
 1 :launch executable using a relative or an absolute path
 */
 
+/*
+Nico modify 0504
+1 : add ft_init_env_process for 25 lines norm in environment.c
+2 : norminette modification in minishell.h remember to remove preprocessor 
+	instructions for macos
+3 : rename status to g_status for the global variable norm
+4 : mofif export.c resolve error display in update when we add a new value
+5 : norminette ok for all files except minishell.c lexer.c execute.c wait
+	for Lan modif on these files
+*/
+
 /******************************************************************************
  *  
  *  					MINISHELL includes
@@ -106,14 +117,14 @@ Nico modif on 0401
 # include <linux/limits.h>
 //# include <wait.h>
 
-// remove before push
+// remove MacOs before push
 #if __linux__
 	# include <wait.h>
 #endif
 #if __APPLE__
 	extern int rl_replace_line(const char *text, int i);
 #endif
-//********************/
+//
 
 /*****************************************************************************
  *  

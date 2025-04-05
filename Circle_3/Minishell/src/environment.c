@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 10:36:34 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/05 12:58:34 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/04/05 13:54:37 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_env	*ft_create_env_node(const char *name, const char *value)
 	return (node);
 }
 
-t_env	*ft_init_env_process(t_env **head, t_env **current, char *envp)
+static t_env	*ft_init_env_process(t_env **head, t_env **current, char *envp)
 {
 	char	*equal_sign;
 	t_env	*new_node;
