@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:56:44 by nimorel           #+#    #+#             */
-/*   Updated: 2024/11/11 17:57:01 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/04/01 15:57:37 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	size_t			i;
 
 	i = 0;
-	if (!dest && !src)
+	if (!dest || !src)
 		return (0);
 	while (i < n)
 	{

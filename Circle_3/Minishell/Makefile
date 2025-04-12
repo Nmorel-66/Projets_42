@@ -25,15 +25,22 @@ SRC_FILES = \
 	$(SRC_DIR)/minishell.c \
 	$(SRC_DIR)/lexer.c \
 	$(SRC_DIR)/lexer_utils.c \
+	$(SRC_DIR)/lexer_exe_unit.c \
 	$(SRC_DIR)/utils.c \
 	$(SRC_DIR)/environment.c \
 	$(SRC_DIR)/execute.c \
+	$(SRC_DIR)/execute_fill_cmd.c \
+	$(SRC_DIR)/execute_cmd.c \
+	$(SRC_DIR)/execute_pipe.c \
 	$(SRC_DIR)/execute_utils.c \
-	$(SRC_DIR)/built_in.c \
+	$(SRC_DIR)/execute_built_in.c \
 	$(SRC_DIR)/cd.c \
 	$(SRC_DIR)/echo.c \
 	$(SRC_DIR)/unset.c \
-	$(SRC_DIR)/export.c
+	$(SRC_DIR)/export.c \
+	$(SRC_DIR)/ft_error_ctr.c \
+	$(SRC_DIR)/ft_test_use.c
+	 
 	
 # Libft files
 LIBFT_SRC = \
@@ -49,8 +56,8 @@ LIBFT_SRC = \
 	$(LIBFT_DIR)/ft_bzero.c \
 	$(LIBFT_DIR)/ft_strjoin.c \
 	$(LIBFT_DIR)/ft_putchar_fd.c \
-	$(LIBFT_DIR)/ft_substr.c \
-	$(LIBFT_DIR)/ft_putnbr_fd.c
+	$(LIBFT_DIR)/ft_putnbr_fd.c \
+	$(LIBFT_DIR)/get_next_line_lan.c
 
 
 LIBFT_OBJ = $(LIBFT_SRC:$(LIBFT_DIR)/%.c=$(LIBFT_OBJ_DIR)/%.o)
@@ -82,4 +89,7 @@ re: fclean all
 
 .PHONY: all clean fclean re
 
-#valgrind --trace-children=yes --leak-check=full --show-leak-kinds=all --suppressions=valgrind.supp ./minishell
+#export PS1="\e[32m🌟 Let's test BASH$ \e[0m"
+#export PS1="\e[32m❤️ Let's test Minishell on bash$ \e[0m"
+#without --trace-children=yes
+#valgrind  --suppressions=valgrind.supp --leak-check=full --show-leak-kinds=all  --track-origins=yes ./minishell

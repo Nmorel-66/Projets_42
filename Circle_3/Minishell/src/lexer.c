@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: layang <layang@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 08:47:36 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/05 15:15:12 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/04/11 07:54:42 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	ft_handle_operator(const char *input, size_t *i, t_token **tokens)
 	op[1] = '\0';
 	op[2] = '\0';
 	if ((input[*i] == '<' || input[*i] == '>' || input[*i] == '&'
-			|| input[*i] == '|') && input[*i + 1] == input[*i])
+		|| input[*i] == '|') && input[*i + 1] == input[*i])
 	{
 		op[1] = input[*i];
 		(*i)++;
@@ -28,44 +28,6 @@ static void	ft_handle_operator(const char *input, size_t *i, t_token **tokens)
 	ft_add_token(tokens, ft_create_token(op, ft_get_operator_type(op[0],
 				op[1])));
 	(*i)++;
-}
-
-static void	ft_handle_env_var(const char *input, size_t *i, t_token **tokens)
-{
-	int		start;
-	int		len;
-	char	*word;
-
-	start = (*i)++;
-	while (input[*i] && !ft_isspace(input[*i]) && !ft_strchr("|<>", input[*i]))
-		(*i)++;
-	len = *i - start;
-	word = malloc(len + 1);
-	if (!word)
-		return ;
-	ft_memcpy(word, &input[start], len);
-	word[len] = '\0';
-	ft_add_token(tokens, ft_create_token(word, ENV_VAR));
-	free(word);
-}
-
-static void	ft_handle_word(const char *input, size_t *i, t_token **tokens)
-{
-	int		start;
-	int		len;
-	char	*word;
-
-	start = *i;
-	while (input[*i] && !ft_isspace(input[*i]) && !ft_strchr("|<>", input[*i]))
-		(*i)++;
-	len = *i - start;
-	word = malloc(len + 1);
-	if (!word)
-		return ;
-	ft_memcpy(word, &input[start], len);
-	word[len] = '\0';
-	ft_add_token(tokens, ft_create_token(word, WORD));
-	free(word);
 }
 
 static void	ft_handle_quote(const char *input, size_t *i, t_token **tokens)
@@ -122,24 +84,60 @@ static void	ft_handle_dquote(const char *input, size_t *i, t_token **tokens)
 		perror("Error : double quote not closed.\n");
 }
 
-void	ft_lexer(const char *input, t_mini	*mini)
+static void	ft_handle_env_var(const char *input, size_t *i, t_token **tokens)
+{
+	int		start;
+	int		len;
+	char	*word;
+
+	start = (*i)++;
+	while (input[*i] && !ft_isspace(input[*i]) && !ft_strchr("|<>", input[*i]))
+		(*i)++;
+	len = *i - start;
+	word = malloc(len + 1);
+	if (!word)
+		return ;
+	ft_memcpy(word, &input[start], len);
+	word[len] = '\0';
+	ft_add_token(tokens, ft_create_token(word, ENV_VAR));
+	free(word);
+}
+
+int ft_lexer(t_mini	*mini)
 {
 	size_t	i;
+	t_token	*tmp;                                              // ** test code
 
 	i = 0;
-	while (input[i])
+	while (mini->input[i])
 	{
-		if (ft_isspace(input[i]))
+		if (ft_isspace(mini->input[i]))
 			i++;
-		else if (ft_strchr("|<>&", input[i]))
-			ft_handle_operator(input, &i, &mini->lexer);
-		else if (input[i] == '\'')
-			ft_handle_quote(input, &i, &mini->lexer);
-		else if (input[i] == '"')
-			ft_handle_dquote(input, &i, &mini->lexer);
-		else if (input[i] == '$')
-			ft_handle_env_var(input, &i, &mini->lexer);
+		else if (ft_strchr("|<>&", mini->input[i]))
+			ft_handle_operator(mini->input, &i, &mini->lexer);
+		else if (mini->input[i] == '\'')
+			ft_handle_quote(mini->input, &i, &mini->lexer);
+		else if (mini->input[i] == '"')
+			ft_handle_dquote(mini->input, &i, &mini->lexer);
+		else if (mini->input[i] == '$')
+			ft_handle_env_var(mini->input, &i, &mini->lexer);
 		else
-			ft_handle_word(input, &i, &mini->lexer);
+			ft_handle_word(mini->input, &i, &mini->lexer);
 	}
+	printf("\n**add lexer succeed:\n");                 // ** test code start-
+	tmp = mini->lexer;                                         // |
+	while (tmp)                                                // |
+	{                                                          // |
+		printf("token: %s, type: %u\n", tmp->value, tmp->type);// |
+		tmp = tmp->next;                                       // |
+	}                                                   // ** test code -end
+	mini->tab_size = ft_count_unit(mini);
+	if (mini->tab_size == -1)
+	{
+		g_status = 2;
+		return (2);
+	}
+	printf("\n*Tab size: %d\n", mini->tab_size);         // ** test code -end
+	ft_fill_tab(mini);
+	return (0);
 }

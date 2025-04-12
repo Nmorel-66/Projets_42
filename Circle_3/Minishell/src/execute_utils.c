@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: layang <layang@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 09:48:01 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/05 13:08:03 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/04/10 20:46:45 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,24 +51,35 @@ char	**ft_env_to_array(t_env *env)
 	return (env_array);
 }
 
-void	ft_free_array(char **paths)
+void	ft_free_array(char ***paths)
 {
 	int	i;
 
 	i = 0;
-	while (paths[i])
+	if (!paths || !*paths)
 	{
-		free(paths[i]);
+        //printf("paths is NULL\n");
+        return ;
+    }
+	//printf("paths address: %p\n", paths);
+	while ((*paths)[i])
+	{
+		if ((*paths)[i])
+		{
+			//printf("Freeing paths[%d] at %p: %s\n", i, paths[i], paths[i]);
+			free((*paths)[i]);
+		}
 		i++;
 	}
-	free(paths);
+	free(*paths);
+	*paths = NULL;
 }
 
 char	*ft_get_path_from_env(t_env *env)
 {
 	while (env)
 	{
-		if (ft_strncmp(env->name, "PATH", 4) == 0)
+		if (ft_strncmp(env->name, "PATH", 5) == 0)
 			return (env->value);
 		env = env->next;
 	}
@@ -96,10 +107,10 @@ char	*ft_get_path(char *cmd, t_env *env)
 		cmd_path = ft_strjoin(temp, cmd);
 		free(temp);
 		if (access(cmd_path, F_OK) == 0)
-			return (ft_free_array(dirs), cmd_path);
+			return (ft_free_array(&dirs), cmd_path);
 		free(cmd_path);
 		i++;
 	}
-	ft_free_array(dirs);
+	ft_free_array(&dirs);
 	return (NULL);
 }

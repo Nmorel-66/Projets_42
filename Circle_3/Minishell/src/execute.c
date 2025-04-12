@@ -3,118 +3,149 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:16:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/05 13:30:00 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/04/12 09:12:10 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_count_operators(t_token *tokens, int *pipe, int *redirect)
+void	ft_execute_simple_cmd(t_mini *mini, int i)
 {
-	*pipe = 0;
-	*redirect = 0;
-	while (tokens)
+	t_token	*cur;
+
+	printf("\n**start fill simple cmd_array\n"); // ** test code
+	ft_fill_cmd(&mini->exe_tab[i], mini);
+	dup2(mini->stdout_fd, STDOUT_FILENO);   // ** test code
+	//ft_print_token(mini->exe_tab[i]);
+	if (mini->cmd_array)
 	{
-		if (tokens->type == PIPE)
-			(*pipe)++;
-		else if (tokens->type == REDIRECT_IN || tokens->type == REDIRECT_OUT
-			|| tokens->type == HEREDOC || tokens->type == APPEND)
-			(*redirect)++;
-		tokens = tokens->next;
+		cur = mini->exe_tab[i];
+		while (cur->next)
+			cur = cur->next;
+		dup2(cur->infile, 0);
+		dup2(cur->outfile, 1);
+		close(mini->log_fd);		// **for testing log				
+		ft_exe_cmd(mini, i);
 	}
-	if ((*pipe > 0) || (*redirect > 0))
-		return (1);
-	return (0);
 }
 
-int	ft_execute_cmd(t_token *tokens, t_mini *mini)
+void	ft_execute_parent(t_mini *mini, int i, int pipe[2], int pid)
 {
-	char	*path;
-	pid_t	pid;
-	t_token	*current;
-	int		i;
-	char	**cmd;
-	int		isbuilt;
-
-	i = 0;
-	current = tokens;
-	if (mini->array_env)
-		ft_free_array(mini->array_env);
-	mini->array_env = ft_env_to_array(mini->env);
-	isbuilt = ft_isbuilt_in(tokens->value, tokens, mini);
-	if (isbuilt == EXIT_CMD)
-		return (ft_free_mini(mini), EXIT_CMD);
-	else if (isbuilt == NOT_BUILT_IN_CMD)
+	if (mini->tab_size != 1 && i != mini->tab_size - 1)
 	{
-		if (tokens->value[0] == '/' || (tokens->value[0] == '.'
-				&& tokens->value[1] == '/'))
-			path = ft_strdup(tokens->value);
-		else
-			path = ft_get_path(tokens->value, mini->env);
-		if (!path)
-		{
-			perror("Command not found");
-			g_status = 127;
-			return (g_status);
-		}
-		while (current && current->type == WORD)
-		{
-			i++;
-			current = current->next;
-		}
-		cmd = malloc(sizeof(char *) * (i + 1));
-		if (!cmd)
-			return (perror("command malloc failed\n"), 1);
-		i = 0;
-		while (tokens && tokens->type == WORD)
-		{
-			cmd[i++] = strdup(tokens->value);
-			tokens = tokens->next;
-		}
-		cmd[i] = NULL;
-		pid = fork();
-		if (pid == 0)
-		{
-			execve(path, cmd, mini->array_env);
-			perror("execve");
-			g_status = 1;
-			ft_free_mini(mini);
-			exit(g_status);
-		}
-		else if (pid < 0)
-		{
-			perror("fork");
-			g_status = 1;
-			ft_free_mini(mini);
-			exit(g_status);
-		}
-		waitpid(pid, &g_status, 0);
-		g_status = (g_status >> 8) & 0xFF;
-		printf("status: %d\n", g_status);
-		free(path);
-		ft_free_array(cmd);
+		printf("          pipe[1] before close: %d\n", pipe[1]);     // ** test code
+		close(pipe[1]);
 	}
-	return (0);
+	waitpid(pid, &g_status, 0);
+	//g_status = (g_status >> 8) & 0xFF;
+	g_status = WEXITSTATUS(g_status);
+	//printf("g_status of cmd %d: %d\n", i + 1, g_status);  // ** test code
+	ft_cd_export_unset(mini, i);
+	if (mini->pre != -1)
+	{
+		printf("          pre before close: %d\n", mini->pre);     // ** test code
+		close(mini->pre); //pipe_fd_last[0]
+	}
+	if (mini->tab_size != 1 && i != mini->tab_size - 1)
+	{
+		printf("pre (before assign): %d \n", mini->pre);// ** test code
+		mini->pre = pipe[0];  // renew pre
+	}
+	if (mini->tab_size > 1 && i != mini->tab_size - 1) // ** test code
+		printf("pre(after assign) = %d, pipe[0] = %d \n", mini->pre, pipe[0]);// ** test code
+}
+
+static void	ft_handle_child(t_mini *mini, int i, int *pipe_fd)
+{
+	if (mini->tab_size == 1)
+		ft_execute_simple_cmd(mini, i);
+	else if (i != mini->tab_size - 1)
+		ft_execute_child(mini, i, pipe_fd);
+	ft_execute_last(mini, i);
+}
+
+//$ls /nonexistentfolder > output.txt
+//ls: cannot access '/nonexistentfolder': No such file or directory
+//$ chmod -w output.txt 
+//$ ls /nonexistentfolder > output.txt
+//bash: output.txt: Permission denied
+void	ft_execute_unit(t_mini *mini, int i)
+{
+	int		pipe_fd[2];
+	int		pid;
+	
+	if (mini->tab_size != 1 && i != mini->tab_size - 1)
+	{
+		if (pipe(pipe_fd) == -1)
+		{
+			ft_set_g_status("pipe", 1);
+			return ;
+		}
+		printf("\n   ##(pipe0: %d, pipe1: %d)##\n", pipe_fd[0], pipe_fd[1]);
+	}
+	pid = fork();
+	if (pid < 0)
+	{
+		ft_set_g_status("fork", 1);
+		return ;
+	}
+	if (pid == 0)
+		ft_handle_child(mini, i, pipe_fd);
+	ft_execute_parent(mini, i, pipe_fd, pid);
 }
 
 int	ft_execute(t_mini *mini)
 {
-	t_token	*current;
-	int		nb_pipe;
-	int		nb_redirect;
+	int		i;
 
-	current = mini->lexer;
-	if (!current)
-		return (1);
-	while (current)
+	i = 0;
+	while (i < mini->tab_size)
 	{
-		if (current->type == WORD
-			&& !ft_count_operators(mini->lexer, &nb_pipe, &nb_redirect))
-			return (ft_execute_cmd(current, mini));
-		current = current->next;
+		ft_execute_unit(mini, i);
+		dup2(mini->log_fd, 1);                    // ** for testing log
+		printf("   g_status **: %d\n", g_status); // ** test code	
+		//real shell dont care the exit status in the pipe
+		//if (g_status == 1 || g_status == 2) 
+		//	break ;
+		i++;
 	}
-	return (0);
+	//printf("\n!mini->sign = %d\n", mini->sign);
+	return (g_status);                            //final g_status value
 }
+
+
+// 判断下一个命令是否执行if (i + 1 < mini->tab_size)
+//	i++;
+
+//add || or && 
+/* i = 0;
+while (i < mini->tab_size)
+{
+    pid = fork();
+    if (pid == 0)
+        exec_cmd(mini->cmd[i]); // 执行当前命令
+
+    waitpid(pid, &g_status, 0);
+    exit_status = WEXITSTATUS(g_status);
+
+    // 保存上一次退出码（如果你需要$?）
+    mini->last_exit_status = exit_status;
+
+    // 判断下一个命令是否执行
+    if (i + 1 < mini->tab_size)
+    {
+        if (mini->cmd[i + 1].type == CMD_AND && exit_status != 0)
+            i += 2; // 跳过下一个命令
+        else if (mini->cmd[i + 1].type == CMD_OR && exit_status == 0)
+            i += 2; // 跳过下一个命令
+        else
+            i++;
+    }
+    else
+        i++;
+}
+ */
+
