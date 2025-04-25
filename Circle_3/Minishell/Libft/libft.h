@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: layang <layang@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:12:19 by nimorel           #+#    #+#             */
-/*   Updated: 2025/03/10 19:48:18 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/04/19 12:24:19 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int		ft_atoi_base(const char *str, char *base);
 
+int		ft_is_numeric(const char *str);
+int		ft_atoll_code(const char *str, long long *result);
 // get_next_line
 # ifdef BUFFER_SIZE
 #  if BUFFER_SIZE < 1 || BUFFER_SIZE > 8192000

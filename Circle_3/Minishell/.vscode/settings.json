@@ -8,9 +8,7 @@
         "tuple": "c",
         "type_traits": "c",
         "utility": "c",
-        "charconv": "c",
-        "chrono": "c",
-        "format": "c",
-        "ratio": "c"
+        "cstdlib": "c",
+        "minishell.h": "c"
     }
 }

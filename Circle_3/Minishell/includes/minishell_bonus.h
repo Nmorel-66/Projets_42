@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   minishell_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:39:53 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/23 18:54:21 by layang           ###   ########.fr       */
+/*   Updated: 2025/04/24 12:25:11 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef MINISHELL_BONUS_H
+# define MINISHELL_BONUS_H
 
 /* 
 For and_or_V0:
-1. Fix mem leak in cmds:
-	<< end cat|>fileout
+1. Create the new Makefile and minishell_bonus.
 
+To do:
+fix mem leak in cmd:
+ls *le* *.txt | rev >> file_fion.txt
 */
 
 /******************************************************************************
@@ -35,6 +37,7 @@ For and_or_V0:
 # include <string.h>
 # include "../Libft/libft.h"
 # include <limits.h>
+# include <dirent.h>
 # include <wait.h>
 
 /*****************************************************************************
@@ -132,7 +135,7 @@ void			ft_start_animation(void);
 void			ft_handle_sigint(int sig);
 void			ft_init_mini(t_mini	*mini, char **envp);
 
-/*  lexer.c 5*/
+/*  lexer_bonus.c 4*/
 int				ft_lexer(t_mini	*mini);
 
 /* lexer_utils.c 5*/
@@ -152,6 +155,9 @@ int				ft_fill_exe_tab(t_mini	*mini);
 void			dquote_pass_dollar(const char *s, char **n, t_env *e,
 					size_t *i);
 void			dquote_pass_char(char	**re, char c, size_t	*i);
+
+/* lexer_wildcard.c 4*/
+void			ft_handle_wildcard(const char *input, size_t *i, t_mini *mini);
 
 /* utils.c 4*/
 void			ft_handle_sigint(int sig);

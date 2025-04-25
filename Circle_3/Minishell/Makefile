@@ -23,24 +23,50 @@ LIBFT_OBJ_DIR = $(LIBFT_DIR)/obj
 NAME = minishell
 SRC_FILES = \
 	$(SRC_DIR)/minishell.c \
-	$(SRC_DIR)/lexer.c \
-	$(SRC_DIR)/lexer_utils.c \
-	$(SRC_DIR)/lexer_exe_unit.c \
-	$(SRC_DIR)/utils.c \
-	$(SRC_DIR)/environment.c \
-	$(SRC_DIR)/execute.c \
-	$(SRC_DIR)/execute_fill_cmd.c \
-	$(SRC_DIR)/execute_cmd.c \
-	$(SRC_DIR)/execute_pipe.c \
-	$(SRC_DIR)/execute_utils.c \
-	$(SRC_DIR)/execute_built_in.c \
-	$(SRC_DIR)/cd.c \
-	$(SRC_DIR)/echo.c \
-	$(SRC_DIR)/unset.c \
-	$(SRC_DIR)/export.c \
-	$(SRC_DIR)/ft_error_ctr.c \
-	$(SRC_DIR)/ft_test_use.c
+	$(SRC_DIR)/lexer/lexer.c \
+	$(SRC_DIR)/lexer/lexer_utils.c \
+	$(SRC_DIR)/lexer/lexer_exe_unit.c \
+	$(SRC_DIR)/lexer/lexer_dquote.c \
+	$(SRC_DIR)/execution/execute.c \
+	$(SRC_DIR)/execution/execute_fill_cmd.c \
+	$(SRC_DIR)/execution/execute_cmd.c \
+	$(SRC_DIR)/execution/execute_pipe.c \
+	$(SRC_DIR)/execution/execute_utils.c \
+	$(SRC_DIR)/execution/execute_built_in.c \
+	$(SRC_DIR)/buildin/environment.c \
+	$(SRC_DIR)/buildin/cd.c \
+	$(SRC_DIR)/buildin/echo.c \
+	$(SRC_DIR)/buildin/unset.c \
+	$(SRC_DIR)/buildin/export.c \
+	$(SRC_DIR)/utils/utils.c \
+	$(SRC_DIR)/utils/ft_error_ctr.c \
+	$(SRC_DIR)/utils/free_utils.c \
+	$(SRC_DIR)/utils/ft_log_use.c
 	 
+# Bonus Files
+NAME_B = minishell_bonus
+SRC_FILES_B = \
+	$(SRC_DIR)/minishell.c \
+	$(SRC_DIR)/lexer/lexer_bonus.c \
+	$(SRC_DIR)/lexer/lexer_utils.c \
+	$(SRC_DIR)/lexer/lexer_exe_unit.c \
+	$(SRC_DIR)/lexer/lexer_dquote.c \
+	$(SRC_DIR)/lexer/lexer_wildcard.c \
+	$(SRC_DIR)/execution/execute.c \
+	$(SRC_DIR)/execution/execute_fill_cmd.c \
+	$(SRC_DIR)/execution/execute_cmd.c \
+	$(SRC_DIR)/execution/execute_pipe.c \
+	$(SRC_DIR)/execution/execute_utils.c \
+	$(SRC_DIR)/execution/execute_built_in.c \
+	$(SRC_DIR)/buildin/environment.c \
+	$(SRC_DIR)/buildin/cd.c \
+	$(SRC_DIR)/buildin/echo.c \
+	$(SRC_DIR)/buildin/unset.c \
+	$(SRC_DIR)/buildin/export.c \
+	$(SRC_DIR)/utils/utils.c \
+	$(SRC_DIR)/utils/ft_error_ctr.c \
+	$(SRC_DIR)/utils/free_utils.c \
+	$(SRC_DIR)/utils/ft_log_use.c
 	
 # Libft files
 LIBFT_SRC = \
@@ -56,23 +82,39 @@ LIBFT_SRC = \
 	$(LIBFT_DIR)/ft_bzero.c \
 	$(LIBFT_DIR)/ft_strjoin.c \
 	$(LIBFT_DIR)/ft_putchar_fd.c \
+	$(LIBFT_DIR)/ft_putstr_fd.c \
 	$(LIBFT_DIR)/ft_putnbr_fd.c \
-	$(LIBFT_DIR)/get_next_line_lan.c
+	$(LIBFT_DIR)/get_next_line_lan.c \
+	$(LIBFT_DIR)/ft_atoi.c \
+	$(LIBFT_DIR)/ft_itoa.c \
+	$(LIBFT_DIR)/ft_isdigit.c
 
 
 LIBFT_OBJ = $(LIBFT_SRC:$(LIBFT_DIR)/%.c=$(LIBFT_OBJ_DIR)/%.o)
-OBJ_FILES = $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC_FILES:.c=.o)))
+OBJ_FILES_B = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC_FILES_B:.c=.o)))
 
 # Targets
 all: $(NAME)
+bonus: $(NAME_B)
 
 $(NAME): $(OBJ_FILES) $(LIBFT_OBJ)
 	@echo "Linking object files to create the executable $(NAME)..."
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_FILES) $(LIBFT_OBJ) $(LDFLAGS)
 	@echo "Executable $(NAME) created successfully!"
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
+$(NAME_B): $(OBJ_FILES_B) $(LIBFT_OBJ)
+	@echo "Linking object files to create the executable $(NAME_B)..."
+	$(CC) $(CFLAGS) -o $(NAME_B) $(OBJ_FILES_B) $(LIBFT_OBJ) $(LDFLAGS)
+	@echo "Executable $(NAME_B) created successfully!"
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/*/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
 
 $(LIBFT_OBJ_DIR)/%.o: $(LIBFT_DIR)/%.c
@@ -83,7 +125,7 @@ clean:
 	rm -rf $(OBJ_DIR) $(LIBFT_OBJ_DIR)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(NAME_B)
 
 re: fclean all
 
