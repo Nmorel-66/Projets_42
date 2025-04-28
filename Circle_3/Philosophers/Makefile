@@ -1,25 +1,26 @@
-NAME = fdf
+NAME = philo
 
 # OS detection
 OS = $(shell uname)
 
 # Compiler and flags
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -Iincludes
+CFLAGS = -Wall -Wextra -Werror
+FLAGS = -lpthread
 
 # Directories
 SRC_DIR = src
 OBJ_DIR = obj
 INC_DIR = includes
-LIBFT_DIR = Libft
-LIBFT_OBJ_DIR = $(LIBFT_DIR)/obj
-
-
 
 # Files
 SRC_FILES = \
-	$(SRC_DIR)/philo.c
-
+	$(SRC_DIR)/philo.c \
+	$(SRC_DIR)/philo_init.c \
+	$(SRC_DIR)/philo_actions.c \
+	$(SRC_DIR)/philo_monitor.c \
+	$(SRC_DIR)/philo_utils.c
+	
 # Object files
 OBJ_FILES = $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
@@ -38,7 +39,7 @@ all: $(NAME)
 # Create the executable
 $(NAME): $(OBJ_FILES)
 	@echo "$(COLOR_BLUE)Linking object files to create the executable $(NAME)...$(COLOR_RESET)"
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_FILES)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_FILES) $(FLAGS)
 	@echo "$(COLOR_GREEN)Executable $(NAME) created successfully!$(COLOR_RESET)"
 
 # Compile source files to object files
@@ -48,7 +49,10 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
 	@echo "$(COLOR_GREEN)$< compiled successfully.$(COLOR_RESET)"
 
-
+# Debug target
+debug:
+	$(MAKE) CFLAGS="$(CFLAGS) -g" re
+	
 # Clean object files
 clean:
 	@echo "$(COLOR_RED)Cleaning object files...$(COLOR_RESET)"
