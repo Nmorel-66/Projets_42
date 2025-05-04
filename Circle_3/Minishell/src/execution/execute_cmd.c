@@ -3,37 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: layang <layang@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 11:36:39 by layang            #+#    #+#             */
-/*   Updated: 2025/04/22 22:53:10 by layang           ###   ########.fr       */
+/*   Updated: 2025/04/28 14:40:02 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	ft_malloc_array(t_token **tokens, t_mini *mini)
-{
-	int		i;
-	t_token	*cur;
-
-	ft_free_array(&mini->cmd_array);
-	cur = *tokens;
-	i = 0;
-	while (cur)
-	{
-		cur = cur->next;
-		i++;
-	}
-	mini->cmd_array = malloc(sizeof(char *) * (i + 1));
-	if (!mini->cmd_array)
-	{
-		(void)ft_link_status("malloc cmd_line failed", 1);
-		return (-1);
-	}
-	ft_memset(mini->cmd_array, 0, sizeof(char *) * (i + 1));
-	return (0);
-}
 
 static void	ft_get_cmd_line(t_mini	*mini, t_token	**tokens)
 {
@@ -47,7 +24,7 @@ static void	ft_get_cmd_line(t_mini	*mini, t_token	**tokens)
 		if (cur->cmd)
 		{
 			mini->cmd_array[i++] = ft_strdup(cur->cmd);
-			printf("\n**get cmd: |%s|\n", cur->cmd);
+			printf("\n**get cmd: %s\n", cur->cmd);
 		}
 		cur = cur->next;
 	}
@@ -78,6 +55,11 @@ static void	ft_not_built_in(t_mini *mini)
 {
 	char	*path;
 
+	if (!mini->cmd_array[0])
+	{
+		ft_free_mini(mini, 1);
+		exit(0);
+	}
 	path = ft_get_path(mini->cmd_array[0], mini->env);
 	if (!path)
 		path = ft_strdup(mini->cmd_array[0]);

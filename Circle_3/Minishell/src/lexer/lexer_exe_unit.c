@@ -6,21 +6,11 @@
 /*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 14:35:54 by layang            #+#    #+#             */
-/*   Updated: 2025/04/22 13:28:00 by layang           ###   ########.fr       */
+/*   Updated: 2025/04/30 13:08:27 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	ft_strcmp(const char	*s1, const char	*s2)
-{
-	size_t	i;
-
-	i = 0;
-	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-}
 
 int	ft_count_unit(t_mini	*mini)
 {
@@ -28,11 +18,12 @@ int	ft_count_unit(t_mini	*mini)
 	t_token	*tmp;
 	int		syntax_err;
 
+	i = 0;
 	dup2(mini->stdout_fd, 1);
 	syntax_err = ft_syntax_err_ctr(mini->lexer);
 	dup2(mini->log_fd, 1);
 	if (syntax_err == -1)
-		return (-1);
+		return (syntax_err);
 	if (mini->lexer)
 		i = 1;
 	tmp = mini->lexer;
@@ -79,7 +70,7 @@ int	ft_fill_exe_tab(t_mini	*mini)
 {
 	mini->tab_size = ft_count_unit(mini);
 	if (mini->tab_size == -1)
-		return (ft_link_status(NULL, 2));
+		return ((void)ft_link_status(NULL, 2), 2);
 	printf("\n*Tab size: %d\n", mini->tab_size);
 	ft_fill_tab(mini);
 	return (0);

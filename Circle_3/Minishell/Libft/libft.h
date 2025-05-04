@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: layang <layang@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:12:19 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/19 12:24:19 by layang           ###   ########.fr       */
+/*   Updated: 2025/04/30 13:07:14 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,7 @@ int		ft_atoll_code(const char *str, long long *result);
 # endif
 
 char	*get_next_line(int fd);
+char	*ft_strjoin_free(char const *s1, char const *s2);
+int		ft_strcmp(const char	*s1, const char	*s2);
 
 #endif

@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error_ctr.c                                     :+:      :+:    :+:   */
+/*   ft_error_ctr_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: layang <layang@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:52:36 by layang            #+#    #+#             */
-/*   Updated: 2025/05/01 10:40:18 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/03 07:06:03 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell_bonus.h"
 
 int	print_syntax_error(char *msg)
 {
 	ft_putstr_fd("minishell: syntax error near unexpected token '", 2);
 	ft_putstr_fd(msg, 2);
 	write(2, "'\n", 2);
+	(void)ft_link_status(NULL, 2);
 	return (-1);
 }
 
 static int	ft_syntax_err_ctr_type(t_token *curr)
 {
-	if ((curr->type == PIPE || curr->type == AND || curr->type == OR)
-		&& (curr->next->type == PIPE || curr->next->type == AND
-			|| curr->next->type == OR))
+	if (ft_is_operator(curr) && ft_is_operator(curr->next))
 		return (print_syntax_error(curr->next->value));
 	if ((curr->type == REDIRECT_IN || curr->type == REDIRECT_OUT
 			|| curr->type == HEREDOC || curr->type == APPEND)
@@ -69,6 +68,7 @@ int	ft_open_quote(t_mini	*mini)
 	check = check_open_quote(mini->input);
 	if (check == 0)
 		return (0);
+	(void)ft_link_status(NULL, 1);
 	dup2(mini->stdout_fd, 1);
 	if (check == 1)
 		printf("Minishell : single quote not closed.\n");
@@ -85,7 +85,7 @@ int	ft_syntax_err_ctr(t_token *lexer)
 	curr = lexer;
 	if (!curr)
 		return (0);
-	if (curr->type == PIPE || curr->type == AND || curr->type == OR)
+	if (ft_is_operator(curr))
 		return (print_syntax_error(curr->value));
 	while (curr && curr->next)
 	{
@@ -93,9 +93,9 @@ int	ft_syntax_err_ctr(t_token *lexer)
 			return (-1);
 		curr = curr->next;
 	}
-	if (curr->type == PIPE || curr->type == AND || curr->type == OR
-		|| curr->type == REDIRECT_IN || curr->type == REDIRECT_OUT
-		|| curr->type == HEREDOC || curr->type == APPEND)
+	if (ft_is_operator(curr) || curr->type == REDIRECT_IN
+		|| curr->type == REDIRECT_OUT || curr->type == HEREDOC
+		|| curr->type == APPEND)
 		return (print_syntax_error("newline"));
 	return (0);
 }

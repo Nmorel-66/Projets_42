@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: layang <layang@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:30:08 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/19 18:59:57 by layang           ###   ########.fr       */
+/*   Updated: 2025/04/25 07:18:25 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_cd(t_token *tokens, t_env *env)
 	{
 		if (ft_update_var(env, ft_strdup("OLDPWD"), oldpwd) == FAILURE
 			|| ft_update_var(env, ft_strdup("PWD"), ft_strdup(cwd)) == FAILURE)
-			return (perror("cd: update OLDPWD and PWD failed"), FAILURE);
+			return (printf("cd: update OLDPWD and PWD failed\n"), FAILURE);
 	}
 	else
 		free(oldpwd);

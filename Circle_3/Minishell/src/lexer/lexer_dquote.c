@@ -6,7 +6,7 @@
 /*   By: layang <layang@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 21:06:20 by layang            #+#    #+#             */
-/*   Updated: 2025/04/22 22:10:07 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/03 03:29:12 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ static int	extract_var_len(const char *src, char buf[255])
 			|| src[i] == '_' || src[i] == '?'))
 	{
 		buf[i] = src[i];
+		if (i == 0 && src[i] == '?')
+		{
+			i++;
+			break ;
+		}
 		i++;
 	}
 	buf[i] = '\0';
@@ -57,6 +62,7 @@ void	dquote_pass_dollar(const char *s, char **re, t_env *e, size_t *i)
 	*i = *i + extract_var_len(s + *i + 1, var) + 1;
 }
 
+//	printf("result after char: %s\n", *re);
 void	dquote_pass_char(char	**re, char c, size_t	*i)
 {
 	char	tmp[2];
@@ -67,6 +73,5 @@ void	dquote_pass_char(char	**re, char c, size_t	*i)
 	new_re = ft_strjoin(*re, tmp);
 	free(*re);
 	*re = new_re;
-	printf("result after char: %s\n", *re);
 	(*i)++;
 }

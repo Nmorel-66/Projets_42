@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: layang <layang@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:39:53 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/23 18:54:21 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/03 03:39:07 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,15 @@ typedef enum e_token_type
 	HEREDOC,
 	APPEND,
 	AND,
-	OR,
-	WILDCARDS
+	OR
 }	t_token_type;
 
 typedef struct s_token
 {
 	char			*value;
 	t_token_type	type;
+	size_t			start;
+	int				par_n;
 	int				infile;
 	int				outfile;
 	char			*cmd;
@@ -129,21 +130,17 @@ typedef struct s_mini
  *****************************************************************************/
 /*  minishell.c 5 */
 void			ft_start_animation(void);
-void			ft_handle_sigint(int sig);
 void			ft_init_mini(t_mini	*mini, char **envp);
 
-/*  lexer.c 5*/
+/*  lexer.c 2*/
 int				ft_lexer(t_mini	*mini);
 
-/* lexer_utils.c 5*/
+/* lexer_utils.c 3*/
 t_token			*ft_create_token(char *value, t_token_type type);
 void			ft_add_token(t_token **tokens, t_token *new_token);
 t_token_type	ft_get_operator_type(char c, char next_c);
-char			*ft_get_dquote(const char *d_str, size_t	len, t_env	*env);
-void			ft_handle_word(const char	*input, size_t *i, t_mini *mini);
 
-/*  lexer_exe_unit.c 5*/
-int				ft_strcmp(const char *s1, const char *s2);
+/*  lexer_exe_unit.c 3*/
 int				ft_count_unit(t_mini	*mini);
 void			ft_fill_tab(t_mini *mini);
 int				ft_fill_exe_tab(t_mini	*mini);
@@ -153,8 +150,13 @@ void			dquote_pass_dollar(const char *s, char **n, t_env *e,
 					size_t *i);
 void			dquote_pass_char(char	**re, char c, size_t	*i);
 
-/* utils.c 4*/
+/* lexer_cmd_block.c  5*/
+char			*ft_get_dquote(const char *d_str, size_t	len, t_env	*env);
+void			ft_handle_block(const char	*input, size_t *i, t_mini *mini);
+
+/* utils.c 5*/
 void			ft_handle_sigint(int sig);
+void			ft_handle_sigint_2(int sig);
 int				ft_isspace(int c);
 int				ft_is_empty_input(char *input);
 int				ft_link_status(char	*msg, int value);
@@ -192,6 +194,10 @@ void			ft_shift_in_out(t_token	**re, t_token_type t, t_mini	*mi);
 void			ft_here_doc(t_token	**heredoc, t_mini	*mi);
 void			ft_add_cmd(t_mini	*mini, t_token	**cmd, t_token_type	type);
 
+/* execute_fill_utiles.c  2*/
+void			ft_pass_in_out(t_token	**token);
+int				ft_malloc_array(t_token **tokens, t_mini *mini);
+
 /* execute_utils.c 5*/
 char			**ft_env_to_array(t_env *env);
 char			*ft_get_path_from_env(t_env *env);
@@ -219,13 +225,18 @@ int				ft_echo(char **cmd_array, t_mini *mini);
 int				ft_unset(t_token *tokens, t_env **env);
 
 /* ft_error_ctr.c 5*/
+int				print_syntax_error(char *msg);
+int				ft_open_quote(t_mini	*mini);
 int				ft_syntax_err_ctr(t_token *lexer);
+
+/* ft_file_path_ctr.c 2*/
 void			ft_file_ctr(int fd, int he_fd, char	*msg, t_mini	*mi);
 char			*ft_check_path_validity(t_mini *mini, char *path);
 
-/* ft_test_use.c -> test functions*/
+/* ft_log_use.c -> test functions 4*/
 void			ft_print_token(t_token *t);
 void			ft_print_cmdarray(char **cmds);
 void			ft_test_log(t_mini *mini);
+//void			ft_log_print(t_mini	*mini, char	*title, char	*s);
 
 #endif

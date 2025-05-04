@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_utils.c                                      :+:      :+:    :+:   */
+/*   lexer_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: layang <layang@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 11:02:33 by nimorel           #+#    #+#             */
-/*   Updated: 2025/05/03 03:39:32 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/03 03:20:36 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell_bonus.h"
 
-t_token	*ft_create_token(char	*value, t_token_type type)
+void	ft_block_init(char	**word, char	**sign_glob)
+{
+	*word = ft_strdup("");
+	if (!*word)
+	{
+		perror("word in lexer malloc");
+		return ;
+	}
+	*sign_glob = ft_strdup("");
+	if (!*sign_glob)
+	{
+		perror("sign_glob malloc");
+		return ;
+	}
+}
+
+t_token	*ft_create_token(char	*value, t_token_type type, size_t st)
 {
 	t_token	*token;
 
@@ -26,7 +42,7 @@ t_token	*ft_create_token(char	*value, t_token_type type)
 		return (NULL);
 	}
 	token->type = type;
-	token->start = 0;
+	token->start = st;
 	token->par_n = 0;
 	token->infile = STDIN_FILENO;
 	token->outfile = STDOUT_FILENO;
@@ -69,5 +85,27 @@ t_token_type	ft_get_operator_type(char c, char next_c)
 		return (REDIRECT_IN);
 	if (c == '>')
 		return (REDIRECT_OUT);
+	if (c == '(')
+		return (BRACKET);
+	if (c == ')')
+		return (REV_BRACKET);
 	return (WORD);
+}
+
+void	ft_stamp_token(t_token	*tokens)
+{
+	int		par;
+	t_token	*to;
+
+	par = 0;
+	to = tokens;
+	while (to)
+	{
+		if (to->type == BRACKET)
+			par++;
+		if (to->type == REV_BRACKET)
+			par--;
+		to->par_n = par;
+		to = to->next;
+	}
 }

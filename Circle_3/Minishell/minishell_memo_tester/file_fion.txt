@@ -12,7 +12,6 @@ tuoelif
 
 :eliftuo
 txt.tuptuo_skael
-
 txt.kcolb_sdnammoc
 txt.sdnammoc
 txt.PIW_sdnammoc

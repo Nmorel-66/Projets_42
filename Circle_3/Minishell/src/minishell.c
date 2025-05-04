@@ -6,7 +6,7 @@
 /*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:44:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/22 09:06:27 by layang           ###   ########.fr       */
+/*   Updated: 2025/04/25 18:18:25 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ static void	ft_prompt(t_mini	*mini)
 			printf("************ ************ ************\n");
 			printf("\n**get input: %s\n", mini->input);
 			add_history(mini->input);
-			if (ft_is_empty_input(mini->input) || ft_lexer(mini) == 2)
+			if (ft_is_empty_input(mini->input) || ft_open_quote(mini)
+				|| ft_lexer(mini) == 2)
 			{
 				ft_free_mini(mini, 0);
 				continue ;

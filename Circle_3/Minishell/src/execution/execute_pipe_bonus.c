@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_pipe.c                                     :+:      :+:    :+:   */
+/*   execute_pipe_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 11:33:31 by layang            #+#    #+#             */
-/*   Updated: 2025/04/24 19:22:00 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/03 17:13:18 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell_bonus.h"
 
 void	ft_execute_last(t_mini *mini, int i)
 {
@@ -34,6 +34,7 @@ void	ft_execute_last(t_mini *mini, int i)
 		if (cur->outfile != STDOUT_FILENO)
 			dup2(cur->outfile, 1);
 		close(mini->pre);
+		mini->pre = -1;
 		ft_exe_cmd(mini, i);
 	}
 }
@@ -51,7 +52,8 @@ void	ft_execute_child(t_mini *mini, int i, int pipe_fd[2])
 		cur = mini->exe_tab[i];
 		while (cur->next)
 			cur = cur->next;
-		if (cur->infile == STDIN_FILENO && i != 0)
+		if (cur->infile == STDIN_FILENO
+			&& (i - 2 >= 0 && next_type(mini, i - 2) == PIPE))
 			dup2(mini->pre, 0);
 		else
 			dup2(cur->infile, 0);
@@ -74,7 +76,29 @@ void	ft_signal_in_child(t_mini *mini, int status)
 	dup2(mini->log_fd, 1);
 }
 
-void	ft_wait_children(t_mini	*mini)
+/* void	ft_wait_bonus(t_mini	*mini, int i, int	*len)
+{
+	if (i == mini->tab_size - 1 || next_type(mini, i) != PIPE)
+	{
+		ft_wait_children(mini, *len + 1);
+		*len = 0;
+	}
+	else
+		(*len)++;
+} */
+
+void	ft_wait_bonus(t_mini	*mini, int i, int	*len)
+{
+	if (next_type(mini, i) == PIPE)
+		(*len)++;
+	else
+	{
+		ft_wait_children(mini, *len + 1);
+		*len = 0;
+	}
+}
+
+void	ft_wait_children(t_mini	*mini, int len)
 {
 	int	i;
 	int	status;
@@ -82,10 +106,10 @@ void	ft_wait_children(t_mini	*mini)
 
 	i = 0;
 	last_exit = 0;
-	while (i < mini->tab_size)
+	while (i < len)
 	{
 		waitpid(mini->cpid[i], &status, 0);
-		if (i++ == mini->tab_size - 1)
+		if (i++ == len - 1)
 		{
 			if (WIFEXITED(status))
 				last_exit = WEXITSTATUS(status);

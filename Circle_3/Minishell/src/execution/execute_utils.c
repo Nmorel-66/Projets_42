@@ -6,11 +6,25 @@
 /*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 09:48:01 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/22 12:23:33 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/03 14:41:33 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	ft_cmd_type(char *cmd)
+{
+	if (!cmd)
+		return (NOT_BUILT_IN_CMD);
+	if (ft_strcmp(cmd, "echo") == 0 || ft_strcmp(cmd, "pwd") == 0
+		|| ft_strcmp(cmd, "cd") == 0 || ft_strcmp(cmd, "export") == 0
+		|| ft_strcmp(cmd, "unset") == 0 || ft_strcmp(cmd, "env") == 0)
+		return (BUILT_IN_CMD);
+	else if (ft_strcmp(cmd, "exit") == 0)
+		return (EXIT_CMD);
+	else
+		return (NOT_BUILT_IN_CMD);
+}
 
 static char	*ft_join_process(char *name, char *value)
 {

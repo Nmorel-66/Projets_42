@@ -3,68 +3,81 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_wildcard.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: layang <layang@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 22:13:49 by layang            #+#    #+#             */
-/*   Updated: 2025/04/24 14:57:14 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/05/03 06:20:08 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_bonus.h"
 
-static int	ft_wildcard_process(const char **word, const char **str)
+static int	wildcard_go(const char **word, const char **str,
+	const char **star_index, const char **match_index)
+{
+	if (**word == **str)
+	{
+		(*word)++;
+		(*str)++;
+	}
+	else if (*star_index)
+	{
+		*word = *star_index + 1;
+		(*match_index)++;
+		*str = *match_index;
+	}
+	else
+		return (0);
+	return (1);
+}
+
+//printf("DEBUG in *:i: %d, word=%s, str=%s\n", i, *word, *str);
+
+static int	ft_wildcard_process(const char **word, const char **str,
+	char	*s_glob)
 {
 	const char	*star_index = NULL;
 	const char	*match_index = NULL;
+	const char	*ori_word;
+	int			i;
 
+	ori_word = *word;
 	while (**str)
 	{
-		if (**word == '*')
+		i = *word - ori_word;
+		if (**word == '*' && s_glob[i] == '1')
 		{
 			star_index = *word;
 			match_index = *str;
 			(*word)++;
 		}
-		else if (**word == **str)
-		{
-			(*word)++;
-			(*str)++;
-		}
-		else if (star_index)
-		{
-			*word = star_index;
-			*str = ++match_index;
-		}
+		else if (wildcard_go(word, str, &star_index, &match_index))
+			continue ;
 		else
 			return (0);
 	}
 	return (1);
 }
 
-static int	ft_wildcard_match(const char *word, const char *d_name)
+static int	ft_wildcard_match(const char	*word, const char	*d_name,
+	char	*s_glob)
 {
 	int		i;
+	int		z;
 
 	i = 0;
-	if (ft_wildcard_process(&word, &d_name))
+	z = ft_strlen(word);
+	if (ft_wildcard_process(&word, &d_name, s_glob))
 	{
-		while (word[i] == '*')
+		z = z - ft_strlen(word);
+		while (word[i] && word[i] == '*' && s_glob[z + i] == '1')
 			i++;
 		return (word[i] == '\0');
 	}
 	return (0);
 }
 
-static void	ft_add_word(const char *word, t_mini *mini)
-{
-	char	*dup;
-
-	dup = ft_strdup(word);
-	ft_add_token(&mini->lexer, ft_create_token(dup, WORD));
-	free(dup);
-}
-
-static void	ft_get_files(const char *word, t_mini *mini)
+int	ft_get_files(const char *word, t_mini *mini, char	*s_glob, size_t j)
 {
 	DIR				*dir;
 	struct dirent	*dent;
@@ -75,39 +88,49 @@ static void	ft_get_files(const char *word, t_mini *mini)
 	dup = NULL;
 	dir = opendir(".");
 	if (!dir)
-		return ;
+		return (printf("minishell: open dir for globbing failed.\n"), 0);
 	dent = readdir(dir);
 	while (dent != NULL)
 	{
-		if (dent->d_name[0] != '.' && ft_wildcard_match(word, dent->d_name))
+		if (dent->d_name[0] != '.' && ft_wildcard_match(word,
+				dent->d_name, s_glob))
 		{
 			dup = ft_strdup(dent->d_name);
-			ft_add_token(&mini->lexer, ft_create_token(dup, WORD));
+			ft_add_token(&mini->lexer, ft_create_token(dup, WORD, j));
 			free(dup);
 			i++;
 		}
 		dent = readdir(dir);
 	}
 	closedir(dir);
-	if (i == 0)
-		ft_add_word(word, mini);
+	return (i != 0);
 }
 
-void	ft_handle_wildcard(const char *input, size_t *i, t_mini *mini)
+int	reget_files(const char	*word, t_token	**tab_n, char	*s_glob, size_t j)
 {
-	int		start;
-	int		len;
-	char	*word;
+	DIR				*dir;
+	struct dirent	*dent;
+	int				i;
+	char			*dup;
 
-	start = *i;
-	while (input[*i] && !ft_isspace(input[*i]) && !ft_strchr("|<>", input[*i]))
-		(*i)++;
-	len = *i - start;
-	word = malloc(len + 1);
-	if (!word)
-		return ;
-	ft_memcpy(word, &input[start], len);
-	word[len] = '\0';
-	ft_get_files(word, mini);
-	free(word);
+	i = 0;
+	dup = NULL;
+	dir = opendir(".");
+	if (!dir)
+		return (printf("minishell: open dir for globbing failed.\n"), 0);
+	dent = readdir(dir);
+	while (dent != NULL)
+	{
+		if (dent->d_name[0] != '.' && ft_wildcard_match(word,
+				dent->d_name, s_glob))
+		{
+			dup = ft_strdup(dent->d_name);
+			ft_add_token(tab_n, ft_create_token(dup, WORD, j));
+			free(dup);
+			i++;
+		}
+		dent = readdir(dir);
+	}
+	closedir(dir);
+	return (i != 0);
 }

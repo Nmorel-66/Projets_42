@@ -23,13 +23,15 @@ void	ft_print_token(t_token	*t)
 	{
 		printf("\n");
 		printf("++token %d: value: %s, type: %d\n", i, c->value, c->type);
-		printf("   in: %d, out: %d cmd: %s\n", c->infile, c->outfile, c->cmd);
+		printf("   in: %d, out: %d cmd: %s par_n: %d\n", c->infile,
+			c->outfile, c->cmd, c->par_n);
+		printf("start index: %zu\n", c->start);
 		c = c->next;
 		i++;
 	}
 }
 
-void	ft_print_cmdarray(char	**cmds) // ** test function
+void	ft_print_cmdarray(char	**cmds)
 {
 	int	i;
 
@@ -41,7 +43,7 @@ void	ft_print_cmdarray(char	**cmds) // ** test function
 	}
 }
 
-void	ft_test_log(t_mini	*mini) // **for testing log
+void	ft_test_log(t_mini	*mini)
 {
 	char	*pwd;
 
@@ -50,3 +52,14 @@ void	ft_test_log(t_mini	*mini) // **for testing log
 	mini->log_fd = open(pwd, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	free(pwd);
 }
+
+/* void	ft_log_print(t_mini	*mini, char	*title, char	*s)
+{
+	if (!s)
+		return;
+	ft_putstr_fd(title, mini->log_fd);
+	ft_putstr_fd(" ", mini->log_fd);
+	ft_putstr_fd(s, mini->log_fd);
+	ft_putstr_fd("\n", mini->log_fd);
+}
+ */

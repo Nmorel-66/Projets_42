@@ -44,7 +44,7 @@ false || (echo aaa && false && true) && echo zzz
  (( false || (echo bbb || echo xxx) ) || echo zzz)
 
 (( false || echo bbb && echo xxx ) || echo zzz)
-
+ 
 (( false || echo bbb && echo $? ) || echo zzz)
 
 (( echo ggg && false && (echo bbb && echo $?) ) || echo zzz)
@@ -108,3 +108,9 @@ echo truc &&(echo troc)
 && echo aa && echo kk &&
 
 echo aa && echo kk &&
+
+(echo aaa3 && echo bb3b && (echo z3zz | grep 3)) && echo $?
+
+(( echo hel && echo bbb ) && echo he2 && echo he3) | grep he
+
+(echo bbb || echo b2 && echo ccc) | grep b && echo $?
