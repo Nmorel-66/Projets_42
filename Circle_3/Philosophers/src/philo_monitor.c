@@ -6,13 +6,13 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 07:44:42 by nimorel           #+#    #+#             */
-/*   Updated: 2025/05/07 14:45:47 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/05/07 14:58:56 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_everyone_ate(t_data *data)
+int	ft_all_ate(t_data *data)
 {
 	int	i;
 
@@ -70,7 +70,7 @@ void	*ft_monitoring(void *arg)
 			pthread_mutex_unlock(&data->philos[i].lock);
 			i++;
 		}
-		if (ft_everyone_ate(data))
+		if (ft_all_ate(data))
 		{
 			pthread_mutex_lock(&data->state_mutex);
 			data->someone_died = 1;

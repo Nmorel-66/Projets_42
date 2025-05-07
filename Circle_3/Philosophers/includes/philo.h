@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 11:30:00 by nimorel           #+#    #+#             */
-/*   Updated: 2025/05/07 14:40:33 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/05/07 14:59:03 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void		ft_eat(t_philo *philo);
 void		*ft_dining(void *arg);
 
 /* philo_monitor.c */
-int			ft_everyone_ate(t_data *data);
+int			ft_all_ate(t_data *data);
 void		*ft_monitoring(void *arg);
 
 /* philo_utils.c */
