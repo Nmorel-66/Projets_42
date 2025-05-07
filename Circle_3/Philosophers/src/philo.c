@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 11:29:06 by nimorel           #+#    #+#             */
-/*   Updated: 2025/05/07 11:05:49 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/05/07 13:54:36 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,20 @@ int	main(int argc, char **argv)
 	pthread_t	monitor;
 	int			i;
 
-	i = 0;
+	i = -1;
 	if (ft_arg_checker(argc, argv) == FAILURE)
 		return (ft_error_handler("Error : arguments", FAILURE));
+	if (ft_atoi(argv[1]) == 1)
+		return (printf("0 1 has taken left fork\n"),
+		printf("\033[1;31m0 1 💀 died\n\033[0m"), SUCCESS);
 	if (ft_init(&data, argc, argv))
-		return (ft_error_handler("Error: init_data failure", FAILURE));
-	while (i < data.nb_philos)
+		return (ft_error_handler("Error: init data failure", FAILURE));
+	while (++i < data.nb_philos)
 	{
 		if (pthread_create(&data.philos[i].thread, NULL, &ft_dining,
-				&data.philos[i]))
+			&data.philos[i]))
 			return (ft_error_handler("Error : Philosopher thread failure", 1));
 		usleep(50);
-		i++;
 	}
 	if (pthread_create(&monitor, NULL, &ft_monitoring, &data))
 		return (ft_error_handler("Error: Monitor thread failure", 1));
