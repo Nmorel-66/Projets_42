@@ -6,13 +6,13 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 07:44:42 by nimorel           #+#    #+#             */
-/*   Updated: 2025/05/07 13:10:53 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/05/07 14:45:47 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	all_philos_ate(t_data *data)
+int	ft_everyone_ate(t_data *data)
 {
 	int	i;
 
@@ -38,7 +38,7 @@ static int	ft_is_someone_die(t_data *data, int *i)
 	long long	now;
 
 	now = ft_gettime();
-	if ((now - data->philos[*i].last_meal) > data->time_to_die || data->nb_philos == 1)
+	if ((now - data->philos[*i].last_meal) > data->time_to_die)
 	{
 		pthread_mutex_lock(&data->state_mutex);
 		data->someone_died = 1;
@@ -70,7 +70,7 @@ void	*ft_monitoring(void *arg)
 			pthread_mutex_unlock(&data->philos[i].lock);
 			i++;
 		}
-		if (all_philos_ate(data))
+		if (ft_everyone_ate(data))
 		{
 			pthread_mutex_lock(&data->state_mutex);
 			data->someone_died = 1;
