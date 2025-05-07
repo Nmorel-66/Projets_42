@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 10:07:01 by nimorel           #+#    #+#             */
-/*   Updated: 2025/05/07 15:22:47 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/05/07 16:07:13 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_init_philos(t_data *data)
 		ph->right_fork = &data->forks[(i + 1) % data->nb_philos];
 		ph->data = data;
 		if (pthread_mutex_init(&ph->lock, NULL))
-			return (1);
+			return (FAILURE);
 		i++;
 	}
 	return (SUCCESS);
@@ -71,8 +71,8 @@ int	ft_init(t_data *data, int argc, char **argv)
 		data->must_eat = ft_atoi(argv[5]);
 	data->start_time = ft_gettime();
 	if (ft_init_mutexes(data))
-		return (1);
+		return (FAILURE);
 	if (ft_init_philos(data))
-		return (1);
+		return (FAILURE);
 	return (SUCCESS);
 }
