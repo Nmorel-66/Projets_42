@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:32:15 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/26 09:45:24 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/05/07 11:36:43 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@ void	ft_print(t_philo *philo, char *msg)
 	{
 		timestamp = ft_gettime() - philo->data->start_time;
 		pthread_mutex_lock(&philo->data->write_mutex);
-		printf("%lld %d %s\n", timestamp, philo->id, msg);
+		if (ft_strcmp(msg, "\033[1;32m \xF0\x9F\x8D\x9D is eating\033[0m") == 0)
+			printf("%lld %d %s %d meals eaten\n",
+				timestamp, philo->id, msg, philo->meals_eaten + 1);
+		else
+			printf("%lld %d %s\n", timestamp, philo->id, msg);
 		pthread_mutex_unlock(&philo->data->write_mutex);
 	}
 	pthread_mutex_unlock(&philo->data->state_mutex);
@@ -45,8 +49,9 @@ void	ft_eat(t_philo *philo)
 
 void	*ft_dining(void *arg)
 {
-	t_philo	*philo = (t_philo *)arg;
+	t_philo	*philo;
 
+	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
 		usleep(200);
 	while (1)
@@ -59,8 +64,8 @@ void	*ft_dining(void *arg)
 		}
 		pthread_mutex_unlock(&philo->data->state_mutex);
 		ft_eat(philo);
-		if (philo->data->must_eat != -1 &&
-			philo->meals_eaten >= philo->data->must_eat)
+		if (philo->data->must_eat != -1
+			&& philo->meals_eaten >= philo->data->must_eat)
 			break ;
 		ft_print(philo, "\033[1;34m \xF0\x9F\x98\xB4 is sleeping\033[0m");
 		usleep(philo->data->time_to_sleep * 1000);

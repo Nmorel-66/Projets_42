@@ -1,0 +1,182 @@
+************ ************ ************
+
+**get input: ls
+
+..Got word before create token: ls
+
+**add lexer succeed:
+
+**  lexer after stamped:
+  
+++token 1: value: ls, type: 0
+   in: 0, out: 1 cmd: (null) par_n: 0
+start index: 0
+
+*nb of unit: 1
+
+*Tab size: 1
+* *PASS to token in while : ls
+**Filling tab: add line 0: ls
+
+Until line 1, finish fill_tab. Executing>>>>-------
+
+**start fill simple cmd_array
+
+**  tab 0 after REREAD:
+  
+++token 1: value: ls, type: 0
+   in: 0, out: 1 cmd: (null) par_n: 0
+start index: 0
+
+**get cmd: ls
+
+last-g_status **: 0
+************ ************ ************
+
+**get input: ls *.*
+
+..Got word before create token: ls
+
+..Got word before create token: *.*
+
+  .real glob location in word: { 101 }
+
+**add lexer succeed:
+
+**  lexer after stamped:
+  
+++token 1: value: ls, type: 0
+   in: 0, out: 1 cmd: (null) par_n: 0
+start index: 0
+
+++token 2: value: valgrind_inhome.supp, type: 0
+   in: 0, out: 1 cmd: (null) par_n: 0
+start index: 3
+
+++token 3: value: valgrind.supp, type: 0
+   in: 0, out: 1 cmd: (null) par_n: 0
+start index: 3
+
+*nb of unit: 1
+
+*Tab size: 1
+* *PASS to token in while : ls
+**Filling tab: add line 0: ls
+**Filling tab: add line 0: valgrind_inhome.supp
+**Filling tab: add line 0: valgrind.supp
+
+Until line 1, finish fill_tab. Executing>>>>-------
+
+**start fill simple cmd_array
+
+  .real glob location in word: { 101 }
+
+**  tab 0 after REREAD:
+  
+++token 1: value: ls, type: 0
+   in: 0, out: 1 cmd: (null) par_n: 0
+start index: 0
+
+++token 2: value: valgrind_inhome.supp, type: 0
+   in: 0, out: 1 cmd: (null) par_n: 0
+start index: 3
+
+++token 3: value: valgrind.supp, type: 0
+   in: 0, out: 1 cmd: (null) par_n: 0
+start index: 3
+
+**get cmd: ls
+
+**get cmd: valgrind_inhome.supp
+
+**get cmd: valgrind.supp
+
+last-g_status **: 0
+************ ************ ************
+
+**get input: echo ""$USER""
+double quoted_word: 
+double quoted_word: 
+
+**add lexer succeed:
+
+++token 1: value: echo, type: 0
+   in: 0, out: 1 cmd: (null) par_n: 0
+start index: 0
+
+++token 2: value: nicolasmorel, type: 0
+   in: 0, out: 1 cmd: (null) par_n: 0
+start index: 0
+
+*nb of unit: 1
+
+*Tab size: 1
+**Filling tab: add line 0: echo
+
+**Filling tab: add line 0: nicolasmorel
+
+
+Until line 1, finish fill_tab. Executing>>>>-------
+
+**start fill simple cmd_array
+
+**get cmd: echo
+
+**get cmd: nicolasmorel
+
+last-g_status **: 0
+************ ************ ************
+
+**get input: echo "'$USER'"
+double quoted_word: 'nicolasmorel'
+
+**add lexer succeed:
+
+++token 1: value: echo, type: 0
+   in: 0, out: 1 cmd: (null) par_n: 0
+start index: 0
+
+++token 2: value: 'nicolasmorel', type: 0
+   in: 0, out: 1 cmd: (null) par_n: 0
+start index: 0
+
+*nb of unit: 1
+
+*Tab size: 1
+**Filling tab: add line 0: echo
+
+**Filling tab: add line 0: 'nicolasmorel'
+
+
+Until line 1, finish fill_tab. Executing>>>>-------
+
+**start fill simple cmd_array
+
+**get cmd: echo
+
+**get cmd: 'nicolasmorel'
+
+last-g_status **: 0
+************ ************ ************
+
+**get input: exit
+
+**add lexer succeed:
+
+++token 1: value: exit, type: 0
+   in: 0, out: 1 cmd: (null) par_n: 0
+start index: 0
+
+*nb of unit: 1
+
+*Tab size: 1
+**Filling tab: add line 0: exit
+
+
+Until line 1, finish fill_tab. Executing>>>>-------
+
+**start fill simple cmd_array
+
+**get cmd: exit
+
+last-g_status **: 0

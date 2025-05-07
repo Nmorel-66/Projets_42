@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 11:29:06 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/26 09:39:31 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/05/07 11:05:49 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ static void	ft_destroy(t_data *data)
 	free(data->forks);
 	free(data->philos);
 }
-static int ft_arg_checker(int ac, char **av)
+
+static int	ft_arg_checker(int ac, char **av)
 {
 	int	i;
 	int	j;
@@ -65,19 +66,19 @@ static int ft_arg_checker(int ac, char **av)
 
 int	main(int argc, char **argv)
 {
-	t_data	data;
+	t_data		data;
 	pthread_t	monitor;
-	int		i;
+	int			i;
 
 	i = 0;
 	if (ft_arg_checker(argc, argv) == FAILURE)
-		return(ft_error_handler("Error : arguments", FAILURE));
+		return (ft_error_handler("Error : arguments", FAILURE));
 	if (ft_init(&data, argc, argv))
 		return (ft_error_handler("Error: init_data failure", FAILURE));
 	while (i < data.nb_philos)
 	{
 		if (pthread_create(&data.philos[i].thread, NULL, &ft_dining,
-			&data.philos[i]))
+				&data.philos[i]))
 			return (ft_error_handler("Error : Philosopher thread failure", 1));
 		usleep(50);
 		i++;

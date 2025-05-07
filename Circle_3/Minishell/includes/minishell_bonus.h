@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:39:53 by nimorel           #+#    #+#             */
-/*   Updated: 2025/05/03 14:44:15 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/04 08:47:04 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ go crazy :
 # include "../Libft/libft.h"
 # include <limits.h>
 # include <dirent.h>
-# include <wait.h>
+//# include <wait.h>
 
 /*****************************************************************************
  *  
@@ -163,12 +163,12 @@ typedef struct s_mini
  *  				add this line otherwise error occured on MACOS
  *  
  *****************************************************************************/
-/* #if __linux__
+#if __linux__
 	# include <wait.h>
 #endif
 #if __APPLE__
 	extern int rl_replace_line(const char *text, int i);
-#endif */
+#endif
 
 /*****************************************************************************
  *  

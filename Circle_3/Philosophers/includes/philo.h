@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 11:30:00 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/26 09:39:18 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/05/07 11:36:55 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
  *  
  *****************************************************************************/
 
-#include <unistd.h>
-#include <sys/time.h>
-#include <pthread.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <limits.h>
+# include <unistd.h>
+# include <sys/time.h>
+# include <pthread.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <limits.h>
 
 /*****************************************************************************
  *  
@@ -41,36 +41,35 @@
  *  
  *****************************************************************************/
 
-// forward declaration
-struct s_data;
+struct	s_data;
 
 typedef struct s_philo
 {
-	int					id;             // numéro du philosophe (1 à n)
-	int					meals_eaten;    // nombre de repas pris
-	long long			last_meal;      // timestamp du dernier repas
-	pthread_t			thread;         // thread du philosophe
-	pthread_mutex_t		*left_fork;     // pointeur vers mutex de la fourchette gauche
-	pthread_mutex_t		*right_fork;    // idem pour la droite
-	struct s_data		*data;          // lien vers les données globales
-	pthread_mutex_t		lock;           // mutex pour protéger ses propres données
+	int					id;
+	int					meals_eaten;
+	long long			last_meal;
+	pthread_t			thread;
+	pthread_mutex_t		*left_fork;
+	pthread_mutex_t		*right_fork;
+	struct s_data		*data;
+	pthread_mutex_t		lock;
 }				t_philo;
 
 typedef struct s_data
 {
-	int					nb_philos;      // nombre de philosophes
-	int					time_to_die;    // temps avant qu’un philo ne meure sans manger
+	int					nb_philos;
+	int					time_to_die;
 	int					time_to_eat;
 	int					time_to_sleep;
-	int					must_eat;       // nombre de repas requis (optionnel)
-	int					all_ate;        // compteur de philosophes ayant assez mangé
-	int					someone_died;   // flag d’arrêt de simulation
-	long long			start_time;     // timestamp du début de simulation
-	pthread_mutex_t		*forks;         // tableau de mutex pour chaque fourchette
-	pthread_mutex_t		write_mutex;    // mutex pour l'affichage/logs
-	pthread_mutex_t		state_mutex;    // mutex pour les flags globaux (someone_died, all_ate)
+	int					must_eat;
+	int					all_ate; // compteur de philosophes ayant assez mangé
+	int					someone_died;
+	long long			start_time;
+	pthread_mutex_t		*forks;
+	pthread_mutex_t		write_mutex;
+	pthread_mutex_t		state_mutex;
 
-	t_philo				*philos;        // tableau de philosophes
+	t_philo				*philos;
 }				t_data;
 
 /*****************************************************************************
@@ -98,5 +97,6 @@ long long	ft_gettime(void);
 int			ft_atoi(const char *str);
 int			ft_isdigit(int c);
 int			ft_error_handler(char *message, int exit_code);
+int			ft_strcmp(const char	*s1, const char	*s2);
 
 #endif

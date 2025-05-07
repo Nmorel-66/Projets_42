@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 10:07:01 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/26 08:32:30 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/05/07 11:03:21 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int	ft_init_mutexes(t_data *data)
 
 int	ft_init_philos(t_data *data)
 {
-	int	i;
+	int		i;
+	t_philo	*ph;
 
 	data->philos = malloc(sizeof(t_philo) * data->nb_philos);
 	if (!data->philos)
@@ -43,7 +44,7 @@ int	ft_init_philos(t_data *data)
 	i = 0;
 	while (i < data->nb_philos)
 	{
-		t_philo *ph = &data->philos[i];
+		ph = &data->philos[i];
 		ph->id = i + 1;
 		ph->meals_eaten = 0;
 		ph->last_meal = data->start_time;
