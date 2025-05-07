@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 11:30:00 by nimorel           #+#    #+#             */
-/*   Updated: 2025/05/07 14:59:03 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/05/07 15:11:04 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_philo
 	pthread_mutex_t		*right_fork;
 	struct s_data		*data;
 	pthread_mutex_t		lock;
-}				t_philo;
+}						t_philo;
 
 typedef struct s_data
 {
@@ -62,15 +62,14 @@ typedef struct s_data
 	int					time_to_eat;
 	int					time_to_sleep;
 	int					must_eat;
-	int					all_ate; // compteur de philosophes ayant assez mangé
+	int					all_ate;
 	int					someone_died;
 	long long			start_time;
 	pthread_mutex_t		*forks;
 	pthread_mutex_t		write_mutex;
 	pthread_mutex_t		state_mutex;
-
 	t_philo				*philos;
-}				t_data;
+}						t_data;
 
 /*****************************************************************************
  *  
