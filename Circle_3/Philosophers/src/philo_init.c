@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 10:07:01 by nimorel           #+#    #+#             */
-/*   Updated: 2025/05/07 11:03:21 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/05/07 15:22:47 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,15 @@ int	ft_init_philos(t_data *data)
 
 int	ft_init(t_data *data, int argc, char **argv)
 {
-	data->nb_philos = atoi(argv[1]);
-	data->time_to_die = atoi(argv[2]);
-	data->time_to_eat = atoi(argv[3]);
-	data->time_to_sleep = atoi(argv[4]);
+	data->nb_philos = ft_atoi(argv[1]);
+	data->time_to_die = ft_atoi(argv[2]);
+	data->time_to_eat = ft_atoi(argv[3]);
+	data->time_to_sleep = ft_atoi(argv[4]);
 	data->must_eat = -1;
 	data->all_ate = 0;
 	data->someone_died = 0;
 	if (argc == 6)
-		data->must_eat = atoi(argv[5]);
+		data->must_eat = ft_atoi(argv[5]);
 	data->start_time = ft_gettime();
 	if (ft_init_mutexes(data))
 		return (1);
