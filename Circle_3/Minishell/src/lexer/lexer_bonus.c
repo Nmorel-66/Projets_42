@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: layang <layang@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 18:48:30 by layang            #+#    #+#             */
-/*   Updated: 2025/05/03 06:40:20 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/07 15:58:46 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,9 @@ int	ft_lexer(t_mini	*mini)
 	if (!mini->lexer)
 		return ((void)ft_link_status(NULL, 1), 2);
 	printf("\n**add lexer succeed:\n");
-	ft_stamp_token(mini->lexer);
+	ft_stamp_token(mini->lexer, NULL, -1);
+	if (stamp_layer_env(mini) == 2)
+		return (2);
 	printf("\n**  lexer after stamped:\n  ");
 	ft_print_token(mini->lexer);
 	return (ft_fill_exe_tab(mini));

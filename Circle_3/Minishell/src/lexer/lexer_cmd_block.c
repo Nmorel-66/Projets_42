@@ -6,13 +6,13 @@
 /*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 11:59:03 by layang            #+#    #+#             */
-/*   Updated: 2025/05/01 17:13:40 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/10 12:11:34 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*get_squote_block(const char *input, size_t	*i)
+char	*get_squote_block(const char *input, size_t	*i)
 {
 	int		start;
 	int		len;
@@ -118,6 +118,7 @@ void	ft_handle_block(const char *input, size_t *i, t_mini *mini)
 
 	j = *i;
 	word = ft_strdup("");
+	(void)is_delimiter('w', mini->lexer);
 	while (input[*i] && !ft_isspace(input[*i]) && !ft_strchr("|<>&", input[*i]))
 	{
 		if (input[*i] == '\'')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:26:37 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/19 21:00:13 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/10 18:13:58 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	ft_update_var(t_env *env, char *name, char *value)
 			{
 				free(current->value);
 				current->value = value;
+				current->env_flag = 1;
 			}
 			free(name);
 			return (SUCCESS);
@@ -54,7 +55,7 @@ int	ft_update_var(t_env *env, char *name, char *value)
 	return (FAILURE);
 }
 
-static int	ft_add_var(t_env **env, char *name, char *value)
+int	ft_add_var(t_env **env, char *name, char *value, int d)
 {
 	t_env	*new_node;
 	t_env	*current;
@@ -69,6 +70,7 @@ static int	ft_add_var(t_env **env, char *name, char *value)
 		free(name);
 		return (FAILURE);
 	}
+	new_node->env_flag = d;
 	if (*env)
 	{
 		current = *env;
@@ -78,9 +80,7 @@ static int	ft_add_var(t_env **env, char *name, char *value)
 	}
 	else
 		*env = new_node;
-	free(name);
-	free(value);
-	return (SUCCESS);
+	return (free(name), free(value), SUCCESS);
 }
 
 static int	ft_export_no_arg(t_env *env)
@@ -107,16 +107,12 @@ static int	ft_export_no_arg(t_env *env)
 	return (SUCCESS);
 }
 
-int	ft_export(t_token *tokens, t_env **env, t_mini *mini)
+int	ft_export(t_token	*tokens, t_env	**env, t_mini	*mini)
 {
 	char	*name;
-	char	*value;
 
 	if (!tokens->next || (mini->cmd_array[0] && !mini->cmd_array[1]))
-	{
-		ft_export_no_arg(*env);
-		return (SUCCESS);
-	}
+		return (ft_export_no_arg(*env), SUCCESS);
 	tokens = tokens->next;
 	while (tokens)
 	{
@@ -126,11 +122,14 @@ int	ft_export(t_token *tokens, t_env **env, t_mini *mini)
 			tokens = tokens->next;
 			continue ;
 		}
-		value = ft_strchr(tokens->value, '=');
-		if (value)
-			value = ft_strdup(value + 1);
-		if (ft_update_var(*env, name, value) != SUCCESS)
-			ft_add_var(env, name, value);
+		if (!ft_is_valid_name(name))
+		{
+			printf("export: %s: not a valid identifier\n", name);
+			free(name);
+			tokens = tokens->next;
+			continue ;
+		}
+		ft_handle_valid_export(env, tokens->value, name);
 		tokens = tokens->next;
 	}
 	return (SUCCESS);

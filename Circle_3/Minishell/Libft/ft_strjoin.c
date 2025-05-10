@@ -6,7 +6,7 @@
 /*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 15:28:31 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/26 12:37:22 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/10 16:02:18 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	i;
 	size_t	j;
 
+	if (!s1 || !s2)
+		return (NULL);
 	len = ft_strlen(s1) + ft_strlen(s2);
 	dest = malloc(sizeof(char) * (len + 1));
 	if (dest == NULL)
@@ -31,11 +33,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	j = 0;
 	while (j < ft_strlen(s2))
-	{
-		dest[i] = s2[j];
-		i++;
-		j++;
-	}
+		dest[i++] = s2[j++];
 	dest[i] = '\0';
 	return (dest);
 }

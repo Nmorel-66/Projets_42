@@ -6,7 +6,7 @@
 /*   By: layang <layang@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 14:35:54 by layang            #+#    #+#             */
-/*   Updated: 2025/05/03 07:06:22 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/04 09:22:52 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	ft_count_unit(t_mini	*mini)
 	return (i + i - 1);
 }
 
+//if (*tmp)
+//	printf("* *PASS to token in tab unit: %s\n", (*tmp)->value);
 static void	fill_tab_unit(t_token	**tmp, t_mini	*mini, int *i)
 {
 	t_token	*new_token;
@@ -56,16 +58,14 @@ static void	fill_tab_unit(t_token	**tmp, t_mini	*mini, int *i)
 		printf("**Filling tab: add line %d: %s\n", *i, (*tmp)->value);
 		*tmp = (*tmp)->next;
 	}
-	if (*tmp)
-		printf("* *PASS to token in tab unit: %s\n", (*tmp)->value);
 	(*i)++;
 }
 
+//	printf("* *PASS to token in op : %s\n", (*tmp)->value);
 static void	fill_tab_op(t_token	**tmp, t_mini	*mini, int *i)
 {
 	t_token	*new_token;
 
-	printf("* *PASS to token in op : %s\n", (*tmp)->value);
 	new_token = ft_create_token((*tmp)->value, (*tmp)->type, (*tmp)->start);
 	if (!new_token)
 		return ;
@@ -76,6 +76,8 @@ static void	fill_tab_op(t_token	**tmp, t_mini	*mini, int *i)
 	(*i)++;
 }
 
+//	if (tmp)
+//		printf("* *PASS to token in while : %s\n", tmp->value);
 void	ft_fill_tab(t_mini	*mini)
 {
 	int		i;
@@ -90,8 +92,6 @@ void	ft_fill_tab(t_mini	*mini)
 	tmp = mini->lexer;
 	while (i < mini->tab_size)
 	{
-		if (tmp)
-			printf("* *PASS to token in while : %s\n", tmp->value);
 		mini->exe_tab[i] = NULL;
 		if (tmp && (tmp->type == BRACKET || tmp->type == REV_BRACKET))
 			tmp = tmp->next;

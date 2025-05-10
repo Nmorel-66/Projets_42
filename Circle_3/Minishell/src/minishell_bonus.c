@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   minishell_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:44:04 by nimorel           #+#    #+#             */
-/*   Updated: 2025/05/10 14:40:10 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/10 14:40:04 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell_bonus.h"
 
 void	ft_start_animation(void)
 {
-	char	*logo[6];
+	char	*logo[7];
 	int		i;
 
 	logo[0] = "███    ███ ██ ███    ██ ██ ██████ ██  ██ ██████ ██     ██    \n";
@@ -22,12 +22,13 @@ void	ft_start_animation(void)
 	logo[2] = "██ ████ ██ ██ ██ ██  ██ ██ ██████ ██████ █████  ██     ██    \n";
 	logo[3] = "██  ██  ██ ██ ██  ██ ██ ██     ██ ██  ██ ██     ██     ██    \n";
 	logo[4] = "██      ██ ██ ██   ████ ██ ██████ ██  ██ ██████ ██████ ██████\n";
-	logo[5] = NULL;
+	logo[5] = "PLUS";
+	logo[6] = NULL;
 	i = 0;
 	write(1, "\n", 1);
 	while (logo[i] != NULL)
 	{
-		write(1, "\033[1;32m", 7);
+		write(1, "\033[1;36m", 7);
 		write(1, logo[i], ft_strlen(logo[i]));
 		i++;
 	}
@@ -77,7 +78,7 @@ static void	ft_prompt(t_mini	*mini)
 				ft_free_mini(mini, 0);
 				continue ;
 			}
-			if (mini->exe_tab && mini->env)
+			if (mini->exe_tab && mini->env && mlc_cpid(mini, mini->tab_size))
 				ft_execute(mini);
 			ft_free_mini(mini, 0);
 		}

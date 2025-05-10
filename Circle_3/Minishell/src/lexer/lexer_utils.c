@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: layang <layang@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 11:02:33 by nimorel           #+#    #+#             */
-/*   Updated: 2025/05/03 03:39:32 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/10 14:46:51 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,29 @@ t_token_type	ft_get_operator_type(char c, char next_c)
 	if (c == '>')
 		return (REDIRECT_OUT);
 	return (WORD);
+}
+
+int	is_delimiter(char sign, t_token	*tokens)
+{
+	static int	is;
+	t_token		*cur;
+
+	if (!tokens)
+	{
+		if (sign == 'w')
+		{
+			is = 0;
+			return (is);
+		}
+		if (sign == 'c')
+			return (is);
+	}
+	cur = tokens;
+	while (cur->next)
+		cur = cur->next;
+	if (cur->type == HEREDOC)
+		is = 1;
+	else
+		is = 0;
+	return (is);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: layang <layang@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:33:18 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/19 04:11:22 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/10 18:32:22 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,40 @@ int	ft_echo(char **cmd_array, t_mini *mini)
 	if (newline)
 		write(1, "\n", 1);
 	return (SUCCESS);
+}
+
+char	*ft_getenv(t_env	*env, const char	*name)
+{
+	t_env	*current;
+
+	current = env;
+	while (current != NULL)
+	{
+		if (ft_strcmp(current->name, name) == 0)
+			return (current->value);
+		current = current->next;
+	}
+	return (NULL);
+}
+
+int	ft_is_valid_name(const char	*name)
+{
+	int	i;
+
+	i = 0;
+	if (!name || !name[0])
+		return (0);
+	if (!ft_isalpha(name[0]) && name[0] != '_')
+		return (0);
+	while (name[i])
+	{
+		if (name[i] == '=')
+			break ;
+		if (!ft_isalnum(name[i]) && name[i] != '_')
+			return (0);
+		i++;
+	}
+	if (ft_strchr(name, ' ') || ft_strchr(name, '\t'))
+		return (0);
+	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:59:12 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/09 20:53:32 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/10 18:53:28 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,43 @@ int	ft_unset(t_token *tokens, t_env **env)
 		arg = arg->next;
 	}
 	return (SUCCESS);
+}
+
+static int	name_exit_env(char	*name, t_env	**env)
+{
+	t_env	*current;
+
+	current = *env;
+	while (current)
+	{
+		if (ft_strcmp(current->name, name) == 0)
+			return (1);
+		current = current->next;
+	}
+	return (0);
+}
+
+void	ft_handle_valid_export(t_env	**env, char	*str, char	*name)
+{
+	char	*value;
+	int		d;
+
+	value = ft_strchr(str, '=');
+	if (value)
+	{
+		d = 1;
+		value = ft_strdup(value + 1);
+	}
+	else
+	{
+		if (name_exit_env(name, env))
+		{
+			free(name);
+			return ;
+		}
+		d = 0;
+		value = ft_strdup("");
+	}
+	if (ft_update_var(*env, name, value) != SUCCESS)
+		ft_add_var(env, name, value, d);
 }

@@ -6,7 +6,7 @@
 /*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:52:36 by layang            #+#    #+#             */
-/*   Updated: 2025/05/01 10:40:18 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/10 16:58:39 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,15 @@ int	ft_open_quote(t_mini	*mini)
 		return (0);
 	dup2(mini->stdout_fd, 1);
 	if (check == 1)
+	{
 		printf("Minishell : single quote not closed.\n");
+		(void)ft_link_status(NULL, 0);
+	}
 	if (check == 2)
+	{
 		printf("Minishell : double quote not closed.\n");
+		(void)ft_link_status(NULL, 0);
+	}
 	dup2(mini->log_fd, 1);
 	return (1);
 }

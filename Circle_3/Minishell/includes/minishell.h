@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:39:53 by nimorel           #+#    #+#             */
-/*   Updated: 2025/05/04 08:46:44 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/05/10 18:42:14 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,25 @@
 # define MINISHELL_H
 
 /* 
-For and_or_V0:
-1. Fix mem leak in cmds:
-	<< end cat|>fileout
-
+For V8:
+add SHLVL as in bash.
+in bonus and mandatory: 
+add not extend
+after heredoc << $USER
+1:
+in hererdoc: add write(1, "> ", 2);in ft_do_here_doc.
+2:
+cat << $USER (in mandatory)
+cat << * (in bonus)
+cat << /bin"/cat file"
+idea: use is_delimiter(); 0/1, use -1 to call.
+in delimiter: 
+block rest block but without $ and *.
+3:
+env -i ./minishell add :
+if (!envp)
+		return (printf("Minishell: minishell need envp.\n"), 0);
+in main().
 */
 
 /******************************************************************************
@@ -35,7 +50,7 @@ For and_or_V0:
 # include <string.h>
 # include "../Libft/libft.h"
 # include <limits.h>
-//# include <wait.h>
+# include <wait.h>
 
 /*****************************************************************************
  *  
@@ -92,6 +107,7 @@ typedef struct s_env
 {
 	char			*name;
 	char			*value;
+	int				env_flag;
 	struct s_env	*next;
 }					t_env;
 
@@ -102,10 +118,12 @@ typedef struct s_mini
 	t_token	**exe_tab;
 	int		tab_size;
 	t_env	*env;
+	t_env	**sub_env;
+	int		layer;
 	char	**array_env;
 	char	**cmd_array;
 	int		pre;
-	int		*cpid;
+	pid_t	*cpid;
 	int		log_fd;
 	int		stdout_fd;
 }			t_mini;
@@ -116,12 +134,12 @@ typedef struct s_mini
  *  				add this line otherwise error occured on MACOS
  *  
  *****************************************************************************/
-#if __linux__
+/*#if __linux__
 	# include <wait.h>
 #endif
 #if __APPLE__
 	extern int rl_replace_line(const char *text, int i);
-#endif
+#endif*/
 
 /*****************************************************************************
  *  
@@ -139,6 +157,7 @@ int				ft_lexer(t_mini	*mini);
 t_token			*ft_create_token(char *value, t_token_type type);
 void			ft_add_token(t_token **tokens, t_token *new_token);
 t_token_type	ft_get_operator_type(char c, char next_c);
+int				is_delimiter(char sign, t_token	*tokens);
 
 /*  lexer_exe_unit.c 3*/
 int				ft_count_unit(t_mini	*mini);
@@ -151,6 +170,7 @@ void			dquote_pass_dollar(const char *s, char **n, t_env *e,
 void			dquote_pass_char(char	**re, char c, size_t	*i);
 
 /* lexer_cmd_block.c  5*/
+char			*get_squote_block(const char	*input, size_t	*i);
 char			*ft_get_dquote(const char *d_str, size_t	len, t_env	*env);
 void			ft_handle_block(const char	*input, size_t *i, t_mini *mini);
 
@@ -166,12 +186,6 @@ void			ft_free_array(char ***paths);
 void			ft_free_tokens(t_token **tokens);
 void			ft_close_cmd_fd(t_token	*tokens);
 void			ft_free_mini(t_mini *all, int sign);
-
-/* environment.c 5*/
-t_env			*ft_create_env_node(const char *name, const char *value);
-t_env			*ft_init_env(char **envp);
-void			ft_free_env(t_env **env);
-char			*ft_getenv(t_env *env, const char *name);
 
 /* execute.c 5 */
 void			ft_execute_simple_cmd(t_mini *mini, int i, int sign);
@@ -199,20 +213,22 @@ void			ft_pass_in_out(t_token	**token);
 int				ft_malloc_array(t_token **tokens, t_mini *mini);
 
 /* execute_utils.c 5*/
+int				ft_cmd_type(char *cmd);
 char			**ft_env_to_array(t_env *env);
 char			*ft_get_path_from_env(t_env *env);
 char			*ft_get_path(char *cmd, t_env *env);
 
 /* execute_built_in.c 5*/
 int				ft_exit(t_mini	*mini, int i);
-int				ft_cmd_type(char *cmd);
 int				ft_is_built_in(char *cmd, t_token *tokens, t_mini *mini);
 int				ft_env(t_env *env);
+int				is_buildin_single(t_mini	*mini);
 void			ft_cd_export_unset(t_mini *mini, int i);
 
 /*  export.c */
 int				ft_export(t_token *tokens, t_env **env, t_mini *mini);
 int				ft_update_var(t_env *env, char *name, char *value);
+int				ft_add_var(t_env **env, char *name, char *value, int d);
 
 /* cd.c */
 int				ft_cd(t_token *tokens, t_env *env);
@@ -220,9 +236,17 @@ int				ft_pwd(void);
 
 /* echo.c */
 int				ft_echo(char **cmd_array, t_mini *mini);
+char			*ft_getenv(t_env *env, const char *name);
+int				ft_is_valid_name(const char	*name);
+
+/* environment.c 5*/
+void			ft_free_env(t_env **env);
+t_env			*ft_create_env_node(const char	*name, const char	*value);
+t_env			*ft_init_env(char **envp);
 
 /* unset */
 int				ft_unset(t_token *tokens, t_env **env);
+void			ft_handle_valid_export(t_env	**env, char	*str, char	*name);
 
 /* ft_error_ctr.c 5*/
 int				print_syntax_error(char *msg);
@@ -232,6 +256,7 @@ int				ft_syntax_err_ctr(t_token *lexer);
 /* ft_file_path_ctr.c 2*/
 void			ft_file_ctr(int fd, int he_fd, char	*msg, t_mini	*mi);
 char			*ft_check_path_validity(t_mini *mini, char *path);
+void			safe_exit_child(t_mini	*mini, char	*msg, int code);
 
 /* ft_log_use.c -> test functions 4*/
 void			ft_print_token(t_token *t);

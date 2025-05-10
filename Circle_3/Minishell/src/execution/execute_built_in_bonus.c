@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_built_in_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 14:42:09 by layang            #+#    #+#             */
-/*   Updated: 2025/05/03 17:12:29 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/10 18:15:29 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,59 +41,85 @@ int	ft_env(t_env *env)
 	if (!env)
 		return (FAILURE);
 	current = env;
-	while (current)
+	while (current && current->env_flag == 1)
 	{
-		if (ft_strcmp(current->value, "") != 0)
-		{
-			write(1, current->name, ft_strlen(current->name));
-			write(1, "=", 1);
+		write(1, current->name, ft_strlen(current->name));
+		write(1, "=", 1);
+		if (current->value)
 			write(1, current->value, ft_strlen(current->value));
-			write(1, "\n", 1);
-		}
+		write(1, "\n", 1);
 		current = current->next;
 	}
 	return (SUCCESS);
 }
 
-int	ft_is_built_in(char *cmd, t_token *tokens, t_mini *mini)
+int	ft_is_built_in(char *cmd, t_token *tokens, t_mini *mini, t_env	**env)
 {
 	if (ft_strcmp(cmd, "echo") == 0)
 		return (ft_echo(mini->cmd_array, mini));
 	else if (ft_strcmp(cmd, "pwd") == 0)
 		return (ft_pwd());
 	else if (ft_strcmp(cmd, "cd") == 0)
-		return (ft_cd(tokens, mini->env));
+		return (ft_cd(tokens, *env));
 	else if (ft_strcmp(cmd, "export") == 0)
-		return (ft_export(tokens, &mini->env, mini));
+		return (ft_export(tokens, env, mini));
 	else if (ft_strcmp(cmd, "unset") == 0)
-		return (ft_unset(tokens, &mini->env));
+		return (ft_unset(tokens, env));
 	else
-		return (ft_env(mini->env));
+		return (ft_env(*env));
 }
 
+/* is_buildin_single(t_mini *mini, int i)
+{
+	char	*cmd;
+	int		par;
+
+	cmd = mini->exe_tab[i]->value;
+	par = mini->exe_tab[i]->par_n;
+	if (mini->tab_size == 1 && par == 0 && (!ft_strcmp(cmd, "cd")
+		|| !ft_strcmp(cmd, "export") || !ft_strcmp(cmd, "unset")
+		|| !ft_strcmp(cmd, "exit")))
+			return (1);
+	else
+		return (0);
+} */
+
+int	is_buildin_single(t_mini *mini, int i)
+{
+	char	*cmd;
+	int		par;
+
+	cmd = mini->exe_tab[i]->value;
+	par = mini->exe_tab[i]->par_n;
+	if (par == 0 && (!ft_strcmp(cmd, "cd") || !ft_strcmp(cmd, "exit")))
+		return (1);
+	else if (!ft_strcmp(cmd, "export") || !ft_strcmp(cmd, "unset"))
+		return (1);
+	else
+		return (0);
+}
+
+//	printf("layer is : %d\n", layer);
 void	ft_cd_export_unset(t_mini *mini, int i)
 {
 	char	*cmd;
+	int		ex;
+	int		layer;
+	t_env	*env;
 
-	cmd = strdup(mini->exe_tab[i]->value);
-	if (ft_strcmp(cmd, "cd") == 0 || ft_strcmp(cmd, "export") == 0
-		|| ft_strcmp(cmd, "unset") == 0)
+	cmd = ft_strdup(mini->exe_tab[i]->value);
+	layer = count_layer(mini, i);
+	if (layer == 0)
+		buildin_main_shell(cmd, mini, i);
+	else
 	{
-		ft_execute_simple_cmd(mini, i, 1);
-		(void)ft_is_built_in(cmd, mini->exe_tab[i], mini);
-		free(cmd);
-	}
-	else if (ft_strcmp(cmd, "exit") == 0)
-	{
-		free(cmd);
-		if (!(mini->exe_tab[i]->next
-				&& ft_is_numeric(mini->exe_tab[i]->next->value)
-				&& mini->exe_tab[i]->next->next))
+		env = mini->sub_env[layer - 1];
+		if (ft_strcmp(cmd, "unset") == 0 || ft_strcmp(cmd, "export") == 0)
 		{
-			ft_free_mini(mini, 1);
-			exit(ft_link_status(NULL, -1));
+			ft_execute_simple_cmd(mini, i, 1, &env);
+			ex = ft_is_built_in(cmd, mini->exe_tab[i], mini, &env);
+			(void)ft_link_status(NULL, ex);
+			free(cmd);
 		}
 	}
-	else
-		free(cmd);
 }

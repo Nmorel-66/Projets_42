@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_utils.c                                       :+:      :+:    :+:   */
+/*   free_utils_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 19:08:55 by layang            #+#    #+#             */
-/*   Updated: 2025/05/07 17:08:53 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/07 17:08:39 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell_bonus.h"
 
 void	ft_free_array(char	***paths)
 {
@@ -101,6 +101,8 @@ static void	ft_free_mini_0(t_mini	*all)
 	}
 	if (all->cmd_array)
 		ft_free_array(&all->cmd_array);
+	if (all->sub_env)
+		ft_free_sub_env(&all->sub_env, all->layer);
 	if (all->lexer)
 		ft_free_tokens(&all->lexer);
 }

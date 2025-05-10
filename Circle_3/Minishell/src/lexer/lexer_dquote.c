@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_dquote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: layang <layang@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 21:06:20 by layang            #+#    #+#             */
-/*   Updated: 2025/05/03 03:29:12 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/10 14:55:38 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,29 +34,43 @@ static int	extract_var_len(const char *src, char buf[255])
 	return (i);
 }
 
-void	dquote_pass_dollar(const char *s, char **re, t_env *e, size_t *i)
+static void	expand_dollar(char	*var, char	**n, char	**re, t_env	*e)
 {
-	char	var[255];
-	char	*env_var;
 	char	*status;
-	char	*n;
+	char	*env_var;
 
-	if (extract_var_len(s + *i + 1, var) == 0)
-		n = ft_strjoin(*re, "$");
-	else if (ft_strcmp(var, "?") == 0)
+	if (ft_strcmp(var, "?") == 0)
 	{
 		status = ft_itoa(ft_link_status(NULL, -1));
-		n = ft_strjoin(*re, status);
+		*n = ft_strjoin(*re, status);
 		free(status);
 	}
 	else
 	{
 		env_var = ft_getenv(e, var);
 		if (env_var)
-			n = ft_strjoin(*re, env_var);
+			*n = ft_strjoin(*re, env_var);
 		else
-			n = ft_strdup(*re);
+			*n = ft_strdup(*re);
 	}
+}
+
+void	dquote_pass_dollar(const char *s, char **re, t_env *e, size_t *i)
+{
+	char	var[255];
+	char	*n;
+	char	*mlc_str;
+
+	if (extract_var_len(s + *i + 1, var) == 0)
+		n = ft_strjoin(*re, "$");
+	else if (is_delimiter('c', NULL) == 1)
+	{
+		mlc_str = ft_strjoin("$", var);
+		n = ft_strjoin(*re, mlc_str);
+		free(mlc_str);
+	}
+	else
+		expand_dollar(var, &n, re, e);
 	free(*re);
 	*re = n;
 	*i = *i + extract_var_len(s + *i + 1, var) + 1;

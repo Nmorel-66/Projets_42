@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_jump.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: layang <layang@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 10:39:17 by layang            #+#    #+#             */
-/*   Updated: 2025/05/01 16:06:05 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/08 03:03:35 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	pass_or_jump(t_mini	*mini, int	*i)
 		return ;
 	}
 	code = ft_link_status(NULL, -1);
+	printf("code of cmd[%d]: %d\n", *i, code);
 	if (next_type(mini, *i) == PIPE || (code == 0 && next_type(mini, *i) == AND)
 		|| (code != 0 && next_type(mini, *i) == OR))
 		(*i) = (*i) + 2;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_cmd_block_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: layang <layang@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 18:58:07 by layang            #+#    #+#             */
-/*   Updated: 2025/05/03 06:38:24 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/10 15:09:00 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	renew_sign_glob(const char	*word, char	**s_glob, int sign)
 	i = 0;
 	while (word[l_glob + i])
 	{
-		if (word[l_glob + i] == '*' && sign == 1)
+		if (word[l_glob + i] == '*' && sign == 1 && !is_delimiter('c', NULL))
 			sur[i] = '1';
 		else
 			sur[i] = '0';
@@ -83,6 +83,7 @@ void	renew_sign_glob(const char	*word, char	**s_glob, int sign)
 	*s_glob = ft_strjoin_free(*s_glob, sur);
 }
 
+//printf("\n..Got word before create token: %s\n", word);
 static void	ft_block_token(char	*word, size_t j, t_mini	*mini, char	*s_glob)
 {
 	if (!word || (!ft_strcmp(word, "") && mini->input[j] == '$'))
@@ -91,7 +92,6 @@ static void	ft_block_token(char	*word, size_t j, t_mini	*mini, char	*s_glob)
 			free(word);
 		return ;
 	}
-	printf("\n..Got word before create token: %s\n", word);
 	if (word_has_glob(s_glob))
 	{
 		if (ft_get_files(word, mini, s_glob, j))
@@ -112,6 +112,7 @@ void	ft_handle_block(const char *input, size_t *i, t_mini *mini)
 
 	j = *i;
 	ft_block_init(&word, &sign_glob);
+	(void)is_delimiter('w', mini->lexer);
 	while (input[*i] && !ft_isspace(input[*i]) && !ft_strchr("|<>&()",
 			input[*i]))
 	{

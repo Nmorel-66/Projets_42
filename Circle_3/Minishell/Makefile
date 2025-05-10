@@ -49,7 +49,7 @@ SRC_FILES = \
 # Bonus Files
 NAME_B = minishell_bonus
 SRC_FILES_B = \
-	$(SRC_DIR)/minishell.c \
+	$(SRC_DIR)/minishell_bonus.c \
 	$(SRC_DIR)/lexer/lexer_bonus.c \
 	$(SRC_DIR)/lexer/lexer_utils_bonus.c \
 	$(SRC_DIR)/lexer/lexer_exe_unit_bonus.c \
@@ -61,18 +61,20 @@ SRC_FILES_B = \
 	$(SRC_DIR)/execution/execute_jump.c \
 	$(SRC_DIR)/execution/execute_fill_cmd.c \
 	$(SRC_DIR)/execution/execute_fill_utiles.c \
-	$(SRC_DIR)/execution/execute_cmd.c \
+	$(SRC_DIR)/execution/execute_cmd_bonus.c \
 	$(SRC_DIR)/execution/execute_pipe_bonus.c \
 	$(SRC_DIR)/execution/execute_utils.c \
 	$(SRC_DIR)/execution/execute_built_in_bonus.c \
 	$(SRC_DIR)/buildin/environment.c \
-	$(SRC_DIR)/buildin/cd.c \
+	$(SRC_DIR)/buildin/cd_bonus.c \
 	$(SRC_DIR)/buildin/echo.c \
 	$(SRC_DIR)/buildin/unset.c \
 	$(SRC_DIR)/buildin/export.c \
 	$(SRC_DIR)/utils/utils.c \
+	$(SRC_DIR)/utils/utils_bonus.c \
 	$(SRC_DIR)/utils/ft_error_ctr_bonus.c \
-	$(SRC_DIR)/utils/free_utils.c \
+	$(SRC_DIR)/utils/free_bonus.c \
+	$(SRC_DIR)/utils/free_utils_bonus.c \
 	$(SRC_DIR)/utils/ft_syntax_err.c \
 	$(SRC_DIR)/utils/ft_log_use.c \
 	$(SRC_DIR)/utils/ft_file_path_ctr.c
@@ -96,6 +98,8 @@ LIBFT_SRC = \
 	$(LIBFT_DIR)/get_next_line_lan.c \
 	$(LIBFT_DIR)/ft_atoi.c \
 	$(LIBFT_DIR)/ft_itoa.c \
+	$(LIBFT_DIR)/ft_isalnum.c \
+	$(LIBFT_DIR)/ft_isalpha.c \
 	$(LIBFT_DIR)/ft_isdigit.c
 
 

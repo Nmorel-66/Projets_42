@@ -6,7 +6,7 @@
 /*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 10:57:41 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/24 17:26:49 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/03 19:18:52 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,16 @@ void	ft_handle_sigint(int sig)
 	(void)ft_link_status(NULL, 130);
 }
 
+/* void	ft_handle_sigint_2(int sig)
+{
+	(void)sig;
+	(void)ft_link_status(NULL, 130);
+} */
+
 void	ft_handle_sigint_2(int sig)
 {
 	(void)sig;
+	get_next_line(-1);
 	(void)ft_link_status(NULL, 130);
 }
 

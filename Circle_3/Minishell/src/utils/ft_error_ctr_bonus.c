@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error_ctr_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: layang <layang@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:52:36 by layang            #+#    #+#             */
-/*   Updated: 2025/05/03 07:06:03 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/10 16:58:56 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,17 @@ int	ft_open_quote(t_mini	*mini)
 	check = check_open_quote(mini->input);
 	if (check == 0)
 		return (0);
-	(void)ft_link_status(NULL, 1);
 	dup2(mini->stdout_fd, 1);
 	if (check == 1)
+	{
 		printf("Minishell : single quote not closed.\n");
+		(void)ft_link_status(NULL, 0);
+	}
 	if (check == 2)
+	{
 		printf("Minishell : double quote not closed.\n");
+		(void)ft_link_status(NULL, 0);
+	}
 	dup2(mini->log_fd, 1);
 	return (1);
 }

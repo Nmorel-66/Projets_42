@@ -62,4 +62,28 @@ void	ft_test_log(t_mini	*mini)
 	ft_putstr_fd(s, mini->log_fd);
 	ft_putstr_fd("\n", mini->log_fd);
 }
+
+give up fork in subshell
+in subshell_tmp
+each time when layer > 1:
+subshell_fd = open("subshell_tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+close when free(mini, 1);
+each time execution in par_n > 0, dup2(subshell_tmp)
+-------------------------
+1.
+if pipeline reread, when 1->0 pipe: 0 reread in env_1
+A: 1st pipe cmd: 
+reread in env itself
+B: from 2nd pipe cmd: when cmd after pipe: chose the hihgest one
+case 1|0   0 reread in env_1 
+case 0|0   0 reread in env_0
+case 0|1   1 reread in env_1
+-------------------------
+2.
+determine the env to use before make env_array
+
+3:
+when to pass/change env:
+before ft_is_built_in
+before ft_not_built_in
  */

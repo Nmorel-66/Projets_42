@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_file_path_ctr.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: layang <layang@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 17:16:28 by layang            #+#    #+#             */
-/*   Updated: 2025/04/26 00:03:41 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/08 10:25:31 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,14 @@ char	*ft_check_path_validity(t_mini *mini, char *path)
 		exit(126);
 	}
 	return (path);
+}
+
+void	safe_exit_child(t_mini	*mini, char	*msg, int code)
+{
+	dup2(mini->stdout_fd, STDOUT_FILENO);
+	if (msg)
+		printf("%s\n", msg);
+	dup2(mini->log_fd, 1);
+	ft_free_mini(mini, 1);
+	exit(code);
 }

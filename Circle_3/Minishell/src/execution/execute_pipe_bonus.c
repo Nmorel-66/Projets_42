@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   execute_pipe_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: layang <layang@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 11:33:31 by layang            #+#    #+#             */
-/*   Updated: 2025/05/03 17:13:18 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/08 07:43:06 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_bonus.h"
 
-void	ft_execute_last(t_mini *mini, int i)
+void	ft_execute_last(t_mini *mini, int i, t_env	**env)
 {
 	t_token	*cur;
 
 	ft_fill_cmd(&mini->exe_tab[i], mini);
 	dup2(mini->log_fd, 1);
-	printf("\n---fill last cmd: \n");
+	printf("\n---fill last cmd, line %d: \n", i);
 	ft_print_token(mini->exe_tab[i]);
 	dup2(mini->stdout_fd, STDOUT_FILENO);
 	if (mini->cmd_array)
@@ -35,11 +35,11 @@ void	ft_execute_last(t_mini *mini, int i)
 			dup2(cur->outfile, 1);
 		close(mini->pre);
 		mini->pre = -1;
-		ft_exe_cmd(mini, i);
+		ft_exe_cmd(mini, i, env);
 	}
 }
 
-void	ft_execute_child(t_mini *mini, int i, int pipe_fd[2])
+void	ft_execute_child(t_mini *mini, int i, int pipe_fd[2], t_env	**env)
 {
 	t_token	*cur;
 
@@ -62,7 +62,7 @@ void	ft_execute_child(t_mini *mini, int i, int pipe_fd[2])
 		else
 			dup2(pipe_fd[1], 1);
 		close(pipe_fd[0]);
-		ft_exe_cmd(mini, i);
+		ft_exe_cmd(mini, i, env);
 	}
 }
 
@@ -89,11 +89,11 @@ void	ft_signal_in_child(t_mini *mini, int status)
 
 void	ft_wait_bonus(t_mini	*mini, int i, int	*len)
 {
-	if (next_type(mini, i) == PIPE)
-		(*len)++;
+	if (len == 0 || next_type(mini, i) == PIPE)
+		return ;
 	else
 	{
-		ft_wait_children(mini, *len + 1);
+		ft_wait_children(mini, *len);
 		*len = 0;
 	}
 }
@@ -120,6 +120,7 @@ void	ft_wait_children(t_mini	*mini, int len)
 			}
 		}
 	}
+	ft_memset(mini->cpid, 0, sizeof(int) * mini->tab_size);
 	printf("\nlast-g_status **: %d\n", last_exit);
 	(void)ft_link_status(NULL, last_exit);
 }

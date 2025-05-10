@@ -6,7 +6,7 @@
 /*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:16:43 by nimorel           #+#    #+#             */
-/*   Updated: 2025/04/26 15:40:33 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/07 09:30:55 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ static void	ft_handle_child(t_mini	*mini, int i, int *pipe_fd)
 		ft_execute_simple_cmd(mini, i, 0);
 	else if (i != mini->tab_size - 1)
 		ft_execute_child(mini, i, pipe_fd);
-	ft_execute_last(mini, i);
+	else
+		ft_execute_last(mini, i);
 }
 
 void	ft_execute_unit(t_mini	*mini, int i)
@@ -96,6 +97,11 @@ void	ft_execute(t_mini	*mini)
 	int	i;
 
 	i = 0;
+	if (is_buildin_single(mini))
+	{
+		ft_cd_export_unset(mini, 0);
+		return ;
+	}
 	mini->cpid = malloc(sizeof(int) * mini->tab_size);
 	if (!mini->cpid)
 	{
@@ -109,6 +115,4 @@ void	ft_execute(t_mini	*mini)
 		i++;
 	}
 	ft_wait_children(mini);
-	if (mini->tab_size == 1 && mini->lexer->type == WORD)
-		ft_cd_export_unset(mini, 0);
 }

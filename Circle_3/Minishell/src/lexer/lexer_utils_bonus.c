@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: layang <layang@student.42perpignan.fr>     +#+  +:+       +#+        */
+/*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 11:02:33 by nimorel           #+#    #+#             */
-/*   Updated: 2025/05/03 03:20:36 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/07 10:09:18 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,20 +92,58 @@ t_token_type	ft_get_operator_type(char c, char next_c)
 	return (WORD);
 }
 
-void	ft_stamp_token(t_token	*tokens)
+/* void	ft_stamp_token(t_token	*tokens, t_token **tab_n, int pa_n)
+{
+	int		par;
+	t_token	*to;
+
+	if (pa_n == -1)
+	{
+		par = 0;
+		to = tokens;
+		while (to)
+		{
+			if (to->type == BRACKET)
+				par++;
+			if (to->type == REV_BRACKET)
+				par--;
+			to->par_n = par;
+			to = to->next;
+		}
+	}
+	else
+	{
+		to = *tab_n;
+		while (to)
+		{
+			to->par_n = pa_n;
+			to = to->next;
+		}
+	}
+} */
+
+void	ft_stamp_token(t_token	*tokens, t_token **tab_n, int pa_n)
 {
 	int		par;
 	t_token	*to;
 
 	par = 0;
-	to = tokens;
+	if (pa_n == -1)
+		to = tokens;
+	else
+		to = *tab_n;
 	while (to)
 	{
-		if (to->type == BRACKET)
-			par++;
-		if (to->type == REV_BRACKET)
-			par--;
-		to->par_n = par;
+		if (pa_n == -1)
+		{
+			if (to->type == BRACKET)
+				par++;
+			else if (to->type == REV_BRACKET)
+				par--;
+			to->par_n = par;
+		}
+		else
+			to->par_n = pa_n;
 		to = to->next;
 	}
 }
