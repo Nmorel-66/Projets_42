@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 12:32:15 by nimorel           #+#    #+#             */
-/*   Updated: 2025/05/07 13:37:14 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/05/11 20:43:17 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	ft_print(t_philo *philo, char *msg)
 void	ft_eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->left_fork);
-	ft_print(philo, "has taken left fork");
+	ft_print(philo, "has taken a fork");
 	pthread_mutex_lock(philo->right_fork);
-	ft_print(philo, "has taken right fork");
+	ft_print(philo, "has taken a fork");
 	ft_print(philo, "\033[1;32m \xF0\x9F\x8D\x9D is eating\033[0m");
 	pthread_mutex_lock(&philo->lock);
 	philo->last_meal = ft_gettime();

@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 07:44:42 by nimorel           #+#    #+#             */
-/*   Updated: 2025/05/07 15:01:02 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/05/11 21:18:23 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_all_ate(t_data *data)
 	int	i;
 
 	if (data->must_eat == -1)
-		return (0);
+		return (SUCCESS);
 	i = 0;
 	while (i < data->nb_philos)
 	{
@@ -25,7 +25,7 @@ int	ft_all_ate(t_data *data)
 		if (data->philos[i].meals_eaten < data->must_eat)
 		{
 			pthread_mutex_unlock(&data->philos[i].lock);
-			return (0);
+			return (SUCCESS);
 		}
 		pthread_mutex_unlock(&data->philos[i].lock);
 		i++;
@@ -38,7 +38,7 @@ static int	ft_is_someone_die(t_data *data, int *i)
 	long long	now;
 
 	now = ft_gettime();
-	if ((now - data->philos[*i].last_meal) > data->time_to_die)
+	if ((now - data->philos[*i].last_meal) >= data->time_to_die)
 	{
 		pthread_mutex_lock(&data->state_mutex);
 		data->someone_died = 1;
@@ -48,9 +48,9 @@ static int	ft_is_someone_die(t_data *data, int *i)
 		pthread_mutex_unlock(&data->write_mutex);
 		pthread_mutex_unlock(&data->state_mutex);
 		pthread_mutex_unlock(&data->philos[*i].lock);
-		return (1);
+		return (FAILURE);
 	}
-	return (0);
+	return (SUCCESS);
 }
 
 void	*ft_monitoring(void *arg)
@@ -77,7 +77,7 @@ void	*ft_monitoring(void *arg)
 			pthread_mutex_unlock(&data->state_mutex);
 			return (NULL);
 		}
-		usleep(1000);
+		usleep(500);
 	}
 	return (NULL);
 }

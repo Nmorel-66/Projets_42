@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 11:29:06 by nimorel           #+#    #+#             */
-/*   Updated: 2025/05/11 15:16:59 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/05/11 21:19:35 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	ft_join_threads(t_data *data)
 	return (SUCCESS);
 }
 
-static void	ft_destroy(t_data *data)
+static void	ft_destroy_all_threads(t_data *data)
 {
 	int	i;
 
@@ -74,8 +74,8 @@ int	main(int argc, char **argv)
 	if (ft_arg_checker(argc, argv) == FAILURE)
 		return (ft_error_handler("Error : arguments", FAILURE));
 	if (ft_atoi(argv[1]) == 1)
-		return (printf("0 1 has taken left fork\n"),
-			printf("\033[1;31m0 %s 💀 died\n\033[0m", argv[2]), SUCCESS);
+	return (printf("0 1 has taken a fork\n"), usleep(ft_atoi(argv[2]) * 1000),
+				printf("\033[1;31m%s 1 💀 died\n\033[0m", argv[2]), SUCCESS);
 	if (ft_init(&data, argc, argv))
 		return (ft_error_handler("Error: init data failure", FAILURE));
 	while (++i < data.nb_philos)
@@ -89,6 +89,6 @@ int	main(int argc, char **argv)
 		return (ft_error_handler("Error: Monitor thread failure", 1));
 	pthread_join(monitor, NULL);
 	ft_join_threads(&data);
-	ft_destroy(&data);
+	ft_destroy_all_threads(&data);
 	return (SUCCESS);
 }
