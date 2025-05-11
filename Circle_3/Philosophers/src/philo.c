@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel <marvin@42.fr> >          +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 11:29:06 by nimorel           #+#    #+#             */
-/*   Updated: 2025/05/07 14:46:17 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/05/11 15:16:59 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	main(int argc, char **argv)
 		return (ft_error_handler("Error : arguments", FAILURE));
 	if (ft_atoi(argv[1]) == 1)
 		return (printf("0 1 has taken left fork\n"),
-			printf("\033[1;31m0 1 💀 died\n\033[0m"), SUCCESS);
+			printf("\033[1;31m0 %s 💀 died\n\033[0m", argv[2]), SUCCESS);
 	if (ft_init(&data, argc, argv))
 		return (ft_error_handler("Error: init data failure", FAILURE));
 	while (++i < data.nb_philos)
