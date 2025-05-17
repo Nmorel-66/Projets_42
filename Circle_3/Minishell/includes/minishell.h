@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:39:53 by nimorel           #+#    #+#             */
-/*   Updated: 2025/05/10 18:42:14 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/05/11 14:42:55 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,9 @@
 # define MINISHELL_H
 
 /* 
-For V8:
-add SHLVL as in bash.
-in bonus and mandatory: 
-add not extend
-after heredoc << $USER
-1:
-in hererdoc: add write(1, "> ", 2);in ft_do_here_doc.
-2:
-cat << $USER (in mandatory)
-cat << * (in bonus)
-cat << /bin"/cat file"
-idea: use is_delimiter(); 0/1, use -1 to call.
-in delimiter: 
-block rest block but without $ and *.
-3:
-env -i ./minishell add :
-if (!envp)
-		return (printf("Minishell: minishell need envp.\n"), 0);
-in main().
-*/
+For V8_5_3:
 
+*/
 /******************************************************************************
  *  
  *  					MINISHELL includes
@@ -50,6 +32,8 @@ in main().
 # include <string.h>
 # include "../Libft/libft.h"
 # include <limits.h>
+# include <dirent.h>
+# include <sys/stat.h>
 # include <wait.h>
 
 /*****************************************************************************
@@ -211,6 +195,7 @@ void			ft_add_cmd(t_mini	*mini, t_token	**cmd, t_token_type	type);
 /* execute_fill_utiles.c  2*/
 void			ft_pass_in_out(t_token	**token);
 int				ft_malloc_array(t_token **tokens, t_mini *mini);
+void			endby_eof_delimiter(int d, char	*line, char	*de, t_mini	*mi);
 
 /* execute_utils.c 5*/
 int				ft_cmd_type(char *cmd);

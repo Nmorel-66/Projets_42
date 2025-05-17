@@ -6,7 +6,7 @@
 /*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 11:29:53 by layang            #+#    #+#             */
-/*   Updated: 2025/05/10 16:11:23 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/11 14:41:25 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,10 @@ static void	loop_here_doc(t_token	**heredoc, int heredoc_fd, t_mini	*mi)
 			close(heredoc_fd);
 			exit(130);
 		}
-		if (!line)
-			break ;
-		if (ft_strncmp(line, (*heredoc)->value, len) == 0 && line[len] == '\n')
+		if (!line || (ft_strncmp(line, (*heredoc)->value, len) == 0
+				&& line[len] == '\n'))
 		{
-			free(line);
-			get_next_line(-1);
+			endby_eof_delimiter(line != NULL, line, (*heredoc)->value, mi);
 			break ;
 		}
 		write(heredoc_fd, line, ft_strlen(line));

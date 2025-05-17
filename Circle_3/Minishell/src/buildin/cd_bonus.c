@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_bonus.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:04:50 by layang            #+#    #+#             */
-/*   Updated: 2025/05/10 15:09:49 by layang           ###   ########.fr       */
+/*   Updated: 2025/05/11 13:19:57 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	ft_cd(t_token *tokens, t_env *env)
 	char	*oldpwd;
 	char	*path;
 
+	if (tokens->next && tokens->next->next)
+		return (ft_putstr_fd("cd: too many arguments\n", 2), 1);
 	if (getcwd(cwd, sizeof(cwd)) == NULL)
 		return (perror("cd: getcwd failed"), FAILURE);
 	oldpwd = ft_strdup(cwd);

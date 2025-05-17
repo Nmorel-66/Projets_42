@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: layang <layang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 09:39:53 by nimorel           #+#    #+#             */
-/*   Updated: 2025/05/10 18:41:28 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/05/11 14:42:13 by layang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ For V6_REPAIRED:
 # include "../Libft/libft.h"
 # include <limits.h>
 # include <dirent.h>
+# include <sys/stat.h>
 # include <wait.h>
 
 /*****************************************************************************
@@ -228,6 +229,7 @@ void			ft_add_cmd(t_mini	*mini, t_token	**cmd, t_token_type	type);
 /* execute_fill_utiles.c  2*/
 void			ft_pass_in_out(t_token	**token);
 int				ft_malloc_array(t_token **tokens, t_mini *mini);
+void			endby_eof_delimiter(int d, char	*line, char	*de, t_mini	*mi);
 
 /* execute_utils.c 5*/
 int				ft_cmd_type(char *cmd);

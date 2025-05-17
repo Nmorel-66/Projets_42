@@ -6,7 +6,7 @@
 /*   By: nimorel <nimorel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:26:37 by nimorel           #+#    #+#             */
-/*   Updated: 2025/05/10 18:13:58 by nimorel          ###   ########.fr       */
+/*   Updated: 2025/05/11 13:55:58 by nimorel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,30 +107,30 @@ static int	ft_export_no_arg(t_env *env)
 	return (SUCCESS);
 }
 
-int	ft_export(t_token	*tokens, t_env	**env, t_mini	*mini)
+int	ft_export(t_token *tokens, t_env **env, t_mini *mini)
 {
 	char	*name;
+	int		ex;
 
 	if (!tokens->next || (mini->cmd_array[0] && !mini->cmd_array[1]))
-		return (ft_export_no_arg(*env), SUCCESS);
+		return (ft_export_no_arg(*env), 0);
+	ex = 0;
 	tokens = tokens->next;
 	while (tokens)
 	{
 		name = ft_extract_name(tokens->value);
-		if (!name)
+		if (name && ft_is_valid_name(name))
+			ft_handle_valid_export(env, tokens->value, name);
+		else
 		{
-			tokens = tokens->next;
-			continue ;
+			if (name)
+			{
+				printf("export: %s: not a valid identifier\n", name);
+				ex = 1;
+				free(name);
+			}
 		}
-		if (!ft_is_valid_name(name))
-		{
-			printf("export: %s: not a valid identifier\n", name);
-			free(name);
-			tokens = tokens->next;
-			continue ;
-		}
-		ft_handle_valid_export(env, tokens->value, name);
 		tokens = tokens->next;
 	}
-	return (SUCCESS);
+	return (ex);
 }
